@@ -1,45 +1,76 @@
 <header>
 
-   <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="head">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                   <div class="head-left">
-                    <i class="fa fa-phone"></i>
-                    <p>call - +001 255 300</p>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="head-left">
+                            <i class="fa fa-phone"></i>
+                            <p>call - +001 255 300</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="head-right">
-                        <ul>
-                            <li>welcome msg!</li>
-                            <li>my account</li>
-                            <li>my wishlist</li>
-                            <li>login</li>
-                        </ul>
+                    <div class="col-md-8">
+                        <div class="head-right">
+                            <ul>
+                                <li>welcome msg!</li>
+                                <li>my account</li>
+                                <li>my wishlist</li>
+                                <li>login</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-   
-<!--Menu Start-->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/home"><img src="img/logo.png" alt="logo" width="20"> </a>
-        </div>
+              </div>
+            <div class="head-mid">
+               <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="" href="#/home"><img src="img/logo.png" alt="logo" class="img-responsive" style="width:200px;"> </a>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+        <button class="btn btn-default custom" type="button">Search</button>
+      </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="social">
+                            <ul>
+                                <li><i class="fa fa-facebook"></i></li>
+                                <li><i class="fa fa-twitter"></i></li>
+                                <li><i class="fa fa-google-plus"></i></li>
 
-        <div class="collapse navbar-collapse" id="nav-collapse">
-               <div ng-include="template.menu" class="template menu"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+      
+
+        <div class="container">
+
+            <!--Menu Start-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <div ng-include="template.menu" class="template menu"></div>
+            </div>
+            <!--        Menu End -->
         </div>
-<!--        Menu End -->
-    </div>
-</nav>
+    </nav>
 </header>

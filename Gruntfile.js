@@ -1,4 +1,4 @@
-//Gruntfile
+//Gruntfile 
 module.exports = function(grunt) {
 
     //Initializing the configuration object
