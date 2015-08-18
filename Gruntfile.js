@@ -23,12 +23,14 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     './bower_components/jquery/dist/jquery.min.js',
+                    './lib/js/jquery.flexslider.js',
                     './bower_components/less/dist/less.min.js',
                     './bower_components/moment/min/moment.min.js',
                     './bower_components/bootstrap/dist/js/bootstrap.min.js',
                     './bower_components/angular/angular.min.js',
                     './bower_components/angular-sanitize/angular-sanitize.min.js',
                     './bower_components/angular-animate/angular-animate.min.js',
+                    './lib/js/angular-flexslider.js',
                     './bower_components/angular-bootstrap/ui-bootstrap.min.js',
                     './bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
                     './bower_components/ngDialog/js/ngDialog.min.js',
