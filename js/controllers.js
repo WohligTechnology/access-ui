@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize' , 'ui-rangeSlider'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -39,20 +39,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('InfiniteCtrl', function($scope, TemplateService, NavigationService) {
-    $scope.template = TemplateService.changecontent("infinite");
-    $scope.menutitle = NavigationService.makeactive("Infinite Scroll");
+.controller('ProductCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService.changecontent("product");
+    $scope.menutitle = NavigationService.makeactive("Product");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    //Infinite scroll
-    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-    $scope.loadMore = function() {
-        var last = $scope.images[$scope.images.length - 1];
-        for (var i = 1; i <= 8; i++) {
-            $scope.images.push(last + i);
-        }
-    };
+  $scope.demo2 = {
+            range: {
+                min: 0,
+                max: 10050
+            },
+            minPrice: 0,
+            maxPrice: 10050
+        };
+         $scope.brands = [{
+            name: "Apple"
+
+
+        }, {
+            name: "nokia"
+
+
+        }, {
+            name: "samsung"
+
+        }, {
+            name: "mi"
+
+        }, {
+            name: "micromax"
+
+        }];
 })
 
 .controller('headerctrl', function($scope, TemplateService) {

@@ -3,6 +3,7 @@ var firstapp = angular.module('firstapp', [
     'ui.router',
     'phonecatControllers',
     'templateservicemod',
+    'ui-rangeSlider',
     'navigationservice'
 ]);
 
@@ -26,10 +27,10 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         controller: 'FeatureCtrl'
     })
 
-    .state('infinite', {
-        url: "/infinite",
+    .state('product', {
+        url: "/product",
         templateUrl: "views/template.html",
-        controller: 'InfiniteCtrl'
+        controller: 'ProductCtrl'
     })
 
     $urlRouterProvider.otherwise("/home");

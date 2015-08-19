@@ -14,6 +14,15 @@ module.exports = function(grunt) {
                 files: {
                     './w/w.css': './less/style.less'
                 }
+            },
+            production: {
+                options: {
+                    sourceMap: false,
+                    compress: true,
+                },
+                files: {
+                    './w/w.css': './less/style.less'
+                }
             }
         },
         concat: {
@@ -31,6 +40,7 @@ module.exports = function(grunt) {
                     './bower_components/angular-sanitize/angular-sanitize.min.js',
                     './bower_components/angular-animate/angular-animate.min.js',
                     './lib/js/angular-flexslider.js',
+                    './lib/js/angular.rangeSlider.js',
                     './bower_components/angular-bootstrap/ui-bootstrap.min.js',
                     './bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
                     './bower_components/ngDialog/js/ngDialog.min.js',
@@ -59,7 +69,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['less/*.less'], // which files to watch
-                tasks: ['less'],
+                tasks: ['less:development'],
                 options: {
                     nospawn: true
                 }

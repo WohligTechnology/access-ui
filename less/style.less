@@ -5,6 +5,7 @@
 @import "../bower_components/fontawesome/css/font-awesome.min.css";
 @import "../bower_components/ui-select/dist/select.min.css";
 @import "../less/flexslider.css";
+@import "../less/angular.rangeSlider.css";
 //@import "../less/component.css";
 @color1: #E6E6E6;
 @color2: #606060;
@@ -124,6 +125,7 @@ a {
         }
     }
 }
+
 
 .navbar-default {
     background-color: @color1;
@@ -275,7 +277,7 @@ img.doneLoading {
             overflow: hidden;
         img {
             width: 100%;
-            height: 100%;
+                height: auto;
             cursor: pointer;
             transition: transform 0.4s;
             position: relative;
@@ -283,6 +285,7 @@ img.doneLoading {
         figcaption {
             height: 100px;
             width: 100%;
+            
             top: auto;
             bottom: 0;
             opacity: 0;
@@ -425,4 +428,88 @@ img.doneLoading {
             border-right: 1px solid @color4;
         }
     }
+}
+.sub-catgame{
+    ul{
+        list-style: none;
+        .pad-mar;
+        li{
+            input[type=checkbox]{
+                  display: none;
+    cursor: pointer;
+            }
+            label{
+                 max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 400;
+//    font-family: 'Titillium Web', sans-serif;
+    text-transform: uppercase;
+    color: #616161;
+    font-size: 13px;
+    cursor: pointer;  
+            }
+            .checkbox{
+                   vertical-align: baseline;
+    display: inline-block;
+                 &:before{
+                    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    vertical-align: baseline;
+    background-color: #b5b4b4;
+    color: #f3f3f3;
+    text-align: center;
+    -webkit-border-radius: 0;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 0;
+    -moz-background-clip: padding;
+    border-radius: 0;
+    background-clip: padding-box;
+    margin-right: 10px;
+            }
+            }
+           
+        }
+    }
+}
+//.sub-catgame ul li input[type=checkbox] {
+//    display: none;
+//    cursor: pointer;
+//}
+//.sub-catgame ul li .checkbox {
+//    vertical-align: baseline;
+//    display: inline-block;
+//}
+//.sub-catgame ul li label {
+//    max-width: 100%;
+//    margin-bottom: 5px;
+//    font-weight: 400;
+////    font-family: 'Titillium Web', sans-serif;
+//    text-transform: uppercase;
+//    color: #616161;
+//    font-size: 13px;
+//    cursor: pointer;
+//}
+//.sub-catgame ul li .checkbox:before {
+//    content: "";
+//    display: inline-block;
+//    width: 13px;
+//    height: 13px;
+//    vertical-align: baseline;
+//    background-color: #b5b4b4;
+//    color: #f3f3f3;
+//    text-align: center;
+//    -webkit-border-radius: 0;
+//    -webkit-background-clip: padding-box;
+//    -moz-border-radius: 0;
+//    -moz-background-clip: padding;
+//    border-radius: 0;
+//    background-clip: padding-box;
+//    margin-right: 10px;
+//}
+.sub-catgame ul li input[type=checkbox]:checked + .checkbox:before {
+    background-color: #fc7700;
+    font-size: 15px;
+    cursor: pointer;
 }
