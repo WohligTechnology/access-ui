@@ -1,48 +1,4 @@
-/**
- * 	Angular RangeSlider SCSS
- * 
- *	Version: 0.0.13
- *
- * 	Author: Daniel Crisp, danielcrisp.com
- *
- * 	The rangeSlider has been styled to match the default styling
- * 	of form elements styled using Twitter's Bootstrap
- * 
- * 	Originally forked from https://github.com/leongersen/noUiSlider
- *
 
-	This code is released under the MIT Licence - http://opensource.org/licenses/MIT
-
-	Copyright (c) 2013 Daniel Crisp
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
-
- */
-/*------------------------------------*\
-    COMPASS IMPORTS
-\*------------------------------------*/
-/*------------------------------------*\
-    SETTINGS
-\*------------------------------------*/
-/*------------------------------------*\
-    THE CSS
-\*------------------------------------*/
 /* line 25, scss/_rangeSlider.scss */
 .ngrs-range-slider {
   position: relative;
@@ -97,6 +53,8 @@
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  color: #000;
+  margin: 12px 16px 0px 16px;
 }
 /* line 53, scss/_rangeSlider.scss */
 .ngrs-range-slider .ngrs-runner {
@@ -119,10 +77,10 @@
   background-color: #1295C9;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzViYzBkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJmOTZiNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #FFFFFF), color-stop(100%, #FFFFFF));
-  background-image: -moz-linear-gradient(#FFFFFF, #FFFFFF);
-  background-image: -webkit-linear-gradient(#FFFFFF, #FFFFFF);
-  background-image: linear-gradient(#FFFFFF, #FFFFFF);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #B7B5B5), color-stop(100%, #B7B5B5));
+  background-image: -moz-linear-gradient(#B7B5B5, #B7B5B5);
+  background-image: -webkit-linear-gradient(#B7B5B5, #B7B5B5);
+  background-image: linear-gradient(#B7B5B5, #B7B5B5);
 }
 /* line 81, scss/_rangeSlider.scss */
 .ngrs-range-slider .ngrs-handle {
@@ -131,8 +89,8 @@
   height: 100%;
   width: 18px;
   margin: 0 0 0 -9px;
-  background: #efefef;
-  border: 1px solid #ccc;
+  background: #7EE1EA;
+  border: 1px solid #7EE1EA;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 21px;
@@ -159,19 +117,15 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 /* line 120, scss/_rangeSlider.scss */
-.ngrs-range-slider .ngrs-handle-min i {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFNJREFUeNpiYMAEXEDsA+OwoEnKALETEHOgK2AEYhMgNkQ3DqSAB6pLAot1DExIJmAFzED8C4hvQdnIppyFKYCBp0D8CohloVafxWUqN7I3AQIMAKw6B24pOi8lAAAAAElFTkSuQmCC");
-}
+
 /* line 127, scss/_rangeSlider.scss */
-.ngrs-range-slider .ngrs-handle-max i {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFdJREFUeNpiYEAAHyDmYkADzEhsByBWA+K3QPwJmwJjIGYBYlUgZgLi59gUwIAkEEsD8VMmBtyAkQFqJDZwAYjPAPE/dAU/gHg/ED/GpgvkTW50QYAAAwADfwrM5sqplgAAAABJRU5ErkJggg==");
-}
+
 /* line 137, scss/_rangeSlider.scss */
 .ngrs-range-slider .ngrs-value {
   position: absolute;
-  top: 100%;
+  top: -13%;
   left: 0;
-  padding: 5px 0 0 0;
+  margin: 8px 0px 0px 0px;
   font-size: 12px;
   color: #fff;
 }

@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize' , 'ui-rangeSlider'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -7,35 +7,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-//    $scope.slides = [
-//        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-//        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-//        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-//        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-//    ];
-      $scope.slides = [
+    //    $scope.slides = [
+    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
+    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
+    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
+    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
+    //    ];
+    $scope.slides = [
         'img/slider/1.jpg',
         'img/slider/2.jpg',
         'img/slider/3.jpg',
         'img/slider/4.jpg'
-        
+
     ];
-    
-            $scope.products = [{
-            image: "img/product/1.png"
 
 
-        }, {
-            image: "img/product/2.png"
+    $scope.products = [{
+        image: "img/product/1.png"
 
 
-        }, {
-            image: "img/product/3.png"
+    }, {
+        image: "img/product/2.png"
 
-        }, {
-            image: "img/product/4.png"
 
-        }];
+    }, {
+        image: "img/product/3.png"
+
+    }, {
+        image: "img/product/4.png"
+
+    }];
 })
 
 
@@ -45,32 +46,132 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-  $scope.demo2 = {
-            range: {
-                min: 0,
-                max: 10050
-            },
-            minPrice: 0,
-            maxPrice: 10050
+    $scope.demo2 = {
+        range: {
+            min: 0,
+            max: 10050
+        },
+        minPrice: 0,
+        maxPrice: 10050
+    };
+    $scope.brands = [{
+        name: "Apple"
+
+
+    }, {
+        name: "nokia"
+
+
+    }, {
+        name: "samsung"
+
+    }, {
+        name: "mi"
+
+    }, {
+        name: "micromax"
+
+    }];
+
+    $scope.max = 5;
+    $scope.isReadonly = false;
+
+    $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+    };
+
+    $scope.ratingStates = [{
+        stateOn: 'glyphicon-ok-sign',
+        stateOff: 'glyphicon-ok-circle'
+    }, {
+        stateOn: 'glyphicon-star',
+        stateOff: 'glyphicon-star-empty'
+    }, {
+        stateOn: 'glyphicon-heart',
+        stateOff: 'glyphicon-ban-circle'
+    }, {
+        stateOn: 'glyphicon-heart'
+    }, {
+        stateOff: 'glyphicon-off'
+    }];
+
+    $scope.$watch('rate', function(val) {
+
+        function sucess(data) {
+
+            console.log(data);
+
         };
-         $scope.brands = [{
-            name: "Apple"
+
+        function error(response) {
+
+            console.log(response)
+
+            alert("Can't post " + response.data + " Error:" + response.status);
+
+        }
 
 
-        }, {
-            name: "nokia"
+
+        if (val) {
+
+            var data = {
+                rating: val,
+                user: "userId" // I'm not sure where is your userId
+
+            }
+
+            $http.post("yourUrl", data).then(sucess, error);
 
 
-        }, {
-            name: "samsung"
+        }
+    })
 
-        }, {
-            name: "mi"
+    $scope.products = [{
+        image: "img/product/5.jpg",
+        name: "Apple",
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+        price: "47000.00"
 
-        }, {
-            name: "micromax"
+    }, {
+        image: "img/product/6.jpg",
+        name: "Apple Macbook",
+        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
+        price: "48000.00"
 
-        }];
+    }, {
+        image: "img/product/7.jpg",
+        name: "Apple air",
+        desc: "but the majority have suffered alteration in some form. ",
+        price: "42000.00"
+
+    }, {
+        image: "img/product/8.jpg",
+        name: "samsung",
+        desc: "distracted by the readable content of a page when looking at its layout. ",
+        price: "72000.00"
+
+    }, {
+        image: "img/product/9.jpg",
+        name: "nokia lumia",
+        desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum. ",
+        price: "75000.00"
+
+    }, {
+        image: "img/product/10.jpg",
+        name: "resmi 1s",
+        desc: "sometimes by accident, sometimes on purpose (injected humour and the like. ",
+        price: "47000.00"
+
+    }, {
+        image: "img/product/11.jpg",
+        name: "micromax",
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+        price: "41000.00"
+
+    }];
+
 })
 
 .controller('headerctrl', function($scope, TemplateService) {

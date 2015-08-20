@@ -60,3 +60,4 @@ firstapp.directive('img', function($compile, $parse) {
         }
     };
 });
+
