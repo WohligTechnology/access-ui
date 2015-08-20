@@ -7449,10 +7449,10 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         controller: 'HomeCtrl'
     })
 
-    .state('feature', {
-        url: "/feature",
+    .state('productdetail', {
+        url: "/productdetail",
         templateUrl: "views/template.html",
-        controller: 'FeatureCtrl'
+        controller: 'ProductdetailCtrl'
     })
 
     .state('product', {
@@ -7666,8 +7666,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('headerctrl', function($scope, TemplateService) {
+.controller('headerctrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService;
+})
+.controller('ProductdetailCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService;
+      $scope.template = TemplateService.changecontent("productdetail");
+    $scope.menutitle = NavigationService.makeactive("Productdetail");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
 });;
 var templateservicemod = angular.module('templateservicemod', []);
 templateservicemod.service('TemplateService', function() {

@@ -21,10 +21,10 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         controller: 'HomeCtrl'
     })
 
-    .state('feature', {
-        url: "/feature",
+    .state('productdetail', {
+        url: "/productdetail",
         templateUrl: "views/template.html",
-        controller: 'FeatureCtrl'
+        controller: 'ProductdetailCtrl'
     })
 
     .state('product', {
