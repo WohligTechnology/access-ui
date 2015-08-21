@@ -251,8 +251,7 @@ img.loading {
     top: 50%;
     opacity: 1;
     left: 50%;
-    .translate(-50%,
-    -50%);
+    .translate(-50%, -50%);
     width: 100px !important;
     height: 100px !important;
 }
@@ -754,6 +753,10 @@ img.doneLoading {
 .pads {
     padding-top: 30px !important;
     padding-bottom: 40px !important;
+    hr {
+        width: 60%;
+        text-align: center;
+    }
 }
 
 .cart-det {
@@ -788,6 +791,10 @@ img.doneLoading {
                     }
                     P {
                         cursor: pointer;
+                    }
+                    .fa-trash {
+                        font-size: 20px;
+                        color: @color1;
                     }
                 }
             }
@@ -849,4 +856,87 @@ img.doneLoading {
     text-align: center;
     background-color: @color3;
     color: @white;
+}
+
+.login {
+    h4 {
+        text-transform: capitalize;
+        font-size: 22px;
+        font-family: @font-family-head;
+    }
+    form {
+        margin-bottom: 15px;
+        input {
+            //            padding: 6px 10px 7px 10px;
+            //            width: 100%;
+            margin: 5px auto;
+        }
+    }
+    .btns {
+        background-color: @color3;
+        color: @white;
+        font-size: 16px;
+        padding: 6px 25px;
+        text-transform: capitalize;
+        font-family: @font-family-body;
+        font-style: normal;
+    }
+    span {
+        a {
+            color: @color3 !important;
+            font-family: @font-family-body;
+            color: @color3 !important;
+            font-style: normal;
+            padding-top: 15px;
+        }
+    }
+    .g-logins {
+        border-radius: 0px;
+        font-family: @font-family-body;
+        font-style: normal;
+        margin: -5px 5px;
+        i {
+            padding-right: 5px;
+        }
+    }
+    .g-login {
+        background: #dd4d3b;
+        border-color: #DD4D3B;
+    }
+    .f-login {
+        background: #3c5a98;
+        border-color: #3c5a98;
+    }
+}
+
+.marg {
+    margin-bottom: 70px;
+}
+
+.btn-primary {
+    color: @white;
+    background-color: @color3;
+    border-color: @color3;
+    border-radius: 0px;
+    &:hover {
+        color: @white;
+        background-color: @color3;
+        border-color: @color3;
+    }
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 40px !important;
+    padding: 6px 12px !important;
+    border-radius: 0px !important;
+}
+
+.car {
+    margin-bottom: 26px;
+    h4 {
+        font-family: @font-family-head;
+        color@color-base;
+    }
 }

@@ -7465,6 +7465,16 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         templateUrl: "views/template.html",
         controller: 'CartCtrl'
     })
+  .state('login', {
+        url: "/login",
+        templateUrl: "views/template.html",
+        controller: 'LoginCtrl'
+    })  
+        .state('forgotpassword', {
+        url: "/forgotpassword",
+        templateUrl: "views/template.html",
+        controller: 'forgotpasswordCtrl'
+    })
 
     $urlRouterProvider.otherwise("/home");
 
@@ -7679,23 +7689,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('CartCtrl', function($scope, TemplateService, NavigationService) {
-    $scope.template = TemplateService;
-       $scope.template = TemplateService;
-      $scope.template = TemplateService.changecontent("cart");
-    $scope.menutitle = NavigationService.makeactive("Cart");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-})
+        $scope.template = TemplateService;
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("cart");
+        $scope.menutitle = NavigationService.makeactive("Cart");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+    .controller('LoginCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("login");
+        $scope.menutitle = NavigationService.makeactive("Login");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })   
+    .controller('forgotpasswordCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("forgotpassword");
+        $scope.menutitle = NavigationService.makeactive("Forgotpassword");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+
     .controller('headerctrl', function($scope, TemplateService, NavigationService) {
-    $scope.template = TemplateService;
-})
-.controller('ProductdetailCtrl', function($scope, TemplateService, NavigationService) {
-    $scope.template = TemplateService;
-      $scope.template = TemplateService.changecontent("productdetail");
-    $scope.menutitle = NavigationService.makeactive("Productdetail");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-});;
+        $scope.template = TemplateService;
+    })
+    .controller('ProductdetailCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("productdetail");
+        $scope.menutitle = NavigationService.makeactive("Productdetail");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    });;
 var templateservicemod = angular.module('templateservicemod', []);
 templateservicemod.service('TemplateService', function() {
     this.title = "Home";

@@ -37,6 +37,16 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         templateUrl: "views/template.html",
         controller: 'CartCtrl'
     })
+  .state('login', {
+        url: "/login",
+        templateUrl: "views/template.html",
+        controller: 'LoginCtrl'
+    })  
+        .state('forgotpassword', {
+        url: "/forgotpassword",
+        templateUrl: "views/template.html",
+        controller: 'forgotpasswordCtrl'
+    })
 
     $urlRouterProvider.otherwise("/home");
 
