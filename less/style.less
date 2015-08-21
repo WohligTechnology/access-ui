@@ -250,7 +250,8 @@ img.loading {
     top: 50%;
     opacity: 1;
     left: 50%;
-    .translate(-50%, -50%);
+    .translate(-50%,
+    -50%);
     width: 100px !important;
     height: 100px !important;
 }
@@ -568,6 +569,11 @@ img.doneLoading {
                 &:hover {
                     color: @color8;
                 }
+                a {
+                    &:hover {
+                        color: @color8;
+                    }
+                }
             }
         }
         &:hover {
@@ -590,6 +596,24 @@ img.doneLoading {
         img {
             height: auto;
             width: 100%;
+        }
+        .pro-img2 {
+            position: absolute;
+            top: 0px;
+            opacity: 0;
+            .transition(all 2s ease);
+        }
+        .pro-img1 {
+            opacity: 1;
+            .transition(all 2s ease);
+        }
+        &:hover {
+            .pro-img2 {
+                opacity: 1;
+            }
+            .pro-img1 {
+                opacity: 0;
+            }
         }
     }
     .pro-name {
@@ -809,23 +833,19 @@ img.doneLoading {
 .total-table {
     .table {
         border: 1px solid #ddd;
-    
     }
 }
 
 .total-table .table tbody tr td p {
     text-align: center;
     margin: 0;
-    
 }
 
 .total-table .table thead tr th {
     border-top: 0px !important;
-     border-bottom: 1px solid #ddd !important;
+    border-bottom: 1px solid #ddd !important;
     font-size: 13px;
     text-align: center;
-        background-color: @color3;
+    background-color: @color3;
     color: @white;
-    
-   
 }

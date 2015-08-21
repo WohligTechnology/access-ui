@@ -130,42 +130,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.products = [{
         image: "img/product/5.jpg",
+        image1: "img/product/5.jpg",
         name: "Apple",
         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
         price: "47000.00"
 
     }, {
         image: "img/product/6.jpg",
+        image1: "img/product/5.jpg",
         name: "Apple Macbook",
         desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
         price: "48000.00"
 
     }, {
         image: "img/product/7.jpg",
+        image1: "img/product/5.jpg",
         name: "Apple air",
         desc: "but the majority have suffered alteration in some form. ",
         price: "42000.00"
 
     }, {
         image: "img/product/8.jpg",
+        image1: "img/product/5.jpg",
         name: "samsung",
         desc: "distracted by the readable content of a page when looking at its layout. ",
         price: "72000.00"
 
     }, {
         image: "img/product/9.jpg",
+        image1: "img/product/5.jpg",
         name: "nokia lumia",
         desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum. ",
         price: "75000.00"
 
     }, {
         image: "img/product/10.jpg",
+        image1: "img/product/5.jpg",
         name: "resmi 1s",
         desc: "sometimes by accident, sometimes on purpose (injected humour and the like. ",
         price: "47000.00"
 
     }, {
         image: "img/product/11.jpg",
+        image1: "img/product/5.jpg",
         name: "micromax",
         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
         price: "41000.00"
