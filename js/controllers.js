@@ -174,7 +174,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('headerctrl', function($scope, TemplateService, NavigationService) {
+.controller('CartCtrl', function($scope, TemplateService, NavigationService) {
+    $scope.template = TemplateService;
+       $scope.template = TemplateService;
+      $scope.template = TemplateService.changecontent("cart");
+    $scope.menutitle = NavigationService.makeactive("Cart");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+})
+    .controller('headerctrl', function($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService;
 })
 .controller('ProductdetailCtrl', function($scope, TemplateService, NavigationService) {

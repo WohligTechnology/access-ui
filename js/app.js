@@ -31,6 +31,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         url: "/product",
         templateUrl: "views/template.html",
         controller: 'ProductCtrl'
+    }) 
+        .state('cart', {
+        url: "/cart",
+        templateUrl: "views/template.html",
+        controller: 'CartCtrl'
     })
 
     $urlRouterProvider.otherwise("/home");
