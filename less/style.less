@@ -16,6 +16,7 @@
 @color7: #f3f3f3;
 @color8: #f27323;
 @color9: #999999;
+@color10: #ddd;
 //@color4: #0FBA66;
 @color-base: #303030;
 @white: #fff;
@@ -310,7 +311,7 @@ img.doneLoading {
                 border-radius: 2px;
                 display: inline-block;
                 background: @color3;
-                color: #fff;
+                color: @white;
                 position: absolute;
                 bottom: 20px;
                 right: 20px;
@@ -729,7 +730,7 @@ img.doneLoading {
         }
         a {
             background-color: @color3;
-            color: #fff;
+            color: @white;
             font-size: 14px;
             padding: 8px 16px 9px 16px;
             margin: 0px 15px;
@@ -772,7 +773,7 @@ img.doneLoading {
                 vertical-align: middle;
                 td {
                     border-top: 0px;
-                    border-bottom: 1px solid #ddd;
+                    border-bottom: 1px solid @color10;
                     font-family: @font-family-body;
                     color: @color-base;
                     vertical-align: middle;
@@ -815,7 +816,7 @@ img.doneLoading {
     }
     a {
         background-color: @color3;
-        color: #fff;
+        color: @white;
         padding: 8px 16px 8px 16px;
     }
     .app {
@@ -825,14 +826,14 @@ img.doneLoading {
         float: right;
     }
     hr {
-        color: #ddd;
+        color: @color10;
         margin-top: 25px;
     }
 }
 
 .total-table {
     .table {
-        border: 1px solid #ddd;
+        border: 1px solid @color10;
     }
 }
 
@@ -843,7 +844,7 @@ img.doneLoading {
 
 .total-table .table thead tr th {
     border-top: 0px !important;
-    border-bottom: 1px solid #ddd !important;
+    border-bottom: 1px solid @color10 !important;
     font-size: 13px;
     text-align: center;
     background-color: @color3;
