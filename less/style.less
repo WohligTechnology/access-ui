@@ -30,7 +30,10 @@ serif;
     padding: 0;
     margin: 0;
 }
-
+a:focus, a:hover {
+    color: @color-base !important;
+    text-decoration: underline;
+}
 .pad {
     padding: 0;
 }
@@ -55,6 +58,9 @@ a {
     color: @color-base;
     text-decoration: none !important;
     .transition(all 300ms ease);
+    &:hover {
+        color: @color-base !important;
+    }
 }
 
 .navbar-nav {
@@ -99,6 +105,11 @@ a {
                 font-size: 12px;
                 i {
                     padding-right: 4px;
+                }
+                a {
+                    &:hover {
+                        color: @color-base !important;
+                    }
                 }
             }
         }
@@ -937,6 +948,6 @@ img.doneLoading {
     margin-bottom: 26px;
     h4 {
         font-family: @font-family-head;
-        color@color-base;
+        color:@color-base;
     }
 }
