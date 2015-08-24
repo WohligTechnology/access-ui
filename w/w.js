@@ -7460,6 +7460,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         templateUrl: "views/template.html",
         controller: 'ProductCtrl'
     }) 
+		 .state('orderhistory', {
+        url: "/orderhistory",
+        templateUrl: "views/template.html",
+        controller: 'OrderhistoryCtrl'
+    }) 
         .state('cart', {
         url: "/cart",
         templateUrl: "views/template.html",
@@ -7720,6 +7725,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("productdetail");
         $scope.menutitle = NavigationService.makeactive("Productdetail");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+.controller('OrderhistoryCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("orderhistory");
+        $scope.menutitle = NavigationService.makeactive("Orderhistory");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     });;

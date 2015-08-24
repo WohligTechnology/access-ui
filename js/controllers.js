@@ -205,7 +205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     })
-
+ 
     .controller('headerctrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
     })
@@ -213,6 +213,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("productdetail");
         $scope.menutitle = NavigationService.makeactive("Productdetail");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+.controller('OrderhistoryCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("orderhistory");
+        $scope.menutitle = NavigationService.makeactive("Orderhistory");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     });
