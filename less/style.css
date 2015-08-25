@@ -913,7 +913,7 @@ img.doneLoading {
 .account {
   margin-bottom: 3%;
 }
-.account .account-page h3 {
+.account .account-head h3 {
   font-weight: 600;
   font-family: 'pt sans';
   font-size: 28px;
@@ -948,6 +948,64 @@ img.doneLoading {
   transition: all 500ms linear;
 }
 .account form .save-btn a.save:hover {
+  background-color: #fff;
+  color: #7ee1ea;
+}
+.contact {
+  margin-bottom: 3%;
+}
+.contact .cont-info .company-info {
+  border-right: 1px solid #ddd;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'lato';
+  letter-spacing: 1px;
+}
+.contact .cont-info .company-info address {
+  width: 80%;
+}
+.contact .cont-info .company-info address span:first-child {
+  margin-right: 15px;
+}
+.contact .cont-info .company-info p a {
+  margin: 0 0 0 20px;
+  text-transform: lowercase;
+}
+.contact .cont-info form .contact-info .topic {
+  margin: 0 0 20px 0;
+}
+.contact .cont-info form .contact-info .msg {
+  margin: 20px 0 0 0;
+}
+.contact .cont-info form .contact-info label {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'lato';
+  letter-spacing: 1px;
+}
+.contact .cont-info form .contact-info label[for="msg"] {
+  display: block;
+}
+.contact .cont-info form .contact-info textarea[id="msg"] {
+  width: 100%;
+}
+.contact .send-btn {
+  margin: 10px 0 0 0;
+}
+.contact .send-btn a.send {
+  padding: 1% 6%;
+  border: 1px solid #7ee1ea;
+  display: inline-block;
+  background-color: #7ee1ea;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'pt sans';
+  -webkit-transition: all 500ms linear;
+  -moz-transition: all 500ms linear;
+  -o-transition: all 500ms linear;
+  transition: all 500ms linear;
+}
+.contact .send-btn a.send:hover {
   background-color: #fff;
   color: #7ee1ea;
 }

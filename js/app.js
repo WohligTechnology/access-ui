@@ -37,6 +37,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         templateUrl: "views/template.html",
         controller: 'OrderhistoryCtrl'
     }) 
+		.state('contact', {
+        url: "/contact", 
+        templateUrl: "views/template.html",
+        controller: 'ContactCtrl'
+    })
+		
 		.state('account', {
         url: "/account", 
         templateUrl: "views/template.html",
