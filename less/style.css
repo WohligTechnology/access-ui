@@ -876,11 +876,35 @@ img.doneLoading {
   font-family: 'Lato';
   font-weight: 400;
 }
-.table .size {
+.table .last-row {
+  border-bottom: 1px solid #ddd;
+}
+.table td .clear {
+  clear: both;
+}
+.table td h4 {
+  margin: 0;
+  font-size: 14px;
+}
+.table td h5 {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+.table .product-info {
+  min-height: 65px;
+}
+.table .product-info .img-holder {
   width: 75px;
+  border: 1px solid #e6e6e6;
+}
+.table .product-info .img-desc {
+  margin: 0 0 0 10px;
+  display: inline-block;
 }
 .more-items {
   padding: 10px 0;
+  margin: 20px 0 40px;
   background-color: #f1f1f1;
 }
 .more-items p {

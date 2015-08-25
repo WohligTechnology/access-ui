@@ -222,4 +222,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Orderhistory");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+    })
+	.controller('AccountCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("account");
+        $scope.menutitle = NavigationService.makeactive("Account"); 
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
     });
