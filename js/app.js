@@ -8,87 +8,90 @@ var firstapp = angular.module('firstapp', [
 ]);
 
 
-firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
-    
-    // for http request with session
-    $httpProvider.defaults.withCredentials = true;
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    $stateProvider
+	// for http request with session
+	$httpProvider.defaults.withCredentials = true;
 
-    .state('home', {
-        url: "/home",
-        templateUrl: "views/template.html",
-        controller: 'HomeCtrl'
-    })
+	$stateProvider
 
-    .state('productdetail', {
-        url: "/productdetail",
-        templateUrl: "views/template.html",
-        controller: 'ProductdetailCtrl'
-    })
+		.state('home', {
+		url: "/home",
+		templateUrl: "views/template.html",
+		controller: 'HomeCtrl'
+	})
 
-    .state('product', {
-        url: "/product",
-        templateUrl: "views/template.html",
-        controller: 'ProductCtrl'
-    }) 
-		 .state('orderhistory', {
-        url: "/orderhistory", 
-        templateUrl: "views/template.html",
-        controller: 'OrderhistoryCtrl'
-    }) 
+	.state('productdetail', {
+		url: "/productdetail",
+		templateUrl: "views/template.html",
+		controller: 'ProductdetailCtrl'
+	})
+
+	.state('product', {
+			url: "/product",
+			templateUrl: "views/template.html",
+			controller: 'ProductCtrl'
+		})
+		.state('orderhistory', {
+			url: "/orderhistory",
+			templateUrl: "views/template.html",
+			controller: 'OrderhistoryCtrl'
+		})
 		.state('contact', {
-        url: "/contact", 
-        templateUrl: "views/template.html",
-        controller: 'ContactCtrl'
-    })
-		
-		.state('account', {
-        url: "/account", 
-        templateUrl: "views/template.html",
-        controller: 'AccountCtrl'
-    }) 
-        .state('cart', {
-        url: "/cart",
-        templateUrl: "views/template.html",
-        controller: 'CartCtrl'
-    })
-  .state('login', {
-        url: "/login",
-        templateUrl: "views/template.html",
-        controller: 'LoginCtrl'
-    })  
-        .state('forgotpassword', {
-        url: "/forgotpassword",
-        templateUrl: "views/template.html",
-        controller: 'forgotpasswordCtrl'
-    })
+			url: "/contact",
+			templateUrl: "views/template.html",
+			controller: 'ContactCtrl'
+		})
 
-    $urlRouterProvider.otherwise("/home");
+	.state('account', {
+			url: "/account",
+			templateUrl: "views/template.html",
+			controller: 'AccountCtrl'
+		})
+		.state('cart', {
+			url: "/cart",
+			templateUrl: "views/template.html",
+			controller: 'CartCtrl'
+		})
+	
+		.state('searchresult', {
+			url: "/searchresult",
+			templateUrl: "views/template.html",
+			controller: 'SearchresultCtrl'
+		})
+	
+		.state('login', {
+			url: "/login",
+			templateUrl: "views/template.html",
+			controller: 'LoginCtrl'
+		})
+		.state('forgotpassword', {
+			url: "/forgotpassword",
+			templateUrl: "views/template.html",
+			controller: 'forgotpasswordCtrl'
+		})
+
+	$urlRouterProvider.otherwise("/home");
 
 });
 
 
-firstapp.directive('img', function($compile, $parse) {
-    return {
-        restrict: 'E',
-        replace: false,
-        link: function($scope, element, attrs) {
-            var $element = $(element);
-            if(!attrs.noloading)
-            {
-                $element.after("<img src='img/loading.gif' class='loading' />");
-                var $loading = $element.next(".loading");
-                $element.load(function() {
-                    $loading.remove();
-                    $(this).addClass("doneLoading");
-                });
-            }
-            else
-            {
-                $($element).addClass("doneLoading");
-            }
-        }
-    };
+firstapp.directive('img', function ($compile, $parse) {
+	return {
+		restrict: 'E',
+		replace: false,
+		link: function ($scope, element, attrs) {
+			var $element = $(element);
+			if (!attrs.noloading) {
+				$element.after("<img src='img/loading.gif' class='loading' />");
+				var $loading = $element.next(".loading");
+				$element.load(function () {
+					$loading.remove();
+					$(this).addClass("doneLoading");
+				});
+			} else {
+				$($element).addClass("doneLoading");
+			}
+		}
+	};
 });
-

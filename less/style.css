@@ -911,7 +911,7 @@ img.doneLoading {
   margin: 0;
 }
 .account {
-  margin-bottom: 3%;
+  margin-bottom: 65px;
 }
 .account .account-head h3 {
   font-weight: 600;
@@ -952,7 +952,7 @@ img.doneLoading {
   color: #7ee1ea;
 }
 .contact {
-  margin-bottom: 3%;
+  margin-bottom: 4%;
 }
 .contact .cont-info .company-info {
   border-right: 1px solid #ddd;
@@ -971,7 +971,7 @@ img.doneLoading {
   margin-bottom: 20px;
 }
 .contact .cont-info .company-info p a {
-  margin: 0 0 0 20px;
+  margin: 0 0 0 10px;
   text-transform: lowercase;
 }
 .contact .cont-info form .contact-info .topic {
@@ -1011,4 +1011,14 @@ img.doneLoading {
 .contact .send-btn a.send:hover {
   background-color: #fff;
   color: #7ee1ea;
+}
+.search {
+  margin-bottom: 37px;
+}
+.search .search-head .prd-name {
+  font-family: "Lato";
+  font-weight: 100;
+}
+.search .product-list {
+  padding: 0;
 }

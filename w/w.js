@@ -7436,91 +7436,93 @@ var firstapp = angular.module('firstapp', [
 ]);
 
 
-firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
-    
-    // for http request with session
-    $httpProvider.defaults.withCredentials = true;
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    $stateProvider
+	// for http request with session
+	$httpProvider.defaults.withCredentials = true;
 
-    .state('home', {
-        url: "/home",
-        templateUrl: "views/template.html",
-        controller: 'HomeCtrl'
-    })
+	$stateProvider
 
-    .state('productdetail', {
-        url: "/productdetail",
-        templateUrl: "views/template.html",
-        controller: 'ProductdetailCtrl'
-    })
+		.state('home', {
+		url: "/home",
+		templateUrl: "views/template.html",
+		controller: 'HomeCtrl'
+	})
 
-    .state('product', {
-        url: "/product",
-        templateUrl: "views/template.html",
-        controller: 'ProductCtrl'
-    }) 
-		 .state('orderhistory', {
-        url: "/orderhistory", 
-        templateUrl: "views/template.html",
-        controller: 'OrderhistoryCtrl'
-    }) 
+	.state('productdetail', {
+		url: "/productdetail",
+		templateUrl: "views/template.html",
+		controller: 'ProductdetailCtrl'
+	})
+
+	.state('product', {
+			url: "/product",
+			templateUrl: "views/template.html",
+			controller: 'ProductCtrl'
+		})
+		.state('orderhistory', {
+			url: "/orderhistory",
+			templateUrl: "views/template.html",
+			controller: 'OrderhistoryCtrl'
+		})
 		.state('contact', {
-        url: "/contact", 
-        templateUrl: "views/template.html",
-        controller: 'ContactCtrl'
-    })
-		
-		.state('account', {
-        url: "/account", 
-        templateUrl: "views/template.html",
-        controller: 'AccountCtrl'
-    }) 
-        .state('cart', {
-        url: "/cart",
-        templateUrl: "views/template.html",
-        controller: 'CartCtrl'
-    })
-  .state('login', {
-        url: "/login",
-        templateUrl: "views/template.html",
-        controller: 'LoginCtrl'
-    })  
-        .state('forgotpassword', {
-        url: "/forgotpassword",
-        templateUrl: "views/template.html",
-        controller: 'forgotpasswordCtrl'
-    })
+			url: "/contact",
+			templateUrl: "views/template.html",
+			controller: 'ContactCtrl'
+		})
 
-    $urlRouterProvider.otherwise("/home");
+	.state('account', {
+			url: "/account",
+			templateUrl: "views/template.html",
+			controller: 'AccountCtrl'
+		})
+		.state('cart', {
+			url: "/cart",
+			templateUrl: "views/template.html",
+			controller: 'CartCtrl'
+		})
+	
+		.state('searchresult', {
+			url: "/searchresult",
+			templateUrl: "views/template.html",
+			controller: 'SearchresultCtrl'
+		})
+	
+		.state('login', {
+			url: "/login",
+			templateUrl: "views/template.html",
+			controller: 'LoginCtrl'
+		})
+		.state('forgotpassword', {
+			url: "/forgotpassword",
+			templateUrl: "views/template.html",
+			controller: 'forgotpasswordCtrl'
+		})
+
+	$urlRouterProvider.otherwise("/home");
 
 });
 
 
-firstapp.directive('img', function($compile, $parse) {
-    return {
-        restrict: 'E',
-        replace: false,
-        link: function($scope, element, attrs) {
-            var $element = $(element);
-            if(!attrs.noloading)
-            {
-                $element.after("<img src='img/loading.gif' class='loading' />");
-                var $loading = $element.next(".loading");
-                $element.load(function() {
-                    $loading.remove();
-                    $(this).addClass("doneLoading");
-                });
-            }
-            else
-            {
-                $($element).addClass("doneLoading");
-            }
-        }
-    };
-});
-
-;
+firstapp.directive('img', function ($compile, $parse) {
+	return {
+		restrict: 'E',
+		replace: false,
+		link: function ($scope, element, attrs) {
+			var $element = $(element);
+			if (!attrs.noloading) {
+				$element.after("<img src='img/loading.gif' class='loading' />");
+				var $loading = $element.next(".loading");
+				$element.load(function () {
+					$loading.remove();
+					$(this).addClass("doneLoading");
+				});
+			} else {
+				$($element).addClass("doneLoading");
+			}
+		}
+	};
+});;
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -7759,6 +7761,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Account"); 
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+    })	
+	.controller('SearchresultCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("searchresult");
+        $scope.menutitle = NavigationService.makeactive("SearchResult"); 
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+	
+	   $scope.products = [{
+        image: "img/product/5.jpg",
+        image1: "img/product/5.jpg",
+        name: "Apple",
+        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+        price: "47000.00"
+
+    }, {
+        image: "img/product/6.jpg",
+        image1: "img/product/5.jpg",
+        name: "Apple Macbook",
+        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
+        price: "48000.00"
+
+    }, {
+        image: "img/product/7.jpg",
+        image1: "img/product/5.jpg",
+        name: "Apple air",
+        desc: "but the majority have suffered alteration in some form. ",
+        price: "42000.00"
+
+    }, {
+        image: "img/product/8.jpg",
+        image1: "img/product/5.jpg",
+        name: "samsung",
+        desc: "distracted by the readable content of a page when looking at its layout. ",
+        price: "72000.00"
+
+    }];
+	
     });;
 var templateservicemod = angular.module('templateservicemod', []);
 templateservicemod.service('TemplateService', function() {
