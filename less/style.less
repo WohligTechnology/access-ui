@@ -1013,3 +1013,49 @@ img.doneLoading {
 		margin: 0;
 	}
 }
+
+//account-page
+.account {
+	margin-bottom: 3%;
+	.account-page {
+		h3 {
+			font-weight: 600;
+			font-family: 'pt sans';
+			font-size: 28px;
+			letter-spacing: 1px;
+		}
+	}
+	form {
+		.divider {
+			margin: 4% 0;
+		}
+		label {
+			font-size: 14px;
+			font-weight: 400;
+			font-family: @font-family-head;
+			letter-spacing: 1px;
+			span {
+				text-transform: lowercase;
+			}
+		}
+		label[for="billing"] {
+			text-transform: capitalize;
+		}
+		.save-btn {
+			a.save {
+				padding: 1% 6%;
+				border: 1px solid #7ee1ea;
+				display: inline-block;
+				background-color: #7ee1ea;
+				color: #fff;
+				font-size: 16px;
+				font-family: 'pt sans';
+				.transition(all 500ms linear);
+				&:hover {
+					background-color: #fff;
+					color: #7ee1ea;
+				}
+			}
+		}
+	}
+}
