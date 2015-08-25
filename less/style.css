@@ -967,6 +967,9 @@ img.doneLoading {
 .contact .cont-info .company-info address span:first-child {
   margin-right: 15px;
 }
+.contact .cont-info .company-info p {
+  margin-bottom: 20px;
+}
 .contact .cont-info .company-info p a {
   margin: 0 0 0 20px;
   text-transform: lowercase;
