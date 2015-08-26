@@ -1127,7 +1127,19 @@ img.doneLoading {
   background-color: #fff;
   color: #7ee1ea;
 }
-.checkout .in input {
+.checkout .order-review {
+  margin: 25px 0;
+}
+.checkout .order-review .review {
+  margin-bottom: 35px;
+}
+.checkout .order-review table tr {
+  border-bottom: 1px solid #ddd;
+}
+.checkout .order-review table .in input {
   width: 20%;
   padding: 2px 0 2px 5px;
+}
+.checkout table thead.head {
+  background-color: #fff;
 }
