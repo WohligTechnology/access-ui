@@ -1022,3 +1022,12 @@ img.doneLoading {
 .search .product-list {
   padding: 0;
 }
+.about {
+  margin-bottom: 53px;
+}
+.about .abt-content {
+  font-family: 'lato';
+}
+.about .abt-content p {
+  text-transform: none;
+}
