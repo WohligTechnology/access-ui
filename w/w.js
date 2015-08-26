@@ -7493,6 +7493,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'AboutCtrl'
 		})
+	
+		.state('checkout', {
+			url: "/checkout",
+			templateUrl: "views/template.html",
+			controller: 'CheckoutCtrl'
+		})
 
 		.state('login', {
 			url: "/login",
@@ -7773,6 +7779,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("about");
         $scope.menutitle = NavigationService.makeactive("About"); 
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+
+	.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("checkout");
+        $scope.menutitle = NavigationService.makeactive("CheckOut"); 
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     })
