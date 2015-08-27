@@ -1,85 +1,85 @@
 <div class="container">
-   <div class="row">
-      <div class="pro-set">
-       <div class="col-md-3">
-           <div class="product-filter">
-               <h4>product filters</h4>
-               <div class="all">
-               <div class="filter">
-                   <p>Brands</p>
-                        <hr class="line">
-                         <form class="sub-catgame">
-                            <ul>
-                                <li>
-                                    <input id="Option" type="checkbox">
-                                    <label class="checkbox" for="Option">Apple</label>
-                                </li>
-                                <li>
-                                    <input id="option2" type="checkbox">
-                                    <label class="checkbox" for="option2">nokia</label>
-                                </li>
-                                <li>
-                                    <input id="option3" type="checkbox">
-                                    <label class="checkbox" for="option3">samsung</label>
-                                </li>
-                                <li>
-                                    <input id="option4" type="checkbox">
-                                    <label class="checkbox" for="option4">mi</label>
-                                </li>
-                                <li>
-                                    <input id="option5" type="checkbox">
-                                    <label class="checkbox" for="option5">micromax</label>
-                                </li>
-                            </ul>
-                        </form>
-               </div>
-               <hr class="line">
-               <div class="price filter">
-                   <p>price</p>
-                    
-                        <hr class="line">
-                       <div range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" filter="currency:'₹'" step="100"></div>
-         </div>
-              </div>
-               </div>
-           </div>
-       <div class="col-md-9">
-           <div class="product-list">
-           <div class="col-md-4 col-sm-6" ng-repeat="pro in products">
-              <a href="#/productdetail">
-                   <div class="pro-box">
-                   <div class="img-box">
-                      <div class="pro-img1">
-                       <img ng-src="{{pro.image}}" class="img-responsive" >
-                       </div>
-                       <div class="pro-img2">
-                       <img ng-src="{{pro.image1}}" class="img-responsive" >
-<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
-                       </div>
-                   </div>
-                   <div class="pro-name">
-                       <h5>{{pro.name}}</h5>
-<span class="spanli"><ul>
+	<div class="row">
+		<div class="pro-set">
+			<div class="col-md-3">
+				<div class="product-filter">
+					<h4>product filters</h4>
+					<div class="all">
+						<div class="filter">
+							<p>Brands</p>
+							<hr class="line">
+							<form class="sub-catgame">
+								<ul>
+									<li>
+										<input id="Option" type="checkbox">
+										<label class="checkbox" for="Option">Apple</label>
+									</li>
+									<li>
+										<input id="option2" type="checkbox">
+										<label class="checkbox" for="option2">nokia</label>
+									</li>
+									<li>
+										<input id="option3" type="checkbox">
+										<label class="checkbox" for="option3">samsung</label>
+									</li>
+									<li>
+										<input id="option4" type="checkbox">
+										<label class="checkbox" for="option4">mi</label>
+									</li>
+									<li>
+										<input id="option5" type="checkbox">
+										<label class="checkbox" for="option5">micromax</label>
+									</li>
+								</ul>
+							</form>
+						</div>
+						<hr class="line">
+						<div class="price filter">
+							<p>price</p>
+
+							<hr class="line">
+							<div range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" filter="currency:'₹'" step="100"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="product-list">
+					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
+						<a href="#/productdetail">
+							<div class="pro-box">
+								<div class="img-box">
+									<div class="pro-img1">
+										<img ng-src="{{pro.image}}" class="img-responsive">
+									</div>
+									<div class="pro-img2">
+										<img ng-src="{{pro.image1}}" class="img-responsive">
+										<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
+									</div>
+								</div>
+								<div class="pro-name">
+									<h5>{{pro.name}}</h5>
+									<span class="spanli"><ul>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star-o"></i></li>
 </ul></span>
-                 <hr class="line">
-                  <p>{{pro.desc}}</p>
-                  <div class="cartli">
-                      <ul>
-                          <li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-                          <li class="carts"><i class="fa fa-heart"></i></li>
-                          <li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                  </div>
-                   </div>
-               </div>
-               </a>
-           </div>
-       </div>
-       </div>
-   </div>
-   </div>
+									<hr class="line">
+									<p>{{pro.desc}}</p>
+									<div class="cartli">
+										<ul>
+											<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
+											<li class="carts"><i class="fa fa-heart"></i></li>
+											<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
