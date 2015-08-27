@@ -116,6 +116,26 @@
 						}
 					}
 				}
+				li:last-child {
+					position: relative;
+				}
+				.dropdown {
+					width: 110px;
+					padding: 5px 0;
+					position: absolute;
+					left: -4px;
+					background-color: #E6E6E6;
+					text-align: center;
+					display: none;
+					z-index: 10;
+					li {
+						border: none;
+						padding: 4px 0;
+					}
+				}
+				li:last-child:hover .dropdown {
+					display: block;
+				}
 			}
 		}
 		
@@ -139,6 +159,10 @@
 							.size(36);
 							text-align: center;
 							cursor: pointer;
+							&:hover {
+								border: 2px solid #303030;
+								color: #303030;
+							}
 						}
 					}
 				}
@@ -205,7 +229,6 @@
 			.carousel li {
 				margin-right: 0px !important;
 			}
-			
 			.flex-direction-nav a.flex-next:before {
 				content: '';
 				background: url("../img/arrow.png") no-repeat center;
@@ -1267,7 +1290,7 @@
 			}
 			table {
 				thead.head {
-				background-color: ;
+					background-color: ;
 				}
 			}
 		}

@@ -100,6 +100,26 @@ a:hover {
 .head .head-right ul li a:hover {
   color: #303030 !important;
 }
+.head .head-right li:last-child {
+  position: relative;
+}
+.head .head-right .dropdown {
+  width: 110px;
+  padding: 5px 0;
+  position: absolute;
+  left: -4px;
+  background-color: #E6E6E6;
+  text-align: center;
+  display: none;
+  z-index: 10;
+}
+.head .head-right .dropdown li {
+  border: none;
+  padding: 4px 0;
+}
+.head .head-right li:last-child:hover .dropdown {
+  display: block;
+}
 .head-mid {
   background-color: #ffffff;
   padding: 40px 0px 40px 0px;
@@ -130,6 +150,10 @@ a:hover {
   height: 36px;
   text-align: center;
   cursor: pointer;
+}
+.head-mid .social ul li i:hover {
+  border: 2px solid #303030;
+  color: #303030;
 }
 .navbar-default {
   background-color: #e6e6e6;

@@ -226,7 +226,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("contact");
-        $scope.menutitle = NavigationService.makeactive("ContactCtrl");
+        $scope.menutitle = NavigationService.makeactive("Contact");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+    })
+	.controller('StorelocatorCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("storelocator");
+        $scope.menutitle = NavigationService.makeactive("StoreLocator");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     })

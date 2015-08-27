@@ -16,7 +16,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 	$stateProvider
 
 		.state('home', {
-		url: "/home",
+		url: "/home", 
 		templateUrl: "views/template.html",
 		controller: 'HomeCtrl'
 	})
@@ -70,6 +70,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			url: "/checkout",
 			templateUrl: "views/template.html",
 			controller: 'CheckoutCtrl'
+		})
+	
+	.state('storelocator', {
+			url: "/storelocator",
+			templateUrl: "views/template.html",
+			controller: 'StorelocatorCtrl'
 		})
 
 		.state('login', {
