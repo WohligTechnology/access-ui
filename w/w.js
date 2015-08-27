@@ -7769,7 +7769,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("contact");
-        $scope.menutitle = NavigationService.makeactive("Contact");
+        $scope.menutitle = NavigationService.makeactive("Contact"); 
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     })
@@ -7894,7 +7894,7 @@ var navigationservice = angular.module('navigationservice', [])
     }, {
 		name: "products",
 		active: "",
-		link: "#/products",
+		link: "#/product",
 		classis: "active",
 		subnav: []
     }, {
