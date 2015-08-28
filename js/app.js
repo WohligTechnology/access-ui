@@ -48,6 +48,18 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'AccountCtrl'
 		})
+	.state('exclusive', {
+			url: "/exclusive",
+			templateUrl: "views/template.html",
+			controller: 'ExclusiveCtrl'
+		})
+	
+	.state('brandhover', {
+			url: "/brandhover",
+			templateUrl: "views/template.html",
+			controller: 'BrandhoverCtrl'
+		})
+	
 		.state('cart', {
 			url: "/cart",
 			templateUrl: "views/template.html",
@@ -76,6 +88,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			url: "/storelocator",
 			templateUrl: "views/template.html",
 			controller: 'StorelocatorCtrl'
+		})
+		.state('brand', {
+			url: "/brand",
+			templateUrl: "views/template.html",
+			controller: 'BrandsCtrl'
 		})
 
 		.state('login', {

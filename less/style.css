@@ -1216,3 +1216,18 @@ img.doneLoading {
   background-color: #fff;
   color: #7ee1ea;
 }
+.brand {
+  margin: 56px 0 66px;
+}
+.brand .divider {
+  margin: 60px 0;
+}
+.exclusive .exclusive-list {
+  box-shadow: 2px 9px 17px 9px #ddd !important;
+}
+.exclusive .exclusive-list ul {
+  padding: 0;
+}
+.exclusive .exclusive-list ul li {
+  list-style: none;
+}
