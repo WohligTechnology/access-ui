@@ -1223,7 +1223,7 @@ img.doneLoading {
   margin: 60px 0;
 }
 .exclusive .exclusive-list {
-  box-shadow: 2px 9px 17px 9px #ddd !important;
+  box-shadow: 2px 9px 17px 9px #ddd ;
 }
 .exclusive .exclusive-list ul {
   padding: 0;
