@@ -259,22 +259,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Brandhover");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	$scope.slides = [
+	  'img/slider/1.jpg',
+		'img/slider/2.jpg',
+		'img/slider/3.jpg',
+		'img/slider/4.jpg'
+	];
 })
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
-	$scope.template = TemplateService;
-	$scope.template = TemplateService.changecontent("checkout");
-	$scope.menutitle = NavigationService.makeactive("CheckOut");
-	TemplateService.title = $scope.menutitle;
-	$scope.navigation = NavigationService.getnav();
-})
-.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
-	$scope.template = TemplateService;
-	$scope.template = TemplateService.changecontent("exclusive");
-	$scope.menutitle = NavigationService.makeactive("Exclusive");
-	TemplateService.title = $scope.menutitle;
-	$scope.navigation = NavigationService.getnav();
-})
+		$scope.template = TemplateService;
+		$scope.template = TemplateService.changecontent("checkout");
+		$scope.menutitle = NavigationService.makeactive("CheckOut");
+		TemplateService.title = $scope.menutitle;
+		$scope.navigation = NavigationService.getnav();
+	})
+	.controller('ExclusivehoverCtrl', function ($scope, TemplateService, NavigationService) {
+		$scope.template = TemplateService;
+		$scope.template = TemplateService.changecontent("exclusivehover");
+		$scope.menutitle = NavigationService.makeactive("Exclusive");
+		TemplateService.title = $scope.menutitle;
+		$scope.navigation = NavigationService.getnav();
+	})
 
 .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
@@ -289,7 +296,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.template = TemplateService.changecontent("searchresult");
 	$scope.menutitle = NavigationService.makeactive("SearchResult");
 	TemplateService.title = $scope.menutitle;
-	$scope.navigation = NavigationService.getnav();
+	$scope.navigation = NavigationService.getnav(); 
 
 	$scope.products = [{
 		image: "img/product/5.jpg",

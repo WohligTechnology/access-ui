@@ -1222,12 +1222,18 @@ img.doneLoading {
 .brand .divider {
   margin: 60px 0;
 }
-.exclusive .exclusive-list {
-  box-shadow: 2px 9px 17px 9px #ddd;
+.exclusivehover .exclusive-list {
+  -webkit-box-shadow: 1px 8px 15px 2px #dddddd;
+  -moz-box-shadow: 1px 8px 15px 2px #dddddd;
+  box-shadow: 1px 8px 15px 2px #dddddd;
 }
-.exclusive .exclusive-list ul {
+.exclusivehover .exclusive-list h5 {
+  color: #7ee1ea;
+  font-size: 18px;
+}
+.exclusivehover .exclusive-list ul {
   padding: 0;
 }
-.exclusive .exclusive-list ul li {
-  list-style: none;
+.exclusivehover .exclusive-list ul li {
+  list-style-type: none;
 }

@@ -1357,15 +1357,18 @@
 			}
 		}
 		
-		//exclusive
-
-		.exclusive {
+		//exclusive hover
+		.exclusivehover {
 			.exclusive-list {
-				box-shadow: 2px 9px 17px 9px #ddd;
+				.box-shadow(1px 8px 15px 2px #ddd);
+				h5 {
+					color: @color3;
+					font-size: 18px;
+				} 
 				ul {
 					padding: 0;
 					li {
-						list-style: none;
+						list-style-type: none;
 					}
 				}
 			}
