@@ -275,13 +275,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		TemplateService.title = $scope.menutitle;
 		$scope.navigation = NavigationService.getnav();
 	})
-	.controller('ExclusivehoverCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("exclusivehover");
-		$scope.menutitle = NavigationService.makeactive("Exclusive");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-	})
+//	.controller('ExclusivehoverCtrl', function ($scope, TemplateService, NavigationService) {
+//		$scope.template = TemplateService;
+//		$scope.template = TemplateService.changecontent("exclusivehover");
+//		$scope.menutitle = NavigationService.makeactive("Exclusive");
+//		TemplateService.title = $scope.menutitle;
+//		$scope.navigation = NavigationService.getnav();
+//	})
 
 .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;

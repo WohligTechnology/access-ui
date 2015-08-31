@@ -641,7 +641,6 @@ img.doneLoading {
   padding-top: 20px;
 }
 .det-img .box-img {
-  border: 1px solid #e6e6e6;
   height: 340px;
   width: 100%;
   overflow: hidden;
@@ -661,7 +660,6 @@ img.doneLoading {
 .det-img .mini-img ul li {
   display: inline-block;
   width: 100px;
-  border: 1px solid #e6e6e6;
   margin: 0px 5px;
 }
 .det-txt h3 {
@@ -722,6 +720,15 @@ img.doneLoading {
 }
 .pro-desc .qua a i {
   padding-right: 5px;
+}
+.img-thumb {
+  padding: 0;
+}
+.img-thumb li {
+  width: 10%;
+  margin: 3%;
+  display: inline-block;
+  list-style-type: none;
 }
 .tab {
   padding-top: 20px;
@@ -1235,30 +1242,58 @@ img.doneLoading {
 .brand .img-holder img {
   margin: 0 auto;
 }
+.brandhover {
+  -webkit-box-shadow: 1px 8px 15px 2px #dddddd;
+  -moz-box-shadow: 1px 8px 15px 2px #dddddd;
+  box-shadow: 1px 8px 15px 2px #dddddd;
+}
+.brandhover .slider {
+  width: 70%;
+  margin: 2% auto;
+}
 .brandhover .slider .divider {
   margin: 2% 0 5%;
 }
 .brandhover .slider .divider .img-holder img {
   margin: 0 auto;
 }
-.exclusivehover .exclusive-list {
+.exclusivehover .container {
+  padding: 0;
+}
+.exclusivehover .container .exclusive-list {
   -webkit-box-shadow: 1px 8px 15px 2px #dddddd;
   -moz-box-shadow: 1px 8px 15px 2px #dddddd;
   box-shadow: 1px 8px 15px 2px #dddddd;
 }
-.exclusivehover .exclusive-list h5 {
+.exclusivehover .container .exclusive-list h5 {
   color: #7ee1ea;
   font-size: 18px;
 }
-.exclusivehover .exclusive-list ul {
+.exclusivehover .container .exclusive-list ul {
   padding: 0;
 }
-.exclusivehover .exclusive-list ul li {
+.exclusivehover .container .exclusive-list ul li {
   list-style-type: none;
 }
-.exclusivehover .list1 {
+.exclusivehover .container .list1 {
   padding: 3% 0;
 }
-.exclusivehover .list1 .list1-1 {
+.exclusivehover .container .list1 .list1-1 {
   margin-left: 5%;
+}
+div.megamenu {
+  width: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 999999999;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }

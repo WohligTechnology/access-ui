@@ -1,3 +1,4 @@
+<!--
 <ul class="nav navbar-nav">
     <li ng-repeat="menu in navigation" class="{{menu.classis}}">
         <a href="{{menu.link}}">{{menu.name}}</a>
@@ -7,4 +8,24 @@
             </li>
         </ul>
     </li>
+</ul>-->
+
+
+
+
+<ul class="nav navbar-nav" ng-controller="submenuctrl">
+	<li ng-mouseover="showsubmenu(0)" ng-mouseleave="hidesubmenu(0)" style="position:static;"><a href="#brand" title="Brands">Brands</a>
+		<div class="megamenu" ng-include src="submenuval[0]" ng-show="submenu[0]">
+		</div>
+	</li>
+	<li ng-mouseover="showsubmenu(1)" ng-mouseleave="hidesubmenu(1)" style="position:static;"><a href="#product" title="Product">product</a>
+			<div class="megamenu" ng-include src="submenuval[1]" ng-show="submenu[1]">
+		</div>
+	</li>
+	<li><a href="#exculsive" title="Exculsive">exculsive</a>
+	</li>
+	<li><a href="#newarrivals" title="New Arrivals">new arrivals</a></li>
+	<li><a href="#deals" title="Deals">Deals</a></li>
+	<li><a href="#about" title="About Us">about us</a></li>
+	<li><a href="#contact" title="Contact">contact</a></li>
 </ul>
