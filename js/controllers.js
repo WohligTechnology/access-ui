@@ -261,10 +261,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.navigation = NavigationService.getnav();
 
 	$scope.slides = [
-	  'img/slider/1.jpg',
-		'img/slider/2.jpg',
-		'img/slider/3.jpg',
-		'img/slider/4.jpg'
+	  'img/brands/dell.png',
+		'img/brands/apple.png',
+		'img/brands/sony.png',
+		'img/brands/beats.png'
 	];
 })
 
