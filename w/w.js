@@ -7476,12 +7476,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'AccountCtrl'
 		})
-//	.state('exclusivehover', {
-//			url: "/exclusivehover",
-//			templateUrl: "views/template.html",
-//			controller: 'ExclusivehoverCtrl'
-//		})
-	
+	.state('exclusive', {
+			url: "/exclusive",
+			templateUrl: "views/template.html",
+			controller: 'ExclusiveCtrl'
+		}) 
 	
 	.state('brandhover', {
 			url: "/brandhover",
@@ -7830,19 +7829,82 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("checkout");
-		$scope.menutitle = NavigationService.makeactive("CheckOut");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-	})
-//	.controller('ExclusivehoverCtrl', function ($scope, TemplateService, NavigationService) {
-//		$scope.template = TemplateService;
-//		$scope.template = TemplateService.changecontent("exclusivehover");
-//		$scope.menutitle = NavigationService.makeactive("Exclusive");
-//		TemplateService.title = $scope.menutitle;
-//		$scope.navigation = NavigationService.getnav();
-//	})
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("checkout");
+	$scope.menutitle = NavigationService.makeactive("CheckOut");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+})
+
+.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("exclusive");
+	$scope.menutitle = NavigationService.makeactive("Exclusive");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+
+	$scope.demo2 = {
+		range: {
+			min: 0,
+			max: 10050
+		},
+		minPrice: 0,
+		maxPrice: 10050
+	};
+
+	$scope.products = [{
+		image: "img/product/5.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple",
+		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+		price: "47000.00"
+
+    }, {
+		image: "img/product/6.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple Macbook",
+		desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
+		price: "48000.00"
+
+    }, {
+		image: "img/product/7.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple air",
+		desc: "but the majority have suffered alteration in some form. ",
+		price: "42000.00"
+
+    }, {
+		image: "img/product/8.jpg",
+		image1: "img/product/5.jpg",
+		name: "samsung",
+		desc: "distracted by the readable content of a page when looking at its layout. ",
+		price: "72000.00"
+
+    }, {
+		image: "img/product/9.jpg",
+		image1: "img/product/5.jpg",
+		name: "nokia lumia",
+		desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum. ",
+		price: "75000.00"
+
+    }, {
+		image: "img/product/10.jpg",
+		image1: "img/product/5.jpg",
+		name: "resmi 1s",
+		desc: "sometimes by accident, sometimes on purpose (injected humour and the like. ",
+		price: "47000.00"
+
+    }, {
+		image: "img/product/11.jpg",
+		image1: "img/product/5.jpg",
+		name: "micromax",
+		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+		price: "41000.00"
+
+    }];
+
+
+})
 
 .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
@@ -7857,7 +7919,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.template = TemplateService.changecontent("searchresult");
 	$scope.menutitle = NavigationService.makeactive("SearchResult");
 	TemplateService.title = $scope.menutitle;
-	$scope.navigation = NavigationService.getnav(); 
+	$scope.navigation = NavigationService.getnav();
 
 	$scope.products = [{
 		image: "img/product/5.jpg",
@@ -7922,8 +7984,8 @@ templateservicemod.service('TemplateService', function () {
 
 templateservicemod.controller('submenuctrl', ['$scope', 'TemplateService',
                                                  function ($scope, TemplateService, MainJson, $rootScope) {
-		$scope.submenuval = ['views/content/brandhover.html', 'views/content/exclusivehover.html'];
-		$scope.submenu = [];
+		$scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
+		$scope.submenu = []; 
 		$scope.showsubmenu = function (data) {
 			console.log(data);
 			$scope.submenu[data] = true;

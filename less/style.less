@@ -1088,7 +1088,7 @@
 						.transition(all 500ms linear);
 						&:hover {
 							background-color: #fff;
-							color: #7ee1ea;
+							color: @color3;
 						}
 					}
 				}
@@ -1197,119 +1197,65 @@
 		//checkout page
 		.checkout {
 			margin: 33px 0 66px;
-			.check-head {
-				margin-bottom: 35px;
-			}
-			.check-guest {
-				.check-reg {
+			font-family: @font-family-body;
+			form {
+				h3.head {
+					padding: 8px 0 8px 10px;
+					background-color: @color1;
 					font-family: @font-family-head;
-					h4 {
-						font-size: 16px;
-					}
-					.reg {
-						margin: 15px 0;
-					}
-					.future {
-						margin: 15px 0;
-					}
-					form {
-						padding-bottom: 25px;
-						border-bottom: 1px solid #ddd;
-						margin-bottom: 20px;
-						label {
-							margin: 10px 0;
-							display: block;
-							font-weight: 400;
+					text-transform: capitalize;
+				}
+				.form-divider {
+					margin: 20px 0;
+					display: block;
+				}
+				label.form-divider {
+					font-weight: normal;
+					word-spacing: 4px;
+				}
+				textarea {
+					min-height: 100px;
+				}
+				.check-panel {
+					margin: 20px 0;
+					.login {
+						a.forgot:hover {
+							color: @color3;
+						}
+						a.btn-log {
+							padding: 2% 6%;
+							border: 1px solid @color3;
+							display: inline-block;
+							background-color: @color3;
+							color: #fff;
+							font-size: 16px;
+							font-family: 'pt sans';
+							.transition(all 500ms linear);
+							&:hover {
+								background-color: #fff;
+								color: @color3;
+							}
 						}
 					}
 				}
-				.login {
-					input {
-						margin: 15px 0;
+				.order-panel {
+					margin: 8px 0;
+				}
+			}
+			.continue-btn {
+				a.contn {
+					padding: 1% 3%;
+					border: 1px solid @color3;
+					display: inline-block;
+					background-color: @color3;
+					color: #fff;
+					font-size: 16px;
+					font-family: 'pt sans';
+					.transition(all 500ms linear);
+					&:hover {
+						background-color: #fff;
+						color: @color3;
 					}
-					.forgot:hover {
-						color: #7ee1ea;
-					}
-					.btn-log {
-						padding: 1% 4%;
-						border: 1px solid #7ee1ea;
-						display: inline-block;
-						background-color: #7ee1ea;
-						color: #fff;
-						font-size: 16px;
-						font-family: 'pt sans';
-						.transition(all 500ms linear);
-						&:hover {
-							background-color: #fff;
-							color: #7ee1ea;
-						}
-					}
-				}
-			}
-			.billing-info {
-				.billing {
-					margin-bottom: 35px;
-				}
-			}
-			.billing-info > form > .row {
-				margin-bottom: 20px;
-			}
-			.billing-info > form textarea {
-				width: 100%;
-				min-height: 150px
-			}
-			.billing-info > form label {
-				margin-bottom: 15px;
-				display: block;
-				font-weight: 400;
-			}
-			.ship-address {
-				margin-top: 45px;
-				.ship {
-					margin-bottom: 35px;
-				}
-			}
-			.ship-address > form > .row {
-				margin-bottom: 20px;
-			}
-			.ship-address > form textarea {
-				width: 100%;
-				min-height: 150px;
-			}
-			.continue {
-				padding: 1% 4%;
-				border: 1px solid #7ee1ea;
-				display: inline-block;
-				background-color: #7ee1ea;
-				color: #fff;
-				font-size: 16px;
-				font-family: 'pt sans';
-				.transition(all 500ms linear);
-				&:hover {
-					background-color: #fff;
-					color: #7ee1ea;
-				}
-			}
-			.order-review {
-				margin: 25px 0;
-				.review {
-					margin-bottom: 35px;
-				}
-				table {
-					tr {
-						border-bottom: 1px solid #ddd;
-					}
-					.in {
-						input {
-							width: 20%;
-							padding: 2px 0 2px 5px;
-						}
-					}
-				}
-			}
-			table {
-				thead.head {
-					background-color: ;
 				}
 			}
 		}
@@ -1397,13 +1343,20 @@
 					}
 				}
 			}
+			.indicate > li {
+				border: 2px solid #000;
+			}
+			.indicate > li:active {
+				background-color: #000;
+				border: 2px solid #fff;
+			}
 		}
 		
-		//exclusive hover
-		.exclusivehover {
+		//product hover
+		.producthover {
 			.container {
 				padding: 0;
-				.exclusive-list {
+				.product-hov-list {
 					.box-shadow(1px 8px 15px 2px #ddd);
 					h5 {
 						color: @color3;

@@ -30,8 +30,8 @@ templateservicemod.service('TemplateService', function () {
 
 templateservicemod.controller('submenuctrl', ['$scope', 'TemplateService',
                                                  function ($scope, TemplateService, MainJson, $rootScope) {
-		$scope.submenuval = ['views/content/brandhover.html', 'views/content/exclusivehover.html'];
-		$scope.submenu = [];
+		$scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
+		$scope.submenu = []; 
 		$scope.showsubmenu = function (data) {
 			console.log(data);
 			$scope.submenu[data] = true;
