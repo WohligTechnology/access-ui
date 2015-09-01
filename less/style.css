@@ -551,6 +551,9 @@ img.doneLoading {
 .product-list .pro-box .spanli ul li .fa-star-o {
   color: #bebbbb;
 }
+.product-list .pro-box .cartli {
+  border-top: 1px solid #e6e6e6;
+}
 .product-list .pro-box .cartli ul {
   list-style: none;
   display: block;
@@ -593,7 +596,7 @@ img.doneLoading {
 .product-list .img-box {
   text-align: center;
   width: 100%;
-  height: 147px;
+  height: 180px;
   overflow: hidden;
   display: block;
 }
