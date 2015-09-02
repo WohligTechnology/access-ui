@@ -259,13 +259,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Brandhover");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
-
-	$scope.slides = [
-	  'img/brands/dell.png',
-		'img/brands/apple.png',
-		'img/brands/sony.png',
-		'img/brands/beats.png'
-	];
 })
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
@@ -352,6 +345,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Brands");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+})
+
+.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("wishlist");
+	$scope.menutitle = NavigationService.makeactive("Wishlist");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+
+	$scope.products = [{
+		image: "img/product/5.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple",
+		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+		price: "47000.00"
+
+    }, {
+		image: "img/product/6.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple Macbook",
+		desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
+		price: "48000.00"
+
+    }, {
+		image: "img/product/7.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple air",
+		desc: "but the majority have suffered alteration in some form. ",
+		price: "42000.00"
+
+    }, {
+		image: "img/product/8.jpg",
+		image1: "img/product/5.jpg",
+		name: "samsung",
+		desc: "distracted by the readable content of a page when looking at its layout. ",
+		price: "72000.00"
+
+    }];
 })
 
 .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService) {

@@ -231,15 +231,15 @@
 			}
 			.flex-direction-nav a.flex-next:before {
 				content: '';
-				background: url("../img/arrow.png") no-repeat center;
-				width: 55px;
-				height: 62px;
+				background: url("../img/right-arrow.png") no-repeat center;
+				width: 65px;
+				height: 65px;
 			}
 			.flex-direction-nav a.flex-prev:before {
 				content: '';
-				background: url("../img/arrow-left.png") no-repeat center;
-				width: 55px;
-				height: 62px;
+				background: url("../img/left-arrow.png") no-repeat center;
+				width: 65px;
+				height: 65px;
 			}
 			.flex-direction-nav a {
 				width: 54px;
@@ -568,12 +568,11 @@
 				margin: 0px 25px 33px 0px;
 				.spanli {
 					ul {
-						list-style: none;
-						display: block;
 						padding: 0 12px;
-						margin: 0;
+						display: block;
 						li {
 							display: inline-block;
+							list-style-type: none;
 							font-size: 11px;
 							.fa-star {
 								color: @color8;
@@ -660,11 +659,12 @@
 			}
 			.pro-name {
 				h5 {
-					text-transform: uppercase;
+					min-height: 55px;
+					padding: 10px 0px 0px 12px;
 					margin: 0;
 					font-family: @font-family-body;
 					font-size: 14px;
-					padding: 10px 0px 0px 12px;
+					text-transform: uppercase;
 				}
 				p {
 					margin: 0;
@@ -1292,7 +1292,15 @@
 					address {
 						width: 80%;
 						span:first-child {
-							margin-right: 10px;
+							display: block;
+							margin-bottom: 10px;
+						}
+						.call {
+							margin: 25px 0;
+							display: block;
+							a {
+								margin-left: 10px;
+							}
 						}
 					}
 				}
@@ -1333,25 +1341,46 @@
 		
 		//brandhover
 		.brandhover {
-			.box-shadow(1px 8px 15px 2px #ddd);
-			.slider {
-				width: 70%;
-				margin: 2% auto;
-				.divider {
-					margin: 2% 0 5%;
-					.img-holder {
-						img {
-							margin: 0 auto;
+			position: relative;
+			.container {
+				width: 890px;
+				position: absolute;
+				left: -600px;
+				background-color: #fff;
+				.box-shadow(1px 8px 15px 2px #ddd);
+				.pdn {
+					padding: 3%;
+				}
+				.brand-slide {
+					width: 100%;
+					.divider {
+						margin: 2% 0 5%;
+						.img-holder {
+							img {
+								margin: 0 auto;
+							}
 						}
 					}
 				}
+				.indicate > li {
+					border: 2px solid #000;
+				}
+				.indicate > li:active {
+					background-color: #000;
+					border: 2px solid #fff;
+				}
 			}
-			.indicate > li {
-				border: 2px solid #000;
-			}
-			.indicate > li:active {
-				background-color: #000;
-				border: 2px solid #fff;
+			.carousel-indicators {
+				bottom: 10px;
+				.item:nth-child(1) {
+				animation:slide 48s 24s infinite;	
+				}
+				.item:nth-child(2) {
+				animation: slide 48s 18s infinite;	
+				}
+				.item:nth-child(3) {
+				animation: slide 48s 12s infinite;
+				}
 			}
 		}
 		
@@ -1377,6 +1406,16 @@
 					.list1-1 {
 						margin-left: 5%;
 					}
+				}
+			}
+		}
+		
+		//wishlist
+		.wishlist {
+			margin-bottom: 30px;
+			.product-list {
+				.pro-img2 {
+					top: 53px;
 				}
 			}
 		}

@@ -209,15 +209,15 @@ a:hover {
 }
 .slider .flex-direction-nav a.flex-next:before {
   content: '';
-  background: url("../img/arrow.png") no-repeat center;
-  width: 55px;
-  height: 62px;
+  background: url("../img/right-arrow.png") no-repeat center;
+  width: 65px;
+  height: 65px;
 }
 .slider .flex-direction-nav a.flex-prev:before {
   content: '';
-  background: url("../img/arrow-left.png") no-repeat center;
-  width: 55px;
-  height: 62px;
+  background: url("../img/left-arrow.png") no-repeat center;
+  width: 65px;
+  height: 65px;
 }
 .slider .flex-direction-nav a {
   width: 54px;
@@ -536,13 +536,12 @@ img.doneLoading {
   margin: 0px 25px 33px 0px;
 }
 .product-list .pro-box .spanli ul {
-  list-style: none;
-  display: block;
   padding: 0 12px;
-  margin: 0;
+  display: block;
 }
 .product-list .pro-box .spanli ul li {
   display: inline-block;
+  list-style-type: none;
   font-size: 11px;
 }
 .product-list .pro-box .spanli ul li .fa-star {
@@ -627,11 +626,12 @@ img.doneLoading {
   opacity: 0;
 }
 .product-list .pro-name h5 {
-  text-transform: uppercase;
+  min-height: 55px;
+  padding: 10px 0px 0px 12px;
   margin: 0;
   font-family: 'pt sans';
   font-size: 14px;
-  padding: 10px 0px 0px 12px;
+  text-transform: uppercase;
 }
 .product-list .pro-name p {
   margin: 0;
@@ -1164,7 +1164,15 @@ img.doneLoading {
   width: 80%;
 }
 .storelocator .store-info .co-operate address span:first-child {
-  margin-right: 10px;
+  display: block;
+  margin-bottom: 10px;
+}
+.storelocator .store-info .co-operate address .call {
+  margin: 25px 0;
+  display: block;
+}
+.storelocator .store-info .co-operate address .call a {
+  margin-left: 10px;
 }
 .storelocator .store-info .get-in > form > input {
   margin-top: 20px;
@@ -1198,26 +1206,47 @@ img.doneLoading {
   margin: 0 auto;
 }
 .brandhover {
+  position: relative;
+}
+.brandhover .container {
+  width: 890px;
+  position: absolute;
+  left: -600px;
+  background-color: #fff;
   -webkit-box-shadow: 1px 8px 15px 2px #dddddd;
   -moz-box-shadow: 1px 8px 15px 2px #dddddd;
   box-shadow: 1px 8px 15px 2px #dddddd;
 }
-.brandhover .slider {
-  width: 70%;
-  margin: 2% auto;
+.brandhover .container .pdn {
+  padding: 3%;
 }
-.brandhover .slider .divider {
+.brandhover .container .brand-slide {
+  width: 100%;
+}
+.brandhover .container .brand-slide .divider {
   margin: 2% 0 5%;
 }
-.brandhover .slider .divider .img-holder img {
+.brandhover .container .brand-slide .divider .img-holder img {
   margin: 0 auto;
 }
-.brandhover .indicate > li {
+.brandhover .container .indicate > li {
   border: 2px solid #000;
 }
-.brandhover .indicate > li:active {
+.brandhover .container .indicate > li:active {
   background-color: #000;
   border: 2px solid #fff;
+}
+.brandhover .carousel-indicators {
+  bottom: 10px;
+}
+.brandhover .carousel-indicators .item:nth-child(1) {
+  animation: slide 48s 24s infinite;
+}
+.brandhover .carousel-indicators .item:nth-child(2) {
+  animation: slide 48s 18s infinite;
+}
+.brandhover .carousel-indicators .item:nth-child(3) {
+  animation: slide 48s 12s infinite;
 }
 .producthover .container {
   padding: 0;
@@ -1242,6 +1271,12 @@ img.doneLoading {
 }
 .producthover .container .list1 .list1-1 {
   margin-left: 5%;
+}
+.wishlist {
+  margin-bottom: 30px;
+}
+.wishlist .product-list .pro-img2 {
+  top: 53px;
 }
 div.megamenu {
   width: auto;
