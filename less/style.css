@@ -531,7 +531,7 @@ img.doneLoading {
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  height: 304px !important;
+  height: 275px !important;
   margin-bottom: 20px;
   margin: 0px 25px 33px 0px;
 }
