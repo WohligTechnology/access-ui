@@ -1,12 +1,10 @@
-<div class="search text-uppercase">
+<!--same as wishlist-->
+
+<div class="wishlist">
 	<div class="container">
-		<div class="pads sign search-head text-center">
-			<h3>search results for:<span class="prd-name">Mobile</span></h3>
-			<p>4items</p>
-		</div>
 		<div class="row">
-			<div class="product-list">
-				<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
+			<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
+				<div class="product-list">
 					<a href="#/productdetail">
 						<div class="pro-box">
 							<div class="img-box">
@@ -20,19 +18,19 @@
 							</div>
 							<div class="pro-name">
 								<h5>{{pro.name}}</h5>
-								<span class="spanli">
-								<ul>
+								<span class="spanli"><ul>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li> 
+    <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star-o"></i></li>
-</ul>
-							</span>
+</ul></span>
+
 								<!--
-								<hr class="line">
-								<p>{{pro.desc}}</p>
+									<hr class="line">
+									<p>{{pro.desc}}</p>
 -->
+
 								<div class="cartli">
 									<ul>
 										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
@@ -47,4 +45,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> 

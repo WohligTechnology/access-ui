@@ -208,6 +208,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService) {
 		$scope.template = TemplateService;
+		$scope.brandhover = [
+	"img/brands/acmemade.jpeg",
+		"img/brands/adonit.png",
+		"img/brands/autodrive.png",
+		"img/brands/b&oplay.png",
+		"img/brands/beats.png",
+		"img/brands/dell.png",
+		"img/brands/Adidas.png",
+		"img/brands/dolcegabbana.jpg",
+		"img/brands/gas.jpg",
+		"img/brands/gstarraw.png",
+		"img/brands/hp.png",
+		"img/brands/jackjones.png",
+		"img/brands/levis.png",
+		"img/brands/motorola.png",
+		"img/brands/sony.png",
+		"img/brands/tommy.jpg"
+	];
 	})
 	.controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService) {
 		$scope.template = TemplateService;
@@ -242,6 +260,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.template = TemplateService.changecontent("account");
 		$scope.menutitle = NavigationService.makeactive("Account");
 		TemplateService.title = $scope.menutitle;
+
 		$scope.navigation = NavigationService.getnav();
 	})
 
@@ -251,15 +270,77 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("About");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.celebimages = [
+            "img/BipashaBasu.jpg", "img/KarishmaKapoor.jpg", "img/MSG.jpg", "img/NicolasAnelka.jpg", "img/YusufPathan.jpg"
+        ];
 })
 
-.controller('BrandhoverCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
-	$scope.template = TemplateService.changecontent("brandhover");
-	$scope.menutitle = NavigationService.makeactive("Brandhover");
+	$scope.template = TemplateService.changecontent("newarrivals");
+	$scope.menutitle = NavigationService.makeactive("New Arrivals");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	$scope.products = [{
+		image: "img/product/5.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple",
+		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+		price: "47000.00"
+
+    }, {
+		image: "img/product/6.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple Macbook",
+		desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
+		price: "48000.00"
+
+    }, {
+		image: "img/product/7.jpg",
+		image1: "img/product/5.jpg",
+		name: "Apple air",
+		desc: "but the majority have suffered alteration in some form. ",
+		price: "42000.00"
+
+    }, {
+		image: "img/product/8.jpg",
+		image1: "img/product/5.jpg",
+		name: "samsung",
+		desc: "distracted by the readable content of a page when looking at its layout. ",
+		price: "72000.00"
+
+    }];
+
+
+
 })
+
+//.controller('BrandhoverCtrl', function ($scope, TemplateService, NavigationService) {
+//	$scope.template = TemplateService;
+//	$scope.template = TemplateService.changecontent("brandhover");
+//	$scope.menutitle = NavigationService.makeactive("Brandhover");
+//	TemplateService.title = $scope.menutitle;
+//	$scope.navigation = NavigationService.getnav();
+//	$scope.brandhover = [
+//	"img/brands/acmemade.jpeg",
+//		"img/brands/adonit.png",
+//		"img/brands/autodrive.png",
+//		"img/brands/b&oplay.png",
+//		"img/brands/beats.png",
+//		"img/brands/dell.png",
+//		"img/brands/Adidas.png",
+//		"img/brands/dolcegabbana.jpg",
+//		"img/brands/gas.jpg",
+//		"img/brands/gstarraw.png",
+//		"img/brands/hp.png",
+//		"img/brands/jackjones.png",
+//		"img/brands/levis.png",
+//		"img/brands/motorola.png",
+//		"img/brands/sony.png",
+//		"img/brands/tommy.jpg"
+//	];
+//})
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
@@ -336,7 +417,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }];
 
-
 })
 
 .controller('BrandsCtrl', function ($scope, TemplateService, NavigationService) {
@@ -345,6 +425,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Brands");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.brandimages = [
+		"img/brands/acmemade.jpeg",
+		"img/brands/adonit.png",
+		"img/brands/autodrive.png",
+		"img/brands/b&oplay.png",
+		"img/brands/beats.png",
+		"img/brands/dell.png",
+		"img/brands/Adidas.png",
+		"img/brands/dolcegabbana.jpg",
+		"img/brands/gas.jpg",
+		"img/brands/gstarraw.png",
+		"img/brands/hp.png",
+		"img/brands/jackjones.png",
+		"img/brands/levis.png",
+		"img/brands/motorola.png",
+		"img/brands/sony.png",
+		"img/brands/tommy.jpg"
+	];
 })
 
 .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {

@@ -30,6 +30,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 		url: "/wishlist",
 		templateUrl: "views/template.html",
 		controller: 'WishlistCtrl'
+	})	
+		.state('newarrivals', {
+		url: "/newarrivals",
+		templateUrl: "views/template.html",
+		controller: 'NewarrivalsCtrl'
 	})
 
 	.state('product', {
@@ -59,12 +64,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			controller: 'ExclusiveCtrl'
 		}) 
 	
-	.state('brandhover', {
-			url: "/brandhover",
-			templateUrl: "views/template.html",
-			controller: 'BrandhoverCtrl'
-		})
-	
+//	.state('brandhover', {
+//			url: "/brandhover",
+//			templateUrl: "views/template.html",
+//			controller: 'BrandhoverCtrl'
+//		})
+//	
 		.state('cart', {
 			url: "/cart",
 			templateUrl: "views/template.html",

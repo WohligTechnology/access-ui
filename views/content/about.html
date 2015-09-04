@@ -32,52 +32,18 @@
 		<div class="celeb">
 			<div class="divider">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-4" ng-repeat="celeb in celebimages">
 						<div class="celeb1">
-							<h5>Lorem ipsum dolor sit amet enim.</h5>
+							
 							<div class="img-holder">
-								<img src="img/product/4.png" alt="" class="img-responsive">
+								<img ng-src="{{celeb}}" alt="" class="img-responsive">
 							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="celeb2">
-							<h5>Lorem ipsum dolor sit amet enim.</h5>
-							<div class="img-holder">
-								<img src="img/product/4.png" alt="" class="img-responsive">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="celeb3">
-							<h5>Lorem ipsum dolor sit amet enim.</h5>
-							<div class="img-holder">
-								<img src="img/product/4.png" alt="" class="img-responsive">
-							</div>
+							<h5 class="text-center">Lorem ipsum dolor sit amet enim.</h5>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="divider">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="celeb5">
-							<h5>Lorem ipsum dolor sit amet enim.</h5>
-							<div class="img-holder">
-								<img src="img/product/4.png" alt="" class="img-responsive">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="celeb6">
-							<h5>Lorem ipsum dolor sit amet enim.</h5>
-							<div class="img-holder">
-								<img src="img/product/4.png" alt="" class="img-responsive">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 </div>
