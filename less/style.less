@@ -636,17 +636,22 @@
 					//        margin: 0 auto;
 					overflow: hidden;
 					display: block;
+					position: relative;
 					img {
-						height: auto;
-						width: 100%;
+						max-width: 100%;
+						max-height: 100%;
+						margin: 0 auto;
 					}
 					.pro-img2 {
+						width: 100%;
+						height: 180px;
 						position: absolute;
 						top: 0px;
 						opacity: 0;
 						.transition(all 2s ease);
 					}
 					.pro-img1 {
+						height: 180px;
 						opacity: 1;
 						.transition(all 2s ease);
 					}
@@ -696,19 +701,25 @@
 					}
 				}
 				.mini-img {
-					ul {
-						list-style: none;
-						display: block;
-						padding: 0;
-						margin: 10px auto;
-						text-align: center;
-						li {
-							display: inline-block;
-							width: 100px;
-							//						border: 1px solid @color1;
-							margin: 0px 5px;
-						}
-					}
+					width: 100%;
+					margin: 0 auto;
+				}
+				.flex-direction-nav a {
+					width: 65px;
+					height: 75px;
+					outline: none;
+				}
+				.flex-direction-nav a.flex-next:before {
+					content: '';
+					background: url("../img/right-arrow.png") no-repeat center;
+					width: 65px;
+					height: 65px;
+				}
+				.flex-direction-nav a.flex-prev:before {
+					content: '';
+					background: url("../img/left-arrow.png") no-repeat center;
+					width: 65px;
+					height: 65px;
 				}
 			}
 			
@@ -771,21 +782,24 @@
 					padding-top: 10px;
 					input {
 						width: 10%;
-						text-align: center;
 						padding: 5px;
+						margin: 0 13px 0 0;
+						text-align: center;
 						cursor: pointer;
 					}
 					a {
+						padding: 8px 16px 9px 16px;
 						background-color: @color3;
 						color: @white;
 						font-size: 14px;
-						padding: 8px 16px 9px 16px;
-						margin: 0px 15px;
-						line-height: 0;
 						font-family: @font-family-body;
+						line-height: 0;
 						i {
 							padding-right: 5px;
 						}
+					}
+					.ad-cart {
+						margin: 0 0 0 12px;
 					}
 				}
 			}
@@ -1291,17 +1305,36 @@
 			//brand
 			.brand {
 				margin: 56px 0 66px;
-				.divider {}
-				.img-holder {
-					height: 190px;
-					position: relative;
-					img {
-						max-height: 100%;
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						.transform(translate(-50%,
-						-50%));
+				.divider {
+					.img-holder {
+						height: 190px;
+						position: relative;
+						img {
+							max-height: 100%;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
+						}
+					}
+				}
+			}
+			
+			//distribution
+			.distribution {
+				.distributer {
+					.img-holder {
+						height: 190px;
+						position: relative;
+						img {
+							max-height: 100%;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
+						}
 					}
 				}
 			}
@@ -1334,7 +1367,7 @@
 					border: 2px solid #fff;
 				}
 				.carousel-indicators {
-					bottom: 0; 
+					bottom: 0;
 					.item:nth-child(1) {
 						animation: slide 48s 24s infinite;
 					}

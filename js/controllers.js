@@ -129,24 +129,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	})
 
 	$scope.products = [{
-		image: "img/product/5.jpg",
-		image1: "img/product/5.jpg",
-		name: "Apple",
+		image: "img/product/iphone.jpg",
+		image1: "img/product/iphone2.jpg",
+		name: "Tempered Glass Screen Protector for iPhone 6 Plus",
 		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
 		price: "47000.00"
 
     }, {
-		image: "img/product/6.jpg",
-		image1: "img/product/5.jpg",
-		name: "Apple Macbook",
+		image: "img/product/iphone6.jpg",
+		image1: "img/product/iphone6ho.jpg",
+		name: "Ultra Rugged Waterproof Case for iPhone 5/5s",
 		desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
 		price: "48000.00"
 
     }, {
-		image: "img/product/7.jpg",
-		image1: "img/product/5.jpg",
+		image: "img/product/iphone6ho.jpg",
+		image1: "img/product/glass2.jpg",
 		name: "Apple air",
-		desc: "but the majority have suffered alteration in some form. ",
+		desc: "Flexible Glass Screen Protector With Applicator for LG G4 ",
 		price: "42000.00"
 
     }, {
@@ -233,6 +233,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.menutitle = NavigationService.makeactive("Productdetail");
 		TemplateService.title = $scope.menutitle;
 		$scope.navigation = NavigationService.getnav();
+		$scope.productdetail = [
+			"img/product/6.jpg",
+			"img/product/7.jpg",
+			"img/product/8.jpg",
+			"img/product/9.jpg",
+			"img/product/10.jpg",
+			"img/product/11.jpg",
+			"img/product/13.jpg"
+		];
 	})
 	.controller('OrderhistoryCtrl', function ($scope, TemplateService, NavigationService) {
 		$scope.template = TemplateService;
@@ -343,12 +352,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 //})
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
-	$scope.template = TemplateService;
-	$scope.template = TemplateService.changecontent("checkout");
-	$scope.menutitle = NavigationService.makeactive("CheckOut");
-	TemplateService.title = $scope.menutitle;
-	$scope.navigation = NavigationService.getnav();
-})
+		$scope.template = TemplateService;
+		$scope.template = TemplateService.changecontent("checkout");
+		$scope.menutitle = NavigationService.makeactive("CheckOut");
+		TemplateService.title = $scope.menutitle;
+		$scope.navigation = NavigationService.getnav();
+	})
+	.controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
+		$scope.template = TemplateService;
+		$scope.template = TemplateService.changecontent("distribution");
+		$scope.menutitle = NavigationService.makeactive("Distribution");
+		TemplateService.title = $scope.menutitle;
+		$scope.navigation = NavigationService.getnav();
+		$scope.distributer = [
+		"img/brands/autodrive.png",
+		"img/brands/hp.png",
+		"img/brands/sony.png",
+		"img/brands/b&oplay.png",
+		"img/brands/beats.png",
+		"img/brands/dell.png",
+		"img/brands/Adidas.png",
+		"img/brands/dolcegabbana.jpg",
+		"img/brands/gas.jpg",
+		"img/brands/acmemade.jpeg",
+		"img/brands/gstarraw.png",
+		"img/brands/adonit.png",
+		"img/brands/jackjones.png",
+		"img/brands/levis.png",
+		"img/brands/motorola.png",
+		"img/brands/tommy.jpg"
+	];
+	})
 
 .controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
@@ -369,7 +403,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.products = [{
 		image: "img/product/5.jpg",
 		image1: "img/product/5.jpg",
-		name: "Apple",
+		name: "Tempered Glass Screen Protector for iPhone 6 Plus ",
 		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
 		price: "47000.00"
 

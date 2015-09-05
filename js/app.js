@@ -62,6 +62,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			url: "/exclusive",
 			templateUrl: "views/template.html",
 			controller: 'ExclusiveCtrl'
+		})
+		.state('distribution', {
+			url: "/distribution",
+			templateUrl: "views/template.html",
+			controller: 'DistributionCtrl'
 		}) 
 	
 //	.state('brandhover', {

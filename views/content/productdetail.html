@@ -21,8 +21,8 @@
 					<h2><i class="fa fa-inr"></i> 4300.00</h2>
 					<div class="qua">
 						<input type="number" placeholder="1">
-						<a href="#"><i class="fa fa-shopping-cart"></i>Add To cart</a>
 						<a href="#"><i class="fa fa-heart"></i>Add To Wishlist</a>
+						<a href="#" class="ad-cart"><i class="fa fa-shopping-cart "></i>Add To cart</a> 
 					</div>
 					<ul class="img-thumb">
 						<li>
@@ -43,17 +43,11 @@
 						<img src="img/product/13.jpg" class="img-responsive">
 					</div>
 					<div class="mini-img">
-						<ul>
+						<flex-slider class="carousel" flex-slide="prd in productdetail" animation="slide" animation-loop="false" item-width="150" item-margin="5">
 							<li>
-								<img src="img/product/13.jpg" class="img-responsive">
+								<img ng-src="{{prd}}" alt="Product-detail" class="img-responsive prd-slide">
 							</li>
-							<li>
-								<img src="img/product/13.jpg" class="img-responsive">
-							</li>
-							<li>
-								<img src="img/product/13.jpg" class="img-responsive">
-							</li>
-						</ul>
+						</flex-slider>
 					</div>
 				</div>
 			</div>
