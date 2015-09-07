@@ -1385,6 +1385,7 @@ img.doneLoading {
   color: #f27323;
 }
 .deals .deals-main .deals-offer .box {
+  padding: 2%;
   border: 1px solid #e6e6e6;
 }
 .deals .deals-main .deals-offer .box:hover {
