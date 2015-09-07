@@ -352,19 +352,63 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 //})
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("checkout");
-		$scope.menutitle = NavigationService.makeactive("CheckOut");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-	})
-	.controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("distribution");
-		$scope.menutitle = NavigationService.makeactive("Distribution");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.distributer = [
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("checkout");
+	$scope.menutitle = NavigationService.makeactive("CheckOut");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+})
+
+.controller('DealsCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("deals");
+	$scope.menutitle = NavigationService.makeactive("Deals");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.dealslide = [
+	"img/product/iphone.jpg",
+		"img/product/iphone6.jpg",
+		"img/product/macbook.png",
+		"img/product/iphone6ho.jpg",
+		"img/product/glass.jpg"
+	];
+	$scope.demo2 = {
+		range: {
+			min: 0,
+			max: 10050
+		},
+		minPrice: 0,
+		maxPrice: 10050
+	};
+	$scope.deals = [
+		{
+			imageprd: "img/product/iphone.jpg",
+			imageprd2: "img/product/iphone6.jpg",
+			descp: "Iphone6 cases and covers",
+			imageoff1: "img/product/iphone6ho.jpg",
+			imageoff2: "img/product/glass.jpg",
+			descpoff: "Iphone cases and covers",
+			price: "45,000.00"
+		},
+		{
+			imageprd: "img/product/iphone.jpg",
+			imageprd2: "img/product/iphone6.jpg",
+			descp: "Iphone6 cases and covers",
+			imageoff1: "img/product/iphone6ho.jpg",
+			imageoff2: "img/product/glass.jpg",
+			descpoff: "Iphone cases and covers",
+			price: "45,000.00"
+		}
+	];
+})
+
+.controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("distribution");
+	$scope.menutitle = NavigationService.makeactive("Distribution");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.distributer = [
 		"img/brands/autodrive.png",
 		"img/brands/hp.png",
 		"img/brands/sony.png",
@@ -382,7 +426,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		"img/brands/motorola.png",
 		"img/brands/tommy.jpg"
 	];
-	})
+})
 
 .controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;

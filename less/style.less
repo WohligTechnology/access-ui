@@ -1420,6 +1420,122 @@
 				}
 			}
 			
+			//deals
+			.deals {
+				.deals-head {
+					.slide-deal {
+						width: 78%;
+						margin: 0 auto;
+						.flex-direction-nav a.flex-next:before {
+							content: '';
+							background: url("../img/right-arrow.png") no-repeat center;
+							width: 100%;
+							height: 35px;
+						}
+						.flex-direction-nav a.flex-prev:before {
+							content: '';
+							background: url("../img/left-arrow.png") no-repeat center;
+							width: 100%;
+							height: 35px;
+						}
+						.flex-direction-nav a {
+							opacity: 1 !important;
+						}
+						.flexslider:hover .flex-direction-nav .flex-next {
+							right: -50px;
+							opacity: 1;
+						}
+						.flexslider:hover .flex-direction-nav .flex-prev {
+							left: -50px;
+						}
+					}
+				}
+				.deals-main {
+					.deals-offer {
+						.off {
+							display: block;
+							text-align: center;
+						}
+						.prod {
+							width: 50%;
+							border-right: 1px solid #e6e6e6;
+							float: left;
+							.images_prod {
+								height: 190px;
+								position: relative;
+								cursor: pointer;
+								.img1 {}
+								.img2 {
+									position: absolute;
+									top: 0;
+									opacity: 0;
+									.transition(all 1.5s ease-in-out);
+								}
+							}
+						}
+						.images_prod:hover > .img2 {
+							opacity: 0;
+						}
+						.images_prod:hover > .img2 {
+							opacity: 1;
+							.transition(all 1.5s ease-in-out);
+						}
+						.off-prod {
+							width: 50%;
+							display: inline-block;
+							.off-images {
+								height: 190px;
+								position: relative;
+								cursor: pointer;
+								.img1 {}
+								.img2 {
+									position: absolute;
+									top: 0;
+									opacity: 0;
+									.transition(all 1.5s ease-in-out);
+								}
+							}
+							.off-images:hover > .img1 {
+								opacity: 0;
+							}
+							.off-images:hover > .img2 {
+								opacity: 1;
+								.transition(all 1.5s ease-in-out);
+							}
+						}
+						.descp-prd > h5 {
+							min-height: 55px;
+						}
+						.rating > ul > li {
+							display: inline-block;
+							font-size: 11px;
+							list-style-type: none;
+							.fa-star {
+								color: #f27323;
+							}
+						}
+						.box {
+							border: 1px solid #e6e6e6;
+							&:hover {
+								.box-shadow(0 4px 8px 3px #e6e6e6);
+							}
+						}
+						.prd-foot {
+							border-top: 1px solid #e6e6e6;
+							ul {
+								padding: 0;
+								margin: 0;
+								li {
+									padding: 10px 15px;
+									display: inline-block;
+									list-style-type: none;
+								}
+							}
+						}
+					}
+				}
+			}
+			
 			div.megamenu {
 				width: auto;
 				//			border: 1px solid rgba(0, 0, 0, 0.15); 

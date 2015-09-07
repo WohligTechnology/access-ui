@@ -86,6 +86,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'SearchresultCtrl'
 		})
+		.state('deals', {
+			url: "/deals",
+			templateUrl: "views/template.html",  
+			controller: 'DealsCtrl'
+		})
 
 		.state('about', {
 			url: "/about",

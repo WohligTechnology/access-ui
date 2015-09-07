@@ -1,0 +1,136 @@
+<div class="deals">
+	<div class="container">
+		<div class="deals-head">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="deals-before">
+						<img src="img/product/offersgone.jpg" alt="Offers Ends" class="img-responsive">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="slide-deal">
+						<flex-slider class="carousel" flex-slide="deal in dealslide" animation="slide" item-width="210">
+							<li>
+								<img ng-src="{{deal}}" alt="Deals">
+							</li>
+						</flex-slider>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="deals-coming">
+						<img src="img/product/comming_soon.jpg" alt="" class="img-responsive">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="deals-main">
+			<div class="row">
+				<div class="pro-set">
+					<div class="col-md-3">
+						<div class="product-filter">
+							<h4>product filters</h4>
+							<div class="all">
+								<div class="filter">
+									<p>Brands</p>
+									<hr class="line">
+									<form class="sub-catgame">
+										<ul>
+											<li>
+												<input id="Option" type="checkbox">
+												<label class="checkbox" for="Option">Apple Iphone</label>
+											</li>
+											<li>
+												<input id="option2" type="checkbox">
+												<label class="checkbox" for="option2">nokia</label>
+											</li>
+											<li>
+												<input id="option3" type="checkbox">
+												<label class="checkbox" for="option3">samsung</label>
+											</li>
+											<li>
+												<input id="option4" type="checkbox">
+												<label class="checkbox" for="option4">mi</label>
+											</li>
+											<li>
+												<input id="option5" type="checkbox">
+												<label class="checkbox" for="option5">micromax</label>
+											</li>
+										</ul>
+									</form>
+								</div>
+								<hr class="line">
+								<div class="price filter">
+									<p>price</p>
+
+									<hr class="line">
+									<div class="rupee" range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" filter="currency:'₹'" step="100"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="deals-offer">
+							<div class="col-md-6 " ng-repeat="offers in deals">
+								<div class="box">
+									<div class="prod">
+										<span class="off">Buy This</span>
+										<div class="images_prod">
+											<div class="img1">
+												<img ng-src="{{offers.imageprd}}" alt="" class="img-responsive">
+											</div>
+											<div class="img2">
+												<img ng-src="{{offers.imageprd2}}" alt="" class="img-responsive">
+											</div>
+										</div>
+										<div class="descp-prd">
+											<h5 class="text-center">{{offers.descp}}</h5>
+										</div>
+										<div class="rating">
+											<ul>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star-o"></i></li>
+											</ul>
+										</div>
+									</div>
+									<div class="off-prod">
+										<span class="off">Get This</span>
+										<div class="off-images">
+											<div class="img1">
+												<img ng-src="{{offers.imageoff1}}" alt="" class="img-responsive">
+											</div>
+											<div class="img2">
+												<img ng-src="{{offers.imageoff2}}" alt="" class="img-responsive">
+											</div>
+										</div>
+										<div class="descp-prd">
+											<h5 class="text-center">{{offers.descpoff}}</h5>
+										</div>
+										<div class="rating">
+											<ul>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star-o"></i></li>
+											</ul>
+										</div>
+									</div>
+									<div class="prd-foot text-center">
+										<ul>
+											<li class="single"><i class="fa fa-inr"></i> {{offers.price}}</li>
+											<li class="carts"><i class="fa fa-heart"></i></li>
+											<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
