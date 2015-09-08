@@ -403,8 +403,7 @@
 			}
 			
 			.sign {
-				padding-top: 100px;
-				padding-bottom: 120px;
+				padding-bottom: 40px;
 				.btn.btn-default:after {
 					right: 94px !important;
 				}
@@ -537,7 +536,6 @@
 				.all {
 					border: 1px solid @color4;
 					padding: 10px 0px 26px 0px;
-					.border-radius(4px);
 					.filter {
 						p {
 							font-size: 18px;
@@ -610,11 +608,11 @@
 							color: @color4;
 							.transition(all 0.8s ease);
 							&:hover {
-								color: @color8;
+								color: @color3;
 							}
 							a {
 								&:hover {
-									color: @color8;
+									color: @color3;
 								}
 							}
 						}
@@ -685,7 +683,7 @@
 			
 			//}
 			.pro-set {
-				padding-top: 20px;
+				margin-top: 8px;
 			}
 			
 			.det-img {
@@ -707,6 +705,7 @@
 				.flex-direction-nav a {
 					width: 65px;
 					height: 75px;
+					top: 33%;
 					outline: none;
 				}
 				.flex-direction-nav a.flex-next:before {
@@ -819,12 +818,14 @@
 			}
 			
 			.proset-set {
-				padding-top: 40px;
+				margin-top: 22px;
+			}
+			
+			.info-content {
+				margin: -9px 0 36px 0 !important;
 			}
 			
 			.pads {
-				padding-top: 30px !important;
-				padding-bottom: 40px !important;
 				hr {
 					width: 60%;
 					text-align: center;
@@ -836,7 +837,7 @@
 					thead {
 						tr {
 							th {
-								text-transform: uppercase;
+								text-transform: capitalize;
 								font-weight: 400;
 								font-size: 16px;
 								font-family: @font-family-head;
@@ -914,6 +915,7 @@
 			.total-table {
 				.table {
 					border: 1px solid @color10;
+					margin-bottom: 35px;
 				}
 			}
 			
@@ -1215,21 +1217,33 @@
 					}
 				}
 				.celeb {
+					.client {
+						margin: 40px 0 30px;
+						font-size: 25px;
+						font-weight: 600;
+						text-align: center;
+					}
 					.divider {
-						margin: 4% 0;
-						.img-holder {
-							width: auto;
-							position: relative;
-							height: 400px;
-							.box-shadow(3px 3px 10px 1px #ddd);
-							img {
-								max-width: 100%;
-								max-height: 100%;
-								padding: 10px;
-								position: absolute;
-								top: 50%;
-								left: 50%;
-								.transform(translateX(-50%) translateY(-50%));
+						.celeb1 {
+							margin: 30px 0;
+							.img-holder {
+								width: auto;
+								height: 400px;
+								position: relative;
+								.box-shadow(3px 3px 10px 1px #ddd);
+								img {
+									max-width: 100%;
+									max-height: 100%;
+									padding: 10px;
+									position: absolute;
+									top: 50%;
+									left: 50%;
+									.transform(translateX(-50%) translateY(-50%));
+								}
+							}
+							h5.actor-name {
+								margin-top: 20px;
+								text-align: center;
 							}
 						}
 					}
@@ -1304,10 +1318,11 @@
 			
 			//brand
 			.brand {
-				margin: 56px 0 66px;
+				margin: 26px 0 35px;
 				.divider {
 					.img-holder {
 						height: 190px;
+						margin-bottom: 12%;
 						position: relative;
 						img {
 							max-height: 100%;
@@ -1323,9 +1338,11 @@
 			
 			//distribution
 			.distribution {
+				margin-top: 2px;
 				.distributer {
 					.img-holder {
 						height: 190px;
+						margin-bottom: 12%;
 						position: relative;
 						img {
 							max-height: 100%;
@@ -1346,9 +1363,10 @@
 				.box-shadow(3px 3px 10px 1px #ddd);
 				.divider {
 					.img-holder {
-						position: relative;
-						height: 130px;
 						width: auto;
+						height: 130px;
+						margin-bottom: 12%;
+						position: relative;
 						img {
 							max-height: 100%;
 							position: absolute;
@@ -1422,6 +1440,7 @@
 			
 			//deals
 			.deals {
+				margin: 25px 0 36px;
 				.deals-head {
 					.slide-deal {
 						width: 78%;
@@ -1452,8 +1471,12 @@
 				}
 				.deals-main {
 					.deals-offer {
+						margin-top: 6%;
 						.off {
+							padding: 5px 0;
 							display: block;
+							font-size: 16px;
+							font-weight: 600;
 							text-align: center;
 						}
 						.prod {
@@ -1524,18 +1547,39 @@
 						.prd-foot {
 							border-top: 1px solid #e6e6e6;
 							ul {
-								padding: 0;
+								padding: 6px 0 0 0;
 								margin: 0;
 								li {
-									padding: 10px 15px;
+									padding: 0 15px;
 									display: inline-block;
 									list-style-type: none;
+								}
+								.carts {
+									font-size: 20px;
+									a {
+										&:hover {
+											color: @color3;
+										}
+									}
 								}
 							}
 						}
 					}
 				}
 			}
+			
+			//pop-up wishlist
+			.pop-up {
+				
+				h5.popup-wishlist {
+					width: 22%;
+					padding: 9px;
+					border: 1px solid @color;
+					text-transform: capitalize;
+					font-size: 15px;
+				}
+			}
+.ngdialog-overlay { display: none !important; }
 			
 			div.megamenu {
 				width: auto;

@@ -40,11 +40,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('ProductCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ProductCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService.changecontent("product");
 	$scope.menutitle = NavigationService.makeactive("Product");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	
+		$scope.openModal = function (s) {
+		ngDialog.open({
+			template: 'views/content/popwish.html',
+			scope: $scope
+		});
+	}
 
 	$scope.demo2 = {
 		range: {
@@ -269,8 +276,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.template = TemplateService.changecontent("account");
 		$scope.menutitle = NavigationService.makeactive("Account");
 		TemplateService.title = $scope.menutitle;
-
 		$scope.navigation = NavigationService.getnav();
+	})
+	.controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
+		$scope.template = TemplateService;
+		$scope.template = TemplateService.changecontent("popwish");
+		$scope.menutitle = NavigationService.makeactive("Addwish");
+		TemplateService.title = $scope.menutitle;
+		$scope.navigation = NavigationService.getnav();
+
+
 	})
 
 .controller('AboutCtrl', function ($scope, TemplateService, NavigationService) {
@@ -284,12 +299,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ];
 })
 
-.controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("newarrivals");
 	$scope.menutitle = NavigationService.makeactive("New Arrivals");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	$scope.demo2 = {
+		range: {
+			min: 0,
+			max: 10050
+		},
+		minPrice: 0,
+		maxPrice: 10050
+	};
 
 	$scope.products = [{
 		image: "img/product/5.jpg",
@@ -321,7 +345,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }];
 
-
+	$scope.openModal = function (s) {
+		console.log(s)
+		ngDialog.open({
+			template: 'views/content/popwish.html',
+			scope: $scope
+		});
+	}
 
 })
 

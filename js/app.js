@@ -80,6 +80,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'CartCtrl'
 		})
+		.state('popup', {
+			url: "/popupwish",
+			templateUrl: "views/template.html",
+			controller: 'AddwishCtrl' 
+		})
 	
 		.state('searchresult', {
 			url: "/searchresult",
