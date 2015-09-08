@@ -1430,6 +1430,16 @@ img.doneLoading {
 .deals .deals-main .deals-offer .prd-foot ul .carts a:hover {
   color: #7ee1ea;
 }
+.pop-up h5.popup-wishlist {
+  width: 22% !important;
+  padding: 9px !important;
+  border: 1px solid #7ee1ea !important;
+  text-transform: capitalize !important;
+  font-size: 15px !important;
+}
+.ngdialog-overlay {
+  display: none !important;
+}
 div.megamenu {
   width: auto;
   margin: 0 auto;
