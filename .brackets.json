@@ -1,5 +1,7 @@
 {
     "jscodehints.detectedExclusions": [
-        "C:/xampp/htdocs/pav-bhaji/bower_components/jquery/src/traversing/var/rneedsContext.js"
+        "C:/xampp/htdocs/pav-bhaji/bower_components/jquery/src/traversing/var/rneedsContext.js",
+        "C:/xampp/htdocs/pav-bhaji/bower_components/jquery/src/data/Data.js",
+        "C:/xampp/htdocs/pav-bhaji/bower_components/jquery/src/data.js"
     ]
 }
