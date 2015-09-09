@@ -14,31 +14,26 @@
 									<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
 								</div>
 							</div>
-							<div class="pro-name">
-								<h5>{{pro.name}}</h5>
-								<span class="spanli"><ul>
+					</a>
+					<div class="pro-name">
+						<h5>{{pro.name}}</h5>
+						<span class="spanli"><ul>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star-o"></i></li>
 </ul></span>
-								
-<!--
-									<hr class="line">
-									<p>{{pro.desc}}</p>
--->
 
-								<div class="cartli">
-									<ul>
-										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-										<li class="carts"><i class="fa fa-heart"></i></li>
-										<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-							</div>
+						<div class="cartli">
+							<ul>
+								<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
+								<li class="carts" ng-click="openModal();"><i class="fa fa-heart"></i></li>
+								<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
+							</ul>
 						</div>
-					</a>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>

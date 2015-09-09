@@ -45,8 +45,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Product");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
-	
-		$scope.openModal = function (s) {
+
+	$scope.openModal = function (s) {
 		ngDialog.open({
 			template: 'views/content/popwish.html',
 			scope: $scope
@@ -389,7 +389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.navigation = NavigationService.getnav();
 })
 
-.controller('DealsCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('DealsCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("deals");
 	$scope.menutitle = NavigationService.makeactive("Deals");
@@ -430,6 +430,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			price: "45,000.00"
 		}
 	];
+
+	$scope.openModal = function (s) {
+		ngDialog.open({
+			template: 'views/content/popwish.html',
+			scope: $scope
+		});
+	}
+
 })
 
 .controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
@@ -458,12 +466,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	];
 })
 
-.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("exclusive");
 	$scope.menutitle = NavigationService.makeactive("Exclusive");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	$scope.openModal = function (s) {
+		ngDialog.open({
+			template: 'views/content/popwish.html',
+			scope: $scope
+		});
+	}
 
 	$scope.demo2 = {
 		range: {
@@ -553,12 +568,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	];
 })
 
-.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService ,ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("wishlist");
 	$scope.menutitle = NavigationService.makeactive("Wishlist");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	$scope.openModal = function (s) {
+		ngDialog.open({
+//			scope: $scope,
+			template: "views/content/popwish.html"
+		});
+	}
 
 	$scope.products = [{
 		image: "img/product/5.jpg",
@@ -591,12 +613,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }];
 })
 
-.controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("searchresult");
 	$scope.menutitle = NavigationService.makeactive("SearchResult");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.openModal = function (s) {
+		ngDialog.open({
+			template: 'views/content/popwish.html',
+			scope: $scope
+		});
+	}
+
+
+
 
 	$scope.products = [{
 		image: "img/product/5.jpg",
