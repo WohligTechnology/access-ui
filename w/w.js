@@ -8260,6 +8260,7 @@ templateservicemod.service('TemplateService', function () {
 		this.menu = "views/menu.html";
 		this.slider = "views/slider.html";
 		this.content = "views/content/content.html";
+		this.kart = "views/kart.html";
 		this.footermenu = "views/footermenu.html";
 		this.footer = "views/footer.html";
 	};

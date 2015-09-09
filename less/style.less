@@ -1623,3 +1623,86 @@
 				background-clip: padding-box;
 				.translateX(-50%);
 			}
+			
+			//kart
+			.kart-container {
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				.kart {
+					position: relative;
+					.kart-logo {
+						width: 130px;
+						padding: 13px;
+						background-color: #2DB1BD;
+						color: #fff;
+						cursor: pointer;
+						text-align: center;
+						position: relative;
+						z-index: 30;
+						a {
+							color: #fff;
+							.name-cart {
+								display: block;
+								font-size: 20px;
+								color: #fff;
+							}
+						}
+					}
+					.kart-hover {
+						width: 450px;
+						padding: 19px 0;
+						position: absolute;
+						top: 0;
+						right: -150px;
+						z-index: 20;
+						background-color: #2DB1BD;
+						opacity: 0;
+						text-align: center;
+						.transition(all 2s ease-in-out);
+						.field {
+							width: 100px;
+							min-height: 30px;
+							padding: 0 10px;
+							border: none;
+							font-size: 13px;
+						}
+						.amount {
+							display: inline-block;
+						}
+						.quantity {
+							margin: 0 20px;
+							display: inline-block;
+						}
+						.express {
+							display: inline-block;
+							.expr-check {
+								padding: 6px 12px 7px;
+								border: 1px solid #fff;
+								background-color: #fff;
+								font-size: 13px;
+								text-transform: capitalize;
+								&:hover {
+									color: #fff; 
+									background-color: transparent;
+									.transition(all 1s ease-in-out);
+								}
+							}
+						}
+						.extra {
+							i {
+								margin-right: 5px;
+								color: #fff;
+								font-size: 20px;
+								vertical-align: middle;
+							}
+						}
+					}
+				}
+			}
+			
+			.kart:hover > .kart-hover {
+				right: 122px;
+				opacity: 1;
+				.transition(all 2s ease-in-out);
+			}

@@ -1493,3 +1493,90 @@ div.megamenu {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
+.kart-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.kart-container .kart {
+  position: relative;
+}
+.kart-container .kart .kart-logo {
+  width: 130px;
+  padding: 13px;
+  background-color: #2DB1BD;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  z-index: 30;
+}
+.kart-container .kart .kart-logo a {
+  color: #fff;
+}
+.kart-container .kart .kart-logo a .name-cart {
+  display: block;
+  font-size: 20px;
+  color: #fff;
+}
+.kart-container .kart .kart-hover {
+  width: 450px;
+  padding: 19px 0;
+  position: absolute;
+  top: 0;
+  right: -150px;
+  z-index: 20;
+  background-color: #2DB1BD;
+  opacity: 0;
+  text-align: center;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
+}
+.kart-container .kart .kart-hover .field {
+  width: 100px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: none;
+  font-size: 13px;
+}
+.kart-container .kart .kart-hover .amount {
+  display: inline-block;
+}
+.kart-container .kart .kart-hover .quantity {
+  margin: 0 20px;
+  display: inline-block;
+}
+.kart-container .kart .kart-hover .express {
+  display: inline-block;
+}
+.kart-container .kart .kart-hover .express .expr-check {
+  padding: 6px 12px 7px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+.kart-container .kart .kart-hover .express .expr-check:hover {
+  color: #fff;
+  background-color: transparent;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+.kart-container .kart .kart-hover .extra i {
+  margin-right: 5px;
+  color: #fff;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.kart:hover > .kart-hover {
+  right: 122px;
+  opacity: 1;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
+}
