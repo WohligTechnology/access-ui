@@ -1,6 +1,8 @@
+var admin_url = "http://localhost/accessbackend/index.php/";
+//var admin_url = "http://wohlig.co.in/accessbackend/admin/index.php/";
 var navigationservice = angular.module('navigationservice', [])
 
-.factory('NavigationService', function () {
+.factory('NavigationService', function ($http ) {
 	var navigation = [{
 		name: "Brands",
 		classis: "active",
@@ -60,6 +62,29 @@ var navigationservice = angular.module('navigationservice', [])
 		getnav: function () {
 			return navigation;
 		},
+          registeruser: function (account, callback) {
+            return $http({
+                url: admin_url + "json/registeruser",
+                method: "POST",
+                data: {
+                    'firstname': account.firstname,
+                    'lastname': account.lastname,
+                    'email': account.email,
+                    'password': account.password
+                }
+            }).success(callback);
+        },
+         loginuser: function(login, callback) {
+            return $http({
+                url: admin_url + "json/loginuser",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "email": login.email,
+                    "password": login.password
+                }
+            }).success(callback);
+        },
 		makeactive: function (menuname) {
 			for (var i = 0; i < navigation.length; i++) {
 				if (navigation[i].name == menuname) {

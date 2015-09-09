@@ -120,7 +120,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			controller: 'BrandsCtrl'
 		})
 
-		.state('login', {
+	 	.state('login', {
 			url: "/login",
 			templateUrl: "views/template.html",
 			controller: 'LoginCtrl'
@@ -135,6 +135,18 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
 });
 
+var formvalidation = function (allvalidation) {
+    var isvalid2 = true;
+    for (var i = 0; i < allvalidation.length; i++) {
+        //        console.log("checking");
+        //        console.log(allvalidation[i].field);
+        if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
+            allvalidation[i].validation = "ng-dirty";
+            isvalid2 = false;
+        }
+    }
+    return isvalid2;
+};
 
 firstapp.directive('img', function ($compile, $parse) {
 	return {
