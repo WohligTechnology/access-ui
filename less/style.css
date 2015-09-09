@@ -137,7 +137,10 @@ a:hover {
   padding: 0px 5px;
   color: #e6e6e6;
 }
-.head-mid .social ul li i {
+.head-mid .social ul li a {
+  color: #e6e6e6;
+}
+.head-mid .social ul li a i {
   border: 2px solid #e6e6e6;
   -webkit-border-radius: 100%;
   -webkit-background-clip: padding-box;
@@ -151,9 +154,13 @@ a:hover {
   text-align: center;
   cursor: pointer;
 }
-.head-mid .social ul li i:hover {
+.head-mid .social ul li a i:hover {
   border: 2px solid #303030;
   color: #303030;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 .navbar-nav > li > a {
   padding-top: 11px;
@@ -199,6 +206,7 @@ a:hover {
 }
 .vert {
   margin-top: 6px;
+  margin-bottom: 37px;
 }
 .slider {
   margin-top: -10px;
@@ -1004,6 +1012,9 @@ img.doneLoading {
 .contact {
   font-family: 'pt sans';
 }
+.contact .contact-head {
+  margin-bottom: 5%;
+}
 .contact .contact-head h3 {
   font-size: 28px;
   font-weight: 600;
@@ -1065,18 +1076,18 @@ img.doneLoading {
 .contact .padin {
   padding: 0 2%;
 }
-.search {
-  margin-bottom: 37px;
+.search-result {
+  margin-bottom: 2px;
 }
-.search .search-head .prd-name {
+.search-result .search-head .prd-name {
   font-family: "Lato";
   font-weight: 100;
 }
-.search .product-list {
+.search-result .product-list {
   padding: 0;
 }
 .about {
-  margin-bottom: 65px;
+  margin-bottom: 6px;
 }
 .about .abt-content {
   font-family: 'lato';
@@ -1119,7 +1130,7 @@ img.doneLoading {
   text-align: center;
 }
 .checkout {
-  margin: 33px 0 66px;
+  margin: 6px 0 37px;
   font-family: 'pt sans';
 }
 .checkout form h3.head {
@@ -1293,9 +1304,6 @@ img.doneLoading {
 .wishlist {
   margin-bottom: 30px;
 }
-.wishlist .product-list .pro-img2 {
-  top: 53px;
-}
 .deals {
   margin: 25px 0 36px;
 }
@@ -1430,15 +1438,44 @@ img.doneLoading {
 .deals .deals-main .deals-offer .prd-foot ul .carts a:hover {
   color: #7ee1ea;
 }
-.pop-up h5.popup-wishlist {
-  width: 22% !important;
-  padding: 9px !important;
-  border: 1px solid #7ee1ea !important;
-  text-transform: capitalize !important;
-  font-size: 15px !important;
+.pop-up {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-.ngdialog-overlay {
+.pop-up h5.popup-wishlist {
+  padding: 10% 3%;
+  border: 2px solid #7ee1ea;
+  background-color: rgba(255, 255, 255, 0.84);
+  font-size: 15px !important;
+  text-transform: capitalize;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.pop-up h5.popup-wishlist i {
+  color: #7ee1ea;
+}
+.pop-up .closepop {
+  width: 20px;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 388px;
+  background-color: #e6e6e6;
+  text-align: center;
+  cursor: pointer;
+}
+.ngdialog-close {
   display: none !important;
+}
+.ngdialog-content {
+  background-color: transparent;
 }
 div.megamenu {
   width: auto;

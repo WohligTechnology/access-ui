@@ -1,4 +1,4 @@
-<div class="search text-uppercase">
+<div class="search-result text-uppercase">
 	<div class="container">
 		<div class="pads sign search-head text-center">
 			<h3>search results for:<span class="prd-name">Mobile</span></h3>
@@ -7,7 +7,6 @@
 		<div class="row">
 			<div class="product-list">
 				<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
-					<a href="#/productdetail">
 						<div class="pro-box">
 							<div class="img-box">
 								<div class="pro-img1">
@@ -35,14 +34,13 @@
 -->
 								<div class="cartli">
 									<ul>
-										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-										<li class="carts"><i class="fa fa-heart"></i></li>
+										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li> 
+										<li class="carts" ng-click="openModal();"><i class="fa fa-heart"></i></li>
 										<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
-					</a>
 				</div>
 			</div>
 		</div>

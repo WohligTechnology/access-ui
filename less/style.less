@@ -152,16 +152,20 @@
 							font-size: 20px;
 							padding: 0px 5px;
 							color: @color1;
-							i {
-								border: 2px solid @color1;
-								.border-radius(100%);
-								padding: 7px 6px;
-								.size(36);
-								text-align: center;
-								cursor: pointer;
-								&:hover {
-									border: 2px solid #303030;
-									color: #303030;
+							a {
+								color: @color1;
+								i {
+									border: 2px solid @color1;
+									.border-radius(100%);
+									padding: 7px 6px;
+									.size(36);
+									text-align: center;
+									cursor: pointer;
+									&:hover {
+										border: 2px solid #303030;
+										color: #303030;
+										.transition(all 1s ease-in-out);
+									}
 								}
 							}
 						}
@@ -218,6 +222,7 @@
 			
 			.vert {
 				margin-top: 6px;
+				margin-bottom: 37px;
 			}
 			
 			//.flexslider-container {
@@ -1124,6 +1129,7 @@
 			.contact {
 				font-family: @font-family-body;
 				.contact-head {
+					margin-bottom: 5%;
 					h3 {
 						font-size: 28px;
 						font-weight: 600;
@@ -1194,8 +1200,8 @@
 			}
 			
 			//searchrersult page
-			.search {
-				margin-bottom: 37px;
+			.search-result {
+				margin-bottom: 2px;
 				.search-head {
 					.prd-name {
 						font-family: "Lato";
@@ -1209,7 +1215,7 @@
 			
 			//about page
 			.about {
-				margin-bottom: 65px;
+				margin-bottom: 6px;
 				.abt-content {
 					font-family: @font-family-head;
 					p {
@@ -1252,7 +1258,7 @@
 			
 			//checkout page
 			.checkout {
-				margin: 33px 0 66px;
+				margin: 6px 0 37px;
 				font-family: @font-family-body;
 				form {
 					h3.head {
@@ -1431,11 +1437,7 @@
 			//wishlist
 			.wishlist {
 				margin-bottom: 30px;
-				.product-list {
-					.pro-img2 {
-						top: 53px;
-					}
-				}
+				.product-list {}
 			}
 			
 			//deals
@@ -1570,17 +1572,42 @@
 			
 			//pop-up wishlist
 			.pop-up {
+				width: 400px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				.transform(translate(-50%,
+				-50%));
 				h5.popup-wishlist {
-					width: 22% !important;
-					padding: 9px !important;
-					border: 1px solid @color3 !important;
-					text-transform: capitalize !important;
+					padding: 10% 3%;
+					border: 2px solid @color3 ;
+					background-color: rgba(255, 255, 255, .84);
 					font-size: 15px !important;
+					text-transform: capitalize;
+					text-align: center;
+					letter-spacing: 2px;
+					i {
+						color: @color3;
+					}
 				}
-			} 
+				.closepop {
+					width: 20px;
+					border-radius: 100%;
+					position: absolute;
+					top: 0;
+					left: 388px;
+					background-color: #e6e6e6;
+					text-align: center;
+					cursor: pointer;
+				}
+			}
 			
-			.ngdialog-overlay {
+			.ngdialog-close {
 				display: none !important;
+			}
+			
+			.ngdialog-content {
+				background-color: transparent;
 			}
 			
 			div.megamenu {
