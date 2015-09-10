@@ -1,4 +1,5 @@
 var admin_url = "http://localhost/accessbackend/index.php/";
+var adminhauth = admin_url + "hauth/";
 //var admin_url = "http://wohlig.co.in/accessbackend/admin/index.php/";
 var navigationservice = angular.module('navigationservice', [])
 
@@ -79,6 +80,12 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             });
         },
+         authenticate: function () {
+                return $http({
+                    url: admin_url + 'json/authenticate',
+                    method: "POST"
+                });
+            },
         usercontact: function (contact, callback) {
             return $http({
                 url: admin_url + "json/usercontact",

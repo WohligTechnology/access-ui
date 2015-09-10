@@ -21,8 +21,14 @@
                                 <li><a href="#/wishlist"><i class="fa fa-heart"></i>wishlist</a>
                                 </li>
                                 <!--                                <li><i class="fa fa-shopping-cart"></i>my cart</li>-->
-                                <li style="border:none;"><a href="#/login"><i class="fa fa-user"></i>login</a>
-                                    <ul class="dropdown">
+                                <li style="border:none;">
+                                    <a href="#/login" ng-show="showlogin">
+                                        <i class="fa fa-user"></i>login
+                                    </a>
+                                    <a href="#/login" ng-hide="showlogin">
+                                        <i class="fa fa-user"></i>{{showusername}}
+                                    </a>
+                                    <ul class="dropdown" ng-show="showlogindropdown">
                                         <li><a href="#/orderhistory"><i class="fa fa-"></i>my orders</a>
                                         </li>
                                         <li><a href="#"><i class="fa fa-"></i>my account</a>

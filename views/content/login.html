@@ -13,7 +13,7 @@
                    <input type="email" placeholder="Email  *" class="form-control" ng-class="allvalidation[0].validation" ng-model="login.email">
                    <input type="password" placeholder="Password *" class="form-control" ng-class="allvalidation[1].validation" ng-model="login.password">
                    </form>
-                   <p><a class="btns" ng-click="userlogin(login);">login</a><a class="btn btn-primary pull-right g-login g-logins" href="#"><i class="fa fa-google-plus"></i>Google+</a><a class="btn btn-primary pull-right f-login g-logins" href="#"><i class="fa fa-facebook"></i>Facebook</a></p>
+                   <p><a class="btns" ng-click="userlogin(login);">login</a><a class="btn btn-primary pull-right g-login g-logins" ng-click="googlelogin()"><i class="fa fa-google-plus"></i>Google+</a><a class="btn btn-primary pull-right f-login g-logins" ng-click="facebooklogin()"><i class="fa fa-facebook"></i>Facebook</a></p>
                    <span> <a href="#/forgotpassword">Forgot your password?</a> </span>
                </div>
            </div>

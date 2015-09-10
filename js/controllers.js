@@ -197,7 +197,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location) {
+.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval) {
 
     console.log($state.current.name);
     $scope.template = TemplateService;
@@ -274,6 +274,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.login = {};
         }
     };
+
+    // GOOGLE AND FACEBOOK LOGIN
+    var checktwitter = function (data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            NavigationService.authenticate().success(authenticatesuccess);
+        } else {
+
+        }
+    };
+
+    var callAtIntervaltwitter = function () {
+        NavigationService.authenticate().success(checktwitter);
+    };
+    var authenticatesuccess = function (data, status) {
+        console.log(data);
+        if (data != "false") {
+            $.jStorage.set("user", data);
+            user = data;
+            $location.url("/app/home");
+        }
+    };
+
+    $scope.facebooklogin = function () {
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.googlelogin = function () {
+
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
 })
 
 .controller('forgotpasswordCtrl', function ($scope, TemplateService, NavigationService) {
@@ -285,14 +326,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location) {
-
+.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location,$window) {
+        $scope.showusername = '';
+        $scope.showlogindropdown = true;
+        if (!$.jStorage.get("user")) {
+            $scope.showlogin = true;
+        } else {
+            $scope.showlogin = false;
+            if (!$.jStorage.get("user").name || $.jStorage.get("user").name == "") {
+                console.log("in if");
+                if ($.jStorage.get("user").firstname && $.jStorage.get("user").firstname != '')
+                    $scope.showusername += $.jStorage.get("user").firstname;
+                if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
+                    $scope.showusername += " " + $.jStorage.get("user").lastname;
+                console.log($scope.showusername);
+            } else {
+                console.log("else");
+                $scope.showusername = $.jStorage.get("user").name;
+                console.log($scope.showusername);
+            }
+        }
         var logoutcallback = function (data, status) {
             console.log(data);
             if (data == "true") {
                 console.log("flush");
                 $.jStorage.flush();
+                $scope.showlogindropdown = false;
                 $location.url("/home");
+                $window.location.reload();
             }
         }
         $scope.logout = function () {
@@ -402,17 +463,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.user = {};
         var updateusercallback = function (data, status) {
             console.log(data);
-            if(data=="true"){
-            $scope.msgsuccess="Updated Successfully!";
-            $scope.msgfailure="";
-                 $scope.user = {};
+            if (data == "true") {
+                $scope.msgsuccess = "Updated Successfully!";
+                $scope.msgfailure = "";
+                $scope.user = {};
+            } else {
+                $scope.user = {};
+                $scope.msgfailure = "Sorry Try Again!";
+                $scope.msgsuccess = "";
             }
-            else{
-             $scope.user = {};
-            $scope.msgfailure="Sorry Try Again!";
-            $scope.msgsuccess="";
-            }
-            
+
         }
         $scope.updateuser = function (user) {
             NavigationService.updateuser(user, updateusercallback)
