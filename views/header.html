@@ -1,84 +1,91 @@
-<header>
+<header ng-controller="headerctrl">
 
-	<nav class="navbar navbar-default">
-		<div class="head">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<!--
+    <nav class="navbar navbar-default">
+        <div class="head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--
                         <div class="head-left">
                             <i class="fa fa-phone"></i>
                             <p>call  +001 255 300</p>
                         </div>
 -->
-					</div>
-					<div class="col-md-8">
-						<div class="head-right">
-							<ul>
-								<!--                                <li>welcome msg!</li>-->
-								<li><a href="#/contact"><i class="fa fa-phone"></i>Contact Us</a></li>
-								<li><a href="#/wishlist"><i class="fa fa-heart"></i>wishlist</a></li>
-								<!--                                <li><i class="fa fa-shopping-cart"></i>my cart</li>-->
-								<li style="border:none;"><a href="#/login"><i class="fa fa-user"></i>login</a>
-									<ul class="dropdown">
-										<li><a href="#/orderhistory"><i class="fa fa-"></i>my orders</a></li>
-										<li><a href="#"><i class="fa fa-"></i>my account</a></li>
-										<li><a href="#"><i class="fa fa-"></i>sign out</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="head-mid">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<a class="" href="#/home"><img src="img/logo.png" alt="logo" class="img-responsive" style="width:200px;"> </a>
-					</div>
-					<div class="col-md-6">
-						<div class="search vert">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search for...">
-								<span class="input-group-btn">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="head-right">
+                            <ul>
+                                <!--                                <li>welcome msg!</li>-->
+                                <li><a href="#/contact"><i class="fa fa-phone"></i>Contact Us</a>
+                                </li>
+                                <li><a href="#/wishlist"><i class="fa fa-heart"></i>wishlist</a>
+                                </li>
+                                <!--                                <li><i class="fa fa-shopping-cart"></i>my cart</li>-->
+                                <li style="border:none;"><a href="#/login"><i class="fa fa-user"></i>login</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#/orderhistory"><i class="fa fa-"></i>my orders</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-"></i>my account</a>
+                                        </li>
+                                        <li ng-click="logout();"><i class="fa fa-"></i>sign out</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="head-mid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="" href="#/home"><img src="img/logo.png" alt="logo" class="img-responsive" style="width:200px;"> </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search vert">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
         <button class="btn btn-default custom" type="button">Search</button>
       </span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="social vert">
-							<ul>
-								<li><a href="" target="_blank"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="" target="_blank"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="" target="_blank"><i class="fa fa-instagram"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="social vert">
+                            <ul>
+                                <li><a href="" target="_blank"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li><a href="" target="_blank"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li><a href="" target="_blank"><i class="fa fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-		<div class="container">
+        <div class="container">
 
-			<!--Menu Start-->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+            <!--Menu Start-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-			</div>
+            </div>
 
-			<div class="collapse navbar-collapse" id="nav-collapse">
-				<div ng-include="template.menu" class="template menu"></div>
-			</div>
-			<!--        Menu End -->
-		</div>
-	</nav>
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <div ng-include="template.menu" class="template menu"></div>
+            </div>
+            <!--        Menu End -->
+        </div>
+    </nav>
 </header>

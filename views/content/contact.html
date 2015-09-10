@@ -23,12 +23,14 @@
 				<div class="col-md-6 bord">
 					<div class="get-in padin">
 						<h4 class="text-uppercase touch">get in touch</h4>
+                         <h5><span style="color: tomato;">{{msg}}</span></h5>
+                         <h5><span style="color: #2CBF2C;">{{msgsuccess}}</span></h5>
 						<form action="" class="from-control">
-							<input type="text" class="form-control" placeholder="Name *" required>
-							<input type="email" class="form-control" placeholder="Email *" required>
-							<input type="tel" class="form-control" placeholder="Telephone">
-							<textarea class="form-control" placeholder="Query *" required></textarea>
-							<a href="#" class="submit-btn-all pull-right">Submit</a>
+							<input type="text" class="form-control" ng-model="contact.name" ng-class="allvalidation[0].validation" placeholder="Name *" required>
+							<input type="email" class="form-control" ng-model="contact.email" ng-class="allvalidation[1].validation" placeholder="Email *" required>
+							<input type="tel" class="form-control" ng-model="contact.phone" ng-class="allvalidation[2].validation" placeholder="Telephone">
+							<textarea class="form-control" ng-model="contact.comment" ng-class="allvalidation[3].validation" placeholder="Query *" required></textarea>
+							<a href="#" class="submit-btn-all pull-right" ng-click="usercontact(contact)">Submit</a>
 						</form>
 					</div>
 				</div>
