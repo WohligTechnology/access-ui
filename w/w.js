@@ -7794,7 +7794,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location) {
+.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval) {
 
     console.log($state.current.name);
     $scope.template = TemplateService;
@@ -7847,6 +7847,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.login = {};
     var getlogin = function (data, status) {
         console.log(data);
+        $.jStorage.set("user", data);
         if (data != "false") {
             $scope.msg = "Login Successful";
             $location.url("/home");
@@ -7867,9 +7868,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.loginuser(login, getlogin);
         } else {
             $scope.msg = "Invalid data try again!!";
-            $scope.account = {};
+            $scope.login = {};
         }
     };
+
+    // GOOGLE AND FACEBOOK LOGIN
+    var checktwitter = function (data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            NavigationService.authenticate().success(authenticatesuccess);
+        } else {
+
+        }
+    };
+
+    var callAtIntervaltwitter = function () {
+        NavigationService.authenticate().success(checktwitter);
+    };
+    var authenticatesuccess = function (data, status) {
+        console.log(data);
+        if (data != "false") {
+            $.jStorage.set("user", data);
+            user = data;
+            $location.url("/app/home");
+        }
+    };
+
+    $scope.facebooklogin = function () {
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.googlelogin = function () {
+
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
 })
 
 .controller('forgotpasswordCtrl', function ($scope, TemplateService, NavigationService) {
@@ -7881,8 +7923,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('headerctrl', function ($scope, TemplateService, NavigationService) {
+.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location,$window) {
+        $scope.showusername = '';
+        $scope.showlogindropdown = true;
+        if (!$.jStorage.get("user")) {
+            $scope.showlogin = true;
+        } else {
+            $scope.showlogin = false;
+            if (!$.jStorage.get("user").name || $.jStorage.get("user").name == "") {
+                console.log("in if");
+                if ($.jStorage.get("user").firstname && $.jStorage.get("user").firstname != '')
+                    $scope.showusername += $.jStorage.get("user").firstname;
+                if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
+                    $scope.showusername += " " + $.jStorage.get("user").lastname;
+                console.log($scope.showusername);
+            } else {
+                console.log("else");
+                $scope.showusername = $.jStorage.get("user").name;
+                console.log($scope.showusername);
+            }
+        }
+        var logoutcallback = function (data, status) {
+            console.log(data);
+            if (data == "true") {
+                console.log("flush");
+                $.jStorage.flush();
+                $scope.showlogindropdown = false;
+                $location.url("/home");
+                $window.location.reload();
+            }
+        }
+        $scope.logout = function () {
+            NavigationService.logout(logoutcallback);
+        }
         $scope.template = TemplateService;
+
         $scope.brandhover = [
  "img/brands/acmemade.jpeg",
   "img/brands/adonit.png",
@@ -7931,6 +8006,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Contact");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        $scope.contact = {};
+        var usercontactcallback = function (data, status) {
+            console.log("before");
+            console.log(data);
+            console.log("aftr");
+            if (data) {
+                $scope.msgsuccess = "Successfully Submitted!!";
+                $scope.msg = "";
+                $scope.contact = {};
+            } else {
+                $scope.msg = "Invalid data try again!!";
+                $scope.msgsuccess = "";
+                $scope.contact = {};
+            }
+        }
+        $scope.usercontact = function (contact) {
+            $scope.allvalidation = [{
+                field: $scope.contact.name,
+                validation: ""
+            }, {
+                field: $scope.contact.email,
+                validation: ""
+            }, {
+                field: $scope.contact.comment,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+                NavigationService.usercontact(contact, usercontactcallback);
+            } else {
+                $scope.msg = "Please fill mandatory fields!!";
+                $scope.msgsuccess = "";
+                $scope.contact = {};
+            }
+
+        }
     })
     .controller('StorelocatorCtrl', function ($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
@@ -7945,6 +8057,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Account");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        $scope.user = {};
+        var updateusercallback = function (data, status) {
+            console.log(data);
+            if (data == "true") {
+                $scope.msgsuccess = "Updated Successfully!";
+                $scope.msgfailure = "";
+                $scope.user = {};
+            } else {
+                $scope.user = {};
+                $scope.msgfailure = "Sorry Try Again!";
+                $scope.msgsuccess = "";
+            }
+
+        }
+        $scope.updateuser = function (user) {
+            NavigationService.updateuser(user, updateusercallback)
+        }
     })
     .controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
         $scope.template = TemplateService;
@@ -8266,6 +8395,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+
     $scope.products = [{
         image: "img/product/5.jpg",
         image1: "img/product/5.jpg",
@@ -8342,70 +8472,71 @@ templateservicemod.controller('submenuctrl', ['$scope', 'TemplateService',
 		};
 }]);;
 var admin_url = "http://localhost/accessbackend/index.php/";
+var adminhauth = admin_url + "hauth/";
 //var admin_url = "http://wohlig.co.in/accessbackend/admin/index.php/";
 var navigationservice = angular.module('navigationservice', [])
 
-.factory('NavigationService', function ($http ) {
-	var navigation = [{
-		name: "Brands",
-		classis: "active",
-		link: "#/brand",
-		subnav: [{
-			name: "Subnav1",
-			classis: "active",
-			link: "#/home"
+.factory('NavigationService', function ($http) {
+    var navigation = [{
+        name: "Brands",
+        classis: "active",
+        link: "#/brand",
+        subnav: [{
+            name: "Subnav1",
+            classis: "active",
+            link: "#/home"
         }, {
-			name: "Subnav2",
-			classis: "active",
-			link: "#/home"
+            name: "Subnav2",
+            classis: "active",
+            link: "#/home"
         }, {
-			name: "Subnav3",
-			classis: "active",
-			link: "#/home"
+            name: "Subnav3",
+            classis: "active",
+            link: "#/home"
         }]
     }, {
-		name: "products",
-		active: "",
-		link: "#/product",
-		classis: "active",
-		subnav: []
+        name: "products",
+        active: "",
+        link: "#/product",
+        classis: "active",
+        subnav: []
     }, {
-		name: "exclusive",
-		active: "",
-		link: "#/exclusive",
-		classis: "active",
-		subnav: []
+        name: "exclusive",
+        active: "",
+        link: "#/exclusive",
+        classis: "active",
+        subnav: []
     }, {
-		name: "new arrivals",
-		active: "",
-		link: "#/new arrivals",
-		classis: "active",
-		subnav: []
+        name: "new arrivals",
+        active: "",
+        link: "#/new arrivals",
+        classis: "active",
+        subnav: []
     }, {
-		name: "deals",
-		active: "",
-		link: "#/deals",
-		classis: "active",
-		subnav: []
+        name: "deals",
+        active: "",
+        link: "#/deals",
+        classis: "active",
+        subnav: []
     }, {
-		name: "about us",
-		active: "",
-		link: "#/about",
-		classis: "active",
-		subnav: []
+        name: "about us",
+        active: "",
+        link: "#/about",
+        classis: "active",
+        subnav: []
     }, {
-		name: "contact",
-		active: "",
-		link: "#/contact",
-		classis: "active",
-		subnav: []
+        name: "contact",
+        active: "",
+        link: "#/contact",
+        classis: "active",
+        subnav: []
     }];
 
-	return {
-		getnav: function () {
-			return navigation;
-		},
-          registeruser: function (account, callback) {
+    return {
+        getnav: function () {
+            return navigation;
+        },
+        registeruser: function (account, callback) {
             return $http({
                 url: admin_url + "json/registeruser",
                 method: "POST",
@@ -8417,7 +8548,57 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }).success(callback);
         },
-         loginuser: function(login, callback) {
+        seach: function (search) {
+            return $http.post(admin_url + 'searchbyname?search=' + search, {}, {
+                withCredentials: true
+            });
+        },
+         authenticate: function () {
+                return $http({
+                    url: admin_url + 'json/authenticate',
+                    method: "POST"
+                });
+            },
+        usercontact: function (contact, callback) {
+            return $http({
+                url: admin_url + "json/usercontact",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "name": contact.name,
+                    "email": contact.email,
+                    "phone": contact.phone,
+                    "comment": contact.comment
+                }
+            }).success(callback);
+        },
+        updateuser: function (user,callback) {
+            return $http({
+                url: admin_url + "json/updateuser",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "id": $.jStorage.get("user").id,
+                    "firstname": user.firstname,
+                    "lastname": user.lastname,
+                    "address": user.address,
+                    "email": user.email,
+                    "phone": user.phone,
+                    "city": user.city,
+                    "zipcode": user.zipcode,
+                    "country": user.country,
+                    "sameasbilling": user.sameasbilling,
+                    "state": user.state,
+                }
+            }).success(callback);
+        },
+        logout: function (callback) {
+            return $http.post(admin_url + 'json/logout', {
+                withCredentials: true
+            }).success(callback);
+        },
+
+        loginuser: function (login, callback) {
             return $http({
                 url: admin_url + "json/loginuser",
                 method: "POST",
@@ -8428,16 +8609,16 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }).success(callback);
         },
-		makeactive: function (menuname) {
-			for (var i = 0; i < navigation.length; i++) {
-				if (navigation[i].name == menuname) {
-					navigation[i].classis = "active";
-				} else {
-					navigation[i].classis = "";
-				}
-			}
-			return menuname;
-		},
+        makeactive: function (menuname) {
+            for (var i = 0; i < navigation.length; i++) {
+                if (navigation[i].name == menuname) {
+                    navigation[i].classis = "active";
+                } else {
+                    navigation[i].classis = "";
+                }
+            }
+            return menuname;
+        },
 
-	}
+    }
 });
