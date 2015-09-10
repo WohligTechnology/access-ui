@@ -1404,6 +1404,27 @@
 				}
 			}
 			
+			.carousel-control.left {
+				width: 17px;
+				height: 25px;
+				position: absolute;
+				top: 50%;
+				background: url('../img/left-arrow.png') no-repeat;
+				.transform(translate(-50%,
+				-0));
+			}
+			
+			.carousel-control.right {
+				width: 17px;
+				height: 25px;
+				position: absolute;
+				top: 50%;
+				right: 0%;
+				background: url('../img/right-arrow.png') no-repeat;
+				.transform(translate(-50%,
+				-0));
+			}
+			
 			.brand_hover {
 				left: 45% !important;
 			}
@@ -1683,7 +1704,7 @@
 								font-size: 13px;
 								text-transform: capitalize;
 								&:hover {
-									color: #fff; 
+									color: #fff;
 									background-color: transparent;
 									.transition(all 1s ease-in-out);
 								}
