@@ -250,6 +250,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.login = {};
     var getlogin = function (data, status) {
         console.log(data);
+        $.jStorage.set("user", data);
         if (data != "false") {
             $scope.msg = "Login Successful";
             $location.url("/home");
@@ -270,7 +271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.loginuser(login, getlogin);
         } else {
             $scope.msg = "Invalid data try again!!";
-            $scope.account = {};
+            $scope.login = {};
         }
     };
 })
@@ -284,8 +285,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('headerctrl', function ($scope, TemplateService, NavigationService) {
+.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location) {
+
+        var logoutcallback = function (data, status) {
+            console.log(data);
+            if (data == "true") {
+                console.log("flush");
+                $.jStorage.flush();
+                $location.url("/home");
+            }
+        }
+        $scope.logout = function () {
+            NavigationService.logout(logoutcallback);
+        }
         $scope.template = TemplateService;
+
         $scope.brandhover = [
  "img/brands/acmemade.jpeg",
   "img/brands/adonit.png",
@@ -334,6 +348,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Contact");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+
+        $scope.contact = {};
+        var usercontactcallback = function (data, status) {
+            console.log("before");
+            console.log(data);
+            console.log("aftr");
+            if (data) {
+                $scope.msgsuccess = "Successfully Submitted!!";
+                $scope.msg = "";
+                $scope.contact = {};
+            } else {
+                $scope.msg = "Invalid data try again!!";
+                $scope.msgsuccess = "";
+                $scope.contact = {};
+            }
+        }
+        $scope.usercontact = function (contact) {
+            $scope.allvalidation = [{
+                field: $scope.contact.name,
+                validation: ""
+            }, {
+                field: $scope.contact.email,
+                validation: ""
+            }, {
+                field: $scope.contact.comment,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+                NavigationService.usercontact(contact, usercontactcallback);
+            } else {
+                $scope.msg = "Please fill mandatory fields!!";
+                $scope.msgsuccess = "";
+                $scope.contact = {};
+            }
+
+        }
     })
     .controller('StorelocatorCtrl', function ($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
@@ -348,6 +399,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Account");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        $scope.user = {};
+        var updateusercallback = function (data, status) {
+            console.log(data);
+            if(data=="true"){
+            $scope.msgsuccess="Updated Successfully!";
+            $scope.msgfailure="";
+                 $scope.user = {};
+            }
+            else{
+             $scope.user = {};
+            $scope.msgfailure="Sorry Try Again!";
+            $scope.msgsuccess="";
+            }
+            
+        }
+        $scope.updateuser = function (user) {
+            NavigationService.updateuser(user, updateusercallback)
+        }
     })
     .controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
         $scope.template = TemplateService;
@@ -668,6 +737,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("SearchResult");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
 
     $scope.products = [{
         image: "img/product/5.jpg",
