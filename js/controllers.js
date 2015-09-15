@@ -264,6 +264,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
 
         }
+        
     };
 
     var callAtIntervaltwitter = function () {
@@ -279,7 +280,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     $scope.facebooklogin = function () {
-        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
+         ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
         stopinterval = $interval(callAtIntervaltwitter, 2000);
         ref.addEventListener('exit', function (event) {
             NavigationService.authenticate().success(authenticatesuccess);
@@ -287,13 +288,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
     }
     $scope.googlelogin = function () {
-
-        ref = window.open(adminhauth + 'login/Google?returnurl=http://localhost/pav-bhaji/#/home', '_blank', 'location=yes');
-        stopinterval = $interval(callAtIntervaltwitter, 2000);
-        ref.addEventListener('exit', function (event) {
-            NavigationService.authenticate().success(authenticatesuccess);
-            $interval.cancel(stopinterval);
-        });
+         ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                NavigationService.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
     }
 })
 
