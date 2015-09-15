@@ -1,6 +1,8 @@
-var admin_url = "http://localhost/accessbackend/index.php/";
+var admin_url = "http://localhost/accessback/index.php/";
 var adminhauth = admin_url + "hauth/";
-//var admin_url = "http://wohlig.co.in/accessbackend/admin/index.php/";
+var adminbase = "http://localhost/accessback/";
+var adminimage = adminbase + "uploads/";
+//var admin_url = "http://wohlig.co.in/accessback/admin/index.php/";
 var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
@@ -86,6 +88,81 @@ var navigationservice = angular.module('navigationservice', [])
                     method: "POST"
                 });
             },
+        getexclusiveandnewarrival: function (callback) {
+                return $http({
+                    url: admin_url + 'json/getexclusiveandnewarrival',
+                    method: "POST"
+                }).success(callback);
+            },  
+        getofferdetails: function (callback) {
+                return $http({
+                    url: admin_url + 'json/getofferdetails',
+                    method: "POST"
+                }).success(callback);
+            }, 
+        getaboutus: function (callback) {
+                return $http({
+                    url: admin_url + 'json/getaboutus',
+                    method: "POST"
+                }).success(callback);
+            },  
+        getbrand: function (callback) {
+                return $http({
+                    url: admin_url + 'json/getbrand',
+                    method: "POST"
+                }).success(callback);
+            },
+          forgotPassword: function(forgot,callback) {
+            return $http.get(admin_url + 'json/forgotpassword', {
+                data: {
+                    "email": forgot.email
+                }
+            }, {
+                withCredentials: true
+            }).success(callback);
+        }, 
+        getproductdetails: function(id) {
+            return $http.get(admin_url + 'json/getproductdetails', {
+                data: {
+                    "id": id
+                }
+            }, {
+                withCredentials: true
+            });
+        },
+
+          getproductbybrand: function(id,callback) {
+            return $http({
+                url: admin_url + 'json/getproductbybrand',
+                method: "POST",
+                withCredentials: true,
+                data: {
+                      "brandid": id
+                }
+            }).success(callback);
+        },
+        newPassword: function(forgot) {
+            return $http({
+                url: admin_url + 'json/forgotpasswordsubmit',
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    'password': forgot.password,
+                    'hashcode': forgot.hashcode
+                }
+            });
+        },
+        getproductbycategory: function(parent,category) {
+            return $http({
+                url: admin_url + 'json/getproductbycategory',
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    'parent': parent,
+                    'subcategory': category
+                }
+            });
+        },
         usercontact: function (contact, callback) {
             return $http({
                 url: admin_url + "json/usercontact",

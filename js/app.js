@@ -22,7 +22,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 	})
 
 	.state('productdetail', {
-		url: "/productdetail",
+		url: "/productdetail/:id",
 		templateUrl: "views/template.html",
 		controller: 'ProductdetailCtrl'
 	})
@@ -38,7 +38,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 	})
 
 	.state('product', {
-			url: "/product",
+			url: "/product/:parent/:category/:brand",
 			templateUrl: "views/template.html",
 			controller: 'ProductCtrl'
 		})
@@ -125,6 +125,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 			templateUrl: "views/template.html",
 			controller: 'LoginCtrl'
 		})
+    
+	 	.state('resetpassword/:id', {
+			url: "/resetpassword",
+			templateUrl: "views/template.html",
+			controller: 'ResetpasswordCtrl'
+		})
 		.state('forgotpassword', {
 			url: "/forgotpassword",
 			templateUrl: "views/template.html",
@@ -134,6 +140,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 	$urlRouterProvider.otherwise("/home");
 
 });
+
+firstapp.filter('serverimage', function () {
+    return function (image) {
+        return adminimage + image;
+    };
+})
 
 var formvalidation = function (allvalidation) {
     var isvalid2 = true;
@@ -147,6 +159,8 @@ var formvalidation = function (allvalidation) {
     }
     return isvalid2;
 };
+
+
 
 firstapp.directive('img', function ($compile, $parse) {
 	return {

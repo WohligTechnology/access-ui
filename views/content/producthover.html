@@ -1,4 +1,4 @@
-<div class="producthover">
+<div class="producthover" ng-controller="submenuctrl">
 	<div class="container">
 		<div class="product-hov-list text-capitalize">
 			<div class="list1">
@@ -8,70 +8,68 @@
 							<div class="row">
 								<div class="col-md-2">
 									<div class="iphone-access">
-										<h5 class="text-capitalize">cover &amp; Cases</h5>
+										<h5 class="text-capitalize" ng-click="getproductbycategory(1,0);">cover &amp; Cases</h5>
 										<ul>
-											<li><a href="" title="Cover &amp; Cases">Iphone Covers</a></li>
-											<li><a href="" title="Cover &amp; Cases">Samsung Covers</a></li>
-											<li><a href="" title="Cover &amp; Cases">Sony Covers</a></li>
-											<li><a href="" title="Cover &amp; Cases">Yureka Covers</a></li>
-											<li><a href="" title="Cover &amp; Cases">Micromaxx covers</a></li>
+											<li><a href="" title="Cover &amp; Cases" ng-click="getproductbycategory(0,2);">Iphone Covers</a></li>
+											<li><a href="" title="Cover &amp; Cases" ng-click="getproductbycategory(0,3);">Samsung Covers</a></li>
+											<li><a href="" title="Cover &amp; Cases" ng-click="getproductbycategory(0,4);">Sony Covers</a></li>
+											<li><a href="" title="Cover &amp; Cases" ng-click="getproductbycategory(0,5);">Yureka Covers</a></li>
+											<li><a href="" title="Cover &amp; Cases" ng-click="getproductbycategory(0,6);">Micromaxx covers</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="Mobile">
-										<h5>Mobiles</h5>
+										<h5 ng-click="getproductbycategory(7,0);">Mobiles</h5>
 										<ul>
-											<li><a href="" title="Mobiles">i phone</a></li>
-											<li><a href="" title="Mobiles">Samsung</a></li>
-											<li><a href="" title="Mobiles">Yureka</a></li>
-											<li><a href="" title="Mobiles">Sony</a></li>
-											<li><a href="" title="Mobiles">Micromaxx</a></li>
+											<li><a href="" title="Mobiles" ng-click="getproductbycategory(0,8);">i phone</a></li>
+											<li><a href="" title="Mobiles" ng-click="getproductbycategory(0,9);">Samsung</a></li>
+											<li><a href="" title="Mobiles" ng-click="getproductbycategory(0,10);">Yureka</a></li>
+											<li><a href="" title="Mobiles" ng-click="getproductbycategory(0,11);">Sony</a></li>
+											<li><a href="" title="Mobiles" ng-click="getproductbycategory(0,12);">Micromaxx</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="headphone">
-										<h5>Headphones</h5>
+										<h5 ng-click="getproductbycategory(13,0);">Headphones</h5>
 										<ul>
-											<li><a href="" title="Head phones">Beats</a></li>
-											<li><a href="" title="Head phones">Sony</a></li>
-											<li><a href="" title="Head phones">JBL</a></li>
-											<li><a href="" title="Head phones">Skull candy</a></li>
-											<li><a href="" title="Head phones">Philips</a></li>
+											<li><a href="" title="Head phones" ng-click="getproductbycategory(0,14);">Beats</a></li>
+											<li><a href="" title="Head phones" ng-click="getproductbycategory(0,15);">Sony</a></li>
+											<li><a href="" title="Head phones" ng-click="getproductbycategory(0,16);">JBL</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="acces">
-										<h5>Accessories</h5>
+										<h5 ng-click="getproductbycategory(17,0);">Accessories</h5>
 										<ul>
-											<li><a href="" title="Accessories">Tech Accesories</a></li>
-											<li><a href="" title="Accessories">Bags</a></li>
-											<li><a href="" title="Accessories">belt</a></li>
+											<li><a href="" title="Accessories" ng-click="getproductbycategory(0,18);">Tech Accesories</a></li>
+											<li><a href="" title="Accessories" ng-click="getproductbycategory(0,19);">Bags</a></li>
+											<li><a href="" title="Accessories" ng-click="getproductbycategory(0,20);">belt</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="watch-prdt">
-										<h5>watches</h5>
+										<h5 ng-click="getproductbycategory(21,0);">watches</h5>
 										<ul>
-											<li><a href="" title="Watch">Analog</a></li>
-											<li><a href="" title="Watch">chronograph</a></li>
-											<li><a href="" title="Watch">digital</a></li>
-											<li><a href="" title="Watch">watch cases</a></li>
+											<li><a href="" title="Watch" ng-click="getproductbycategory(0,22);">Analog</a></li>
+											<li><a href="" title="Watch" ng-click="getproductbycategory(0,23);">chronograph</a></li>
+											<li><a href="" title="Watch" ng-click="getproductbycategory(0,24);">digital</a></li>
+											<li><a href="" title="Watch" ng-click="getproductbycategory(0,25);">watch cases</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="laptop-prdt">
-										<h5>Laptops</h5>
+										<h5 ng-click="getproductbycategory(26,0);">Laptops</h5>
 										<ul>
-											<li><a href="" title="Laptop">Dell</a></li>
-											<li><a href="" title="Laptop">hp</a></li>
-											<li><a href="" title="Laptop">lenevo</a></li>
-											<li><a href="" title="Laptop">asus</a></li>
-											<li><a href="" title="Laptop">compaq</a></li>
+											<li><a href="" title="Laptop" ng-click="getproductbycategory(0,27);">lenevo</a></li>
+											<li><a href="" title="Laptop" ng-click="getproductbycategory(0,28);">dell</a></li>
+											<li><a href="" title="Laptop" ng-click="getproductbycategory(0,29);">Samsung</a></li>
+											<li><a href="" title="Laptop" ng-click="getproductbycategory(0,30);">asus</a></li>
+											<li><a href="" title="Laptop" ng-click="getproductbycategory(0,31);">Apple</a></li>
 										</ul>
 									</div>
 								</div>

@@ -3,11 +3,9 @@
 		<div class="brand-section text-center">
 			<div class="divider">
 				<div class="row">
-					<div class="col-md-3" ng-repeat="brnd in brandimages">
+					<div class="col-md-3" ng-repeat="brnd in brandimages" ng-click="getproductbybrand(brnd.id);">
 						<div class="img-holder">
-							<a href="#/">
-								<img ng-src="{{brnd}}" alt="Brands" class="img-responsive">
-							</a>
+								<img ng-src="{{brnd.logo | serverimage}}" alt="Brands" class="img-responsive" >
 						</div>
 					</div>
 				</div>

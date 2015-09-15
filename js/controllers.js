@@ -40,7 +40,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 
-.controller('ProductCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
+.controller('ProductCtrl', function ($scope, TemplateService, NavigationService, ngDialog, $stateParams, $location) {
     $scope.template = TemplateService.changecontent("product");
     $scope.menutitle = NavigationService.makeactive("Product");
     TemplateService.title = $scope.menutitle;
@@ -105,86 +105,61 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.$watch('rate', function (val) {
 
-        function sucess(data) {
+            function sucess(data) {
 
-            console.log(data);
+                console.log(data);
 
-        };
+            };
 
-        function error(response) {
+            function error(response) {
 
-            console.log(response)
+                console.log(response)
 
-            alert("Can't post " + response.data + " Error:" + response.status);
-
-        }
-
-
-
-        if (val) {
-
-            var data = {
-                rating: val,
-                user: "userId" // I'm not sure where is your userId
+                alert("Can't post " + response.data + " Error:" + response.status);
 
             }
 
-            $http.post("yourUrl", data).then(sucess, error);
 
 
-        }
-    })
+            if (val) {
 
-    $scope.products = [{
-        image: "img/product/iphone.jpg",
-        image1: "img/product/iphone2.jpg",
-        name: "Tempered Glass Screen Protector for iPhone 6 Plus",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "47000.00"
+                var data = {
+                    rating: val,
+                    user: "userId" // I'm not sure where is your userId
 
-    }, {
-        image: "img/product/iphone6.jpg",
-        image1: "img/product/iphone6ho.jpg",
-        name: "Ultra Rugged Waterproof Case for iPhone 5/5s",
-        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
-        price: "48000.00"
+                }
 
-    }, {
-        image: "img/product/iphone6ho.jpg",
-        image1: "img/product/glass2.jpg",
-        name: "Apple air",
-        desc: "Flexible Glass Screen Protector With Applicator for LG G4 ",
-        price: "42000.00"
+                $http.post("yourUrl", data).then(sucess, error);
 
-    }, {
-        image: "img/product/8.jpg",
-        image1: "img/product/5.jpg",
-        name: "samsung",
-        desc: "distracted by the readable content of a page when looking at its layout. ",
-        price: "72000.00"
 
-    }, {
-        image: "img/product/9.jpg",
-        image1: "img/product/5.jpg",
-        name: "nokia lumia",
-        desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum. ",
-        price: "75000.00"
+            }
+        })
+        // PRODUCTS SELECTED FROM CATEGORY
+    var getproductbycategorycallback = function (data, status) {
+        console.log(data.queryresult);
+        $scope.products = data.queryresult;
+    }
+    $scope.parent = $stateParams.parent;
+    $scope.category = $stateParams.category;
+    if ($scope.parent && $scope.category == 0) {
+        console.log("no need ");
+    } else {
+        NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
+    }
 
-    }, {
-        image: "img/product/10.jpg",
-        image1: "img/product/5.jpg",
-        name: "resmi 1s",
-        desc: "sometimes by accident, sometimes on purpose (injected humour and the like. ",
-        price: "47000.00"
 
-    }, {
-        image: "img/product/11.jpg",
-        image1: "img/product/5.jpg",
-        name: "micromax",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "41000.00"
+    //GO TO PRODUCT DETAIL
+    $scope.getproductdetails = function (productid) {
+        $location.url("/productdetail/" + productid);
 
-    }];
+    }
+
+
+    var getproductbybrandcallback = function (data, status) {
+        $scope.products = data.queryresult;
+    }
+    $scope.brandid = $stateParams.brand;
+    NavigationService.getproductbybrand($scope.brandid, getproductbybrandcallback)
 
 })
 
@@ -197,7 +172,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval) {
+.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval, $window) {
 
     console.log($state.current.name);
     $scope.template = TemplateService;
@@ -211,8 +186,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     var registerusercallback = function (data, status) {
         console.log(data);
+        console.log("registerlogin");
         if (data != "false") {
+            $.jStorage.set("user", data);
             $location.url("/home");
+            $window.location.reload();
+
         } else {
             $scope.msg = "This Email Id is already registered with us or Error In Registration";
             $scope.account = {};
@@ -250,6 +229,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.login = {};
     var getlogin = function (data, status) {
         console.log(data);
+        console.log("in login");
         $.jStorage.set("user", data);
         if (data != "false") {
             $scope.msg = "Login Successful";
@@ -324,24 +304,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Forgotpassword");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    var forgotPasswordcallback = function (data, status) {
+        console.log(data);
+    }
+    $scope.forgotPassword = function (email) {
+        NavigationService.forgotPassword(email, forgotPasswordcallback);
+    }
 })
 
-.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location,$window) {
+.controller('headerctrl', function ($scope, TemplateService, NavigationService, $location, $window) {
         $scope.showusername = '';
-        $scope.showlogindropdown = true;
+
         if (!$.jStorage.get("user")) {
             $scope.showlogin = true;
+            $scope.showlogindropdown = false;
         } else {
             $scope.showlogin = false;
+            $scope.showlogindropdown = true;
             if (!$.jStorage.get("user").name || $.jStorage.get("user").name == "") {
-                console.log("in if");
                 if ($.jStorage.get("user").firstname && $.jStorage.get("user").firstname != '')
                     $scope.showusername += $.jStorage.get("user").firstname;
                 if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
                     $scope.showusername += " " + $.jStorage.get("user").lastname;
                 console.log($scope.showusername);
             } else {
-                console.log("else");
                 $scope.showusername = $.jStorage.get("user").name;
                 console.log($scope.showusername);
             }
@@ -380,12 +366,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   "img/brands/tommy.jpg"
  ];
     })
-    .controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService) {
+    .controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService, $location, $stateParams) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("productdetail");
         $scope.menutitle = NavigationService.makeactive("Productdetail");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        $scope.productid = $stateParams.id;
+        var getproductdetailscallback = function (data, status) {
+            console.log(data);
+        }
+        NavigationService.getproductdetails($scope.productid).success(getproductdetailscallback);
         $scope.productdetail = [
    "img/product/6.jpg",
    "img/product/7.jpg",
@@ -454,6 +445,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
     })
+    .controller('ResetpasswordCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("resetpassword");
+        $scope.menutitle = NavigationService.makeactive("Resetpassword");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+        $scope.forgot = [];
+        $scope.forgot.hashcode = $stateParams.id;
+        //  REDIRECT CHANGE PASSWORD STARTS
+        var newPasswordSuccess = function (data, status) {
+            if (data == '1') {
+                $location.url("/login");
+            } else {
+                $scope.msg = "Sorry not able to change password..Try Again!";
+            }
+        }
+        $scope.newPassword = function () {
+            console.log($scope.forgot);
+            NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
+        }
+    })
     .controller('AccountCtrl', function ($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("account");
@@ -494,9 +507,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("About");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.celebimages = [
-            "img/BipashaBasu.jpg", "img/KarishmaKapoor.jpg", "img/MSG.jpg", "img/NicolasAnelka.jpg", "img/YusufPathan.jpg"
-        ];
+    var getaboutuscallback = function (data, status) {
+        console.log(data);
+        $scope.celebimages = data.queryresult;
+        console.log($scope.celebimages);
+    }
+    NavigationService.getaboutus(getaboutuscallback);
 })
 
 .controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
@@ -515,35 +531,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         maxPrice: 10050
     };
 
-    $scope.products = [{
-        image: "img/product/5.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "47000.00"
-
-    }, {
-        image: "img/product/6.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple Macbook",
-        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
-        price: "48000.00"
-
-    }, {
-        image: "img/product/7.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple air",
-        desc: "but the majority have suffered alteration in some form. ",
-        price: "42000.00"
-
-    }, {
-        image: "img/product/8.jpg",
-        image1: "img/product/5.jpg",
-        name: "samsung",
-        desc: "distracted by the readable content of a page when looking at its layout. ",
-        price: "72000.00"
-
-    }];
+    var getexclusiveandnewarrivalcallback = function (data, status) {
+        console.log(data);
+        $scope.products = data.queryresult;
+        console.log($scope.products);
+    }
+    NavigationService.getexclusiveandnewarrival(getexclusiveandnewarrivalcallback);
 
     $scope.openModal = function (s) {
         console.log(s)
@@ -555,31 +548,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-//.controller('BrandhoverCtrl', function ($scope, TemplateService, NavigationService) {
-//	$scope.template = TemplateService;
-//	$scope.template = TemplateService.changecontent("brandhover");
-//	$scope.menutitle = NavigationService.makeactive("Brandhover");
-//	TemplateService.title = $scope.menutitle;
-//	$scope.navigation = NavigationService.getnav();
-//	$scope.brandhover = [
-//	"img/brands/acmemade.jpeg",
-//		"img/brands/adonit.png",
-//		"img/brands/autodrive.png",
-//		"img/brands/b&oplay.png",
-//		"img/brands/beats.png",
-//		"img/brands/dell.png",
-//		"img/brands/Adidas.png",
-//		"img/brands/dolcegabbana.jpg",
-//		"img/brands/gas.jpg",
-//		"img/brands/gstarraw.png",
-//		"img/brands/hp.png",
-//		"img/brands/jackjones.png",
-//		"img/brands/levis.png",
-//		"img/brands/motorola.png",
-//		"img/brands/sony.png",
-//		"img/brands/tommy.jpg"
-//	];
-//})
+
 
 .controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
     $scope.template = TemplateService;
@@ -595,13 +564,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Deals");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.dealslide = [
- "img/product/iphone.jpg",
-  "img/product/iphone6.jpg",
-  "img/product/macbook.png",
-  "img/product/iphone6ho.jpg",
-  "img/product/glass.jpg"
- ];
+
+    $scope.dealsimg = [];
+
+    var getofferdetailscallback = function (data, status) {
+        $scope.dealslide = data.offers;
+        console.log($scope.dealslide);
+        console.log($scope.dealslide);
+    }
+    NavigationService.getofferdetails(getofferdetailscallback);
+    //    $scope.dealslide = [
+    // "img/product/iphone.jpg",
+    //  "img/product/iphone6.jpg",
+    //  "img/product/macbook.png",
+    //  "img/product/iphone6ho.jpg",
+    //  "img/product/glass.jpg"
+    // ];
     $scope.demo2 = {
         range: {
             min: 0,
@@ -630,6 +608,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             price: "45,000.00"
   }
  ];
+    $scope.updeals = [
+        {
+            imageprd: "img/product/iphone.jpg",
+            imageprd2: "img/product/iphone6.jpg",
+            descp: "Iphone6 cases and covers",
+            imageoff1: "img/product/iphone6ho.jpg",
+            imageoff2: "img/product/glass.jpg",
+            descpoff: "Iphone cases and covers",
+            price: "45,000.00"
+  }
+ ];
 })
 
 .controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
@@ -638,24 +627,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Distribution");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.distributer = [
-  "img/brands/autodrive.png",
-  "img/brands/hp.png",
-  "img/brands/sony.png",
-  "img/brands/b&oplay.png",
-  "img/brands/beats.png",
-  "img/brands/dell.png",
-  "img/brands/Adidas.png",
-  "img/brands/dolcegabbana.jpg",
-  "img/brands/gas.jpg",
-  "img/brands/acmemade.jpeg",
-  "img/brands/gstarraw.png",
-  "img/brands/adonit.png",
-  "img/brands/jackjones.png",
-  "img/brands/levis.png",
-  "img/brands/motorola.png",
-  "img/brands/tommy.jpg"
- ];
+    var getbrandsuccess = function (data, status) {
+        $scope.distributer = data.queryresult;
+        console.log($scope.distributer);
+    }
+    NavigationService.getbrand(getbrandsuccess);
+
 })
 
 .controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
@@ -673,84 +650,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         minPrice: 0,
         maxPrice: 10050
     };
-
-    $scope.products = [{
-        image: "img/product/5.jpg",
-        image1: "img/product/5.jpg",
-        name: "Tempered Glass Screen Protector for iPhone 6 Plus ",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "47000.00"
-
-    }, {
-        image: "img/product/6.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple Macbook",
-        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
-        price: "48000.00"
-
-    }, {
-        image: "img/product/7.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple air",
-        desc: "but the majority have suffered alteration in some form. ",
-        price: "42000.00"
-
-    }, {
-        image: "img/product/8.jpg",
-        image1: "img/product/5.jpg",
-        name: "samsung",
-        desc: "distracted by the readable content of a page when looking at its layout. ",
-        price: "72000.00"
-
-    }, {
-        image: "img/product/9.jpg",
-        image1: "img/product/5.jpg",
-        name: "nokia lumia",
-        desc: "Many desktop publishing packages and web page editors now use Lorem Ipsum. ",
-        price: "75000.00"
-
-    }, {
-        image: "img/product/10.jpg",
-        image1: "img/product/5.jpg",
-        name: "resmi 1s",
-        desc: "sometimes by accident, sometimes on purpose (injected humour and the like. ",
-        price: "47000.00"
-
-    }, {
-        image: "img/product/11.jpg",
-        image1: "img/product/5.jpg",
-        name: "micromax",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "41000.00"
-
-    }];
+    var getexclusiveandnewarrivalcallback = function (data, status) {
+        console.log(data);
+        $scope.products = data.queryresult;
+        console.log($scope.products);
+    }
+    NavigationService.getexclusiveandnewarrival(getexclusiveandnewarrivalcallback);
 
 })
 
-.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $location) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("brand");
     $scope.menutitle = NavigationService.makeactive("Brands");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.brandimages = [
-  "img/brands/acmemade.jpeg",
-  "img/brands/adonit.png",
-  "img/brands/autodrive.png",
-  "img/brands/b&oplay.png",
-  "img/brands/beats.png",
-  "img/brands/dell.png",
-  "img/brands/Adidas.png",
-  "img/brands/dolcegabbana.jpg",
-  "img/brands/gas.jpg",
-  "img/brands/gstarraw.png",
-  "img/brands/hp.png",
-  "img/brands/jackjones.png",
-  "img/brands/levis.png",
-  "img/brands/motorola.png",
-  "img/brands/sony.png",
-  "img/brands/tommy.jpg"
- ];
+    var getbrandsuccess = function (data, status) {
+        $scope.brandimages = data.queryresult;
+        console.log($scope.brandimages);
+    }
+    NavigationService.getbrand(getbrandsuccess);
+
+    $scope.getproductbybrand = function (id) {
+        $location.url("/product/" + 0 + "/" + 0 + "/" + id);
+    }
+
 })
 
 .controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
@@ -828,5 +752,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         price: "72000.00"
 
     }];
+
+})
+
+.controller('submenuctrl', function ($scope, TemplateService, NavigationService, $rootScope, $location) {
+    $scope.template = TemplateService;
+    $scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
+    $scope.submenu = [];
+    $scope.parent = {};
+    $scope.category = {};
+
+    $scope.getproductbycategory = function (parent, category) {
+        $location.url("/product/" + parent + "/" + category);
+    }
+    $scope.showsubmenu = function (data) {
+        console.log(data);
+        $scope.submenu[data] = true;
+    };
+    $scope.hidesubmenu = function (data) {
+        console.log(data);
+        $scope.submenu[data] = false;
+    };
+
 
 });

@@ -1,13 +1,13 @@
 <div class="distribution">
 	<div class="container">
 		<div class="distributon-head">
-			<h3 class="text-center text-uppercase">distributers</h3>
+			<h3 class="text-center text-uppercase">Distributers</h3>
 		</div>
 		<div class="distributer">
 			<div class="row">
-				<div class="col-md-3" ng-repeat="dist in distributer">
+				<div class="col-md-3" ng-repeat="dist in distributer" ng-if="dist.isdistributer==1">
 					<div class="img-holder">
-						<img ng-src="{{dist}}" alt="" class="img-responsive">
+						<img ng-src="{{dist.logo | serverimage}}" alt="" class="img-responsive">
 					</div>
 				</div>
 			</div>
