@@ -6,12 +6,14 @@
 					<a href="#/productdetail">
 						<div class="pro-box">
 							<div class="img-box">
-								<div class="pro-img1">
-									<img ng-src="{{pro.image}}" class="img-responsive">
+								<div class="pro-img1" ng-if="pro.image1">
+									<img ng-src="{{pro.image1 |serverimage}}" class="img-responsive">
 								</div>
-								<div class="pro-img2">
-									<img ng-src="{{pro.image1}}" class="img-responsive">
-									<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
+								<div class="pro-img2" ng-if="pro.image2">
+									<img ng-src="{{pro.image2 |serverimage}}" class="img-responsive">
+								</div>
+								<div class="pro-img2" ng-if="!pro.image1">
+									<img ng-src="{{pro.image2 |serverimage}}" class="img-responsive">
 								</div>
 							</div>
 					</a>
@@ -28,7 +30,7 @@
 						<div class="cartli">
 							<ul>
 								<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-								<li class="carts" ng-click="openModal();"><i class="fa fa-heart"></i></li>
+								<li class="carts" ng-click="openModal(); removefromwishlist(pro.id);"><i class="fa fa-times"></i></li>
 								<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
 							</ul>
 						</div>

@@ -212,6 +212,38 @@ var navigationservice = angular.module('navigationservice', [])
                     "password": login.password
                 }
             }).success(callback);
+        }, 
+        addtowishlist: function (productid, callback) {
+            return $http({
+                url: admin_url + "json/addtowishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        }, 
+        removefromwishlist: function (productid, callback) {
+            return $http({
+                url: admin_url + "json/removefromwishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        },   
+        getwishlistproduct: function (callback) {
+            return $http({
+                url: admin_url + "json/getwishlistproduct",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id
+                }
+            }).success(callback);
         },
         makeactive: function (menuname) {
             for (var i = 0; i < navigation.length; i++) {

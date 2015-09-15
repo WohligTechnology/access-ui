@@ -7656,13 +7656,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Product");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-    $scope.openModal = function (s) {
-        ngDialog.open({
-            template: 'views/content/popwish.html',
-            scope: $scope
-        });
+    var addtowishlistcallback = function (data, status) {
+        console.log(data);
+        if (data == "true") {
+            ngDialog.open({
+                template: 'views/content/popwish.html',
+                scope: $scope
+            });
+        } else if (data == "0") {
+            ngDialog.open({
+                template: 'views/content/wishexist.html',
+                scope: $scope
+            });
+        } else {
+            ngDialog.open({
+                template: 'views/content/failure.html',
+                scope: $scope
+            });
+        }
     }
+    $scope.addtowishlist = function (productid) {
+        NavigationService.addtowishlist(productid, addtowishlistcallback);
+    }
+
 
     $scope.demo2 = {
         range: {
@@ -7752,7 +7768,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
     $scope.parent = $stateParams.parent;
     $scope.category = $stateParams.category;
-    if ($scope.parent && $scope.category == 0) {
+    if ($scope.parent == 0 && $scope.category == 0) {
         console.log("no need ");
     } else {
         NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
@@ -7770,7 +7786,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.products = data.queryresult;
     }
     $scope.brandid = $stateParams.brand;
-    NavigationService.getproductbybrand($scope.brandid, getproductbybrandcallback)
+    if ($scope.brandid == 0) {
+
+    } else {
+        NavigationService.getproductbybrand($scope.brandid, getproductbybrandcallback);
+    }
 
 })
 
@@ -7875,7 +7895,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
 
         }
-        
+
     };
 
     var callAtIntervaltwitter = function () {
@@ -7891,7 +7911,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     $scope.facebooklogin = function () {
-         ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
         stopinterval = $interval(callAtIntervaltwitter, 2000);
         ref.addEventListener('exit', function (event) {
             NavigationService.authenticate().success(authenticatesuccess);
@@ -7899,12 +7919,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
     }
     $scope.googlelogin = function () {
-         ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function (event) {
-                NavigationService.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
     }
 })
 
@@ -7924,6 +7944,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $location, $window) {
+
+        // WISHLIST
+
+        $scope.getwishlistproduct = function () {
+            $location.url("/wishlist");
+        }
         $scope.showusername = '';
 
         if (!$.jStorage.get("user")) {
@@ -7937,10 +7963,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.showusername += $.jStorage.get("user").firstname;
                 if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
                     $scope.showusername += " " + $.jStorage.get("user").lastname;
-                console.log($scope.showusername);
+                //                console.log($scope.showusername);
             } else {
                 $scope.showusername = $.jStorage.get("user").name;
-                console.log($scope.showusername);
+                //                console.log($scope.showusername);
             }
         }
         var logoutcallback = function (data, status) {
@@ -8178,15 +8204,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.dealsimg = [];
 
-//    var getofferdetailscallback = function (data, status) {
-//        $scope.dealslide = data.offers;
-//        console.log($scope.dealslide);
-//        _.each($scope.dealslide, function (n) {
-//            $scope.dealsimg.push(n.image);
-//        }
-//    }
-//    NavigationService.getofferdetails(getofferdetailscallback);
-        $scope.dealslide = [
+    //    var getofferdetailscallback = function (data, status) {
+    //        $scope.dealslide = data.offers;
+    //        console.log($scope.dealslide);
+    //        _.each($scope.dealslide, function (n) {
+    //            $scope.dealsimg.push(n.image);
+    //        }
+    //    }
+    //    NavigationService.getofferdetails(getofferdetailscallback);
+    $scope.dealslide = [
      "img/product/iphone.jpg",
       "img/product/iphone6.jpg",
       "img/product/macbook.png",
@@ -8272,7 +8298,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $location) {
+.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $location ) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("brand");
     $scope.menutitle = NavigationService.makeactive("Brands");
@@ -8290,42 +8316,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService,ngDialog) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("wishlist");
     $scope.menutitle = NavigationService.makeactive("Wishlist");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.products = [{
-        image: "img/product/5.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple",
-        desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-        price: "47000.00"
+    // WISHLIST PRODUCTS
 
-    }, {
-        image: "img/product/6.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple Macbook",
-        desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
-        price: "48000.00"
+    var getwishlistproductcallback = function (data, status) {
+        $scope.products = data.queryresult;
+        console.log($scope.products);
+    }
+    NavigationService.getwishlistproduct(getwishlistproductcallback);
 
-    }, {
-        image: "img/product/7.jpg",
-        image1: "img/product/5.jpg",
-        name: "Apple air",
-        desc: "but the majority have suffered alteration in some form. ",
-        price: "42000.00"
+    // DELETE PRODUCT FROM WISHLIST
+    var removefromwishlist = function (data, status) {
+        console.log(data);
+        if(data==1){
+          ngDialog.open({
+                template: 'views/content/deletewish.html',
+                scope: $scope
+            });
+             NavigationService.getwishlistproduct(getwishlistproductcallback);
+        }
+        
+    }
+    $scope.removefromwishlist = function (productid) {
+        NavigationService.removefromwishlist(productid, removefromwishlist);
+    }
 
-    }, {
-        image: "img/product/8.jpg",
-        image1: "img/product/5.jpg",
-        name: "samsung",
-        desc: "distracted by the readable content of a page when looking at its layout. ",
-        price: "72000.00"
-
-    }];
 })
 
 .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService) {
@@ -8368,7 +8389,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('submenuctrl', function ($scope, TemplateService, NavigationService, $rootScope, $location) {
+.controller('submenuctrl', function ($scope, TemplateService, NavigationService, $rootScope, $location, $state) {
+    console.log($state.current.name);
     $scope.template = TemplateService;
     $scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
     $scope.submenu = [];
@@ -8376,7 +8398,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.category = {};
 
     $scope.getproductbycategory = function (parent, category) {
-        $location.url("/product/" + parent + "/" + category);
+        console.log("parent" + parent + "   cate=" + category);
+        $location.url("/product/" + parent + "/" + category + "/0");
     }
     $scope.showsubmenu = function (data) {
         console.log(data);
@@ -8653,6 +8676,38 @@ var navigationservice = angular.module('navigationservice', [])
                 data: {
                     "email": login.email,
                     "password": login.password
+                }
+            }).success(callback);
+        }, 
+        addtowishlist: function (productid, callback) {
+            return $http({
+                url: admin_url + "json/addtowishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        }, 
+        removefromwishlist: function (productid, callback) {
+            return $http({
+                url: admin_url + "json/removefromwishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        },   
+        getwishlistproduct: function (callback) {
+            return $http({
+                url: admin_url + "json/getwishlistproduct",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id
                 }
             }).success(callback);
         },
