@@ -218,7 +218,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
     $scope.registeruser = function () {
-        console.log("akbc");
         $scope.allvalidation = [{
             field: $scope.account.firstname,
             validation: ""
@@ -239,7 +238,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if (check) {
             NavigationService.registeruser($scope.account, registerusercallback);
         } else {
-            $scope.msg = "Invalid data try again!!";
+            $scope.msgregister = "Invalid data try again!!";
+            $scope.msg ="";
             $scope.account = {};
         }
 
@@ -271,6 +271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             NavigationService.loginuser(login, getlogin);
         } else {
             $scope.msg = "Invalid data try again!!";
+            $scope.msgregister ="";
             $scope.login = {};
         }
     };
