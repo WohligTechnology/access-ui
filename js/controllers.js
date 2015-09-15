@@ -582,6 +582,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("CheckOut");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.openblock = {};
+    $scope.openship = {};
+    $scope.openship.open = "closemodalship";
+    $scope.showcheckout = true;
+    $scope.openblockvalue = false;
+    $scope.showshipping = false;
+    // SHOW LOGIN BLOCK
+
+    $scope.checklogin = $.jStorage.get("user");
+    $scope.showlogin = {};
+    if ($scope.checklogin != null) {
+        $scope.showlogin = false;
+        console.log("in if " + $scope.showlogin);
+    } else {
+        $scope.showlogin = true;
+        console.log("else " + $scope.showlogin);
+    }
+
+    // SHOW ONLY CHECKOUT
+    //    console.log(openship);
+    $scope.getradiovalues = function (openblock) {
+        $scope.openblockvalue = openblock.radiovalue;
+        if ($scope.openblockvalue == checkoutasguest || $scope.openblockvalue == register) {
+            $scope.openblockvalue = true;
+        }
+    }
 })
 
 .controller('DealsCtrl', function ($scope, TemplateService, NavigationService) {
@@ -687,7 +714,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $location ) {
+.controller('BrandsCtrl', function ($scope, TemplateService, NavigationService, $location) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("brand");
     $scope.menutitle = NavigationService.makeactive("Brands");
@@ -705,7 +732,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService,ngDialog) {
+.controller('WishlistCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("wishlist");
     $scope.menutitle = NavigationService.makeactive("Wishlist");
@@ -723,14 +750,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // DELETE PRODUCT FROM WISHLIST
     var removefromwishlist = function (data, status) {
         console.log(data);
-        if(data==1){
-          ngDialog.open({
+        if (data == 1) {
+            ngDialog.open({
                 template: 'views/content/deletewish.html',
                 scope: $scope
             });
-             NavigationService.getwishlistproduct(getwishlistproductcallback);
+            NavigationService.getwishlistproduct(getwishlistproductcallback);
         }
-        
+
     }
     $scope.removefromwishlist = function (productid) {
         NavigationService.removefromwishlist(productid, removefromwishlist);
