@@ -567,19 +567,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.dealsimg = [];
 
-    var getofferdetailscallback = function (data, status) {
-        $scope.dealslide = data.offers;
-        console.log($scope.dealslide);
-        console.log($scope.dealslide);
-    }
-    NavigationService.getofferdetails(getofferdetailscallback);
-    //    $scope.dealslide = [
-    // "img/product/iphone.jpg",
-    //  "img/product/iphone6.jpg",
-    //  "img/product/macbook.png",
-    //  "img/product/iphone6ho.jpg",
-    //  "img/product/glass.jpg"
-    // ];
+//    var getofferdetailscallback = function (data, status) {
+//        $scope.dealslide = data.offers;
+//        console.log($scope.dealslide);
+//        _.each($scope.dealslide, function (n) {
+//            $scope.dealsimg.push(n.image);
+//        }
+//    }
+//    NavigationService.getofferdetails(getofferdetailscallback);
+        $scope.dealslide = [
+     "img/product/iphone.jpg",
+      "img/product/iphone6.jpg",
+      "img/product/macbook.png",
+      "img/product/iphone6ho.jpg",
+      "img/product/glass.jpg"
+     ];
     $scope.demo2 = {
         range: {
             min: 0,
