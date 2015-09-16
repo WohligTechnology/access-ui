@@ -1032,6 +1032,7 @@ img.doneLoading {
   display: block;
   font-family: 'lato';
   font-size: 16px;
+  font-weight: 500;
 }
 .contact .store-info .co-operate address .call {
   margin: 10px 0;
@@ -1041,7 +1042,7 @@ img.doneLoading {
   border-left: 1px solid #ddd;
 }
 .contact .bord .get-in h4 {
-  margin: 3px 0 15px 0;
+  margin: 2px 0 15px 0;
   font-family: 'lato';
   font-size: 16px;
 }
@@ -1262,19 +1263,7 @@ img.doneLoading {
   background-color: #000;
   border: 2px solid #fff;
 }
-.brandhover .carousel-indicators {
-  bottom: 0;
-}
-.brandhover .carousel-indicators .item:nth-child(1) {
-  animation: slide 48s 24s infinite;
-}
-.brandhover .carousel-indicators .item:nth-child(2) {
-  animation: slide 48s 18s infinite;
-}
-.brandhover .carousel-indicators .item:nth-child(3) {
-  animation: slide 48s 12s infinite;
-}
-.carousel-control.left {
+.brandhover .carousel-control.left {
   width: 17px;
   height: 25px;
   position: absolute;
@@ -1286,7 +1275,7 @@ img.doneLoading {
   -o-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-.carousel-control.right {
+.brandhover .carousel-control.right {
   width: 17px;
   height: 25px;
   position: absolute;
@@ -1299,7 +1288,7 @@ img.doneLoading {
   -o-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-.brand_hover {
+.brandhover .brand_hover {
   left: 45% !important;
 }
 .producthover .container {
@@ -1358,27 +1347,27 @@ img.doneLoading {
 .deals .deals-head .slide-deal .flexslider:hover .flex-direction-nav .flex-prev {
   left: -50px;
 }
-.deals .deals-main .deals-offer {
+.deals-offer {
   margin-top: 6%;
 }
-.deals .deals-main .deals-offer .off {
+.deals-offer .off {
   padding: 5px 0;
   display: block;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
 }
-.deals .deals-main .deals-offer .prod {
+.deals-offer .prod {
   width: 50%;
   border-right: 1px solid #e6e6e6;
   float: left;
 }
-.deals .deals-main .deals-offer .prod .images_prod {
+.deals-offer .prod .images_prod {
   height: 190px;
   position: relative;
   cursor: pointer;
 }
-.deals .deals-main .deals-offer .prod .images_prod .img2 {
+.deals-offer .prod .images_prod .img2 {
   position: absolute;
   top: 0;
   opacity: 0;
@@ -1387,26 +1376,26 @@ img.doneLoading {
   -o-transition: all 1.5s ease-in-out;
   transition: all 1.5s ease-in-out;
 }
-.deals .deals-main .deals-offer .images_prod:hover > .img2 {
+.deals-offer .images_prod:hover > .img2 {
   opacity: 0;
 }
-.deals .deals-main .deals-offer .images_prod:hover > .img2 {
+.deals-offer .images_prod:hover > .img2 {
   opacity: 1;
   -webkit-transition: all 1.5s ease-in-out;
   -moz-transition: all 1.5s ease-in-out;
   -o-transition: all 1.5s ease-in-out;
   transition: all 1.5s ease-in-out;
 }
-.deals .deals-main .deals-offer .off-prod {
+.deals-offer .off-prod {
   width: 50%;
   display: inline-block;
 }
-.deals .deals-main .deals-offer .off-prod .off-images {
+.deals-offer .off-prod .off-images {
   height: 190px;
   position: relative;
   cursor: pointer;
 }
-.deals .deals-main .deals-offer .off-prod .off-images .img2 {
+.deals-offer .off-prod .off-images .img2 {
   position: absolute;
   top: 0;
   opacity: 0;
@@ -1415,52 +1404,52 @@ img.doneLoading {
   -o-transition: all 1.5s ease-in-out;
   transition: all 1.5s ease-in-out;
 }
-.deals .deals-main .deals-offer .off-prod .off-images:hover > .img1 {
+.deals-offer .off-prod .off-images:hover > .img1 {
   opacity: 0;
 }
-.deals .deals-main .deals-offer .off-prod .off-images:hover > .img2 {
+.deals-offer .off-prod .off-images:hover > .img2 {
   opacity: 1;
   -webkit-transition: all 1.5s ease-in-out;
   -moz-transition: all 1.5s ease-in-out;
   -o-transition: all 1.5s ease-in-out;
   transition: all 1.5s ease-in-out;
 }
-.deals .deals-main .deals-offer .descp-prd > h5 {
+.deals-offer .descp-prd > h5 {
   min-height: 55px;
 }
-.deals .deals-main .deals-offer .rating > ul > li {
+.deals-offer .rating > ul > li {
   display: inline-block;
   font-size: 11px;
   list-style-type: none;
 }
-.deals .deals-main .deals-offer .rating > ul > li .fa-star {
+.deals-offer .rating > ul > li .fa-star {
   color: #f27323;
 }
-.deals .deals-main .deals-offer .box {
+.deals-offer .box {
   padding: 2%;
   border: 1px solid #e6e6e6;
 }
-.deals .deals-main .deals-offer .box:hover {
+.deals-offer .box:hover {
   -webkit-box-shadow: 0 4px 8px 3px #e6e6e6;
   -moz-box-shadow: 0 4px 8px 3px #e6e6e6;
   box-shadow: 0 4px 8px 3px #e6e6e6;
 }
-.deals .deals-main .deals-offer .prd-foot {
+.deals-offer .prd-foot {
   border-top: 1px solid #e6e6e6;
 }
-.deals .deals-main .deals-offer .prd-foot ul {
+.deals-offer .prd-foot ul {
   padding: 6px 0 0 0;
   margin: 0;
 }
-.deals .deals-main .deals-offer .prd-foot ul li {
+.deals-offer .prd-foot ul li {
   padding: 0 15px;
   display: inline-block;
   list-style-type: none;
 }
-.deals .deals-main .deals-offer .prd-foot ul .carts {
+.deals-offer .prd-foot ul .carts {
   font-size: 20px;
 }
-.deals .deals-main .deals-offer .prd-foot ul .carts a:hover {
+.deals-offer .prd-foot ul .carts a:hover {
   color: #7ee1ea;
 }
 .pop-up {
@@ -1508,7 +1497,7 @@ div.megamenu {
   position: absolute;
   top: 100%;
   left: 50%;
-  z-index: 999999999;
+  z-index: 999999;
   background-color: #fff;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
@@ -1517,6 +1506,9 @@ div.megamenu {
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+div.megamenu.brand_hover {
+  left: 45% !important;
 }
 .kart-container {
   position: fixed;
@@ -1534,7 +1526,7 @@ div.megamenu {
   cursor: pointer;
   text-align: center;
   position: relative;
-  z-index: 30;
+  z-index: 99999;
 }
 .kart-container .kart .kart-logo a {
   color: #fff;
@@ -1550,14 +1542,14 @@ div.megamenu {
   position: absolute;
   top: 0;
   right: -150px;
-  z-index: 20;
+  z-index: 99998;
   background-color: #2DB1BD;
   opacity: 0;
   text-align: center;
-  -webkit-transition: all 2s ease-in-out;
-  -moz-transition: all 2s ease-in-out;
-  -o-transition: all 2s ease-in-out;
-  transition: all 2s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 .kart-container .kart .kart-hover .field {
   width: 100px;
@@ -1600,8 +1592,8 @@ div.megamenu {
 .kart:hover > .kart-hover {
   right: 122px;
   opacity: 1;
-  -webkit-transition: all 2s ease-in-out;
-  -moz-transition: all 2s ease-in-out;
-  -o-transition: all 2s ease-in-out;
-  transition: all 2s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
