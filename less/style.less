@@ -1185,7 +1185,7 @@
 							.transition(all 500ms linear);
 							&:hover {
 								background-color: #fff;
-								color: @color3;
+								ctnolor: @color3;
 							}
 						}
 					}
@@ -1306,6 +1306,8 @@
 					}
 				}
 				.continue-btn {
+					min-height: 70px;
+					margin: 10px 0;
 					a.contn {
 						padding: 1% 3%;
 						border: 1px solid @color3;
@@ -1320,6 +1322,18 @@
 							color: @color3;
 						}
 					}
+				}
+			}
+			
+			.billing-reg {
+				input {
+					margin: 20px 0;
+				}
+			}
+			
+			.shipping-reg {
+				input {
+					margin: 20px 0;
 				}
 			}
 			
@@ -1716,4 +1730,23 @@
 				right: 122px;
 				opacity: 1;
 				.transition(all .5s ease-in-out);
+			}
+			
+			.btn-all {
+				padding: 1% 4%;
+				border: 1px solid #7ee1ea;
+				display: inline-block;
+				background-color: #7ee1ea;
+				color: #fff;
+				font-size: 16px;
+				font-family: 'pt sans';
+				.transition(all 500ms linear);
+				&:hover {
+					background-color: #fff;
+					color: @color3;
+				}
+			}
+			
+			.ng-dirty {
+				border: 1px solid red;
 			}

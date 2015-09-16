@@ -14,6 +14,9 @@
 								<label class="form-divider" ng-click="registerifnot()">
 									<input type="radio" name="1" value="register" ng-model="openblock.radiovalue"> Register</label>
 							</div>
+							<div class="cont" ng-click="continuebilling()">
+							<a href="" class="btn-all">Continue</a>
+							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="login" ng-show="!register">
@@ -42,9 +45,11 @@
 				
 
 			</div>
+<!--
 			<div class="continue-btn" ng-click="continuebilling()">
 					<a href="" class="contn pull-right">Continue Billing</a>
 				</div>
+-->
 			<div>
 				<div class="billing-info" ng-show="openblockvalue">
 					<h3 class="head">Billing information</h3>
@@ -148,6 +153,9 @@
 
 		<div class="continue-btn" ng-if="lastcontinue" ng-click="placeorder();">
 			<a href="" class="contn pull-right">Continue</a>
+		</div>
+		<div class="placeorder">
+			<a href="" class="btn-all pull-right">Place Order</a>
 		</div>
 	</div>
 </div>
