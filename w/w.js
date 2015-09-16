@@ -7796,8 +7796,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.addtocart = function(product){
 		console.log(product);
 		var selectedproduct = {};
-		selectedproduct.id = product.id;
-		selectedproduct.name = product.name;
+		selectedproduct.product = product.id;
+		selectedproduct.productname = product.name;
 		selectedproduct.price = product.price;
 		selectedproduct.quantity = 1;
 		NavigationService.addtocart(selectedproduct, function(data){
