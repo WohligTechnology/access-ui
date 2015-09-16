@@ -120,6 +120,9 @@ a:hover {
 .head .head-right li:last-child:hover .dropdown {
   display: block;
 }
+.dropdown > li {
+  cursor: pointer;
+}
 .head-mid {
   background-color: #ffffff;
   padding: 28px 0 0 0;
@@ -746,6 +749,12 @@ img.doneLoading {
 }
 .pro-desc .qua .ad-cart {
   margin: 0 0 0 12px;
+}
+.flexslider:hover .flex-direction-nav .flex-next {
+  right: -50px;
+}
+.flexslider:hover .flex-direction-nav .flex-prev {
+  left: -50px;
 }
 .img-thumb {
   padding: 0;
@@ -1626,4 +1635,7 @@ div.megamenu.brand_hover {
 }
 .ng-dirty {
   border: 1px solid red;
+}
+form {
+  border: 1px solid transparent;
 }

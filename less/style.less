@@ -139,6 +139,10 @@
 				}
 			}
 			
+			.dropdown > li {
+				cursor: pointer;
+			}
+			
 			.head-mid {
 				background-color: @white;
 				padding: 28px 0 0 0;
@@ -806,6 +810,14 @@
 						margin: 0 0 0 12px;
 					}
 				}
+			}
+			
+			.flexslider:hover .flex-direction-nav .flex-next {
+				right: -50px;
+			}
+			
+			.flexslider:hover .flex-direction-nav .flex-prev {
+				left: -50px;
 			}
 			
 			.img-thumb {
@@ -1749,4 +1761,8 @@
 			
 			.ng-dirty {
 				border: 1px solid red;
+			}
+			
+			form {
+				border: 1px solid transparent;
 			}
