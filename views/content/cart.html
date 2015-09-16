@@ -5,7 +5,12 @@
 				<h3>Your Shopping Bag</h3>
 				<p>Items reserved for limited time only</p>
 			</div>
-			<div class="cart-det">
+			<div class="text-center">
+				<p>
+					{{nodata}}
+				</p>
+			</div>
+			<div class="cart-det" ng-show="nodata ==''">
 				<table class="table">
 					<thead>
 						<tr>
@@ -18,55 +23,30 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr ng-repeat="mycart in cart">
 							<td>
 								<div class="tables">
-									<img src="img/product/13.jpg" class="img-responsive">
+									<img ng-src="{{mycart.image | serverimage}}" class="img-responsive">
 								</div>
 							</td>
 							<td>
-								<h4>FLORAL PLIMSOLL</h4>
+								<h4>{{mycart.name}}</h4>
 								<h5>Ref. 2514/302</h5>
 							</td>
 							<td>
 								<div class="in">
-									<input type="number" placeholder="1">
+									<input type="number" placeholder="1" ng-model="mycart.qty">
 									<a href="#"></a>
 								</div>
 							</td>
 							<td>
-								<p><i class="fa fa-inr"></i>4321.00</p>
+								<p><i class="fa fa-inr"></i>{{mycart.price}}</p>
 							</td>
 							<td>
-								<p><i class="fa fa-inr"></i>4321.00</p>
+								<p><i class="fa fa-inr"></i>{{mycart.price * mycart.qty}}</p>
 							</td>
 							<td>
-								<p><i class="fa fa-trash"></i></p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="tables">
-									<img src="img/product/13.jpg" class="img-responsive">
-								</div>
-							</td>
-							<td>
-								<h4>FLORAL PLIMSOLL</h4>
-								<h5>Ref. 2514/302</h5>
-							</td>
-							<td>
-								<div class="in">
-									<input type="number" placeholder="1">
-								</div>
-							</td>
-							<td>
-								<p><i class="fa fa-inr"></i>4321.00</p>
-							</td>
-							<td>
-								<p><i class="fa fa-inr"></i>4321.00</p>
-							</td>
-							<td>
-								<p><i class="fa fa-trash"></i></p>
+								<p><i class="fa fa-trash" ng-click="deletecart(mycart)"></i></p>
 							</td>
 						</tr>
 					</tbody>

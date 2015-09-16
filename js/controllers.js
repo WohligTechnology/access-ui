@@ -204,6 +204,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Cart");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.nodata = '';
+	
+	NavigationService.getcart(function(data){
+		console.log(data);
+		$scope.cart = data;
+		if(data == ''){
+			$scope.nodata = "No Data found.";
+		}
+	});
 })
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval, $window) {

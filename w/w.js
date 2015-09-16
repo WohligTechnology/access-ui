@@ -7815,6 +7815,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Cart");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.nodata = '';
+	
+	NavigationService.getcart(function(data){
+		console.log(data);
+		$scope.cart = data;
+		if(data == ''){
+			$scope.nodata = "No Data found.";
+		}
+	});
 })
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval, $window) {
@@ -8880,6 +8889,14 @@ var navigationservice = angular.module('navigationservice', [])
                 method: "POST",
                 withCredentials: true,
                 data: form
+            }).success(callback);
+        }, 
+        getcart: function (callback) {
+            return $http({
+                url: admin_url + "json/showcart",
+                method: "POST",
+                withCredentials: true,
+                data: {}
             }).success(callback);
         }, 
         addtocart: function (product, callback) {

@@ -243,6 +243,14 @@ var navigationservice = angular.module('navigationservice', [])
                 data: form
             }).success(callback);
         }, 
+        getcart: function (callback) {
+            return $http({
+                url: admin_url + "json/showcart",
+                method: "POST",
+                withCredentials: true,
+                data: {}
+            }).success(callback);
+        }, 
         addtocart: function (product, callback) {
             return $http({
                 url: admin_url + "json/addtocart",
