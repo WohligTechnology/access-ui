@@ -234,6 +234,22 @@ var navigationservice = angular.module('navigationservice', [])
                     "product": productid
                 }
             }).success(callback);
+        }, 
+        placeorder: function (form, callback) {
+            return $http({
+                url: admin_url + "json/placeorder",
+                method: "POST",
+                withCredentials: true,
+                data: form
+            }).success(callback);
+        }, 
+        addtocart: function (product, callback) {
+            return $http({
+                url: admin_url + "json/addtocart",
+                method: "POST",
+                withCredentials: true,
+                data: product
+            }).success(callback);
         },   
         getwishlistproduct: function (callback) {
             return $http({
