@@ -266,6 +266,22 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true,
                 data: product
             }).success(callback);
+        }, 
+        deletecart: function (id, callback) {
+           return $http.get(admin_url + 'json/deletecart', {
+                data: {
+                    "id": id
+                }
+            }, {
+                withCredentials: true
+            }).success(callback);
+        },
+        totalcart: function(callback) {
+            return $http.post(admin_url + 'json/totalcart', {}, {
+                withCredentials: true
+            }).success(callback);
+		   
+            //return cart;
         },   
         getwishlistproduct: function (callback) {
             return $http({

@@ -1,3 +1,6 @@
+var globalfunction = {};
+var globalvariable = {};
+
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -162,9 +165,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	} else {
 		NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
 	}
-	
-	if($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0){
-		NavigationService.getallproduct(function(data){
+
+	if ($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0) {
+		NavigationService.getallproduct(function (data) {
 			console.log(data);
 			$scope.products = data.queryresult;
 		});
@@ -187,21 +190,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	} else {
 		NavigationService.getproductbybrand($scope.brandid, getproductbybrandcallback);
 	}
-	
-	
-	$scope.addtocart = function(product){
+
+
+	$scope.addtocart = function (product) {
 		console.log(product);
 		var selectedproduct = {};
 		selectedproduct.product = product.id;
 		selectedproduct.productname = product.name;
 		selectedproduct.price = product.price;
 		selectedproduct.quantity = 1;
-		NavigationService.addtocart(selectedproduct, function(data){
+		NavigationService.addtocart(selectedproduct, function (data) {
 			console.log(data);
 			$location.url("/cart");
 		});
 	}
-	
+
 
 })
 
@@ -213,24 +216,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.nodata = '';
-	
-	NavigationService.getcart(function(data){
+
+	NavigationService.totalcart(function (data) {
+		$scope.totalcart = data;
+	});
+
+
+	NavigationService.getcart(function (data) {
 		console.log(data);
-		
-		if($.jStorage.get("user")){
+
+		if ($.jStorage.get("user")) {
 			console.log("user exist");
-			_.each(data, function(n){
+			_.each(data, function (n) {
 				n.options = {};
 				n.options.realname = n.name;
 				n.options.image = n.image;
 			});
 		}
-		
+
 		$scope.cart = data;
-		if(data == ''){
+		if (data == '') {
 			$scope.nodata = "No Data found.";
 		}
 	});
+
+	//delete cart
+	$scope.deletecart = function (cart) {
+		console.log(cart);
+		NavigationService.deletecart(cart.rowid, function (data) {
+			console.log(data);
+		});
+	}
+
+
 })
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $state, $location, $interval, $window) {
@@ -377,6 +395,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $location, $window) {
 
 		// WISHLIST
+
+		globalfunction.cart = function () {
+			NavigationService.totalcart(function (data) {
+				console.log(data);
+				globalvariable.totalcart = data;
+				console.log(globalvariable.totalcart);
+			});
+		}
 
 		$scope.getwishlistproduct = function () {
 			$location.url("/wishlist");
@@ -666,118 +692,118 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.shippingbilling = function () {
 		console.log("test billing");
 		console.log($scope.openship.open);
-			if ($scope.openship.open == "closemodalship") {
-				$scope.allvalidation = [{
-					field: $scope.checkout.firstname,
-					validation: ""
+		if ($scope.openship.open == "closemodalship") {
+			$scope.allvalidation = [{
+				field: $scope.checkout.firstname,
+				validation: ""
             }, {
-					field: $scope.checkout.lastname,
-					validation: ""
+				field: $scope.checkout.lastname,
+				validation: ""
             }, {
-					field: $scope.checkout.email,
-					validation: ""
+				field: $scope.checkout.email,
+				validation: ""
             }, {
-					field: $scope.checkout.billingaddress,
-					validation: ""
+				field: $scope.checkout.billingaddress,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcity,
-					validation: ""
+				field: $scope.checkout.billingcity,
+				validation: ""
             }, {
-					field: $scope.checkout.billingstate,
-					validation: ""
+				field: $scope.checkout.billingstate,
+				validation: ""
             }, {
-					field: $scope.checkout.billingpincode,
-					validation: ""
+				field: $scope.checkout.billingpincode,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcountry,
-					validation: ""
+				field: $scope.checkout.billingcountry,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcontact,
-					validation: ""
+				field: $scope.checkout.billingcontact,
+				validation: ""
             }];
-				var check = formvalidation($scope.allvalidation);
-				
-			}else{
-				console.log("on shipping");
-				$scope.allvalidation = [{
-					field: $scope.checkout.firstname,
-					validation: ""
+			var check = formvalidation($scope.allvalidation);
+
+		} else {
+			console.log("on shipping");
+			$scope.allvalidation = [{
+				field: $scope.checkout.firstname,
+				validation: ""
             }, {
-					field: $scope.checkout.lastname,
-					validation: ""
+				field: $scope.checkout.lastname,
+				validation: ""
             }, {
-					field: $scope.checkout.email,
-					validation: ""
+				field: $scope.checkout.email,
+				validation: ""
             }, {
-					field: $scope.checkout.billingaddress,
-					validation: ""
+				field: $scope.checkout.billingaddress,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcity,
-					validation: ""
+				field: $scope.checkout.billingcity,
+				validation: ""
             }, {
-					field: $scope.checkout.billingstate,
-					validation: ""
+				field: $scope.checkout.billingstate,
+				validation: ""
             }, {
-					field: $scope.checkout.billingpincode,
-					validation: ""
+				field: $scope.checkout.billingpincode,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcountry,
-					validation: ""
+				field: $scope.checkout.billingcountry,
+				validation: ""
             }, {
-					field: $scope.checkout.billingcontact,
-					validation: ""
+				field: $scope.checkout.billingcontact,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingname,
-					validation: ""
+				field: $scope.checkout.shippingname,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingaddress,
-					validation: ""
+				field: $scope.checkout.shippingaddress,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingcity,
-					validation: ""
+				field: $scope.checkout.shippingcity,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingstate,
-					validation: ""
+				field: $scope.checkout.shippingstate,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingpincode,
-					validation: ""
+				field: $scope.checkout.shippingpincode,
+				validation: ""
             }, {
-					field: $scope.checkout.shippingcountry,
-					validation: ""
+				field: $scope.checkout.shippingcountry,
+				validation: ""
             }, {
-					field: $scope.checkout.customernote,
-					validation: ""
+				field: $scope.checkout.customernote,
+				validation: ""
             }];
-				var check = formvalidation($scope.allvalidation);
-			}
-		
+			var check = formvalidation($scope.allvalidation);
+		}
+
 		if (check) {
-//					NavigationService.registeruser($scope.account, registerusercallback);
-					console.log("all fill");
-			
-					$scope.paymentinfo = true;
-				} else {
-					$scope.msgregister = "Invalid data try again!!";
-					$scope.msg = "";
-					$scope.account = {};
-				}
-		
-		
+			//					NavigationService.registeruser($scope.account, registerusercallback);
+			console.log("all fill");
+
+			$scope.paymentinfo = true;
+		} else {
+			$scope.msgregister = "Invalid data try again!!";
+			$scope.msg = "";
+			$scope.account = {};
 		}
-	
-//		placeorder
-	
-		$scope.placeorder = function(){
-			console.log();
-			
-			NavigationService.placeorder($scope.checkout, function(data){
-				console.log(data);
-			});
-			
-		}
-	
-		// SHOW ONLY CHECKOUT
-		//    console.log(openship);
+
+
+	}
+
+	//		placeorder
+
+	$scope.placeorder = function () {
+		console.log();
+
+		NavigationService.placeorder($scope.checkout, function (data) {
+			console.log(data);
+		});
+
+	}
+
+	// SHOW ONLY CHECKOUT
+	//    console.log(openship);
 
 })
 
