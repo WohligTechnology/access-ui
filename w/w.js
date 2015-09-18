@@ -7773,6 +7773,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	} else {
 		NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
 	}
+	
+	if($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0){
+		NavigationService.getallproduct(function(data){
+			console.log(data);
+			$scope.products = data.queryresult;
+		});
+	}
 
 
 	//GO TO PRODUCT DETAIL
@@ -7802,6 +7809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		selectedproduct.quantity = 1;
 		NavigationService.addtocart(selectedproduct, function(data){
 			console.log(data);
+			$location.url("/cart");
 		});
 	}
 	
@@ -7819,6 +7827,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	
 	NavigationService.getcart(function(data){
 		console.log(data);
+		
+		if($.jStorage.get("user")){
+			console.log("user exist");
+			_.each(data, function(n){
+				n.options = {};
+				n.options.realname = n.name;
+				n.options.image = n.image;
+			});
+		}
+		
 		$scope.cart = data;
 		if(data == ''){
 			$scope.nodata = "No Data found.";
@@ -8894,6 +8912,14 @@ var navigationservice = angular.module('navigationservice', [])
         getcart: function (callback) {
             return $http({
                 url: admin_url + "json/showcart",
+                method: "POST",
+                withCredentials: true,
+                data: {}
+            }).success(callback);
+        }, 
+        getallproduct: function (callback) {
+            return $http({
+                url: admin_url + "json/getallproducts",
                 method: "POST",
                 withCredentials: true,
                 data: {}

@@ -26,11 +26,11 @@
 						<tr ng-repeat="mycart in cart">
 							<td>
 								<div class="tables">
-									<img ng-src="{{mycart.image | serverimage}}" class="img-responsive">
+									<img ng-src="{{mycart.options.image | serverimage}}" class="img-responsive">
 								</div>
 							</td>
 							<td>
-								<h4>{{mycart.name}}</h4>
+								<h4>{{mycart.options.realname}}</h4>
 								<h5>Ref. 2514/302</h5>
 							</td>
 							<td>
