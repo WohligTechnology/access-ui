@@ -35,7 +35,7 @@
 							</td>
 							<td>
 								<div class="in">
-									<input type="number" placeholder="1" ng-model="mycart.qty">
+									<input type="text" ng-model="mycart.qty" ng-change="onchangeqty(mycart)">
 									<a href="#"></a>
 								</div>
 							</td>
@@ -53,7 +53,7 @@
 				</table>
 				<div class="check">
 					<h4>Discount Coupon</h4>
-					<input type="text" placeholder="Enter Your Coupon code.."><a href="#" class="app">Apply</a>
+					<input type="text" placeholder="Enter Your Coupon code.." ng-model="coupon"><a class="app" ng-click="checkcoupon(coupon)">Apply</a>
 					<a href="#" class="out">Proceed To Checkout</a>
 					<a href="#" class="out text-capitalize">continue shopping</a>
 					<hr>
@@ -81,10 +81,10 @@
 												<p><i class="fa fa-inr"></i>{{totalcart}}</p>
 											</td>
 											<td>
-												<p><i class="fa fa-inr"></i>4321.00</p>
+												<p><i class="fa fa-inr"></i>{{discountamount}}</p>
 											</td>
 											<td>
-												<p><i class="fa fa-inr"></i>4321.00</p>
+												<p><i class="fa fa-inr"></i>{{totalcart - discountamount}}</p>
 											</td>
 										</tr>
 									</tbody>

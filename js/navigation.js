@@ -61,6 +61,8 @@ var navigationservice = angular.module('navigationservice', [])
         subnav: []
     }];
 
+	var coupondetails = $.jStorage.get("coupon");
+	
     return {
         getnav: function () {
             return navigation;
@@ -302,6 +304,18 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }
             return menuname;
+        },
+        getcoupondetails: function() {
+            return coupondetails;
+        },
+        setcoupondetails: function(coupon) {
+            $.jStorage.set("coupon", coupon);
+            coupondetails = coupon;
+        },
+        getdiscountcoupon: function(couponcode) {
+            return $http.post(admin_url + 'json/getdiscountcoupon?couponcode=' + couponcode, {}, {
+                withCredentials: true
+            });
         },
 
     }
