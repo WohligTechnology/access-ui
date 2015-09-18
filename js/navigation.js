@@ -262,19 +262,20 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         }, 
         addtocart: function (product, callback) {
-            return $http({
-                url: admin_url + "json/addtocart",
-                method: "POST",
-                withCredentials: true,
-                data: product
+//            return $http({
+//                url: admin_url + "json/addtocart",
+//                method: "POST",
+//                withCredentials: true,
+//                data: product
+//            }).success(callback);
+		   
+		   return $http.get(admin_url + 'json/addtocart?product='+product.product+'&productname='+product.productname+'&price='+product.price+'&quantity='+product.quantity, {}, {
+                withCredentials: true
             }).success(callback);
+		   
         }, 
         deletecart: function (id, callback) {
-           return $http.get(admin_url + 'json/deletecart', {
-                data: {
-                    "id": id
-                }
-            }, {
+           return $http.get(admin_url + 'json/deletecart?id='+id, {}, {
                 withCredentials: true
             }).success(callback);
         },
@@ -307,6 +308,9 @@ var navigationservice = angular.module('navigationservice', [])
         },
         getcoupondetails: function() {
             return coupondetails;
+        },
+        getuser: function() {
+            return $.jStorage.get("user");
         },
         setcoupondetails: function(coupon) {
             $.jStorage.set("coupon", coupon);

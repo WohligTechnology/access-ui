@@ -21,16 +21,17 @@
 						<div class="col-md-4">
 							<div class="login" ng-show="!register">
 								<h4 class="text-uppercase">Login</h4>
-								<input type="text" class="form-control form-divider" placeholder="Username or email">
-								<input type="text" class="form-control form-divider" placeholder="Password">
+								<h5><span style="color: tomato;">{{msg}}</span></h5>
+								<input type="text" class="form-control form-divider" placeholder="Username or email" ng-class="allvalidation[0].validation" ng-model="login.email">
+								<input type="password" class="form-control form-divider" placeholder="Password" ng-class="allvalidation[1].validation" ng-model="login.password">
 								<a href="#" class="pull-left forgot">Forgot Password?</a>
-								<a href="#" class="pull-right btn-log">Login</a>
+								<a class="pull-right btn-log" ng-click="userlogin(login);">Login</a>
 							</div>
 							<div class="login" ng-show="register">
 								<h4>create an account</h4>
 								<h5><span style="color: tomato;">{{msgregister}}</span></h5>
 								<form>
-									<input type="text" placeholder="First name *" class="form-control form-divider" ng-class="allvalidation[0].validation" ng-model="account.firstname">
+									<input type="text" placeholder="First name *" class="form-control" ng-class="allvalidation[0].validation" ng-model="account.firstname">
 									<input type="text" placeholder="Last name *" class="form-control form-divider" ng-class="allvalidation[1].validation" ng-model="account.lastname">
 									<input type="email" placeholder="Email *" class="form-control form-divider" ng-class="allvalidation[2].validation" ng-model="account.email">
 									<input type="password" placeholder="Password *" class="form-control form-divider" ng-class="allvalidation[3].validation" ng-model="account.password">
@@ -101,7 +102,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="continue-btn" ng-click="shippingbilling()">
+				<div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
 					<a href="" class="contn pull-right">Continue</a>
 				</div>
 				<div class="pay-info" ng-show="paymentinfo">
@@ -133,13 +134,13 @@
 									<tbody>
 										<tr>
 											<td>
-												<i class="fa fa-inr"></i>35,000.00
+												<i class="fa fa-inr"></i>{{totalcart}}
 											</td>
 											<td>
-												<i class="fa fa-inr"></i>0
+												<i class="fa fa-inr"></i>{{discount}}
 											</td>
 											<td>
-												<i class="fa fa-inr"></i>35,000.00
+												<i class="fa fa-inr"></i>{{totalcart - discount}}
 											</td>
 										</tr>
 									</tbody>
@@ -155,7 +156,7 @@
 			<a href="" class="contn pull-right">Continue</a>
 		</div>
 		<div class="placeorder">
-			<a href="" class="btn-all pull-right">Place Order</a>
+			<a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>
 		</div>
 	</div>
 </div>

@@ -1,5 +1,6 @@
 var globalfunction = {};
 var globalvariable = {};
+var msg = "my al popup";
 
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
@@ -201,7 +202,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		selectedproduct.quantity = 1;
 		NavigationService.addtocart(selectedproduct, function (data) {
 			console.log(data);
-			$location.url("/cart");
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+//			$location.url("/cart");
 		});
 	}
 
@@ -217,169 +222,163 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.navigation = NavigationService.getnav();
 	$scope.nodata = '';
 
-	$scope.gettotalcartfunction = function(){
-	NavigationService.totalcart(function (data) {
-		$scope.totalcart = data;
-	});
+	$scope.gettotalcartfunction = function () {
+		NavigationService.totalcart(function (data) {
+			$scope.totalcart = data;
+		});
 	}
-	
+
 	$scope.gettotalcartfunction();
-	
-	
-	
+
+
+
 	//check coupons
-        $scope.discountamount = 0;
+	$scope.discountamount = 0;
 
-        function calcdiscountamount() {
-            var data = NavigationService.getcoupondetails();
-            var subtotal = parseFloat($scope.totalcart);
-            console.log(data);
-            if (data.coupontype == '1') {
-                if (data.discountpercent != '0') {
-                    console.log("ABC");
-                    $scope.ispercent = parseFloat(data.discountpercent);
-                    $scope.discountamount = (subtotal * $scope.ispercent / 100);
-                } else {
-                    $scope.isamount = parseFloat(data.discountamount);
-                    console.log("ABCD");
-                    $scope.discountamount = $scope.isamount;
-                }
-            }
-            if (data.coupontype == '2') {
-                console.log($scope.cart);
+	function calcdiscountamount() {
+		var data = NavigationService.getcoupondetails();
+		var subtotal = parseFloat($scope.totalcart);
+		console.log(data);
+		if (data.coupontype == '1') {
+			if (data.discountpercent != '0') {
+				console.log("ABC");
+				$scope.ispercent = parseFloat(data.discountpercent);
+				$scope.discountamount = (subtotal * $scope.ispercent / 100);
+			} else {
+				$scope.isamount = parseFloat(data.discountamount);
+				console.log("ABCD");
+				$scope.discountamount = $scope.isamount;
+			}
+		}
+		if (data.coupontype == '2') {
+			console.log($scope.cart);
 
-                var totallength = 0;
-                _.each($scope.cart, function (cart) {
-                    totallength += parseInt(cart.qty);
-                });
-                var xproducts = parseInt(data.xproducts);
-                var yproducts = parseInt(data.yproducts);
-                var itter = Math.floor(totallength / xproducts) * yproducts;
-                console.log("ITTER " + itter);
-                var newcart = _.sortBy($scope.cart, function (cart) {
-                    cart.price = parseFloat(cart.price);
-                    cart.qty2 = parseInt(cart.qty);
-                    return parseFloat(cart.price);
-                });
-                //newcart=_.each(newcart, function(cart){  cart.price=parseFloat(cart.price);cart.qty=parseFloat(cart.qty); });
-                console.log(newcart);
-                $scope.discountamount = 0;
-                for (var i = 0; i < itter; i++) {
-                    if (newcart[i].qty2 != 0) {
-                        newcart[i].qty2--;
-                        $scope.discountamount += newcart[i].price;
-                    }
+			var totallength = 0;
+			_.each($scope.cart, function (cart) {
+				totallength += parseInt(cart.qty);
+			});
+			var xproducts = parseInt(data.xproducts);
+			var yproducts = parseInt(data.yproducts);
+			var itter = Math.floor(totallength / xproducts) * yproducts;
+			console.log("ITTER " + itter);
+			var newcart = _.sortBy($scope.cart, function (cart) {
+				cart.price = parseFloat(cart.price);
+				cart.qty2 = parseInt(cart.qty);
+				return parseFloat(cart.price);
+			});
+			//newcart=_.each(newcart, function(cart){  cart.price=parseFloat(cart.price);cart.qty=parseFloat(cart.qty); });
+			console.log(newcart);
+			$scope.discountamount = 0;
+			for (var i = 0; i < itter; i++) {
+				if (newcart[i].qty2 != 0) {
+					newcart[i].qty2--;
+					$scope.discountamount += newcart[i].price;
+				}
 
-                }
-            }
-            if (data.coupontype == '4') {
-                console.log("FREE DELIVERY APPLIED");
-                $scope.isfreedelivery = "Free Delivery";
-                $scope.discountamount = 0;
-            }
-        };
+			}
+		}
+		if (data.coupontype == '4') {
+			console.log("FREE DELIVERY APPLIED");
+			$scope.isfreedelivery = "Free Delivery";
+			$scope.discountamount = 0;
 
 
+		}
 
-        var coupondetails = {};
-        $scope.ispercent = 0;
-        $scope.isamount = 0;
-        $scope.isfreedelivery = 0;
-        $scope.discountamount = 0;
-        var couponsuccess = function (data, status) {
-            if (data == 'false') {
-                $scope.validcouponcode = 0;
-            } else {
-                console.log("Show it");
-                $scope.validcouponcode = 1;
+		$.jStorage.set("discountamount", $scope.discountamount);
+	};
 
-                NavigationService.setcoupondetails(data);
-                calcdiscountamount();
-
-            }
-        }
+	$scope.tocheckout = function () {
+		$.jStorage.set("discountamount", $scope.discountamount);
+		$location.url("/checkout");
+	}
 
 
 
-        $scope.checkcoupon = function (couponcode) {
-            console.log(couponcode);
-            NavigationService.getdiscountcoupon(couponcode).success(couponsuccess);
-        };
-	
+	var coupondetails = {};
+	$scope.ispercent = 0;
+	$scope.isamount = 0;
+	$scope.isfreedelivery = 0;
+	$scope.discountamount = 0;
+	var couponsuccess = function (data, status) {
+		if (data == 'false') {
+			$scope.validcouponcode = 0;
+		} else {
+			console.log("Show it");
+			$scope.validcouponcode = 1;
+
+			NavigationService.setcoupondetails(data);
+			calcdiscountamount();
+
+		}
+	}
+
+
+
+	$scope.checkcoupon = function (couponcode) {
+		console.log(couponcode);
+		NavigationService.getdiscountcoupon(couponcode).success(couponsuccess);
+	};
+
 	//discrount coupons
-	
-	
+
+
 	// add and subtract from cart
 	var cartt = function (data, status) {
-            console.log(data);
-            $scope.gettotalcartfunction();
-		   $scope.getcartfunction();
-        };
-        $scope.addtocart = function (id, name, price, quantity, index) {
-            // console.log(id+name+price+quantity);
-            $scope.cart[index].subtotal = price * quantity;
-            NavigationService.addtocart(id, name, price, quantity).success(cartt);
-        };
-        //addto cart
+		console.log(data);
+		$scope.gettotalcartfunction();
+		$scope.getcartfunction();
+	};
 
-        $scope.addproductcart = function (id, name, price, quantity, index) {
-            console.log(id + name + price + quantity);
-            quantity = parseInt(quantity) + 1;
-            $scope.newquantity[index] = quantity;
-            $scope.cart[index].subtotal = price * quantity;
-            NavigationService.addtocart(id, name, price, quantity).success(cartt);
-        };
-	
-        $scope.onchangeqty = function (mycart) {
-            console.log(mycart);
-		   
+	$scope.changeqty = function (mycart, option) {
+		if (option == '+') {
+			++mycart.qty;
+		} else {
+			if (mycart.qty > 1)
+				--mycart.qty;
+		}
 		var selectedproduct = {};
 		selectedproduct.product = mycart.id;
 		selectedproduct.productname = mycart.options.realname;
 		selectedproduct.price = mycart.price;
 		selectedproduct.quantity = mycart.qty;
-            NavigationService.addtocart(selectedproduct, cartt);
-        };
-	
-        $scope.subproductcart = function (id, name, price, quantity, index) {
-            console.log(id + name + price + quantity);
-            quantity = parseInt(quantity) - 1;
-            $scope.newquantity[index] = quantity;
-            $scope.cart[index].subtotal = price * quantity;
-            NavigationService.addtocart(id, name, price, quantity).success(cartt);
-        };
-	
+		NavigationService.addtocart(selectedproduct, cartt);
+	};
+
+
 	//add and subtract from cart
-	
-	
 
-$scope.getcartfunction = function(){
-	NavigationService.getcart(function (data) {
-		console.log(data);
 
-		if ($.jStorage.get("user")) {
-			console.log("user exist");
-			_.each(data, function (n) {
-				n.options = {};
-				n.options.realname = n.name;
-				n.options.image = n.image;
-			});
-		}
 
-		$scope.cart = data;
-		if (data == '') {
-			$scope.nodata = "No Data found.";
-		}
-	});
-}
+	$scope.getcartfunction = function () {
+		NavigationService.getcart(function (data) {
+			console.log(data);
 
-$scope.getcartfunction();
+			if ($.jStorage.get("user")) {
+				console.log("user exist");
+				_.each(data, function (n) {
+					n.options = {};
+					n.options.realname = n.name;
+					n.options.image = n.image;
+				});
+			}
+
+			$scope.cart = data;
+			if (data == '') {
+				$scope.nodata = "No Data found.";
+			}
+		});
+	}
+
+	$scope.getcartfunction();
 
 	//delete cart
 	$scope.deletecart = function (cart) {
 		console.log(cart);
-		NavigationService.deletecart(cart.rowid, function (data) {
+		NavigationService.deletecart(cart.id, function (data) {
 			console.log(data);
+			$scope.getcartfunction();
+			$scope.gettotalcartfunction();
 		});
 	}
 
@@ -779,7 +778,7 @@ $scope.getcartfunction();
 
 
 
-.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("checkout");
 	$scope.menutitle = NavigationService.makeactive("CheckOut");
@@ -795,15 +794,111 @@ $scope.getcartfunction();
 	$scope.register = false;
 	$scope.checkout = {};
 	$scope.paymentinfo = false;
+	$scope.discount = 0;
+	$scope.discount = $.jStorage.get("discountamount");
+	$scope.login = {};
+	$scope.showcontinue = false;
+
+
+	//CREATE ACCOUNT
+	$scope.account = {};
+
+	var registerusercallback = function (data, status) {
+		console.log(data);
+		console.log("registerlogin");
+		if (data != "false") {
+			$.jStorage.set("user", data);
+			$scope.showlogin = false;
+			$scope.showcontinue = true;
+			$scope.openblockvalue = true;
+			$window.location.reload();
+
+		} else {
+			$scope.msg = "This Email Id is already registered with us or Error In Registration";
+			$scope.account = {};
+		}
+	}
+	$scope.registeruser = function () {
+		$scope.allvalidation = [{
+			field: $scope.account.firstname,
+			validation: ""
+            }, {
+			field: $scope.account.lastname,
+			validation: ""
+            }, {
+			field: $scope.account.email,
+			validation: ""
+            }, {
+			field: $scope.account.password,
+			validation: ""
+            }, {
+			field: $scope.account.confirmpassword,
+			validation: ""
+            }];
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.registeruser($scope.account, registerusercallback);
+		} else {
+			$scope.msgregister = "Invalid data try again!!";
+			$scope.msg = "";
+			$scope.account = {};
+		}
+
+	}
+
+
+
 	// SHOW LOGIN BLOCK
 
 	$scope.checklogin = $.jStorage.get("user");
 	$scope.showlogin = {};
 	if ($scope.checklogin != null) {
 		$scope.showlogin = false;
+		$scope.showcontinue = true;
+		$scope.openblockvalue = true;
 	} else {
 		$scope.showlogin = true;
 	}
+
+	//login
+	var getlogin = function (data, status) {
+		console.log(data);
+		console.log("in login");
+		$.jStorage.set("user", data);
+		if (data != "false") {
+			$scope.msg = "Login Successful";
+			$scope.showlogin = false;
+			$scope.showcontinue = true;
+			$scope.openblockvalue = true;
+			window.reload();
+		} else {
+			$scope.msg = "Invalid Email Or Password";
+		}
+	};
+	$scope.userlogin = function (login) {
+		$scope.allvalidation = [{
+			field: $scope.login.email,
+			validation: ""
+            }, {
+			field: $scope.login.password,
+			validation: ""
+            }];
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.loginuser(login, getlogin);
+		} else {
+			$scope.msg = "Invalid data try again!!";
+			$scope.msgregister = "";
+			$scope.login = {};
+		}
+	};
+
+	//order products
+	NavigationService.totalcart(function (data) {
+		$scope.totalcart = data;
+	});
+
+
 
 
 	//register on login
@@ -820,6 +915,7 @@ $scope.getcartfunction();
 
 	$scope.continuebilling = function () {
 		$scope.openblockvalue = true;
+		$scope.showcontinue = true;
 	}
 
 
@@ -931,8 +1027,25 @@ $scope.getcartfunction();
 	$scope.placeorder = function () {
 		console.log();
 
-		NavigationService.placeorder($scope.checkout, function (data) {
+
+		NavigationService.getcart(function (data) {
 			console.log(data);
+			$scope.cart = data;
+
+			$scope.checkout.cart = $scope.cart;
+			if (NavigationService.getuser()) {
+				$scope.checkout.user = $.jStorage.get("user").id;
+			} else {
+				$scope.checkout.user = 0;
+			}
+			NavigationService.placeorder($scope.checkout, function (data) {
+				console.log(data);
+				ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+			});
+
 		});
 
 	}
