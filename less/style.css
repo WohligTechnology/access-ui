@@ -813,10 +813,15 @@ img.doneLoading {
 .cart-det table tbody .in input {
   width: 20%;
   padding: 2px 0px 2px 5px;
+  margin: 0 7px;
 }
 .cart-det table .tables {
   width: 100px;
   border: 1px solid #e6e6e6;
+}
+.prout {
+  margin-left: 55px;
+  float: right;
 }
 .check h4 {
   font-family: 'lato';
@@ -832,7 +837,7 @@ img.doneLoading {
   padding: 8px 16px 8px 16px;
 }
 .check .app {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .check .out {
   margin-left: 20px;
@@ -1641,4 +1646,8 @@ form {
 }
 #content {
   z-index: 0 !important;
+}
+.color {
+  color: #7EE1EA;
+  font-size: 17px;
 }
