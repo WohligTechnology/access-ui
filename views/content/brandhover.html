@@ -1,4 +1,4 @@
-<div class="brandhover" ng-controller="headerctrl">
+<div class="brandhover" ng-controller="submenuctrl">
 	<div class="brand-slide">
 		<div id="mybrand" class="carousel slide pdn" data-ride="carousel">
 			<ol class="carousel-indicators indicate">
@@ -12,12 +12,13 @@
 						<div class="row">
 							<div class="col-md-3" ng-repeat="brndhov in brandhover">
 								<div class="img-holder">
-									<img ng-src="{{brndhov}}" alt="Brands" class="img-responsive">
+									<img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+<!--
 				<div class="item">
 					<div class="divider">
 						<div class="row">
@@ -42,6 +43,8 @@
 						</div>
 					</div>
 				</div>
+-->        
+        
 			</div>
 			<a class="left carousel-control arrow-left" href="#mybrand" role="button" data-slide="prev">
 			</a>
