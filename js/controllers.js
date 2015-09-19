@@ -661,7 +661,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.productid = $stateParams.id;
-	
+
 	var addtowishlistcallback = function (data, status) {
 		console.log(data);
 		if (data == "true") {
@@ -681,7 +681,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			});
 		}
 	}
-	
+
 	$scope.addtowishlist = function (productid) {
 		if (NavigationService.getuser()) {
 			NavigationService.addtowishlist(productid, addtowishlistcallback);
@@ -719,22 +719,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		} else {
 			$scope.availability = "Out of Stock";
 		}
-		
+
 		$scope.product.product.img = $scope.product.productimage[0].image;
 		$scope.product.product.quantity = 1;
-		
+
 		$scope.productdetail = [];
-		_.each($scope.product.productimage, function(n){
+		_.each($scope.product.productimage, function (n) {
 			$scope.productdetail.push(n.image);
 		});
-		
+
 		console.log($scope.productdetail);
-		
+
 	}
 	NavigationService.getproductdetails($scope.productid).success(getproductdetailscallback);
-	
-	
-	$scope.onimgclick = function(img){
+
+
+	$scope.onimgclick = function (img) {
 		console.log(img);
 		$scope.product.product.img = img;
 	}
@@ -880,7 +880,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	NavigationService.getaboutus(getaboutuscallback);
 })
 
-.controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
+.controller('NewarrivalsCtrl', function ($scope, TemplateService, NavigationService, ngDialog, $location) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("newarrivals");
 	$scope.menutitle = NavigationService.makeactive("New Arrivals");
@@ -901,7 +901,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		$scope.products = data.queryresult;
 		console.log($scope.products);
 	}
-	NavigationService.getexclusiveandnewarrival(getexclusiveandnewarrivalcallback);
+	NavigationService.getexclusiveandnewarrival(2, getexclusiveandnewarrivalcallback);
 
 	$scope.openModal = function (s) {
 		console.log(s)
@@ -910,6 +910,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			scope: $scope
 		});
 	}
+	
+	
+	$scope.getproductdetails = function (productid) {
+		console.log(productid);
+		$location.url("/productdetail/" + productid);
+
+	}
+
+	var addtowishlistcallback = function (data, status) {
+		console.log(data);
+		if (data == "true") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else if (data == "0") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+	$scope.addtowishlist = function (productid) {
+		if (NavigationService.getuser()) {
+			NavigationService.addtowishlist(productid, addtowishlistcallback);
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+
+	$scope.addtocart = function (product) {
+		console.log(product);
+		var selectedproduct = {};
+		selectedproduct.product = product.id;
+		selectedproduct.productname = product.name;
+		selectedproduct.price = product.price;
+		selectedproduct.quantity = 1;
+		NavigationService.addtocart(selectedproduct, function (data) {
+			console.log(data);
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+			//			$location.url("/cart");
+			myfunction();
+		});
+	}
+	
 
 })
 
@@ -1272,7 +1328,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('ExclusiveCtrl', function ($scope, TemplateService, NavigationService, ngDialog, $location) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("exclusive");
 	$scope.menutitle = NavigationService.makeactive("Exclusive");
@@ -1288,11 +1344,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		maxPrice: 10050
 	};
 	var getexclusiveandnewarrivalcallback = function (data, status) {
-		console.log(data);
+		console.log(data.queryresult);
 		$scope.products = data.queryresult;
 		console.log($scope.products);
 	}
-	NavigationService.getexclusiveandnewarrival(getexclusiveandnewarrivalcallback);
+	NavigationService.getexclusiveandnewarrival(1, getexclusiveandnewarrivalcallback);
+	
+	
+	$scope.getproductdetails = function (productid) {
+		console.log(productid);
+		$location.url("/productdetail/" + productid);
+
+	}
+
+	var addtowishlistcallback = function (data, status) {
+		console.log(data);
+		if (data == "true") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else if (data == "0") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+	$scope.addtowishlist = function (productid) {
+		if (NavigationService.getuser()) {
+			NavigationService.addtowishlist(productid, addtowishlistcallback);
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+
+	$scope.addtocart = function (product) {
+		console.log(product);
+		var selectedproduct = {};
+		selectedproduct.product = product.id;
+		selectedproduct.productname = product.name;
+		selectedproduct.price = product.price;
+		selectedproduct.quantity = 1;
+		NavigationService.addtocart(selectedproduct, function (data) {
+			console.log(data);
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+			//			$location.url("/cart");
+			myfunction();
+		});
+	}
+
+	
 
 })
 

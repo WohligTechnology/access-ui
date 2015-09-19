@@ -43,47 +43,45 @@
 					</div>
 				</div>
 			</div>
-			<a href="#/productdetail">
-				<div class="col-md-9">
-					<div class="product-list">
-						<div class="col-md-4 col-sm-6" ng-repeat="pro in products" ng-if="pro.typeid==1||pro.typeid==3">
-							<div class="pro-box">
-								<div class="img-box">
-									<div class="pro-img1" ng-if="pro.image1">
-										<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
-									</div>
-									<div class="pro-img2" ng-if="!pro.image1">
-										<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-										<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
-									</div>
-									<div class="pro-img2" ng-if="pro.image2">
-										<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-										<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
-									</div>
+			<div class="col-md-9">
+				<div class="product-list">
+					<div class="col-md-4 col-sm-6" ng-repeat="pro in products" ng-if="pro.typeid==1||pro.typeid==3">
+						<div class="pro-box">
+							<div class="img-box" ng-click="getproductdetails(pro.id)">
+								<div class="pro-img1" ng-if="pro.image1">
+									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
 								</div>
-								<div class="pro-name">
-									<h5>{{pro.name}}</h5>
-									<span class="spanli"><ul>
+								<div class="pro-img2" ng-if="!pro.image1">
+									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+									<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
+								</div>
+								<div class="pro-img2" ng-if="pro.image2">
+									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+									<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
+								</div>
+							</div>
+							<div class="pro-name">
+								<h5>{{pro.name}}</h5>
+								<span class="spanli"><ul>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star-o"></i></li>
 </ul></span>
-			</a>
-			<div class="cartli">
-				<ul>
-					<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-					<li class="carts" ng-click="openModal();"><i class="fa fa-heart"></i>
-					</li>
-					<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a>
-					</li>
-				</ul>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
+								<div class="cartli">
+									<ul>
+										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
+										<li class="carts" ng-click="addtowishlist(pro.id);"><i class="fa fa-heart"></i>
+										</li>
+										<li class="carts"><a ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
