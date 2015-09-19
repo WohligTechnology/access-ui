@@ -750,29 +750,75 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		}
 	})
 	.controller('AccountCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("account");
-		$scope.menutitle = NavigationService.makeactive("Account");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.user = {};
-		var updateusercallback = function (data, status) {
-			console.log(data);
-			if (data == "true") {
-				$scope.msgsuccess = "Updated Successfully!";
-				$scope.msgfailure = "";
-				$scope.user = {};
-			} else {
-				$scope.user = {};
-				$scope.msgfailure = "Sorry Try Again!";
-				$scope.msgsuccess = "";
-			}
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("account");
+        $scope.menutitle = NavigationService.makeactive("Account");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+        $scope.user = {};
 
-		}
-		$scope.updateuser = function (user) {
-			NavigationService.updateuser(user, updateusercallback)
-		}
-	})
+        var updateusercallback = function (data, status) {
+            console.log(data);
+            if (data == "true") {
+                $scope.msgsuccess = "Updated Successfully!";
+                $scope.msgfailure = "";
+                NavigationService.getuserdetails(function (data, status) {
+                    console.log("user details");
+                    $scope.user = data;
+                    $scope.user.billingaddress = data.billingaddress;
+                    $scope.user.billingcity = data.billingcity;
+                    $scope.user.billingstate = data.billingstate;
+                    $scope.user.billingpincode = data.billingpincode;
+                    $scope.user.billingcountry = data.billingcountry;
+                    $scope.user.firstname = data.firstname;
+                    $scope.user.lastname = data.lastname;
+                    $scope.user.email = data.email;
+                    $scope.user.phone = data.phone;
+                    console.log(data);
+                });
+            } else {
+                NavigationService.getuserdetails(function (data, status) {
+                    console.log("user details");
+                    $scope.user = data;
+                    $scope.user.billingaddress = data.billingaddress;
+                    $scope.user.billingcity = data.billingcity;
+                    $scope.user.billingstate = data.billingstate;
+                    $scope.user.billingpincode = data.billingpincode;
+                    $scope.user.billingcountry = data.billingcountry;
+                    $scope.user.firstname = data.firstname;
+                    $scope.user.lastname = data.lastname;
+                    $scope.user.email = data.email;
+                    $scope.user.phone = data.phone;
+                    console.log(data);
+                });
+                $scope.msgfailure = "Sorry Try Again!";
+                $scope.msgsuccess = "";
+            }
+
+        }
+        $scope.updateuser = function (user) {
+            NavigationService.updateuser(user, updateusercallback)
+        }
+
+
+
+        // User details by default
+
+        NavigationService.getuserdetails(function (data, status) {
+            console.log("user details");
+            $scope.user = data;
+            $scope.user.billingaddress = data.billingaddress;
+            $scope.user.billingcity = data.billingcity;
+            $scope.user.billingstate = data.billingstate;
+            $scope.user.billingpincode = data.billingpincode;
+            $scope.user.billingcountry = data.billingcountry;
+            $scope.user.firstname = data.firstname;
+            $scope.user.lastname = data.lastname;
+            $scope.user.email = data.email;
+            $scope.user.phone = data.phone;
+            console.log(data);
+        });
+    })
 	.controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
 		$scope.template = TemplateService;
 		$scope.template = TemplateService.changecontent("popwish");
@@ -1305,28 +1351,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('submenuctrl', function ($scope, TemplateService, NavigationService, $rootScope, $location, $state) {
-	console.log($state.current.name);
-	$scope.template = TemplateService;
-	$scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
-	$scope.submenu = [];
-	$scope.parent = {};
-	$scope.category = {};
+    console.log($state.current.name);
+    $scope.template = TemplateService;
+    $scope.submenuval = ['views/content/brandhover.html', 'views/content/producthover.html'];
+    $scope.submenu = [];
+    $scope.parent = {};
+    $scope.category = {};
 
-	$scope.getproductbycategory = function (parent, category) {
-		console.log("parent" + parent + "   cate=" + category);
-		$location.url("/product/" + parent + "/" + category + "/0");
-	}
-	$scope.showsubmenu = function (data) {
-		console.log(data);
-		$scope.submenu[data] = true;
-	};
-	$scope.hidesubmenu = function (data) {
-		console.log(data);
-		$scope.submenu[data] = false;
-	};
+    // Brand on hover
 
-	$scope.getproductbybrand = function (id) {
-		$location.url("/product/" + 0 + "/" + 0 + "/" + id);
-	}
+    var getbrandsuccess = function (data, status) {
+        $scope.brandhover = data.queryresult;
+        console.log($scope.brandhover);
+    }
+    NavigationService.getbrand(getbrandsuccess);
+
+
+
+    $scope.getproductbycategory = function (parent, category) {
+        console.log("parent" + parent + "   cate=" + category);
+        $location.url("/product/" + parent + "/" + category + "/0");
+    }
+    $scope.showsubmenu = function (data) {
+        console.log(data);
+        $scope.submenu[data] = true;
+    };
+    $scope.hidesubmenu = function (data) {
+        console.log(data);
+        $scope.submenu[data] = false;
+    };
+
+    $scope.getproductbybrand = function (id) {
+        $location.url("/product/" + 0 + "/" + 0 + "/" + id);
+    }
 
 });

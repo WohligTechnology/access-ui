@@ -181,6 +181,7 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         updateuser: function (user,callback) {
+            console.log(user);
             return $http({
                 url: admin_url + "json/updateuser",
                 method: "POST",
@@ -189,14 +190,14 @@ var navigationservice = angular.module('navigationservice', [])
                     "id": $.jStorage.get("user").id,
                     "firstname": user.firstname,
                     "lastname": user.lastname,
-                    "address": user.address,
+                    "address": user.billingaddress,
                     "email": user.email,
                     "phone": user.phone,
-                    "city": user.city,
-                    "zipcode": user.zipcode,
-                    "country": user.country,
+                    "city": user.billingcity,
+                    "zipcode": user.billingpincode,
+                    "country": user.billingcountry,
                     "sameasbilling": user.sameasbilling,
-                    "state": user.state,
+                    "state": user.billingstate
                 }
             }).success(callback);
         },
@@ -205,7 +206,11 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-
+          getuserdetails: function(callback) {
+            return $http.get(admin_url + 'json/getuserdetails', {}, {
+                withCredentials: true
+            }).success(callback);
+        }, 
         loginuser: function (login, callback) {
             return $http({
                 url: admin_url + "json/loginuser",
