@@ -7611,9 +7611,23 @@ firstapp.directive('img', function ($compile, $parse) {
 });;
 var globalfunction = {};
 var globalvariable = {};
+var myfunction = '';
 var msg = "my al popup";
 
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
+
+.controller('AppCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+	$scope.demo = "demo testing";
+	myfunction = function () {
+		NavigationService.gettotalcart(function (data) {
+			$scope.totalcart = data;
+		});
+		NavigationService.totalcart(function (data) {
+			$scope.amount = data;
+		});
+	}
+	myfunction();
+})
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
 	//Used to name the .html file
@@ -7621,6 +7635,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Home");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
 
 	//    $scope.slides = [
 	//        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
@@ -7660,6 +7675,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Product");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.pageno = 0;
+	var lastpage = 1;
+	$scope.products = [];
+	$scope.dataload = "Loading ...";
+
+
+
+
 	var addtowishlistcallback = function (data, status) {
 		console.log(data);
 		if (data == "true") {
@@ -7680,7 +7703,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		}
 	}
 	$scope.addtowishlist = function (productid) {
-		NavigationService.addtowishlist(productid, addtowishlistcallback);
+		if (NavigationService.getuser()) {
+			NavigationService.addtowishlist(productid, addtowishlistcallback);
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
 	}
 
 
@@ -7772,18 +7802,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	}
 	$scope.parent = $stateParams.parent;
 	$scope.category = $stateParams.category;
-	if ($scope.parent == 0 && $scope.category == 0) {
-		console.log("no need ");
-	} else {
-		NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
-	}
 
-	if ($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0) {
-		NavigationService.getallproduct(function (data) {
-			console.log(data);
-			$scope.products = data.queryresult;
-		});
-	}
+
+	//	if ($scope.parent == 0 && $scope.category == 0) {
+	//		console.log("no need ");
+	//	} else {
+	//		NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
+	//	}
+	//
+	//	if ($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0) {
+	//		NavigationService.getallproduct(function (data) {
+	//			console.log(data);
+	//			$scope.products = data.queryresult;
+	//		});
+	//	}
 
 
 	//GO TO PRODUCT DETAIL
@@ -7794,14 +7826,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 	var getproductbybrandcallback = function (data, status) {
-		$scope.products = data.queryresult;
+		_.each(data.queryresult, function (n) {
+			$scope.products.push(n);
+		});
+
+		if($scope.products == ""){
+			$scope.dataload = "No data found";
+		}
+		lastpage = data.lastpage;
 	}
 	$scope.brandid = $stateParams.brand;
-	if ($scope.brandid == 0) {
 
-	} else {
-		NavigationService.getproductbybrand($scope.brandid, getproductbybrandcallback);
+
+
+	$scope.addMoreItems = function () {
+		if (lastpage != $scope.pageno) {
+			++$scope.pageno;
+			if ($scope.brandid != 0) {
+				NavigationService.getproductbybrand($scope.brandid, $scope.pageno, getproductbybrandcallback);
+			} else if ($scope.parent != 0 || $scope.category != 0) {
+				NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.category).success(getproductbybrandcallback);
+			} else {
+				NavigationService.getallproduct($scope.pageno, getproductbybrandcallback);
+			}
+		}
 	}
+
+	$scope.addMoreItems();
 
 
 	$scope.addtocart = function (product) {
@@ -7817,7 +7868,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
 				plain: true
 			});
-//			$location.url("/cart");
+			//			$location.url("/cart");
+			myfunction();
 		});
 	}
 
@@ -7939,6 +7991,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		console.log(data);
 		$scope.gettotalcartfunction();
 		$scope.getcartfunction();
+		myfunction();
 	};
 
 	$scope.changeqty = function (mycart, option) {
@@ -7990,6 +8043,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			console.log(data);
 			$scope.getcartfunction();
 			$scope.gettotalcartfunction();
+			myfunction();
 		});
 	}
 
@@ -8409,6 +8463,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.discount = $.jStorage.get("discountamount");
 	$scope.login = {};
 	$scope.showcontinue = false;
+	$scope.openblock.radiovalue = "checkoutasguest";
 
 
 	//CREATE ACCOUNT
@@ -8652,9 +8707,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			NavigationService.placeorder($scope.checkout, function (data) {
 				console.log(data);
 				ngDialog.open({
-				template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-				plain: true
-			});
+					template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+					plain: true
+				});
 			});
 
 		});
@@ -9073,13 +9128,14 @@ var navigationservice = angular.module('navigationservice', [])
             });
         },
 
-          getproductbybrand: function(id,callback) {
+          getproductbybrand: function(id,pageno,callback) {
             return $http({
                 url: admin_url + 'json/getproductbybrand',
                 method: "POST",
                 withCredentials: true,
                 data: {
-                      "brandid": id
+                      "brandid": id,
+				 "pageno":pageno
                 }
             }).success(callback);
         },
@@ -9094,14 +9150,15 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        getproductbycategory: function(parent,category) {
+        getproductbycategory: function(pageno, parent,category) {
             return $http({
                 url: admin_url + 'json/getproductbycategory',
                 method: "POST",
                 withCredentials: true,
                 data: {
                     'parent': parent,
-                    'subcategory': category
+                    'subcategory': category,
+				'pageno': pageno
                 }
             });
         },
@@ -9193,13 +9250,11 @@ var navigationservice = angular.module('navigationservice', [])
                 data: {}
             }).success(callback);
         }, 
-        getallproduct: function (callback) {
-            return $http({
-                url: admin_url + "json/getallproducts",
-                method: "POST",
-                withCredentials: true,
-                data: {}
+        getallproduct: function (pageno, callback) {
+		   return $http.get(admin_url + 'json/getallproducts?pageno='+pageno, {}, {
+                withCredentials: true
             }).success(callback);
+		   
         }, 
         addtocart: function (product, callback) {
 //            return $http({
@@ -9260,6 +9315,12 @@ var navigationservice = angular.module('navigationservice', [])
             return $http.post(admin_url + 'json/getdiscountcoupon?couponcode=' + couponcode, {}, {
                 withCredentials: true
             });
+        },
+	    gettotalcart: function(callback) {
+            return $http.post(admin_url + 'json/totalitemcart', {}, {
+                withCredentials: true
+            }).success(callback);
+            //return cart;
         },
 
     }

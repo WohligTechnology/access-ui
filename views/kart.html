@@ -1,23 +1,24 @@
 
-<div class="kart-container">
+<div class="kart-container" ng-controller="AppCtrl">
 	<div class="kart">
 		<div class="kart-logo">
 			<a href="#/cart">
 				<i class="fa fa-shopping-cart fa-3x"></i>
+				<span class="badge mybadge" ng-if="totalcart!=0">{{totalcart}}</span>
 				<span name="name-cart">Cart</span>
 			</a>
 		</div>
 		<div class="kart-hover">
 			<div class="amount">
 				<span class="extra"><i class="fa fa-inr"></i></span>
-				<input type="text" placeholder="Amount" class="field">
+				<input type="text" placeholder="Amount" class="field" ng-model="amount" disabled>
 			</div>
 			<div class="quantity">
 				<span class="extra"><i class="fa fa-inr"></i></span>
-				<input type="text" placeholder="Quantity" class="field">
+				<input type="text" placeholder="Quantity" class="field" ng-model="totalcart" disabled>
 			</div>
 			<div class="express">
-				<a href="" class="expr-check">express Checkout</a>
+				<a href="#/checkout" class="expr-check">express Checkout</a>
 			</div>
 		</div>
 	</div>

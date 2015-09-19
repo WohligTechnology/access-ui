@@ -133,13 +133,14 @@ var navigationservice = angular.module('navigationservice', [])
             });
         },
 
-          getproductbybrand: function(id,callback) {
+          getproductbybrand: function(id,pageno,callback) {
             return $http({
                 url: admin_url + 'json/getproductbybrand',
                 method: "POST",
                 withCredentials: true,
                 data: {
-                      "brandid": id
+                      "brandid": id,
+				 "pageno":pageno
                 }
             }).success(callback);
         },
@@ -154,14 +155,15 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        getproductbycategory: function(parent,category) {
+        getproductbycategory: function(pageno, parent,category) {
             return $http({
                 url: admin_url + 'json/getproductbycategory',
                 method: "POST",
                 withCredentials: true,
                 data: {
                     'parent': parent,
-                    'subcategory': category
+                    'subcategory': category,
+				'pageno': pageno
                 }
             });
         },
@@ -253,13 +255,11 @@ var navigationservice = angular.module('navigationservice', [])
                 data: {}
             }).success(callback);
         }, 
-        getallproduct: function (callback) {
-            return $http({
-                url: admin_url + "json/getallproducts",
-                method: "POST",
-                withCredentials: true,
-                data: {}
+        getallproduct: function (pageno, callback) {
+		   return $http.get(admin_url + 'json/getallproducts?pageno='+pageno, {}, {
+                withCredentials: true
             }).success(callback);
+		   
         }, 
         addtocart: function (product, callback) {
 //            return $http({
@@ -320,6 +320,12 @@ var navigationservice = angular.module('navigationservice', [])
             return $http.post(admin_url + 'json/getdiscountcoupon?couponcode=' + couponcode, {}, {
                 withCredentials: true
             });
+        },
+	    gettotalcart: function(callback) {
+            return $http.post(admin_url + 'json/totalitemcart', {}, {
+                withCredentials: true
+            }).success(callback);
+            //return cart;
         },
 
     }

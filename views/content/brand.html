@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="brand-section text-center">
 			<div class="divider">
-				<div class="row">
+				<div class="row" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
 					<div class="col-md-3" ng-repeat="brnd in brandimages" ng-click="getproductbybrand(brnd.id);">
 						<div class="img-holder">
 								<img ng-src="{{brnd.logo | serverimage}}" alt="Brands" class="img-responsive" >
