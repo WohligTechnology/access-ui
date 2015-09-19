@@ -31,7 +31,7 @@
                                     <ul class="dropdown" ng-show="showlogindropdown">
                                         <li><a href="#/orderhistory"><i class="fa fa-"></i>my orders</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-"></i>my account</a>
+                                        <li><a href="#/account"><i class="fa fa-"></i>my account</a>
                                         </li>
                                         <li ng-click="logout();"><i class="fa fa-"></i>sign out</li>
                                     </ul>
@@ -51,9 +51,9 @@
                     <div class="col-md-6">
                         <div class="search vert">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
+                                <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
                                 <span class="input-group-btn">
-        <button class="btn btn-default custom" type="button">Search</button>
+        <button class="btn btn-default custom" type="button" ng-click="fastsearch(search)">Search</button>
       </span>
                             </div>
                         </div>

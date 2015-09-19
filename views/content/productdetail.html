@@ -3,9 +3,9 @@
 		<div class="row">
 			<div class="col-md-7">
 				<div class="det-txt">
-					<h3>Dell Inspiron 3541 (Notebook) (APU Dual Core E1/ 2GB/ 500GB/ Win8.1) (X560161IN9)</h3>
+					<h3>{{product.product.name}}</h3>
 					<p>dell</p>
-					<span class="avi">availability :<p> In Stock</p></span>
+					<span class="avi">availability :<p>{{availability}}</p></span>
 					<div class="rat">
 						<span class="spanli"><ul>
     <li><i class="fa fa-star"></i></li>
@@ -18,21 +18,15 @@
 					<hr class="line">
 				</div>
 				<div class="pro-desc">
-					<h2><i class="fa fa-inr"></i> 4300.00</h2>
+					<h2><i class="fa fa-inr"></i>{{product.product.price}}</h2>
 					<div class="qua">
-						<input type="number" placeholder="1">
-						<a href="#"><i class="fa fa-heart"></i>Add To Wishlist</a>
-						<a href="#" class="ad-cart"><i class="fa fa-shopping-cart "></i>Add To cart</a>
+						<input type="number" value="1" placeholder="1" min="1" ng-model="product.product.quantity">
+						<a ng-click="addtowishlist(product.id)"><i class="fa fa-heart"></i>Add To Wishlist</a>
+						<a class="ad-cart" ng-click = "addtocart(product.product)"><i class="fa fa-shopping-cart "></i>Add To cart</a>
 					</div>
 					<ul class="img-thumb">
-						<li>
-							<a href=""><img src="img/product/dell1.jpg" alt="Thumbnil" class="img-responsive"></a>
-						</li>
-						<li>
-							<a href=""><img src="img/product/dell2.jpg" alt="Thumbnil" class="img-responsive"></a>
-						</li>
-						<li>
-							<a href=""><img src="img/product/dell3.png" alt="Thumbnil" class="img-responsive"></a>
+						<li ng-repeat="color in product.relatedproduct" ng-click="onimgclick(color.image)">
+							<a href=""><img src="{{color.image | serverimage}}" alt="Thumbnil" class="img-responsive"></a>
 						</li>
 					</ul>
 				</div>
@@ -40,12 +34,12 @@
 			<div class="col-md-5">
 				<div class="det-img">
 					<div class="box-img">
-						<img src="img/product/13.jpg" class="img-responsive">
+						<img src="{{product.product.img | serverimage}}" class="img-responsive">
 					</div>
 					<div class="mini-img">
 						<flex-slider class="carousel" flex-slide="prd in productdetail" animation="slide" animation-loop="false" item-width="150" item-margin="5">
-							<li>
-								<img ng-src="{{prd}}" alt="Product-detail" class="img-responsive prd-slide">
+							<li ng-click="onimgclick(prd)">
+								<img ng-src="{{prd | serverimage}}" alt="Product-detail" class="img-responsive prd-slide">
 							</li>
 						</flex-slider>
 					</div>

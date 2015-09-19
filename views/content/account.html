@@ -70,8 +70,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="country">country</label>
-                                <select name="" id="country" class="form-control" ng-model="user.billingcountry" <ng-m></ng-m>
-                                    <option value="">Select Country</option>
+                                <select class="form-control" ng-model="user.billingcountry">
+                                    			  <option value="">Select Country</option>
                                                     <option value="Afganistan">Afghanistan</option>
                                                     <option value="Albania">Albania</option>
                                                     <option value="Algeria">Algeria</option>
@@ -341,6 +341,7 @@
                             </div>
                         </div>
                     </div>
+<!--
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <div class="form-group">
@@ -349,8 +350,9 @@
                             </div>
                         </div>
                     </div>
+-->
                     <div class="save-btn text-center">
-                        <a href="#" class="save" ng-click="updateuser(user)">save</a>
+                        <a class="save" ng-click="updateuser(user)">save</a>
                     </div>
                 </form>
             </div>

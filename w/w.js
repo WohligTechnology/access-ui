@@ -7515,7 +7515,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 		})
 	
 		.state('searchresult', {
-			url: "/searchresult",
+			url: "/searchresult/:search",
 			templateUrl: "views/template.html",
 			controller: 'SearchresultCtrl'
 		})
@@ -7830,7 +7830,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.products.push(n);
 		});
 
-		if($scope.products == ""){
+		if ($scope.products == "") {
 			$scope.dataload = "No data found";
 		}
 		lastpage = data.lastpage;
@@ -8193,54 +8193,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $location, $window) {
 
-		// WISHLIST
+	// WISHLIST
 
-		globalfunction.cart = function () {
-			NavigationService.totalcart(function (data) {
-				console.log(data);
-				globalvariable.totalcart = data;
-				console.log(globalvariable.totalcart);
-			});
-		}
+	$scope.fastsearch = function (search) {
+		$location.url("/searchresult/" + search);
+	}
 
-		$scope.getwishlistproduct = function () {
-			$location.url("/wishlist");
-		}
-		$scope.showusername = '';
 
-		if (!$.jStorage.get("user")) {
-			$scope.showlogin = true;
-			$scope.showlogindropdown = false;
-		} else {
-			$scope.showlogin = false;
-			$scope.showlogindropdown = true;
-			if (!$.jStorage.get("user").name || $.jStorage.get("user").name == "") {
-				if ($.jStorage.get("user").firstname && $.jStorage.get("user").firstname != '')
-					$scope.showusername += $.jStorage.get("user").firstname;
-				if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
-					$scope.showusername += " " + $.jStorage.get("user").lastname;
-				//                console.log($scope.showusername);
-			} else {
-				$scope.showusername = $.jStorage.get("user").name;
-				//                console.log($scope.showusername);
-			}
-		}
-		var logoutcallback = function (data, status) {
+	globalfunction.cart = function () {
+		NavigationService.totalcart(function (data) {
 			console.log(data);
-			if (data == "true") {
-				console.log("flush");
-				$.jStorage.flush();
-				$scope.showlogindropdown = false;
-				$location.url("/home");
-				$window.location.reload();
-			}
-		}
-		$scope.logout = function () {
-			NavigationService.logout(logoutcallback);
-		}
-		$scope.template = TemplateService;
+			globalvariable.totalcart = data;
+			console.log(globalvariable.totalcart);
+		});
+	}
 
-		$scope.brandhover = [
+	$scope.getwishlistproduct = function () {
+		$location.url("/wishlist");
+	}
+	$scope.showusername = '';
+
+	if (!$.jStorage.get("user")) {
+		$scope.showlogin = true;
+		$scope.showlogindropdown = false;
+	} else {
+		$scope.showlogin = false;
+		$scope.showlogindropdown = true;
+		if (!$.jStorage.get("user").name || $.jStorage.get("user").name == "") {
+			if ($.jStorage.get("user").firstname && $.jStorage.get("user").firstname != '')
+				$scope.showusername += $.jStorage.get("user").firstname;
+			if ($.jStorage.get("user").lastname && $.jStorage.get("user").lastname != '')
+				$scope.showusername += " " + $.jStorage.get("user").lastname;
+			//                console.log($scope.showusername);
+		} else {
+			$scope.showusername = $.jStorage.get("user").name;
+			//                console.log($scope.showusername);
+		}
+	}
+	var logoutcallback = function (data, status) {
+		console.log(data);
+		if (data == "true") {
+			console.log("flush");
+			$.jStorage.flush();
+			$scope.showlogindropdown = false;
+			$location.url("/home");
+			$window.location.reload();
+		}
+	}
+	$scope.logout = function () {
+		NavigationService.logout(logoutcallback);
+	}
+	$scope.template = TemplateService;
+
+	$scope.brandhover = [
  "img/brands/acmemade.jpeg",
   "img/brands/adonit.png",
   "img/brands/autodrive.png",
@@ -8258,141 +8263,219 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   "img/brands/sony.png",
   "img/brands/tommy.jpg"
  ];
-	})
-	.controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService, $location, $stateParams) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("productdetail");
-		$scope.menutitle = NavigationService.makeactive("Productdetail");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.productid = $stateParams.id;
-		var getproductdetailscallback = function (data, status) {
-			console.log(data);
-		}
-		NavigationService.getproductdetails($scope.productid).success(getproductdetailscallback);
-		$scope.productdetail = [
-   "img/product/6.jpg",
-   "img/product/7.jpg",
-   "img/product/8.jpg",
-   "img/product/9.jpg",
-   "img/product/10.jpg",
-   "img/product/11.jpg",
-   "img/product/13.jpg"
-  ];
-	})
-	.controller('OrderhistoryCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("orderhistory");
-		$scope.menutitle = NavigationService.makeactive("Orderhistory");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-	})
-	.controller('ContactCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("contact");
-		$scope.menutitle = NavigationService.makeactive("Contact");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
+})
 
-		$scope.contact = {};
-		var usercontactcallback = function (data, status) {
-			console.log("before");
-			console.log(data);
-			console.log("aftr");
-			if (data) {
-				$scope.msgsuccess = "Successfully Submitted!!";
-				$scope.msg = "";
-				$scope.contact = {};
-			} else {
-				$scope.msg = "Invalid data try again!!";
-				$scope.msgsuccess = "";
-				$scope.contact = {};
-			}
+.controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService, $location, $stateParams, ngDialog) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("productdetail");
+	$scope.menutitle = NavigationService.makeactive("Productdetail");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.productid = $stateParams.id;
+	
+	var addtowishlistcallback = function (data, status) {
+		console.log(data);
+		if (data == "true") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else if (data == "0") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
 		}
-		$scope.usercontact = function (contact) {
-			$scope.allvalidation = [{
-				field: $scope.contact.name,
-				validation: ""
+	}
+	
+	$scope.addtowishlist = function (productid) {
+		if (NavigationService.getuser()) {
+			NavigationService.addtowishlist(productid, addtowishlistcallback);
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+
+	$scope.addtocart = function (product) {
+		console.log(product);
+		var selectedproduct = {};
+		selectedproduct.product = product.id;
+		selectedproduct.productname = product.name;
+		selectedproduct.price = product.price;
+		selectedproduct.quantity = product.quantity;
+		NavigationService.addtocart(selectedproduct, function (data) {
+			console.log(data);
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+			//			$location.url("/cart");
+			myfunction();
+		});
+	}
+
+	var getproductdetailscallback = function (data, status) {
+		console.log(data);
+		$scope.product = data;
+		if (data.product.quantity >= 1) {
+			$scope.availability = "In Stock";
+		} else {
+			$scope.availability = "Out of Stock";
+		}
+		
+		$scope.product.product.img = $scope.product.productimage[0].image;
+		$scope.product.product.quantity = 1;
+		
+		$scope.productdetail = [];
+		_.each($scope.product.productimage, function(n){
+			$scope.productdetail.push(n.image);
+		});
+		
+		console.log($scope.productdetail);
+		
+	}
+	NavigationService.getproductdetails($scope.productid).success(getproductdetailscallback);
+	
+	
+	$scope.onimgclick = function(img){
+		console.log(img);
+		$scope.product.product.img = img;
+	}
+})
+
+.controller('OrderhistoryCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("orderhistory");
+	$scope.menutitle = NavigationService.makeactive("Orderhistory");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+})
+
+.controller('ContactCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("contact");
+	$scope.menutitle = NavigationService.makeactive("Contact");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+
+	$scope.contact = {};
+	var usercontactcallback = function (data, status) {
+		console.log("before");
+		console.log(data);
+		console.log("aftr");
+		if (data) {
+			$scope.msgsuccess = "Successfully Submitted!!";
+			$scope.msg = "";
+			$scope.contact = {};
+		} else {
+			$scope.msg = "Invalid data try again!!";
+			$scope.msgsuccess = "";
+			$scope.contact = {};
+		}
+	}
+	$scope.usercontact = function (contact) {
+		$scope.allvalidation = [{
+			field: $scope.contact.name,
+			validation: ""
             }, {
-				field: $scope.contact.email,
-				validation: ""
+			field: $scope.contact.email,
+			validation: ""
             }, {
-				field: $scope.contact.comment,
-				validation: ""
+			field: $scope.contact.comment,
+			validation: ""
             }];
-			var check = formvalidation($scope.allvalidation);
-			if (check) {
-				NavigationService.usercontact(contact, usercontactcallback);
-			} else {
-				$scope.msg = "Please fill mandatory fields!!";
-				$scope.msgsuccess = "";
-				$scope.contact = {};
-			}
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.usercontact(contact, usercontactcallback);
+		} else {
+			$scope.msg = "Please fill mandatory fields!!";
+			$scope.msgsuccess = "";
+			$scope.contact = {};
+		}
 
-		}
-	})
-	.controller('StorelocatorCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("storelocator");
-		$scope.menutitle = NavigationService.makeactive("StoreLocator");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-	})
-	.controller('ResetpasswordCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("resetpassword");
-		$scope.menutitle = NavigationService.makeactive("Resetpassword");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
+	}
+})
 
-		$scope.forgot = [];
-		$scope.forgot.hashcode = $stateParams.id;
-		//  REDIRECT CHANGE PASSWORD STARTS
-		var newPasswordSuccess = function (data, status) {
-			if (data == '1') {
-				$location.url("/login");
-			} else {
-				$scope.msg = "Sorry not able to change password..Try Again!";
-			}
-		}
-		$scope.newPassword = function () {
-			console.log($scope.forgot);
-			NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
-		}
-	})
-	.controller('AccountCtrl', function ($scope, TemplateService, NavigationService) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("account");
-		$scope.menutitle = NavigationService.makeactive("Account");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
-		$scope.user = {};
-		var updateusercallback = function (data, status) {
-			console.log(data);
-			if (data == "true") {
-				$scope.msgsuccess = "Updated Successfully!";
-				$scope.msgfailure = "";
-				$scope.user = {};
-			} else {
-				$scope.user = {};
-				$scope.msgfailure = "Sorry Try Again!";
-				$scope.msgsuccess = "";
-			}
+.controller('StorelocatorCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("storelocator");
+	$scope.menutitle = NavigationService.makeactive("StoreLocator");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+})
 
+.controller('ResetpasswordCtrl', function ($scope, TemplateService, NavigationService, $stateParams) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("resetpassword");
+	$scope.menutitle = NavigationService.makeactive("Resetpassword");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+
+	$scope.forgot = [];
+	$scope.forgot.hashcode = $stateParams.id;
+	//  REDIRECT CHANGE PASSWORD STARTS
+	var newPasswordSuccess = function (data, status) {
+		if (data == '1') {
+			$location.url("/login");
+		} else {
+			$scope.msg = "Sorry not able to change password..Try Again!";
 		}
-		$scope.updateuser = function (user) {
-			NavigationService.updateuser(user, updateusercallback)
+	}
+	$scope.newPassword = function () {
+		console.log($scope.forgot);
+		NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
+	}
+})
+
+.controller('AccountCtrl', function ($scope, TemplateService, NavigationService) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("account");
+	$scope.menutitle = NavigationService.makeactive("Account");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.user = {};
+
+	var updateusercallback = function (data, status) {
+		console.log(data);
+		if (data == "1") {
+			$scope.msgsuccess = "User updated";
+		} else {
+			$scope.msgfailure = "fail to update"
 		}
-	})
-	.controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
-		$scope.template = TemplateService;
-		$scope.template = TemplateService.changecontent("popwish");
-		$scope.menutitle = NavigationService.makeactive("Addwish");
-		TemplateService.title = $scope.menutitle;
-		$scope.navigation = NavigationService.getnav();
+
+	}
+	$scope.updateuser = function (user) {
+		NavigationService.updateuser(user, updateusercallback)
+	}
 
 
-	})
+
+	// User details by default
+
+	NavigationService.getuserdetails(function (data, status) {
+		console.log("user details");
+		console.log(data);
+		$scope.user = data;
+	});
+})
+
+.controller('AddwishCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
+	$scope.template = TemplateService;
+	$scope.template = TemplateService.changecontent("popwish");
+	$scope.menutitle = NavigationService.makeactive("Addwish");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+
+
+})
 
 .controller('AboutCtrl', function ($scope, TemplateService, NavigationService) {
 	$scope.template = TemplateService;
@@ -8851,6 +8934,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	// WISHLIST PRODUCTS
 
+	$scope.getproductdetails = function (productid) {
+		console.log(productid);
+		$location.url("/productdetail/" + productid);
+
+	}
+
 	var getwishlistproductcallback = function (data, status) {
 		$scope.products = data.queryresult;
 		console.log($scope.products);
@@ -8861,57 +8950,87 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var removefromwishlist = function (data, status) {
 		console.log(data);
 		if (data == 1) {
-			ngDialog.open({
-				template: 'views/content/deletewish.html',
-				scope: $scope
-			});
+			//			ngDialog.open({
+			//				template: 'views/content/deletewish.html',
+			//				scope: $scope
+			//			});
 			NavigationService.getwishlistproduct(getwishlistproductcallback);
 		}
 
 	}
 	$scope.removefromwishlist = function (productid) {
+		console.log(productid);
 		NavigationService.removefromwishlist(productid, removefromwishlist);
 	}
 
 })
 
-.controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService) {
+.controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $stateParams, ngDialog, $location) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("searchresult");
 	$scope.menutitle = NavigationService.makeactive("SearchResult");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 
+	$scope.getproductdetails = function (productid) {
+		console.log(productid);
+		$location.url("/productdetail/" + productid);
 
-	$scope.products = [{
-		image: "img/product/5.jpg",
-		image1: "img/product/5.jpg",
-		name: "Apple",
-		desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-		price: "47000.00"
+	}
 
-    }, {
-		image: "img/product/6.jpg",
-		image1: "img/product/5.jpg",
-		name: "Apple Macbook",
-		desc: "This book is a treatise on the theory of ethics, very popular during the Renaissance. ",
-		price: "48000.00"
+	var addtowishlistcallback = function (data, status) {
+		console.log(data);
+		if (data == "true") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else if (data == "0") {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
+	$scope.addtowishlist = function (productid) {
+		if (NavigationService.getuser()) {
+			NavigationService.addtowishlist(productid, addtowishlistcallback);
+		} else {
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+		}
+	}
 
-    }, {
-		image: "img/product/7.jpg",
-		image1: "img/product/5.jpg",
-		name: "Apple air",
-		desc: "but the majority have suffered alteration in some form. ",
-		price: "42000.00"
+	$scope.addtocart = function (product) {
+		console.log(product);
+		var selectedproduct = {};
+		selectedproduct.product = product.id;
+		selectedproduct.productname = product.name;
+		selectedproduct.price = product.price;
+		selectedproduct.quantity = 1;
+		NavigationService.addtocart(selectedproduct, function (data) {
+			console.log(data);
+			ngDialog.open({
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
+			//			$location.url("/cart");
+			myfunction();
+		});
+	}
 
-    }, {
-		image: "img/product/8.jpg",
-		image1: "img/product/5.jpg",
-		name: "samsung",
-		desc: "distracted by the readable content of a page when looking at its layout. ",
-		price: "72000.00"
 
-    }];
+	NavigationService.search($stateParams.search, function (data) {
+		console.log(data);
+		$scope.products = data;
+	});
 
 })
 
@@ -8922,6 +9041,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.submenu = [];
 	$scope.parent = {};
 	$scope.category = {};
+
+	// Brand on hover
+
+	var getbrandsuccess = function (data, status) {
+		$scope.brandhover = data.queryresult;
+	}
+	NavigationService.getbrand(getbrandsuccess);
+
+
 
 	$scope.getproductbycategory = function (parent, category) {
 		console.log("parent" + parent + "   cate=" + category);
@@ -9119,13 +9247,14 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         }, 
         getproductdetails: function(id) {
-            return $http.get(admin_url + 'json/getproductdetails', {
-                data: {
-                    "id": id
-                }
-            }, {
+            return $http.get(admin_url + 'json/getproductdetails?id='+id, {}, {
                 withCredentials: true
             });
+        }, 
+        search: function(search, callback) {
+            return $http.get(admin_url + 'json/searchbyname?search='+search, {}, {
+                withCredentials: true
+            }).success(callback);
         },
 
           getproductbybrand: function(id,pageno,callback) {
@@ -9176,22 +9305,22 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         updateuser: function (user,callback) {
+            console.log(user);
             return $http({
                 url: admin_url + "json/updateuser",
                 method: "POST",
                 withCredentials: true,
                 data: {
-                    "id": $.jStorage.get("user").id,
                     "firstname": user.firstname,
                     "lastname": user.lastname,
-                    "address": user.address,
+                    "address": user.billingaddress,
                     "email": user.email,
                     "phone": user.phone,
-                    "city": user.city,
-                    "zipcode": user.zipcode,
-                    "country": user.country,
+                    "city": user.billingcity,
+                    "zipcode": user.billingpincode,
+                    "country": user.billingcountry,
                     "sameasbilling": user.sameasbilling,
-                    "state": user.state,
+                    "state": user.billingstate
                 }
             }).success(callback);
         },
@@ -9200,7 +9329,11 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-
+          getuserdetails: function(callback) {
+            return $http.get(admin_url + 'json/getuserdetails', {}, {
+                withCredentials: true
+            }).success(callback);
+        }, 
         loginuser: function (login, callback) {
             return $http({
                 url: admin_url + "json/loginuser",

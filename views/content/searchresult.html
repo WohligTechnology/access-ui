@@ -6,14 +6,14 @@
 		</div>
 		<div class="row">
 			<div class="product-list">
-				<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
+				<div class="col-md-3 col-sm-6" ng-repeat="pro in products" ng-click="getproductdetails(pro.id)">
 						<div class="pro-box">
 							<div class="img-box">
 								<div class="pro-img1">
-									<img ng-src="{{pro.image}}" class="img-responsive">
+									<img ng-src="{{pro.image | serverimage}}" class="img-responsive">
 								</div>
 								<div class="pro-img2">
-									<img ng-src="{{pro.image1}}" class="img-responsive">
+									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
 									<!--                       <img  src="img/product/5.jpg" class="img-responsive " >-->
 								</div>
 							</div>
@@ -35,8 +35,8 @@
 								<div class="cartli">
 									<ul>
 										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li> 
-										<li class="carts" ng-click="openModal();"><i class="fa fa-heart"></i></li>
-										<li class="carts"><a href="#/cart"><i class="fa fa-shopping-cart"></i></a></li>
+										<li class="carts" ng-click="addtowishlist(pro.id);"><i class="fa fa-heart"></i></li>
+										<li class="carts" ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i></li>
 									</ul>
 								</div>
 							</div>

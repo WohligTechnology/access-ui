@@ -124,13 +124,14 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         }, 
         getproductdetails: function(id) {
-            return $http.get(admin_url + 'json/getproductdetails', {
-                data: {
-                    "id": id
-                }
-            }, {
+            return $http.get(admin_url + 'json/getproductdetails?id='+id, {}, {
                 withCredentials: true
             });
+        }, 
+        search: function(search, callback) {
+            return $http.get(admin_url + 'json/searchbyname?search='+search, {}, {
+                withCredentials: true
+            }).success(callback);
         },
 
           getproductbybrand: function(id,pageno,callback) {
@@ -187,7 +188,6 @@ var navigationservice = angular.module('navigationservice', [])
                 method: "POST",
                 withCredentials: true,
                 data: {
-                    "id": $.jStorage.get("user").id,
                     "firstname": user.firstname,
                     "lastname": user.lastname,
                     "address": user.billingaddress,

@@ -87,7 +87,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 		})
 	
 		.state('searchresult', {
-			url: "/searchresult",
+			url: "/searchresult/:search",
 			templateUrl: "views/template.html",
 			controller: 'SearchresultCtrl'
 		})
