@@ -1,5 +1,5 @@
 {
-  "name": "ethanhunt",
+  "name": "pavbhaji",
   "version": "1.0.0",
   "description": "EthanHunt",
   "main": "Gruntfile.js",
@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git+https://github.com/WohligTechnology/EthanHunt.git"
   },
-  "author": "",
+  "author": "chintan@wohlig.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/WohligTechnology/EthanHunt/issues"

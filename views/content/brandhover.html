@@ -1,57 +1,18 @@
 <div class="brandhover" ng-controller="submenuctrl">
-	<div class="brand-slide">
-		<div id="mybrand" class="carousel slide pdn" data-ride="carousel">
-			<ol class="carousel-indicators indicate">
-				<li data-target="#mybrand" data-slide-to="0" class="active"></li>
-				<li data-target="#mybrand" data-slide-to="1"></li>
-				<li data-target="#mybrand" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<div class="divider">
-						<div class="row">
-							<div class="col-md-3" ng-repeat="brndhov in brandhover">
-								<div class="img-holder">
-									<img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-<!--
-				<div class="item">
-					<div class="divider">
-						<div class="row">
-							<div class="col-md-3" ng-repeat="brndhov in brandhover">
-								<div class="img-holder">
-									<a href="">
-										<img src="img/brands/apple.png" alt="Brands" class="img-responsive">
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="divider">
-						<div class="row">
-							<div class="col-md-3" ng-repeat="brndhov in brandhover">
-								<div class="img-holder">
-									<a href=""><img src="img/brands/jackjones.png" alt="Brands" class="img-responsive"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
--->        
-        
-			</div>
-			<a class="left carousel-control arrow-left" href="#mybrand" role="button" data-slide="prev">
-			</a>
-			<a class="right carousel-control arrow-right" href="#mybrand" role="button" data-slide="next">
-			</a>
-		</div>
-	</div>
+
+    <div style="height: 305px">
+        <carousel interval="myInterval" no-wrap="noWrapSlides">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <div class="row">
+                    <div class="col-md-3" ng-repeat="brndhov in brandhover">
+                        <div class="img-holder">
+                            <img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
+                        </div>
+                    </div>
+                </div>
+            </slide>
+        </carousel>
+    </div>
 </div>
 
 
