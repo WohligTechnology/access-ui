@@ -1,7 +1,7 @@
 {
   "name": "pavbhaji",
   "version": "1.0.0",
-  "description": "EthanHunt",
+  "description": "Pav Bhaji for Wohlig",
   "main": "Gruntfile.js",
   "dependencies": {
     "grunt": "^0.4.5",
