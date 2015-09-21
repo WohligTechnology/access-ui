@@ -1458,6 +1458,17 @@
 				}
 			}
 			
+			.brandhover .img-holder {
+				height: 120px;
+				width: auto;
+				margin-bottom: 50px;
+				img {
+					max-height: 100%;
+					max-width: 100%;
+					margin: 0 auto;
+				}
+			}
+			
 			//product hover
 			.producthover {
 				.container {
@@ -1689,6 +1700,7 @@
 				position: fixed;
 				bottom: 0;
 				right: 0;
+				z-index: 999999;
 				.kart {
 					position: relative;
 					.kart-logo {
@@ -1782,9 +1794,9 @@
 				}
 			}
 			
-//			input.ng-touched.ng-invalid {
-//				border: 1px solid red;
-//			}
+			input.ng-touched.ng-invalid {
+				border: 1px solid red;
+			}
 			
 			form {
 				border: 1px solid transparent;
@@ -1798,4 +1810,9 @@
 			.color {
 				color: #7EE1EA;
 				font-size: 17px;
+				cursor: pointer;
+			}
+			
+			.content {
+				min-height: 500px;
 			}

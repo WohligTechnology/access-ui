@@ -1,18 +1,16 @@
 <div class="brandhover" ng-controller="submenuctrl">
 
-    <div style="height: 305px">
-        <carousel interval="myInterval" no-wrap="noWrapSlides">
-            <slide ng-repeat="slide in slides" active="slide.active">
-                <div class="row">
-                    <div class="col-md-3" ng-repeat="brndhov in brandhover">
-                        <div class="img-holder">
-                            <img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
-                        </div>
-                    </div>
-                </div>
-            </slide>
-        </carousel>
-    </div>
+	<carousel interval="myInterval" no-wrap="noWrapSlides">
+		<slide ng-repeat="slide in slides" active="slide.active">
+			<div class="row">
+				<div class="col-md-3" ng-repeat="brndhov in brandhover">
+					<div class="img-holder">
+						<img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
+					</div>
+				</div>
+			</div>
+		</slide>
+	</carousel>
 </div>
 
 
