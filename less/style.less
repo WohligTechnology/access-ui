@@ -1410,7 +1410,9 @@
 			.brandhover {
 				width: 1000px;
 				padding: 2%;
-				.box-shadow(3px 3px 5px 1px rgba(0,0,0,.7));
+				border-bottom: 1px solid @color1;
+				border-left: 1px solid @color1;
+				border-right: 1px solid @color1;
 				.divider {
 					.img-holder {
 						width: auto;
@@ -1474,10 +1476,13 @@
 				.container {
 					padding: 0;
 					.product-hov-list {
-						.box-shadow(3px 3px 5px 1px rgba(0,0,0,.7));
+						border-bottom: 1px solid @color1;
+						border-left: 1px solid @color1;
+						border-right: 1px solid @color1;
 						h5 {
 							color: @color3;
 							font-size: 18px;
+							font-weight: 600;
 						}
 						ul {
 							padding: 0;
@@ -1536,8 +1541,12 @@
 					padding: 0;
 				}
 				.tagline {
-					font-size: 20px;
-					font-weight: 700;
+					font-family: @font-family-body;
+					font-size: 23px;
+					font-weight: 600;
+				}
+				.mid {
+					font-size: 28px;
 				}
 			}
 			
