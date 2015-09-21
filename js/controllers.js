@@ -273,7 +273,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.nodata = 'Loading..';
-	$scope.nodatafound = true;
+    $scope.nodatafound = true;
 
     $scope.gettotalcartfunction = function() {
         NavigationService.totalcart(function(data) {
@@ -419,11 +419,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             $scope.cart = data;
             if (data == '') {
-			  $scope.nodatafound = true;
+                $scope.nodatafound = true;
                 $scope.nodata = "No Data found.";
-            }else{
-			  $scope.nodatafound = false;
-		  }
+            } else {
+                $scope.nodatafound = false;
+            }
         });
     }
 
@@ -758,7 +758,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Contact");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-	$scope.allvalidation = [];
+    $scope.allvalidation = [];
 
     $scope.contact = {};
     var usercontactcallback = function(data, status) {
@@ -766,14 +766,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.msgsuccess = "Successfully Submitted!!";
             $scope.msg = "";
             $scope.contact = {};
-		   clearvalidation($scope.allvalidation);
+            clearvalidation($scope.allvalidation);
         } else {
             $scope.msg = "Invalid data try again!!";
             $scope.msgsuccess = "";
             $scope.contact = {};
         }
-	    
-	    
+
+
     }
     $scope.usercontact = function(contact) {
         $scope.allvalidation = [{
@@ -1572,6 +1572,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [];
+
+    $scope.prev = function() {
+
+        var i = 0;
+
+        _.each(slides, function(n, key) {
+            if (n.active) {
+                i = key;
+            }
+            console.log(i);
+            n.active = false;
+        });
+        if (i == 0) {
+            i = slides.length;
+        }
+        slides[i - 1].active = true;
+    };
+
+    $scope.next = function() {
+
+        var i = 0;
+
+        _.each(slides, function(n, key) {
+            if (n.active) {
+                i = key;
+            }
+            console.log(i);
+            n.active = false;
+        });
+        if (i == (slides.length - 1)) {
+            i = -1;
+        }
+        slides[i + 1].active = true;
+
+    };
+
     $scope.addSlide = function() {
         var newWidth = 600 + slides.length + 1;
         slides.push({

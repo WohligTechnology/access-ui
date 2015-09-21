@@ -1,5 +1,7 @@
 <div class="brandhover" ng-controller="submenuctrl">
-
+	
+<span class="left" ng-click="prev()"></span>
+<span class="right" ng-click="next()"></span>
 	<carousel interval="myInterval" no-wrap="noWrapSlides">
 		<slide ng-repeat="slide in slides" active="slide.active">
 			<div class="row">
@@ -12,13 +14,3 @@
 		</slide>
 	</carousel>
 </div>
-
-
-
-<!--
-<div class="sof">
-	<flex-slider animation="slide">
-		<li><img src="img/brands/apple.png" alt="" class="img-responsive"></li>
-		<li><img src="img/brands/dell.png" alt="" class="img-resposnive"></li>
-	</flex-slider>
-</div>-->
