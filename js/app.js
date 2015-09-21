@@ -165,6 +165,13 @@ var formvalidation = function(allvalidation) {
     return isvalid2;
 };
 
+var clearvalidation = function(allvalidation) {
+	console.log(allvalidation);
+    for (var i = 0; i < allvalidation.length; i++) {
+            allvalidation[i].validation = "";
+    }
+};
+
 
 
 firstapp.directive('img', function($compile, $parse) {

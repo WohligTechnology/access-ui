@@ -748,27 +748,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('ContactCtrl', function($scope, TemplateService, NavigationService) {
+.controller('ContactCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("contact");
     $scope.menutitle = NavigationService.makeactive("Contact");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+	$scope.allvalidation = [];
 
     $scope.contact = {};
     var usercontactcallback = function(data, status) {
-        console.log("before");
-        console.log(data);
-        console.log("aftr");
         if (data) {
             $scope.msgsuccess = "Successfully Submitted!!";
             $scope.msg = "";
             $scope.contact = {};
+		   clearvalidation($scope.allvalidation);
         } else {
             $scope.msg = "Invalid data try again!!";
             $scope.msgsuccess = "";
             $scope.contact = {};
         }
+	    
+	    
     }
     $scope.usercontact = function(contact) {
         $scope.allvalidation = [{
@@ -787,7 +788,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
             $scope.msg = "Please fill mandatory fields!!";
             $scope.msgsuccess = "";
-            $scope.contact = {};
         }
 
     }
