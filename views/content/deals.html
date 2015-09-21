@@ -3,11 +3,11 @@
 
 		<div class="deals-head">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-3 prev">
 					<div class="deals-before">
-<!--						<img src="img/product/offersgone.jpg" alt="Offers Ends" class="img-responsive">-->
-                <div class="deals-offer">
-							<div class="col-md-12 "  ng-repeat="offers in updeals">
+						<p class="tagline text-center">Previous Deals</p>
+						<div class="deals-offer">
+							<div class="col-md-12 prev " ng-repeat="offers in updeals">
 								<div class="box">
 									<div class="prod">
 										<span class="off">Buy This</span>
@@ -68,6 +68,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
+					<p class="tagline text-center">Today Deals</p>
 					<div class="slide-deal">
 						<flex-slider class="carousel" flex-slide="deal in dealslide" animation="slide" item-width="210">
 							<li>
@@ -76,11 +77,11 @@
 						</flex-slider>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 prev">
 					<div class="deals-coming">
-<!--						<img src="img/product/comming_soon.jpg" alt="" class="img-responsive">-->
-                <div class="deals-offer">
-							<div class="col-md-12 " ng-repeat="offers in updeals">
+						<p class="tagline text-center">Coming Deals</p>
+						<div class="deals-offer">
+							<div class="col-md-12 prev " ng-repeat="offers in updeals">
 								<div class="box">
 									<div class="prod">
 										<span class="off">Buy This</span>
@@ -144,7 +145,7 @@
 		</div>
 
 
-		
+
 		<div class="deals-main">
 			<div class="row">
 				<div class="pro-set">
