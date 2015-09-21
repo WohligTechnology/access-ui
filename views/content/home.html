@@ -67,11 +67,13 @@
             <div class="col-md-offset-2 col-md-8 text-center">
                 <h3>sign up to receive our updates</h3>
                 <p>Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat.</p>
+                
                 <div class="search padtp">
+                       <p>{{msg}}</p>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Your email...">
+                            <input type="text" class="form-control" ng-class="allvalidation[0].validation" ng-model="subscribe.email" placeholder="Your email...">
                             <span class="input-group-btn">
-        <button class="btn btn-default custom" type="button">Subscribe</button>
+        <button class="btn btn-default custom" type="button" ng-click="usersubscribtion()">Subscribe</button>
       </span>
                         </div>
                         </div>

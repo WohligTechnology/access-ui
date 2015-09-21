@@ -49,14 +49,17 @@
                         <a class="" href="#/home"><img src="img/logo.png" alt="logo" class="img-responsive" style="width:200px;"> </a>
                     </div>
                     <div class="col-md-6">
+                       
+                               <form ng-submit="fastsearch(search)">
                         <div class="search vert">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
                                 <span class="input-group-btn">
-        <button class="btn btn-default custom" type="button" ng-click="fastsearch(search)">Search</button>
+        <button class="btn btn-default custom" type="submit">Search</button>
       </span>
                             </div>
                         </div>
+					</form>
                     </div>
                     <div class="col-md-3">
                         <div class="social vert">

@@ -172,7 +172,29 @@ var clearvalidation = function(allvalidation) {
     }
 };
 
-
+firstapp.directive('myloading', function() {
+    return {
+        restrict: 'E',
+        scope: { obj: '=' },
+        template: '<div>Hello, {{obj}}!</div>'
+    };
+});
+//
+//firstapp.directive('myloading', function($http) {
+//    return {
+//        restrict: 'A',
+//        scope: {
+//            obj: "=",
+//        },
+//        template: '{{obj1}}',
+//
+//        controller: function($scope) {
+//            
+//		   $scope.obj1  = $scope.obj;
+//
+//        }
+//    };
+//});
 
 firstapp.directive('img', function($compile, $parse) {
     return {

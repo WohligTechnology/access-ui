@@ -5,7 +5,7 @@ var msg = "my al popup";
 
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
-.controller('AppCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('AppCtrl', function($scope, TemplateService, NavigationService, $timeout, $location) {
     $scope.demo = "demo testing";
     myfunction = function() {
         NavigationService.gettotalcart(function(data) {
@@ -16,6 +16,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
     }
     myfunction();
+	
+	$scope.expresscheckout = function(total){
+		if(total != 0){
+			$location.url("/checkout");
+		}
+	}
 })
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -24,6 +30,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+	$scope.subscribe = {};
+	$scope.msg = "";
+	
+	$scope.usersubscribtion = function(){
+		$scope.allvalidation = [{
+            field: $scope.subscribe.email,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+		   $scope.msg = "Thank you for your subscribtion . ";
+//            NavigationService.registeruser($scope.account, registerusercallback);
+        } else {
+            $scope.msg = "Enter valid email id .";
+        }
+	}
 
 
     //    $scope.slides = [
@@ -992,7 +1014,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.checkout = {};
     $scope.paymentinfo = false;
     $scope.discount = 0;
+	if($.jStorage.get("discountamount")){
     $scope.discount = $.jStorage.get("discountamount");
+	}
     $scope.login = {};
     $scope.showcontinue = false;
     $scope.openblock.radiovalue = "checkoutasguest";
@@ -1039,7 +1063,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
             $scope.msgregister = "Invalid data try again!!";
             $scope.msg = "";
-            $scope.account = {};
         }
 
     }
@@ -1472,6 +1495,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("SearchResult");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+	
+	$scope.searchfor = $stateParams.search;
 
     $scope.getproductdetails = function(productid) {
         console.log(productid);
