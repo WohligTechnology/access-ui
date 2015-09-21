@@ -272,7 +272,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Cart");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.nodata = '';
+    $scope.nodata = 'Loading..';
+	$scope.nodatafound = true;
 
     $scope.gettotalcartfunction = function() {
         NavigationService.totalcart(function(data) {
@@ -418,8 +419,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             $scope.cart = data;
             if (data == '') {
+			  $scope.nodatafound = true;
                 $scope.nodata = "No Data found.";
-            }
+            }else{
+			  $scope.nodatafound = false;
+		  }
         });
     }
 

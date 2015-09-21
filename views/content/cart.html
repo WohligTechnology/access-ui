@@ -5,12 +5,12 @@
 				<h3>Your Shopping Bag</h3>
 				<p>Items reserved for limited time only</p>
 			</div>
-			<div class="text-center">
+			<div class="text-center" ng-if="nodatafound">
 				<p>
 					{{nodata}}
 				</p>
 			</div>
-			<div class="cart-det" ng-show="nodata ==''">
+			<div class="cart-det" ng-if="!nodatafound">
 				<table class="table">
 					<thead>
 						<tr>

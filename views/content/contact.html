@@ -26,10 +26,10 @@
                          <h5><span style="color: tomato;">{{msg}}</span></h5>
                          <h5><span style="color: #2CBF2C;">{{msgsuccess}}</span></h5>
 						<form action="" class="from-control">
-							<input type="text" class="form-control" ng-model="contact.name"  placeholder="Name *" required>
-							<input type="email" class="form-control" ng-model="contact.email" placeholder="Email *" required>
+							<input type="text" class="form-control" ng-model="contact.name" ng-class="allvalidation[0].validation"  placeholder="Name *" required>
+							<input type="email" class="form-control" ng-model="contact.email" ng-class="allvalidation[0].validation" placeholder="Email *" required>
 							<input type="tel" class="form-control" ng-model="contact.phone" placeholder="Telephone">
-							<textarea class="form-control" ng-model="contact.comment" placeholder="Query *" required></textarea>
+							<textarea class="form-control" ng-model="contact.comment" ng-class="allvalidation[0].validation" placeholder="Query *" required></textarea>
 							<a class="submit-btn-all pull-right" ng-click="usercontact(contact)">Submit</a>
 						</form>
 					</div>
