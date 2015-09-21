@@ -158,7 +158,7 @@ var formvalidation = function(allvalidation) {
         //        console.log("checking");
         //        console.log(allvalidation[i].field);
         if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
-            allvalidation[i].validation = "ng-dirty";
+            allvalidation[i].validation = "ng-invalid";
             isvalid2 = false;
         }
     }

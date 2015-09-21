@@ -3,7 +3,7 @@ var globalvariable = {};
 var myfunction = '';
 var msg = "my al popup";
 
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'valdr', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
 .controller('AppCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     $scope.demo = "demo testing";
