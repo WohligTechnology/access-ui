@@ -46,8 +46,8 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<div class="product-list">
-					<div class="col-md-4 col-sm-6" ng-repeat="pro in products" ng-if="pro.typeid==2||pro.typeid==3">
+				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
+					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box">
 							<div class="img-box" ng-click="getproductdetails(pro.id)">
 								<div class="pro-img1" ng-if="pro.image1">

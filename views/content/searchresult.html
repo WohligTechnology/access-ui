@@ -12,9 +12,9 @@
 		
 		<div class="row">
 			<div class="product-list">
-				<div class="col-md-3 col-sm-6" ng-repeat="pro in products" ng-click="getproductdetails(pro.id)">
+				<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box">
-							<div class="img-box">
+							<div class="img-box" ng-click="getproductdetails(pro.id)">
 								<div class="pro-img1">
 									<img ng-src="{{pro.image | serverimage}}" class="img-responsive">
 								</div>

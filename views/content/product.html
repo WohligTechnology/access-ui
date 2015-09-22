@@ -44,9 +44,6 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<div ng-if="products==''">
-					{{dataload}}
-				</div>
 				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">	
 					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box">
