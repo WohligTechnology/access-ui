@@ -89,14 +89,9 @@ var navigationservice = angular.module('navigationservice', [])
 				method: "POST"
 			});
 		},
-		getexclusiveandnewarrival: function (id, callback) {
-			return $http({
-				url: admin_url + 'json/getexclusiveandnewarrival',
-				method: "POST",
-				withCredentials: true,
-				data: {
-					"id": id
-				}
+		getexclusiveandnewarrival: function (pageno, id, callback) {
+			return $http.get(admin_url + 'json/getexclusiveandnewarrival?id='+id+'&pageno='+pageno, {}, {
+				withCredentials: true
 			}).success(callback);
 		},
 		getofferdetails: function (callback) {
@@ -122,6 +117,11 @@ var navigationservice = angular.module('navigationservice', [])
 					"email": forgot.email
 				}
 			}, {
+				withCredentials: true
+			}).success(callback);
+		},
+		getsubscribe: function (email, callback) {
+			return $http.get(admin_url + 'json/getsubscribe?email='+email, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
@@ -158,18 +158,12 @@ var navigationservice = angular.module('navigationservice', [])
 				}
 			});
 		},
-		getproductbycategory: function (pageno, parent, category) {
+		getproductbycategory: function (pageno, parent, category, callback) {
 			console.log(category);
-			return $http({
-				url: admin_url + 'json/getproductbycategory',
-				method: "POST",
-				withCredentials: true,
-				data: {
-					'parent': parent,
-					'subcategory': category,
-					'pageno': pageno
-				}
-			});
+			return $http.get(admin_url + 'json/getproductbycategory?parent='+parent+'&subcategory='+category+'&pageno='+pageno, {}, {
+				withCredentials: true
+			}).success(callback);
+			
 		},
 		usercontact: function (contact, callback) {
 			return $http({

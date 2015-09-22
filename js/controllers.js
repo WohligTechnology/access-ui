@@ -5,33 +5,54 @@ var msg = "my al popup";
 
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
-.controller('AppCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    $scope.demo = "demo testing";
-    myfunction = function() {
-        NavigationService.gettotalcart(function(data) {
-            $scope.totalcart = data;
-        });
-        NavigationService.totalcart(function(data) {
-            $scope.amount = data;
-        });
-    }
-    myfunction();
+.controller('AppCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+	$scope.demo = "demo testing";
+	myfunction = function () {
+		NavigationService.gettotalcart(function (data) {
+			$scope.totalcart = data;
+		});
+		NavigationService.totalcart(function (data) {
+			$scope.amount = data;
+		});
+	}
+	myfunction();
 })
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-    $scope.template = TemplateService.changecontent("home");
-    $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+	//Used to name the .html file
+	$scope.template = TemplateService.changecontent("home");
+	$scope.menutitle = NavigationService.makeactive("Home");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.subscribe = {};
+	$scope.msg = "";
 
+	$scope.usersubscribtion = function () {
+		$scope.allvalidation = [{
+			field: $scope.subscribe.email,
+			validation: ""
+        }];
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.getsubscribe($scope.account, function (data) {
+				console.log(data);
+				if (data == "true") {
+					$scope.msg = "Thank you for your subscribtion . ";
+				} else {
+					$scope.msg = "Already subscribed";
+				}
+			});
+		} else {
+			$scope.msg = "Enter valid email id .";
+		}
+	}
 
-    //    $scope.slides = [
-    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-    //        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-    //    ];
+	//    $scope.slides = [
+	//        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
+	//        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
+	//        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
+	//        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
+	//    ];
 	$scope.slides = [
         'img/slider/1.jpg',
         'img/slider/2.jpg',
@@ -234,7 +255,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			if ($scope.brandid != 0) {
 				NavigationService.getproductbybrand($scope.brandid, $scope.pageno, getproductbybrandcallback);
 			} else if ($scope.parent != 0 || $scope.category != 0) {
-				NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.category).success(getproductbybrandcallback);
+				NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
 			} else {
 				NavigationService.getallproduct($scope.pageno, getproductbybrandcallback);
 			}
@@ -891,6 +912,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.pageno = 0;
+	$scope.dataload = "Loading ...";
+	$scope.products = [];
+
 	var lastpage = 1;
 
 	$scope.demo2 = {
@@ -904,10 +928,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	var getexclusiveandnewarrivalcallback = function (data, status) {
 		console.log(data);
-		$scope.products = data.queryresult;
+		_.each(data.queryresult, function (n) {
+			$scope.products.push(n);
+		});
+
 		console.log($scope.products);
+		if ($scope.products == "") {
+			$scope.dataload = "No data found";
+		}
 	}
-	
+
 	$scope.addMoreItems = function () {
 		console.log("load more444444");
 		if (lastpage != $scope.pageno) {
@@ -918,9 +948,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.addMoreItems();
 
-	
-	
-	
+
+
+
 
 	$scope.openModal = function (s) {
 		console.log(s)
@@ -990,7 +1020,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, ngDialog) {
+.controller('CheckoutCtrl', function ($scope, TemplateService, NavigationService, ngDialog, $timeout) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("checkout");
 	$scope.menutitle = NavigationService.makeactive("CheckOut");
@@ -1050,50 +1080,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			field: $scope.account.confirmpassword,
 			validation: ""
         }];
-        var check = formvalidation($scope.allvalidation);
-        if (check) {
-            NavigationService.registeruser($scope.account, registerusercallback);
-        } else {
-            $scope.msgregister = "Invalid data try again!!";
-            $scope.msg = "";
-            $scope.account = {};
-        }
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			NavigationService.registeruser($scope.account, registerusercallback);
+		} else {
+			$scope.msgregister = "Invalid data try again!!";
+			$scope.msg = "";
+		}
 
-    }
-
+	}
 
 
-    // SHOW LOGIN BLOCK
 
-    $scope.checklogin = $.jStorage.get("user");
-    $scope.showlogin = {};
-    if ($scope.checklogin != null) {
-        $scope.showlogin = false;
-        $scope.showcontinue = true;
-        $scope.openblockvalue = true;
-    } else {
-        $scope.showlogin = true;
-    }
+	// SHOW LOGIN BLOCK
 
-    //login
-    var getlogin = function(data, status) {
-        console.log(data);
-        console.log("in login");
-        $.jStorage.set("user", data);
-        if (data != "false") {
-            $scope.msg = "Login Successful";
-            $scope.showlogin = false;
-            $scope.showcontinue = true;
-            $scope.openblockvalue = true;
-            window.reload();
-        } else {
-            $scope.msg = "Invalid Email Or Password";
-        }
-    };
-    $scope.userlogin = function(login) {
-        $scope.allvalidation = [{
-            field: $scope.login.email,
-            validation: ""
+	$scope.checklogin = $.jStorage.get("user");
+	$scope.showlogin = {};
+	if ($scope.checklogin != null) {
+		$scope.showlogin = false;
+		$scope.showcontinue = true;
+		$scope.openblockvalue = true;
+	} else {
+		$scope.showlogin = true;
+	}
+
+	//login
+	var getlogin = function (data, status) {
+		console.log(data);
+		console.log("in login");
+		$.jStorage.set("user", data);
+		if (data != "false") {
+			$scope.msg = "Login Successful";
+			$scope.showlogin = false;
+			$scope.showcontinue = true;
+			$scope.openblockvalue = true;
+			window.reload();
+		} else {
+			$scope.msg = "Invalid Email Or Password";
+		}
+	};
+	$scope.userlogin = function (login) {
+		$scope.allvalidation = [{
+			field: $scope.login.email,
+			validation: ""
         }, {
 			field: $scope.login.password,
 			validation: ""
@@ -1230,6 +1259,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.paymentinfo = true;
 		} else {
 			$scope.checkoutmsg = "Please fill mandatory fields!! OR Invalid data !!";
+			$timeout(function () {
+				$scope.checkoutmsg = "";
+			}, 5000);
 			$scope.msg = "";
 		}
 
@@ -1293,39 +1325,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         "img/product/iphone6ho.jpg",
         "img/product/glass.jpg"
     ];
-    $scope.demo2 = {
-        range: {
-            min: 0,
-            max: 10050
-        },
-        minPrice: 0,
-        maxPrice: 10050
-    };
-    $scope.deals = [{
-        imageprd: "img/product/iphone.jpg",
-        imageprd2: "img/product/iphone6.jpg",
-        descp: "Iphone6 cases and covers",
-        imageoff1: "img/product/iphone6ho.jpg",
-        imageoff2: "img/product/iphone2.jpg",
-        descpoff: "Iphone cases and covers",
-        price: "45,000.00"
+	$scope.demo2 = {
+		range: {
+			min: 0,
+			max: 10050
+		},
+		minPrice: 0,
+		maxPrice: 10050
+	};
+	$scope.deals = [{
+		imageprd: "img/product/iphone.jpg",
+		imageprd2: "img/product/iphone6.jpg",
+		descp: "Iphone6 cases and covers",
+		imageoff1: "img/product/iphone6ho.jpg",
+		imageoff2: "img/product/iphone2.jpg",
+		descpoff: "Iphone cases and covers",
+		price: "45,000.00"
     }, {
-        imageprd: "img/product/iphone.jpg",
-        imageprd2: "img/product/iphone6.jpg",
-        descp: "Iphone6 cases and covers",
-        imageoff1: "img/product/iphone6ho.jpg",
-        imageoff2: "img/product/iphone2.jpg",
-        descpoff: "Iphone cases and covers",
-        price: "45,000.00"
+		imageprd: "img/product/iphone.jpg",
+		imageprd2: "img/product/iphone6.jpg",
+		descp: "Iphone6 cases and covers",
+		imageoff1: "img/product/iphone6ho.jpg",
+		imageoff2: "img/product/iphone2.jpg",
+		descpoff: "Iphone cases and covers",
+		price: "45,000.00"
     }];
-    $scope.updeals = [{
-        imageprd: "img/product/iphone.jpg",
-        imageprd2: "img/product/iphone6.jpg",
-        descp: "Iphone6 cases and covers",
-        imageoff1: "img/product/iphone6ho.jpg",
-        imageoff2: "img/product/iphone2.jpg",
-        descpoff: "Iphone cases and covers",
-        price: "45,000.00"
+	$scope.updeals = [{
+		imageprd: "img/product/iphone.jpg",
+		imageprd2: "img/product/iphone6.jpg",
+		descp: "Iphone6 cases and covers",
+		imageoff1: "img/product/iphone6ho.jpg",
+		imageoff2: "img/product/iphone2.jpg",
+		descpoff: "Iphone cases and covers",
+		price: "45,000.00"
     }];
 })
 
