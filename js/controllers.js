@@ -5,7 +5,7 @@ var msg = "my al popup";
 
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'infinite-scroll', 'ngAnimate', 'ngDialog', 'angular-flexslider', 'ngSanitize', 'ui-rangeSlider'])
 
-.controller('AppCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('AppCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location) {
 	$scope.demo = "demo testing";
 	myfunction = function () {
 		NavigationService.gettotalcart(function (data) {
@@ -15,6 +15,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.amount = data;
 		});
 	}
+
+	$scope.expresscheckout = function (total) {
+		if (total != 0) {
+			$location.url("/checkout");
+		}
+	}
+
+
 	myfunction();
 })
 
@@ -34,7 +42,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }];
 		var check = formvalidation($scope.allvalidation);
 		if (check) {
-			NavigationService.getsubscribe($scope.account, function (data) {
+			NavigationService.getsubscribe($scope.subscribe.email, function (data) {
 				console.log(data);
 				if (data == "true") {
 					$scope.msg = "Thank you for your subscribtion . ";
@@ -93,28 +101,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-	var addtowishlistcallback = function (data, status) {
-		console.log(data);
-		if (data == "true") {
-			ngDialog.open({
-				template: 'views/content/popwish.html',
-				scope: $scope
-			});
-		} else if (data == "0") {
-			ngDialog.open({
-				template: 'views/content/wishexist.html',
-				scope: $scope
-			});
-		} else {
-			ngDialog.open({
-				template: 'views/content/failure.html',
-				scope: $scope
-			});
-		}
-	}
-	$scope.addtowishlist = function (productid) {
+	
+	$scope.addtowishlist = function (product) {
 		if (NavigationService.getuser()) {
-			NavigationService.addtowishlist(productid, addtowishlistcallback);
+			NavigationService.addtowishlist(product.id, function (data, status) {
+				console.log(data);
+				if (data == "true") {
+					product.fav = "fav";
+					ngDialog.open({
+						template: 'views/content/popwish.html',
+						scope: $scope
+					});
+				} else if (data == "0") {
+					ngDialog.open({
+						template: 'views/content/wishexist.html',
+						scope: $scope
+					});
+				} else {
+					ngDialog.open({
+						template: 'views/content/failure.html',
+						scope: $scope
+					});
+				}
+			});
 		} else {
 			ngDialog.open({
 				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
@@ -237,8 +246,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	var getproductbybrandcallback = function (data, status) {
 		_.each(data.queryresult, function (n) {
+			if (n.isfavid) {
+				n.fav = "fav";
+			}
 			$scope.products.push(n);
 		});
+		console.log($scope.products);
 
 		if ($scope.products == "") {
 			$scope.dataload = "No data found";
@@ -428,16 +441,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.getcartfunction = function () {
 		NavigationService.getcart(function (data) {
 			console.log(data);
-
-			if ($.jStorage.get("user")) {
-				console.log("user exist");
-				_.each(data, function (n) {
-					n.options = {};
-					n.options.realname = n.name;
-					n.options.image = n.image;
-				});
-			}
-
 			$scope.cart = data;
 			if (data == '') {
 				$scope.nodatafound = true;
@@ -485,7 +488,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$window.location.reload();
 
 		} else {
-			$scope.msg = "This Email Id is already registered with us or Error In Registration";
+			$scope.msgregister = "This Email Id is already registered with us or Error In Registration";
+			$scope.msg = "";
 			$scope.account = {};
 		}
 	}
@@ -522,13 +526,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var getlogin = function (data, status) {
 		console.log(data);
 		console.log("in login");
-		$.jStorage.set("user", data);
 		if (data != "false") {
+			$.jStorage.set("user", data);
 			$scope.msg = "Login Successful";
 			$location.url("/home");
 		} else {
 			$scope.msg = "Invalid Email Or Password";
 		}
+		$scope.msgregister = "";
 	};
 	$scope.userlogin = function (login) {
 		$scope.allvalidation = [{
@@ -771,6 +776,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Orderhistory");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+
+	NavigationService.myorders(function (data) {
+		console.log(data.queryresult);
+		$scope.orders = data.queryresult;
+	});
 })
 
 .controller('ContactCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -786,12 +796,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		if (data) {
 			$scope.msgsuccess = "Successfully Submitted!!";
 			$scope.msg = "";
-			$scope.contact = {};
 			clearvalidation($scope.allvalidation);
 		} else {
 			$scope.msg = "Invalid data try again!!";
 			$scope.msgsuccess = "";
-			$scope.contact = {};
 		}
 
 
@@ -859,7 +867,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	var updateusercallback = function (data, status) {
 		console.log(data);
-		if (data == "1") {
+		if (data == "true") {
 			$scope.msgsuccess = "User updated";
 		} else {
 			$scope.msgfailure = "fail to update"
@@ -929,6 +937,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var getexclusiveandnewarrivalcallback = function (data, status) {
 		console.log(data);
 		_.each(data.queryresult, function (n) {
+			if(n.isfavid){
+				n.fav = "fav";
+			}
 			$scope.products.push(n);
 		});
 
@@ -1037,12 +1048,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.checkout = {};
 	$scope.paymentinfo = false;
 	$scope.discount = 0;
+
 	if ($.jStorage.get("discountamount")) {
 		$scope.discount = $.jStorage.get("discountamount");
 	}
 	$scope.login = {};
 	$scope.showcontinue = false;
 	$scope.openblock.radiovalue = "checkoutasguest";
+
+	//PREFILLED USER DATA
+	NavigationService.getuserdetails(function (data) {
+		console.log(data);
+		$scope.checkout = data;
+	});
 
 
 	//CREATE ACCOUNT
@@ -1261,7 +1279,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.checkoutmsg = "Please fill mandatory fields!! OR Invalid data !!";
 			$timeout(function () {
 				$scope.checkoutmsg = "";
-			}, 5000);
+			}, 8000);
 			$scope.msg = "";
 		}
 
@@ -1310,21 +1328,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.dealsimg = [];
 
-	//    var getofferdetailscallback = function (data, status) {
-	//        $scope.dealslide = data.offers;
-	//        console.log($scope.dealslide);
-	//        _.each($scope.dealslide, function (n) {
-	//            $scope.dealsimg.push(n.image);
-	//        }
-	//    }
-	//    NavigationService.getofferdetails(getofferdetailscallback);
-	$scope.dealslide = [
-        "img/product/iphone.jpg",
-        "img/product/iphone6.jpg",
-        "img/product/macbook.png",
-        "img/product/iphone6ho.jpg",
-        "img/product/glass.jpg"
-    ];
+	$scope.sliderclick = function (id) {
+		NavigationService.getoneoffer(id, function (data) {
+			console.log(data);
+		})
+	}
+
+	var getofferdetailscallback = function (data, status) {
+		console.log(data.offer[0]);
+		$scope.deals = data.offer[0];
+
+		$scope.slideoffer = [];
+		_.each(data.offer[0], function (n) {
+			_.each(n.offerproducts, function (m) {
+				if (m.image1) {
+					$scope.slideoffer.push({
+						"id": n.id,
+						"img": m.image1
+					});
+				}
+			});
+
+		});
+		console.log($scope.slideoffer);
+
+
+		$scope.pastdeals = data.pastoffer;
+		$scope.pastdealproducts = data.pastofferproducts;
+		$scope.upcomingoffer = data.upcomingoffer;
+		$scope.upcomingofferproducts = data.upcomingofferproducts;
+		console.log($scope.dealslide);
+		_.each($scope.dealslide, function (n) {
+			$scope.dealsimg.push(n.image);
+		})
+	}
+	NavigationService.getofferdetails(getofferdetailscallback);
+	//	$scope.dealslide = [
+	//        "img/product/iphone.jpg",
+	//        "img/product/iphone6.jpg",
+	//        "img/product/macbook.png",
+	//        "img/product/iphone6ho.jpg",
+	//        "img/product/glass.jpg"
+	//    ];
 	$scope.demo2 = {
 		range: {
 			min: 0,
@@ -1333,32 +1378,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		minPrice: 0,
 		maxPrice: 10050
 	};
-	$scope.deals = [{
-		imageprd: "img/product/iphone.jpg",
-		imageprd2: "img/product/iphone6.jpg",
-		descp: "Iphone6 cases and covers",
-		imageoff1: "img/product/iphone6ho.jpg",
-		imageoff2: "img/product/iphone2.jpg",
-		descpoff: "Iphone cases and covers",
-		price: "45,000.00"
-    }, {
-		imageprd: "img/product/iphone.jpg",
-		imageprd2: "img/product/iphone6.jpg",
-		descp: "Iphone6 cases and covers",
-		imageoff1: "img/product/iphone6ho.jpg",
-		imageoff2: "img/product/iphone2.jpg",
-		descpoff: "Iphone cases and covers",
-		price: "45,000.00"
-    }];
-	$scope.updeals = [{
-		imageprd: "img/product/iphone.jpg",
-		imageprd2: "img/product/iphone6.jpg",
-		descp: "Iphone6 cases and covers",
-		imageoff1: "img/product/iphone6ho.jpg",
-		imageoff2: "img/product/iphone2.jpg",
-		descpoff: "Iphone cases and covers",
-		price: "45,000.00"
-    }];
+	//	$scope.deals = [{
+	//		imageprd: "img/product/iphone.jpg",
+	//		imageprd2: "img/product/iphone6.jpg",
+	//		descp: "Iphone6 cases and covers",
+	//		imageoff1: "img/product/iphone6ho.jpg",
+	//		imageoff2: "img/product/iphone2.jpg",
+	//		descpoff: "Iphone cases and covers",
+	//		price: "45,000.00"
+	//    }, {
+	//		imageprd: "img/product/iphone.jpg",
+	//		imageprd2: "img/product/iphone6.jpg",
+	//		descp: "Iphone6 cases and covers",
+	//		imageoff1: "img/product/iphone6ho.jpg",
+	//		imageoff2: "img/product/iphone2.jpg",
+	//		descpoff: "Iphone cases and covers",
+	//		price: "45,000.00"
+	//    }];
+	//	$scope.updeals = [{
+	//		imageprd: "img/product/iphone.jpg",
+	//		imageprd2: "img/product/iphone6.jpg",
+	//		descp: "Iphone6 cases and covers",
+	//		imageoff1: "img/product/iphone6ho.jpg",
+	//		imageoff2: "img/product/iphone2.jpg",
+	//		descpoff: "Iphone cases and covers",
+	//		price: "45,000.00"
+	//    }];
 })
 
 .controller('DistributionCtrl', function ($scope, TemplateService, NavigationService) {
@@ -1501,6 +1546,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.menutitle = NavigationService.makeactive("Wishlist");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
+	$scope.loading = "loading..";
 
 	// WISHLIST PRODUCTS
 
@@ -1513,6 +1559,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var getwishlistproductcallback = function (data, status) {
 		$scope.products = data.queryresult;
 		console.log($scope.products);
+		if (data.queryresult == '') {
+			$scope.loading = "No data found..";
+		} else {
+			$scope.loading = "";
+		}
 	}
 	NavigationService.getwishlistproduct(getwishlistproductcallback);
 

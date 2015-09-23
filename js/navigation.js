@@ -185,21 +185,26 @@ var navigationservice = angular.module('navigationservice', [])
 				method: "POST",
 				withCredentials: true,
 				data: {
+					"id":$.jStorage.get("user").id,
 					"firstname": user.firstname,
 					"lastname": user.lastname,
-					"address": user.billingaddress,
+					"billingaddress": user.billingaddress,
 					"email": user.email,
 					"phone": user.phone,
-					"city": user.billingcity,
-					"zipcode": user.billingpincode,
-					"country": user.billingcountry,
-					"sameasbilling": user.sameasbilling,
-					"state": user.billingstate
+					"billingcity": user.billingcity,
+					"billingpincode": user.billingpincode,
+					"billingcountry": user.billingcountry,
+					"billingstate": user.billingstate
 				}
 			}).success(callback);
 		},
 		logout: function (callback) {
 			return $http.post(admin_url + 'json/logout', {
+				withCredentials: true
+			}).success(callback);
+		},
+		myorders: function (callback) {
+			return $http.post(admin_url + 'json/getuserorders?user'+$.jStorage.get("user").id, {
 				withCredentials: true
 			}).success(callback);
 		},
