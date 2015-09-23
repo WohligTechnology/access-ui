@@ -101,7 +101,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-	
+
 	$scope.addtowishlist = function (product) {
 		if (NavigationService.getuser()) {
 			NavigationService.addtowishlist(product.id, function (data, status) {
@@ -695,6 +695,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var addtowishlistcallback = function (data, status) {
 		console.log(data);
 		if (data == "true") {
+			$scope.product.product.fav = "fav";
 			ngDialog.open({
 				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
 				plain: true
@@ -744,6 +745,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var getproductdetailscallback = function (data, status) {
 		console.log(data);
 		$scope.product = data;
+		if($scope.product.product.user){
+			$scope.product.product.fav = "fav";
+		}
 		if (data.product.quantity >= 1) {
 			$scope.availability = "In Stock";
 		} else {
@@ -937,7 +941,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	var getexclusiveandnewarrivalcallback = function (data, status) {
 		console.log(data);
 		_.each(data.queryresult, function (n) {
-			if(n.isfavid){
+			if (n.isfavid) {
 				n.fav = "fav";
 			}
 			$scope.products.push(n);
@@ -978,28 +982,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	}
 
-	var addtowishlistcallback = function (data, status) {
-		console.log(data);
-		if (data == "true") {
-			ngDialog.open({
-				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-				plain: true
-			});
-		} else if (data == "0") {
-			ngDialog.open({
-				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-				plain: true
-			});
-		} else {
-			ngDialog.open({
-				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-				plain: true
-			});
-		}
-	}
-	$scope.addtowishlist = function (productid) {
+//	var addtowishlistcallback = function (data, status) {
+//		console.log(data);
+//		if (data == "true") {
+//			ngDialog.open({
+//				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+//				plain: true
+//			});
+//		} else if (data == "0") {
+//			ngDialog.open({
+//				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+//				plain: true
+//			});
+//		} else {
+//			ngDialog.open({
+//				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+//				plain: true
+//			});
+//		}
+//	}
+	$scope.addtowishlist = function (product) {
 		if (NavigationService.getuser()) {
-			NavigationService.addtowishlist(productid, addtowishlistcallback);
+			NavigationService.addtowishlist(product.id, function (data, status) {
+				console.log(data);
+				if (data == "true") {
+					product.fav = "fav";
+					ngDialog.open({
+						template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+						plain: true
+					});
+				} else if (data == "0") {
+					ngDialog.open({
+						template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+						plain: true
+					});
+				} else {
+					ngDialog.open({
+						template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+						plain: true
+					});
+				}
+			});
 		} else {
 			ngDialog.open({
 				template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
