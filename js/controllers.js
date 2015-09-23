@@ -101,7 +101,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-
 	$scope.addtowishlist = function (product) {
 		if (NavigationService.getuser()) {
 			NavigationService.addtowishlist(product.id, function (data, status) {
@@ -109,19 +108,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 				if (data == "true") {
 					product.fav = "fav";
 					ngDialog.open({
-						template: 'views/content/popwish.html',
-						scope: $scope
-					});
+				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
 				} else if (data == "0") {
 					ngDialog.open({
-						template: 'views/content/wishexist.html',
-						scope: $scope
-					});
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
 				} else {
 					ngDialog.open({
-						template: 'views/content/failure.html',
-						scope: $scope
-					});
+				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+				plain: true
+			});
 				}
 			});
 		} else {
