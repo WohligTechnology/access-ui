@@ -1692,6 +1692,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	// Brand on hover
 
 	var getbrandsuccess = function (data, status) {
+		console.log("data stat");
+		console.log(data);
+		$scope.lastpage = data.lastpage;
 		$scope.splideno = data.lastpage;
 		$scope.brandhover = data.queryresult;
 
@@ -1733,6 +1736,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.slidebrands = function (pageno) {
 		NavigationService.getbrand(pageno, function (data) {
+			$scope.lastpage = data.lastpage;
 			$scope.brandhover = data.queryresult;
 		});
 	}
@@ -1761,6 +1765,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 			$scope.brandhover = [];
 			$scope.slidebrands(--$scope.pageno);
+		}else{
+			console.log("in else");
+			console.log($scope.lastpage);
+			
+			$scope.slidebrands($scope.pageno = $scope.lastpage);
 		}
 	};
 
@@ -1782,6 +1791,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 			$scope.brandhover = [];
 			$scope.slidebrands(++$scope.pageno);
+		}else{
+			$scope.slidebrands($scope.pageno=1);
 		}
 
 	};
