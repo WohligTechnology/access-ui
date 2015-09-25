@@ -42,6 +42,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             templateUrl: "views/template.html",
             controller: 'ProductCtrl'
         })
+    
+    .state('category', {
+            url: "/category",
+            templateUrl: "views/template.html",
+            controller: 'CategoryCtrl'
+        })
         .state('orderhistory', {
             url: "/orderhistory",
             templateUrl: "views/template.html",

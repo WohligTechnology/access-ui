@@ -26,6 +26,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	myfunction();
 })
 
+.controller('CategoryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+	//Used to name the .html file
+	$scope.template = TemplateService.changecontent("category");
+	$scope.menutitle = NavigationService.makeactive("category");
+	TemplateService.title = $scope.menutitle;
+	$scope.navigation = NavigationService.getnav();
+	$scope.subscribe = {};
+})
+
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
 	//Used to name the .html file
 	$scope.template = TemplateService.changecontent("home");
