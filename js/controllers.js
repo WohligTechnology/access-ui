@@ -44,7 +44,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     }, {
-		image: "img/product/headphones.jpg",
+		image: "img/product/headphones.jpg", 
 	    name:"Headphones"
 
     }, {
