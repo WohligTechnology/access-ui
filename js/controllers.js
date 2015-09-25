@@ -33,6 +33,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.subscribe = {};
+	$scope.products = [{
+		image: "img/product/1.png",
+		name: "iphone"
+
+
+    }, {
+		image: "img/product/2.png",
+	    name: "phones"
+
+
+    }, {
+		image: "img/product/3.png",
+	    name:"phone"
+
+    }, {
+		image: "img/product/4.png",
+	    name:"headphones"
+
+    }];
 })
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
