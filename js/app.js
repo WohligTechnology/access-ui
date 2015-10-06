@@ -202,6 +202,27 @@ firstapp.directive('myloading', function() {
 //    };
 //});
 
+
+firstapp.directive('youtube', function ($sce) {
+	return {
+		restrict: 'A',
+		scope: {
+			code: '='
+		},
+		replace: true,
+		//        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+		template: '<iframe style="overflow:hidden;" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+		link: function (scope) {
+			scope.$watch('code', function (newVal) {
+				if (newVal) {
+					scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+				}
+			});
+		}
+	};
+});
+
+
 firstapp.directive('img', function($compile, $parse) {
     return {
         restrict: 'E',

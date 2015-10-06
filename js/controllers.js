@@ -717,6 +717,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.productid = $stateParams.id;
+	$scope.playvideo = false;
 
 	var addtowishlistcallback = function (data, status) {
 		console.log(data);
@@ -780,16 +781,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 			$scope.availability = "Out of Stock";
 		}
 
-		$scope.product.product.img = $scope.product.productimage[0].image;
+		$scope.product.product.img = $filter("serverimage")($scope.product.productimage[0].image);
 		$scope.product.product.quantity = 1;
 
 		$scope.productdetail = [];
 		_.each($scope.product.productimage, function (n) {
 			$scope.productdetail.push({image:$filter("serverimage")(n.image),check:1});
 		});
-		if(data.product.videourl != ''){
-			
-			$scope.productdetail.push({image:data.product.videourl,check:0});
+		if(data.product.videourl != ''){					$scope.productdetail.push({image:"http://img.youtube.com/vi/"+data.product.videourl+"/default.jpg",url:data.product.videourl,check:0});
 		}
 
 		console.log($scope.productdetail);
@@ -800,7 +799,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 	$scope.onimgclick = function (img) {
 		console.log(img);
-		$scope.product.product.img = img;
+		if(img.check == 0){
+			$scope.playvideo = true;
+			$scope.product.product.img = img.url;
+		}else{
+			$scope.playvideo = false;
+			$scope.product.product.img = img.image;
+		}
 	}
 })
 
