@@ -32,8 +32,8 @@
 }
 
 #container input:checked + label {
-	background: #E6E6E6;  /* Fondo de las pestañas al presionar */
-	color: #303030; /* Color de las pestañas al presionar */
+	background: #7ee1ea;  /* Fondo de las pestañas al presionar */
+	color: #fff; /* Color de las pestañas al presionar */ 
 	position: relative;
 	z-index: 6;
 	/*
