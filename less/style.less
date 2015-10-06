@@ -1613,16 +1613,28 @@
 				}
 				.prod {
 					width: 50%;
+					padding-right: 4px;
 					border-right: 1px solid #e6e6e6;
 					float: left;
 					.images_prod {
 						height: 190px;
 						position: relative;
 						cursor: pointer;
-						.img1 {}
-						.img2 {
+						.img1 {
+							width: 100%;
 							position: absolute;
-							top: 0;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
+						}
+						.img2 {
+							width: 100%;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
 							opacity: 0;
 							.transition(all 1.5s ease-in-out);
 						}
@@ -1634,15 +1646,28 @@
 				}
 				.off-prod {
 					width: 50%;
+					padding-left: 4px;
 					display: inline-block;
 					.off-images {
 						height: 190px;
 						position: relative;
 						cursor: pointer;
-						.img1 {}
-						.img2 {
+						.img1 {
+							width: 100%;
 							position: absolute;
-							top: 0;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
+							text-align: center;
+						}
+						.img2 {
+							width: 100%;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							.transform(translate(-50%,
+							-50%));
 							opacity: 0;
 							.transition(all 1.5s ease-in-out);
 						}
@@ -1668,6 +1693,9 @@
 					border: 1px solid #e6e6e6;
 					&:hover {
 						.box-shadow(0 4px 8px 3px #e6e6e6);
+					}
+					img {
+						margin: 0 auto;
 					}
 				}
 				.prd-foot {
@@ -1809,7 +1837,7 @@
 								background-color: #fff;
 								font-size: 13px;
 								text-transform: capitalize;
-								cursor: pointer; 
+								cursor: pointer;
 								&:hover {
 									color: #fff;
 									background-color: transparent;
@@ -1878,10 +1906,21 @@
 				margin-top: 50px !important;
 			}
 			
-			div.pro-box {
-				div.pro-name.nopdl {
-					h5 {
-						padding-left: 0;
-					}
+			.pdn {
+				margin: 15px 0 0 !important;
+				height: 250px !important;
+				.img1 {
+					height: inherit !important;
+				}
+				.img2 {
+					height: inherit !important;
+				}
+			}
+			
+			div.nopdl {
+				h5 {
+					min-height: 5px !important;
+					padding-left: 0 !important;
+					margin-top: 0 !important;
 				}
 			}

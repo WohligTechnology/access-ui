@@ -47,14 +47,14 @@
 				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">	
 					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box">
-							<div class="img-box" ng-click="getproductdetails(pro.id);">
-								<div class="pro-img1" ng-if="pro.image">
+							<div class="img-box pdn" ng-click="getproductdetails(pro.id);">
+								<div class="pro-img1 img1" ng-if="pro.image">
 									<img ng-src="{{pro.image}}" class="img-responsive">
 								</div>
-								<div class="pro-img2" ng-if="!pro.image">
+								<div class="pro-img2 img2" ng-if="!pro.image">
 									<img ng-src="{{pro.image}}" class="img-responsive">
 								</div>
-								<div class="pro-img2" ng-if="pro.image">
+								<div class="pro-img2 img2" ng-if="pro.image">
 									<img ng-src="{{pro.image}}" class="img-responsive">
 								</div>
 							</div>
