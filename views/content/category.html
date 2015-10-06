@@ -48,11 +48,14 @@
 					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box" ng-click="categorydetail(pro.id);">
 							<div class="img-box pdn">
-								<div class="pro-img1 img1" ng-if="pro.image">
-									<img ng-src="{{pro.image1}}" class="img-responsive">
+								<div class="pro-img1 img1" ng-if="pro.image1">
+									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
 								</div>
-								<div class="pro-img2 img2" ng-if="!pro.image">
-									<img ng-src="{{pro.image2}}" class="img-responsive">
+								<div class="pro-img2 img2" ng-if="!pro.image1">
+									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+								</div>
+								<div class="pro-img2 img2" ng-if="pro.image2">
+									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
 								</div>
 							</div>
 							<div class="pro-name nopdl">
