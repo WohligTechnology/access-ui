@@ -37,9 +37,9 @@
 						<img src="{{product.product.img | serverimage}}" class="img-responsive">
 					</div>
 					<div class="mini-img">
-						<flex-slider class="carousel" flex-slide="prd in productdetail" animation="slide" animation-loop="false" item-width="150" item-margin="5">
-							<li ng-click="onimgclick(prd)">
-								<img ng-src="{{prd | serverimage}}" alt="Product-detail" class="img-responsive prd-slide">
+						<flex-slider class="carousel" flex-slide="prd in product.productimage track by $index" animation="slide" animation-loop="false" item-width="150" item-margin="5">
+							<li ng-click="onimgclick(prd.image)">
+								<img ng-src="{{prd.image | serverimage}}" alt="Product-detail" class="img-responsive prd-slide">
 							</li>
 						</flex-slider>
 					</div>

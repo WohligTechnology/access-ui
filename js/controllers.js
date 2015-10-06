@@ -26,32 +26,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	myfunction();
 })
 
-.controller('CategoryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('CategoryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location) {
 	//Used to name the .html file
 	$scope.template = TemplateService.changecontent("category");
 	$scope.menutitle = NavigationService.makeactive("category");
 	TemplateService.title = $scope.menutitle;
 	$scope.navigation = NavigationService.getnav();
 	$scope.subscribe = {};
-	$scope.products = [{
-		image: "img/product/iphone-cases-and-covers.jpg",
-		name: "Cases & covers"
 
+	NavigationService.getallcategory(function (data) {
+		console.log(data);
+		$scope.products = data;
+	});
 
-    }, {
-		image: "img/product/5.png",
-		name: "Mobiles"
+	$scope.categorydetail = function (id) {
+		$location.url("/product/" + id + "/0/0");
+	}
 
-
-    }, {
-		image: "img/product/headphones.jpg",
-		name: "Headphones"
-
-    }, {
-		image: "img/product/watch.jpg",
-		name: "Watches"
-
-    }];
 	$scope.demo2 = {
 		range: {
 			min: 0,
@@ -794,8 +785,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 		$scope.productdetail = [];
 		_.each($scope.product.productimage, function (n) {
-			$scope.productdetail.push(n.image);
+			$scope.productdetail.push({image:n.image});
 		});
+		if(data.product.videourl != ''){
+			
+		}
 
 		console.log($scope.productdetail);
 
@@ -1387,8 +1381,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	$scope.dealsimg = [];
 
 	$scope.sliderclick = function (id) {
-		NavigationService.getoneoffer(id, function (data) {
+		NavigationService.getofferproducts(id.id, function (data) {
 			console.log(data);
+			$scope.deals = [];
+			$scope.deals[0] = data.offerdetails;
+			$scope.deals[0].offerproducts = data.offerproducts;
+			console.log($scope.deals);
+
 		})
 	}
 
@@ -1421,13 +1420,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		})
 	}
 	NavigationService.getofferdetails(getofferdetailscallback);
-	//	$scope.dealslide = [
-	//        "img/product/iphone.jpg",
-	//        "img/product/iphone6.jpg",
-	//        "img/product/macbook.png",
-	//        "img/product/iphone6ho.jpg",
-	//        "img/product/glass.jpg"
-	//    ];
+
 	$scope.demo2 = {
 		range: {
 			min: 0,
@@ -1728,8 +1721,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 	// Brand on hover
 
 	var getbrandsuccess = function (data, status) {
-		console.log("data stat");
-		console.log(data);
 		$scope.lastpage = data.lastpage;
 		$scope.splideno = data.lastpage;
 		$scope.brandhover = data.queryresult;
@@ -1754,15 +1745,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 	$scope.getproductbycategory = function (parent, category) {
-		console.log("parent" + parent + "   cate=" + category);
 		$location.url("/product/" + parent + "/" + category + "/0");
 	}
 	$scope.showsubmenu = function (data) {
-		console.log(data);
 		$scope.submenu[data] = true;
 	};
 	$scope.hidesubmenu = function (data) {
-		console.log(data);
 		$scope.submenu[data] = false;
 	};
 
@@ -1798,13 +1786,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 		slides[i - 1].active = true;
 
 		if ($scope.pageno > 1) {
-
 			$scope.brandhover = [];
 			$scope.slidebrands(--$scope.pageno);
 		} else {
-			console.log("in else");
-			console.log($scope.lastpage);
-
 			$scope.slidebrands($scope.pageno = $scope.lastpage);
 		}
 	};

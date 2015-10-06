@@ -1,6 +1,6 @@
-var admin_url = "http:///wohlig.co.in/accessbackend/index.php/";
+var admin_url = "http:///localhost/accessback/index.php/";
 var adminhauth = admin_url + "hauth/";
-var adminbase = "http://wohlig.co.in/accessbackend/";
+var adminbase = "http://localhost/accessback/";
 var adminimage = adminbase + "uploads/";
 var navigationservice = angular.module('navigationservice', [])
 
@@ -135,6 +135,11 @@ var navigationservice = angular.module('navigationservice', [])
 				withCredentials: true
 			}).success(callback);
 		},
+		getofferproducts: function (id, callback) {
+			return $http.get(admin_url + 'json/getofferproducts?offerid=' + id, {}, {
+				withCredentials: true
+			}).success(callback);
+		},
 
 		getproductbybrand: function (id, pageno, callback) {
 			return $http({
@@ -210,6 +215,11 @@ var navigationservice = angular.module('navigationservice', [])
 		},
 		getuserdetails: function (callback) {
 			return $http.get(admin_url + 'json/getuserdetails', {}, {
+				withCredentials: true
+			}).success(callback);
+		},
+		getallcategory : function (callback) {
+			return $http.get(admin_url + 'json/getallcategory', {}, {
 				withCredentials: true
 			}).success(callback);
 		},
