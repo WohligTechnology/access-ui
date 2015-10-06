@@ -710,7 +710,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     ];
 })
 
-.controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService, $location, $stateParams, ngDialog) {
+.controller('ProductdetailCtrl', function ($scope, TemplateService, NavigationService, $location, $stateParams, ngDialog, $filter) {
 	$scope.template = TemplateService;
 	$scope.template = TemplateService.changecontent("productdetail");
 	$scope.menutitle = NavigationService.makeactive("Productdetail");
@@ -785,10 +785,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 		$scope.productdetail = [];
 		_.each($scope.product.productimage, function (n) {
-			$scope.productdetail.push({image:n.image});
+			$scope.productdetail.push({image:$filter("serverimage")(n.image),check:1});
 		});
 		if(data.product.videourl != ''){
 			
+			$scope.productdetail.push({image:data.product.videourl,check:0});
 		}
 
 		console.log($scope.productdetail);
