@@ -1,8 +1,8 @@
-var admin_url = "http://localhost/accessback/index.php/";
-//var admin_url = "http://wohlig.co.in/accessbackend/index.php/";
+//var admin_url = "http://localhost/accessback/index.php/";
+var admin_url = "http://wohlig.co.in/accessbackend/index.php/";
 var adminhauth = admin_url + "hauth/";
-var adminbase = "http://localhost/accessback/";
-//var adminbase = "http://wohlig.co.in/accessbackend/";
+//var adminbase = "http://localhost/accessback/";
+var adminbase = "http://wohlig.co.in/accessbackend/";
 var adminimage = adminbase + "uploads/";
 var navigationservice = angular.module('navigationservice', [])
 
