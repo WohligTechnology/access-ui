@@ -36,7 +36,7 @@
 					<div class="box-img" ng-if="!playvideo">
 						<img src="{{product.product.img}}" class="img-responsive">
 					</div>
-					<div class="video" ng-if="playvideo" youtube code="product.product.img"></div>
+					<div class="video" style="min-height:250px" ng-if="playvideo" youtube code="product.product.img"></div>
 					<div class="mini-img">
 						<flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="150" item-margin="5">
 							<li ng-click="onimgclick(prd)">
