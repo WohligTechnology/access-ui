@@ -62,6 +62,10 @@
 				margin: 0;
 			}
 			
+			text-area {
+				resize: none;
+			}
+			
 			body {
 				//    padding-top: 105px;
 				font-family: @font-family-body;
@@ -695,8 +699,7 @@
 						margin: 0;
 						font-family: @font-family-body;
 						font-size: 14px;
-						text-transform: uppercase;
-						text-align: center;
+						text-transform: capitalize;
 					}
 					p {
 						margin: 0;
@@ -817,6 +820,11 @@
 			}
 			
 			.pro-desc {
+				.tax {
+					margin-left: 10px;
+					font-size: 16px;
+					text-transform: capitalize;
+				}
 				.qua {
 					padding-top: 10px;
 					input {
@@ -1209,8 +1217,8 @@
 								margin-bottom: 14px;
 								display: block;
 								font-family: @font-family-head;
-								font-size: 16px;
-								font-weight: 500;
+								font-size: 17px;
+								font-weight: 600;
 							}
 							.call {
 								margin: 10px 0;
@@ -1225,7 +1233,8 @@
 						h4 {
 							margin: 2px 0 15px 0;
 							font-family: @font-family-head;
-							font-size: 16px;
+							font-size: 17px;
+							font-weight: 600;
 						}
 						input {
 							margin: 20px 0;
@@ -1256,6 +1265,14 @@
 				}
 				.padin {
 					padding: 0 2%;
+				}
+				.retail {
+					margin: 0 0 15px 0;
+					font-family: @font-family-head;
+					font-size: 17px;
+					font-weight: 600;
+					text-align: center;
+					text-transform: uppercase;
 				}
 			}
 			
@@ -1363,6 +1380,10 @@
 					.order-panel {
 						margin: 8px 0;
 					}
+				}
+				h3.head {
+					padding: 8px 0 8px 10px;
+					text-transform: capitalize;
 				}
 				.continue-btn {
 					min-height: 70px;
@@ -1583,7 +1604,7 @@
 				.deals-head {
 					.slide-deal {
 						width: 78%;
-						margin: 0 auto;
+						margin: 15% auto;
 						.flex-direction-nav a.flex-next:before {
 							content: '';
 							background: url("../img/right-arrow.png") no-repeat center;
@@ -1614,12 +1635,16 @@
 				.tagline {
 					font-family: @font-family-body;
 					font-size: 23px;
-					font-weight: 600;
+					font-weight: 500;
+					text-transform: uppercase;
 				}
 				.mid {
-					font-size: 28px;
-					margin-top: -8px;
 					margin-bottom: 20px;
+					margin-top: -8px;
+					font-weight: 500;
+					font-size: 28px;
+					font-family: @font-family-body;
+					text-transform: uppercase;
 				}
 			}
 			
@@ -1665,6 +1690,10 @@
 					opacity: 1;
 					.transition(all 1.5s ease-in-out);
 				}
+				.images_prod:hover > .img1 {
+					opacity: 0;
+					.transition(all 1.5s ease-in-out);
+				}
 				.off-prod {
 					width: 50%;
 					padding-left: 4px;
@@ -1695,6 +1724,10 @@
 					}
 					.off-images:hover > .img2 {
 						opacity: 1;
+						.transition(all 1.5s ease-in-out);
+					}
+					.off-images:hover > .img1 {
+						opacity: 0;
 						.transition(all 1.5s ease-in-out);
 					}
 				}
@@ -1728,7 +1761,7 @@
 						padding: 6px 0 0 0;
 						margin: 0;
 						li {
-							padding: 0 15px;
+							padding: 0 25px;
 							display: inline-block;
 							list-style-type: none;
 						}

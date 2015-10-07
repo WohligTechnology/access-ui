@@ -2,7 +2,6 @@
 	<div class="container">
 		<div class="about-head sign pads text-center">
 			<h3>About us</h3>
-			<p class="text-capitalize">Nulla ipsum dolor lacus,Cum sociis natoque penatibus et ultrices volutpat.</p>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -30,20 +29,20 @@
 			</div>
 		</div>
 		<div class="celeb">
-		<h4 class="client">Our clientele</h4>
+			<h4 class="client">Our clientele</h4>
 			<div class="divider">
 				<div class="row">
 					<div class="col-md-4" ng-repeat="celeb in celebimages">{{}}
-						<div class="celeb1">							
+						<div class="celeb1">
 							<div class="img-holder">
 								<img ng-src="{{celeb.image | serverimage}}" alt="" class="img-responsive">
 							</div>
-							<h5 class="actor-name">{{celeb.title}}</h5> 
+							<h5 class="actor-name">{{celeb.title}}</h5>
 						</div>
 					</div>
 				</div>
 			</div>
-		
+
 		</div>
 	</div>
 </div>
