@@ -167,7 +167,7 @@ var navigationservice = angular.module('navigationservice', [])
 		},
 		getproductbycategory: function (pageno, parent, category, callback) {
 			console.log(category);
-			return $http.get(admin_url + 'json/getproductbycategory?parent='+parent+'&subcategory='+category+'&pageno='+pageno, {}, {
+			return $http.get(admin_url + 'json/getproductbycategory?parent='+category+'&category='+parent+'&pageno='+pageno, {}, {
 				withCredentials: true
 			}).success(callback);
 			
