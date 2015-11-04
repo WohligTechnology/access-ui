@@ -38,11 +38,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
         })
 
     .state('product', {
-            url: "/product/:parent/:category/:brand",
-            templateUrl: "views/template.html",
-            controller: 'ProductCtrl'
-        })
-    
+        url: "/product/:parent/:category/:brand",
+        templateUrl: "views/template.html",
+        controller: 'ProductCtrl'
+    })
+
     .state('category', {
             url: "/category",
             templateUrl: "views/template.html",
@@ -75,12 +75,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             controller: 'DistributionCtrl'
         })
 
-    //	.state('brandhover', {
-    //			url: "/brandhover",
-    //			templateUrl: "views/template.html",
-    //			controller: 'BrandhoverCtrl'
-    //		})
-    //	
+    //  .state('brandhover', {
+    //          url: "/brandhover",
+    //          templateUrl: "views/template.html",
+    //          controller: 'BrandhoverCtrl'
+    //      })
+    //  
     .state('cart', {
             url: "/cart",
             templateUrl: "views/template.html",
@@ -144,25 +144,25 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
         })
 
     $urlRouterProvider.otherwise("/home");
-//    $locationProvider.html5Mode(true);
-//    $locationProvider.hashPrefix('!');
+    //    $locationProvider.html5Mode(true);
+    //    $locationProvider.hashPrefix('!');
 
 });
 
 firstapp.filter('serverimage', function() {
     return function(image) {
-        if(image)
-        return adminimage + image;
+        if (image)
+            return adminimage + image;
         else
-        return "favicon.ico";
+            return "favicon.ico";
     };
 })
 
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
     for (var i = 0; i < allvalidation.length; i++) {
-                console.log("checking");
-                console.log(allvalidation[i].field);
+        console.log("checking");
+        console.log(allvalidation[i].field);
         if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
             allvalidation[i].validation = "ng-invalid";
             isvalid2 = false;
@@ -172,16 +172,18 @@ var formvalidation = function(allvalidation) {
 };
 
 var clearvalidation = function(allvalidation) {
-	console.log(allvalidation);
+    console.log(allvalidation);
     for (var i = 0; i < allvalidation.length; i++) {
-            allvalidation[i].validation = "";
+        allvalidation[i].validation = "";
     }
 };
 
 firstapp.directive('myloading', function() {
     return {
         restrict: 'E',
-        scope: { obj: '=' },
+        scope: {
+            obj: '='
+        },
         template: '<div>Hello, {{obj}}!</div>'
     };
 });
@@ -196,30 +198,30 @@ firstapp.directive('myloading', function() {
 //
 //        controller: function($scope) {
 //            
-//		   $scope.obj1  = $scope.obj;
+//         $scope.obj1  = $scope.obj;
 //
 //        }
 //    };
 //});
 
 
-firstapp.directive('youtube', function ($sce) {
-	return {
-		restrict: 'A',
-		scope: {
-			code: '='
-		},
-		replace: true,
-		//        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
-		template: '<iframe style="overflow:hidden;" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
-		link: function (scope) {
-			scope.$watch('code', function (newVal) {
-				if (newVal) {
-					scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
-				}
-			});
-		}
-	};
+firstapp.directive('youtube', function($sce) {
+    return {
+        restrict: 'A',
+        scope: {
+            code: '='
+        },
+        replace: true,
+        //        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+        template: '<iframe style="overflow:hidden;" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+        link: function(scope) {
+            scope.$watch('code', function(newVal) {
+                if (newVal) {
+                    scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+                }
+            });
+        }
+    };
 });
 
 
