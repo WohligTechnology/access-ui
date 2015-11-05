@@ -153,7 +153,7 @@ var navigationservice = angular.module('navigationservice', [])
 //					"pageno": pageno
 //				}
 //			}).success(callback);
-            return $http.get(admin_url + 'json/getproductbybrand?brandid='+ id +'pageno='+pageno, {}, {
+            return $http.get(admin_url + 'json/getproductbybrand?maxrow=9&brandid='+ id +'&pageno='+pageno, {}, {
 				withCredentials: true
 			}).success(callback);
 		},
