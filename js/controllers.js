@@ -339,7 +339,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($scope.brandid != 0) {
                 NavigationService.getproductbybrand($scope.brandid, $scope.pageno, getproductbybrandcallback);
             } else if ($scope.parent != 0 || $scope.category != 0) {
+                console.log("go to service");
                 NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
+                
             } else {
                 NavigationService.getallproduct($scope.pageno, getproductbybrandcallback);
             }
@@ -1907,6 +1909,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.pageno = 1;
     $scope.splideno = 0;
 
+    //PRODUCT HOVER CLICK
+    
+    $scope.categorydetailhover = function(id) {
+        $location.url("/product/" + id + "/0/0");
+    }
+    
     // Brand on hover
 
     var getbrandsuccess = function(data, status) {
@@ -1933,8 +1941,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-    $scope.getproductbycategory = function(parent, category) {
-        $location.url("/product/" + parent + "/" + category + "/0");
+    $scope.getproductbycategoryhover = function(parent) {
+        console.log("go to product");
+        $location.url("/product/" + parent + "/0/0");
+        
     }
     $scope.showsubmenu = function(data) {
         $scope.submenu[data] = true;
