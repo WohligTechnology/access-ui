@@ -93,6 +93,9 @@
 			.navbar-nav {
 				float: left;
 				margin: -1px -15px;
+				.color {
+					color: #333 !important;
+				}
 			}
 			
 			.navbar {
@@ -760,6 +763,12 @@
 				.mini-img {
 					width: 100%;
 					margin: 0 auto;
+					.slide {
+						img {
+							width: 80%;
+							margin: 0 auto;
+						}
+					}
 				}
 				.flex-direction-nav a {
 					width: 65px;
@@ -1585,14 +1594,21 @@
 						ul {
 							padding: 0;
 							li {
+								line-height: 30px;
 								list-style-type: none;
+								a {
+									&:hover {
+										.transition(all 500ms ease-in-out);
+										border-bottom: 1px solid #000;
+									}
+								}
 							}
 						}
-					}
-					.list1 {
-						padding: 3% 0;
-						.list1-1 {
-							margin-left: 5%;
+						.list1 {
+							padding: 3% 0;
+							.list1-1 {
+								margin-left: 5%;
+							}
 						}
 					}
 				}

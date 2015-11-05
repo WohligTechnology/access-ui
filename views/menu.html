@@ -14,17 +14,21 @@
 
 
 <ul class="nav navbar-nav" ng-controller="submenuctrl">
-	<li ng-mouseover="showsubmenu(0)" ng-mouseleave="hidesubmenu(0)" style="position:static;"><a href="#brand" title="Brands">Brands</a>
+
+	
+	<li ng-mouseover="showsubmenu(0)" ng-mouseleave="hidesubmenu(0)" style="position:static;">
+		<a title="Brands" ng-click="navigate(navbar[0]);" class="{{navbar[0].class}}">Brands</a>
 		<div class="megamenu brand_hover" ng-include src="submenuval[0]" ng-show="submenu[0]">
 		</div>
 	</li>
-	<li ng-mouseover="showsubmenu(1)" ng-mouseleave="hidesubmenu(1)" style="position:static;"><a href="#category" title="Product">product</a>
+	<li ng-mouseover="showsubmenu(1)" ng-mouseleave="hidesubmenu(1)" style="position:static;">
+		<a href="#category" title="Product" ng-click="navigate(navbar[1]);" class="{{navbar[1].class}}">Product</a>
 		<div class="megamenu" ng-include src="submenuval[1]" ng-show="submenu[1]">
 		</div>
 	</li>
-<!--	<li><a href="#exclusive" title="exclusive">exclusive</a></li>-->
-	<li><a href="#newarrivals" title="New Arrivals">new arrivals</a></li>
-	<li><a href="#deals" title="Deals">Deals</a></li>
-	<li><a href="#distribution" title="Distribution">Distribution</a></li>
-	<li><a href="#about" title="About Us">about us</a></li>
+	<li><a href="#newarrivals" title="New Arrivals" ng-click="navigate(navbar[2]);" class="{{navbar[2].class}}">new arrivals</a></li>
+	<li><a href="#deals" title="Deals" ng-click="navigate(navbar[3]);" class="{{navbar[3].class}}">Deals</a></li>
+	<li><a href="#distribution" title="Distribution" ng-click="navigate(navbar[4]);" class="{{navbar[4].class}}">Distribution</a></li>
+	<li><a href="#about" title="About Us" ng-click="navigate(navbar[5]);" class="{{navbar[5].class}}">about us</a></li>
+
 </ul>
