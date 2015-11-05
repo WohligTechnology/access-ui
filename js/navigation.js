@@ -144,14 +144,17 @@ var navigationservice = angular.module('navigationservice', [])
 		},
 
 		getproductbybrand: function (id, pageno, callback) {
-			return $http({
-				url: admin_url + 'json/getproductbybrand',
-				method: "POST",
-				withCredentials: true,
-				data: {
-					"brandid": id,
-					"pageno": pageno
-				}
+//			return $http({
+//				url: admin_url + 'json/getproductbybrand',
+//				method: "POST",
+//				withCredentials: true,
+//				data: {
+//					"brandid": id,
+//					"pageno": pageno
+//				}
+//			}).success(callback);
+            return $http.get(admin_url + 'json/getproductbybrand?brandid='+ id +'pageno='+pageno, {}, {
+				withCredentials: true
 			}).success(callback);
 		},
 		newPassword: function (forgot) {
