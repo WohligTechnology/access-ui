@@ -43,6 +43,13 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
         controller: 'ProductCtrl'
     })
 
+
+    .state('termscondition', {
+        url: "/termscondition",
+        templateUrl: "views/template.html",
+        controller: 'TermsConditionCtrl'
+    })
+
     .state('category', {
             url: "/category",
             templateUrl: "views/template.html",
@@ -113,6 +120,17 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
         url: "/checkout",
         templateUrl: "views/template.html",
         controller: 'CheckoutCtrl'
+    })
+
+    .state('privacy', {
+        url: "/privacy",
+        templateUrl: "views/template.html",
+        controller: 'PrivacyCtrl'
+    })
+    .state('faq', {
+        url: "/faq",
+        templateUrl: "views/template.html",
+        controller: 'FaqCtrl'
     })
 
     .state('storelocator', {
