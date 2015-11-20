@@ -26,7 +26,7 @@
 					</div>
 					<ul class="img-thumb">
 						<li ng-repeat="color in product.samecolor" ng-click="makeactive(color);" ng-if="color.id!=product.product.id">
-							<a href=""><img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="Thumbnil" class="img-responsive"></a>
+							<a href="" title="color"><img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="Thumbnil" class="img-responsive"></a>
 						</li>
 					</ul>
 				</div>
