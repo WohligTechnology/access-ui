@@ -290,3 +290,14 @@ firstapp.directive('img', function($compile, $parse) {
         }
     };
 });
+
+firstapp.directive("disableRightClick", function () {
+    return {
+        restict: 'A',
+        link: function (scope, el) {
+            el.bind("contextmenu", function (e) {
+                e.preventDefault();
+            });
+        }
+    };
+});
