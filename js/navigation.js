@@ -317,6 +317,11 @@ var navigationservice = angular.module('navigationservice', [])
 				}
 			}).success(callback);
 		},
+		getHomeProducts: function(callback) {
+            return $http.get(admin_url + 'json/getHomeProducts', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
 		makeactive: function (menuname) {
 			for (var i = 0; i < navigation.length; i++) {
 				if (navigation[i].name == menuname) {
