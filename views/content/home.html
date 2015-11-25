@@ -7,78 +7,78 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 padr">
+        <div class="col-md-8 padr" ng-if="homeProducts.length>=1">
             <div class="pro-imgleft grid cs-style-3">
-              
-                	<figure>
-						  <img src="img/product/1.png" class="img-responsive">
-						<figcaption>
-							<h3>Product name</h3>
-							<span>Rs 7500</span>
-							<a href="#/product">Shop Now</a>
-						</figcaption>
-					</figure>
+                <figure>
+                    <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[0].images.length==0">
+                    <img ng-src="{{homeProducts[0].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[0].images.length>0">
+                    <figcaption>
+                        <h3>{{homeProducts[0].name}}</h3>
+                        <span>Rs {{homeProducts[0].price}}</span>
+                        <a href="#/productdetail/{{homeProducts[0].id}}">Shop Now</a>
+                    </figcaption>
+                </figure>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-if="homeProducts.length>=2">
             <div class="pro-imgright grid cs-style-3">
-                	<figure>
-						  <img src="img/product/2.png" class="img-responsive">
-						<figcaption>
-							<h3>Product name</h3>
-							<span>Rs 7500</span>
-							<a href="#/product">Shop Now</a>
-						</figcaption>
-					</figure>
+                <figure>
+                    <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[1].images.length==0">
+                    <img ng-src="{{homeProducts[1].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[1].images.length>0">
+                    <figcaption>
+                        <h3>{{homeProducts[1].name}}</h3>
+                        <span>Rs {{homeProducts[1].price}}</span>
+                        <a href="#/productdetail/{{homeProducts[1].id}}">Shop Now</a>
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="scond-pro">
-            <div class="col-md-4 padr">
+            <div class="col-md-4 padr" ng-if="homeProducts.length>=3">
                 <div class="pro-imgright grid cs-style-3">
-                  	<figure>
-						  <img src="img/product/3.png" class="img-responsive">
-						<figcaption>
-							<h3>Product name</h3>
-							<span>Rs 7500</span>
-							<a href="#/product">Shop Now</a>
-						</figcaption>
-					</figure>
+                    <figure>
+                          <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[2].images.length==0">
+                          <img ng-src="{{homeProducts[2].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[2].images.length>0">
+                        <figcaption>
+                            <h3>{{homeProducts[2].name}}</h3>
+                            <span>Rs {{homeProducts[2].price}}</span>
+                            <a href="#/productdetail/{{homeProducts[2].id}}">Shop Now</a>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
-            <div class="col-md-8 ">
+            <div class="col-md-8" ng-if="homeProducts.length>=4">
                 <div class="pro-imgleft grid cs-style-3">
-                   	<figure>
-						  <img src="img/product/4.png" class="img-responsive">
-						<figcaption>
-							<h3>Product name</h3>
-							<span>Rs 7500</span>
-							<a href="#/product">Shop Now</a>
-						</figcaption>
-					</figure>
+                    <figure>
+                          <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[3].images.length==0">
+                          <img ng-src="{{homeProducts[3].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[3].images.length>0">
+                        <figcaption>
+                            <h3>{{homeProducts[3].name}}</h3>
+                            <span>Rs {{homeProducts[3].price}}</span>
+                            <a href="#/productdetail/{{homeProducts[3].id}}">Shop Now</a>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="sign">
         <div class="row">
             <div class="col-md-offset-2 col-md-8 text-center">
                 <h3>sign up to receive our updates</h3>
                 <p>Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat.</p>
-                
                 <div class="search padtp">
-                       <p>{{msg}}</p>
-                        <div class="input-group">
-                            <input type="email" class="form-control" ng-class="allvalidation[0].validation" ng-model="subscribe.email" placeholder="Your email...">
-                            <span class="input-group-btn">
+                    <p>{{msg}}</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" ng-class="allvalidation[0].validation" ng-model="subscribe.email" placeholder="Your email...">
+                        <span class="input-group-btn">
         <button class="btn btn-default custom" type="button" ng-click="usersubscribtion()">Subscribe</button>
       </span>
-                        </div>
-                        </div>
+                    </div>
+                </div>
             </div>
-               
         </div>
     </div>
 </div>

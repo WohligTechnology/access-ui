@@ -110,6 +110,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     NavigationService.getHomeProducts(function(data) {
         if (data) {
+            $scope.homeProducts = data;
             console.log(data);
         }
     });
@@ -878,7 +879,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     $scope.onimgclick = function(img) {
-        console.log(img);
+        // console.log(img);
         if (img.check == 0) {
             $scope.playvideo = true;
             $scope.product.product.img = img.url;
@@ -891,7 +892,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.makeactive = function(product) {
         $scope.productdetail = [];
         $scope.product = {};
-        NavigationService.getproductdetails(product.id).success(getproductdetailscallback);
+        $location.url("/productdetail/" + product.id);
+        // NavigationService.getproductdetails(product.id).success(getproductdetailscallback);
     }
 
     $scope.showDesc = true;
