@@ -6,15 +6,15 @@
 					<div class="col-md-12">
 						<div class="list1-1">
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-2" ng-repeat="cat in categories">
 									<div class="iphone-access">
-										<h5 class="text-capitalize" ng-click="categorydetailhover(1);">cover &amp; Cases</h5>
+										<h5 class="text-capitalize">{{cat.name}}</h5>
 										<ul>
-											<li><a href="" ng-click="categorydetailhover(2);">Apple</a></li>
+											<li ng-repeat="subcat in cat.subcategory"><a href="#/product/{{subcat.id}}/0/0">{{subcat.name}}</a></li>
 										</ul>
 									</div>
 								</div>
-								<div class="col-md-2">
+								<!-- <div class="col-md-2">
 									<div class="Mobile">
 										<h5 ng-click="categorydetailhover(3);">Earphones &amp; Headphones</h5>
 										<ul>
@@ -29,7 +29,7 @@
 											<li><a href="" ng-click="categorydetailhover(6);">Bluetooth</a></li>
 										</ul>
 									</div>
-								</div>
+								</div> -->
 								
 							</div>
 						</div>

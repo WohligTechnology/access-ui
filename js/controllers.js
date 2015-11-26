@@ -155,8 +155,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.pageno = 0;
     var lastpage = 1;
+    $scope.price = {};
+    $scope.price.minPrice = 0;
+    $scope.price.maxPrice = 100;
+
     $scope.products = [];
+    $scope.showfilter = [];
     $scope.dataload = "Loading ...";
+    $scope.filters = {};
+    $scope.filters.category = "";
+    $scope.filters.color = "";
+    $scope.filters.type = "";
+    $scope.filters.material = "";
+    $scope.filters.finish = "";
+    $scope.filters.compatibledevice = "";
+    $scope.filters.compatiblewith = "";
+    $scope.filters.brand = "";
+    $scope.filters.pricemin = "";
+    $scope.filters.pricemax = "";
+
+    $scope.colorfilter = [];
+
+    $scope.getFilterResults = function() {
+        $scope.pageno = 1;
+        $scope.products = [];
+        NavigationService.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+    }
+
+    $scope.alignFilter = function(str) {
+        $scope.filters[str] = "";
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n[str] + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
+        console.log($scope.filters[str]);
+        $scope.getFilterResults();
+    }
+
+    $scope.alignFilterId = function(str) {
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n.id + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        console.log(objfil);
+        $scope.getFilterResults();
+    }
 
     for (var i = 0; i < navbarjson.length; i++) {
         if (i == 1) {
@@ -165,6 +219,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             navbarjson[i].class = "";
         }
     }
+
 
 
     $scope.addtowishlist = function(product) {
@@ -300,63 +355,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.parent = $stateParams.parent;
     $scope.category = $stateParams.category;
 
-
-    //	if ($scope.parent == 0 && $scope.category == 0) {
-    //		console.log("no need ");
-    //	} else {
-    //		NavigationService.getproductbycategory($scope.parent, $scope.category).success(getproductbycategorycallback);
-    //	}
-    //
-    //	if ($scope.parent == 0 && $scope.category == 0 && $stateParams.brand == 0) {
-    //		NavigationService.getallproduct(function (data) {
-    //			console.log(data);
-    //			$scope.products = data.queryresult;
-    //		});
-    //	}
-
-
     //GO TO PRODUCT DETAIL
     $scope.getproductdetails = function(productid) {
         $location.url("/productdetail/" + productid);
-
     }
 
-
     var getproductbybrandcallback = function(data, status) {
+        console.log(data);
         _.each(data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
             }
             $scope.products.push(n);
         });
-        console.log($scope.products);
-
         if ($scope.products == "") {
             $scope.dataload = "No data found";
         }
         lastpage = data.lastpage;
+        // console.log("lastpage=" + lastpage);
     }
     $scope.brandid = $stateParams.brand;
 
-
-
     $scope.addMoreItems = function() {
-        if (lastpage != $scope.pageno) {
+        // console.log("lastpage=" + lastpage);
+        // console.log("pageno=" + $scope.pageno);
+        if ($scope.pageno <= lastpage) {
             ++$scope.pageno;
-            if ($scope.brandid != 0) {
-                NavigationService.getproductbybrand($scope.brandid, $scope.pageno, getproductbybrandcallback);
-            } else if ($scope.parent != 0 || $scope.category != 0) {
-                console.log("go to service");
-                NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
-
+            if ($stateParams.brand != 0) {
+                NavigationService.getproductbybrand($scope.pageno, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+            } else if ($stateParams.parent != 0) {
+                NavigationService.getproductbycategory($scope.pageno, $scope.parent, $scope.filters, getproductbybrandcallback);
             } else {
                 NavigationService.getallproduct($scope.pageno, getproductbybrandcallback);
             }
         }
     }
 
-    $scope.addMoreItems();
-
+    // $scope.addMoreItems();
 
     $scope.addtocart = function(product) {
         console.log(product);
@@ -375,11 +410,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                     xyz.close();
                 }, 3000)
-                //			$location.url("/cart");
+                //          $location.url("/cart");
             myfunction();
         });
     }
 
+    $scope.clearFilters = function() {
+        NavigationService.getFilters($stateParams.parent, $stateParams.brand, function(data) {
+            if (data) {
+                $scope.showfilter = data;
+                console.log(data);
+                if (data.compatibledevice && data.compatibledevice.length > 0) {
+                    var arr = [];
+                    _.each(data.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                            console.log(arr);
+                        })
+                    })
+                    data.compatibledevice = arr;
+                }
+                $scope.filters.pricemin = data.price.min;
+                $scope.filters.pricemax = data.price.max;
+                $scope.pageno = 1;
+                $scope.products = [];
+                $scope.filters = {};
+                $scope.filters.category = "";
+                $scope.filters.color = "";
+                $scope.filters.type = "";
+                $scope.filters.material = "";
+                $scope.filters.finish = "";
+                $scope.filters.compatibledevice = "";
+                $scope.filters.compatiblewith = "";
+                $scope.filters.brand = "";
+                $scope.filters.pricemin = "";
+                $scope.filters.pricemax = "";
+                // if ($stateParams.brand != 0) {
+                //     NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+                // } else if ($stateParams.parent != 0) {
+                //     NavigationService.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+                // } else {
+                //     NavigationService.getallproduct(1, getproductbybrandcallback);
+                // }
+            }
+        });
+    }
+
+    $scope.clearFilters();
 
 })
 
@@ -837,7 +917,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                     xyz.close();
                 }, 3000)
-                //			$location.url("/cart");
+                //          $location.url("/cart");
             myfunction();
         });
     }
@@ -1142,25 +1222,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }
 
-    //	var addtowishlistcallback = function (data, status) {
-    //		console.log(data);
-    //		if (data == "true") {
-    //			ngDialog.open({
-    //				template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-    //				plain: true
-    //			});
-    //		} else if (data == "0") {
-    //			ngDialog.open({
-    //				template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-    //				plain: true
-    //			});
-    //		} else {
-    //			ngDialog.open({
-    //				template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-    //				plain: true
-    //			});
-    //		}
-    //	}
+    //  var addtowishlistcallback = function (data, status) {
+    //      console.log(data);
+    //      if (data == "true") {
+    //          ngDialog.open({
+    //              template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+    //              plain: true
+    //          });
+    //      } else if (data == "0") {
+    //          ngDialog.open({
+    //              template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+    //              plain: true
+    //          });
+    //      } else {
+    //          ngDialog.open({
+    //              template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+    //              plain: true
+    //          });
+    //      }
+    //  }
     $scope.addtowishlist = function(product) {
         if (NavigationService.getuser()) {
             NavigationService.addtowishlist(product.id, function(data, status) {
@@ -1219,7 +1299,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                     xyz.close();
                 }, 3000)
-                //			$location.url("/cart");
+                //          $location.url("/cart");
             myfunction();
         });
     }
@@ -1469,7 +1549,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         if (check) {
-            //					NavigationService.registeruser($scope.account, registerusercallback);
+            //                  NavigationService.registeruser($scope.account, registerusercallback);
             console.log("all fill");
 
             $scope.paymentinfo = true;
@@ -1484,7 +1564,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }
 
-    //		placeorder
+    //      placeorder
 
     $scope.placeorder = function() {
         console.log();
@@ -1583,31 +1663,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         minPrice: 0,
         maxPrice: 10050
     };
-    //	$scope.deals = [{
-    //		imageprd: "img/product/iphone.jpg",
-    //		imageprd2: "img/product/iphone6.jpg",
-    //		descp: "Iphone6 cases and covers",
-    //		imageoff1: "img/product/iphone6ho.jpg",
-    //		imageoff2: "img/product/iphone2.jpg",
-    //		descpoff: "Iphone cases and covers",
-    //		price: "45,000.00"
+    //  $scope.deals = [{
+    //      imageprd: "img/product/iphone.jpg",
+    //      imageprd2: "img/product/iphone6.jpg",
+    //      descp: "Iphone6 cases and covers",
+    //      imageoff1: "img/product/iphone6ho.jpg",
+    //      imageoff2: "img/product/iphone2.jpg",
+    //      descpoff: "Iphone cases and covers",
+    //      price: "45,000.00"
     //    }, {
-    //		imageprd: "img/product/iphone.jpg",
-    //		imageprd2: "img/product/iphone6.jpg",
-    //		descp: "Iphone6 cases and covers",
-    //		imageoff1: "img/product/iphone6ho.jpg",
-    //		imageoff2: "img/product/iphone2.jpg",
-    //		descpoff: "Iphone cases and covers",
-    //		price: "45,000.00"
+    //      imageprd: "img/product/iphone.jpg",
+    //      imageprd2: "img/product/iphone6.jpg",
+    //      descp: "Iphone6 cases and covers",
+    //      imageoff1: "img/product/iphone6ho.jpg",
+    //      imageoff2: "img/product/iphone2.jpg",
+    //      descpoff: "Iphone cases and covers",
+    //      price: "45,000.00"
     //    }];
-    //	$scope.updeals = [{
-    //		imageprd: "img/product/iphone.jpg",
-    //		imageprd2: "img/product/iphone6.jpg",
-    //		descp: "Iphone6 cases and covers",
-    //		imageoff1: "img/product/iphone6ho.jpg",
-    //		imageoff2: "img/product/iphone2.jpg",
-    //		descpoff: "Iphone cases and covers",
-    //		price: "45,000.00"
+    //  $scope.updeals = [{
+    //      imageprd: "img/product/iphone.jpg",
+    //      imageprd2: "img/product/iphone6.jpg",
+    //      descp: "Iphone6 cases and covers",
+    //      imageoff1: "img/product/iphone6ho.jpg",
+    //      imageoff2: "img/product/iphone2.jpg",
+    //      descpoff: "Iphone cases and covers",
+    //      price: "45,000.00"
     //    }];
 })
 
@@ -1781,7 +1861,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                     xyz.close();
                 }, 3000)
-                //			$location.url("/cart");
+                //          $location.url("/cart");
             myfunction();
         });
     }
@@ -1868,10 +1948,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     var removefromwishlist = function(data, status) {
         console.log(data);
         if (data == 1) {
-            //			ngDialog.open({
-            //				template: 'views/content/deletewish.html',
-            //				scope: $scope
-            //			});
+            //          ngDialog.open({
+            //              template: 'views/content/deletewish.html',
+            //              scope: $scope
+            //          });
             NavigationService.getwishlistproduct(getwishlistproductcallback);
         }
 
@@ -1956,7 +2036,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                     xyz.close();
                 }, 3000)
-                //			$location.url("/cart");
+                //          $location.url("/cart");
             myfunction();
         });
     }
@@ -1985,6 +2065,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $location.url("/product/" + id + "/0/0");
     }
 
+    NavigationService.getallcategories(function(data) {
+        console.log(data);
+        $scope.categories = data;
+    });
+
     // Brand on hover
 
     var getbrandsuccess = function(data, status) {
@@ -2003,9 +2088,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         for (var i = 0; i < $scope.splideno; i++) {
             $scope.addSlide();
         }
-
-
-
     }
     NavigationService.getbrand($scope.pageno, getbrandsuccess);
 

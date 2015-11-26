@@ -142,18 +142,9 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-
-        getproductbybrand: function(id, pageno, callback) {
-            //			return $http({
-            //				url: admin_url + 'json/getproductbybrand',
-            //				method: "POST",
-            //				withCredentials: true,
-            //				data: {
-            //					"brandid": id,
-            //					"pageno": pageno
-            //				}
-            //			}).success(callback);
-            return $http.get(admin_url + 'json/getproductbybrand?maxrow=9&brandid=' + id + '&pageno=' + pageno, {}, {
+        getproductbybrand: function(pageno, brand, filters, callback) {
+            console.log("getproductbybrand");
+            return $http.get(admin_url + 'json/getproductbycategory?category=' + filters.category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax, {}, {
                 withCredentials: true
             }).success(callback);
         },
@@ -168,11 +159,11 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        getproductbycategory: function(pageno, parent, category, callback) {
-            return $http.get(admin_url + 'json/getproductbycategory?parent=' + parent + '&category=' + category + '&pageno=' + pageno, {}, {
+        getproductbycategory: function(pageno, category, filters, callback) {
+            console.log("getproductbycategory");
+            return $http.get(admin_url + 'json/getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax, {}, {
                 withCredentials: true
             }).success(callback);
-
         },
         usercontact: function(contact, callback) {
             return $http({
@@ -353,6 +344,20 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
             //return cart;
         },
-
+        getFilters: function(category, brand, callback) {
+            return $http.post(admin_url + 'json/getFilters?category=' + category + "&brand=" + brand, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getallcategories: function(callback) {
+            return $http.get(admin_url + 'json/getallcategory', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getsinglecategory: function(id, callback) {
+            return $http.get(admin_url + 'json/getsinglecategory?categoryid=' + id, {}, {
+                withCredentials: true
+            }).success(callback);
+        }
     }
 });

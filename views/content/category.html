@@ -1,61 +1,19 @@
 <div class="container">
 	<div class="row">
 		<div class="pro-set">
-			<div class="col-md-3">
-				<div class="product-filter">
-					<h4>product filters</h4>
-					<div class="all">
-						<div class="filter">
-							<p>Brands</p>
-							<hr class="line">
-							<form class="sub-catgame">
-								<ul>
-									<li>
-										<input id="Option" type="checkbox">
-										<label class="checkbox" for="Option">Apple Iphone</label>
-									</li>
-									<li>
-										<input id="option2" type="checkbox">
-										<label class="checkbox" for="option2">nokia</label>
-									</li>
-									<li>
-										<input id="option3" type="checkbox">
-										<label class="checkbox" for="option3">samsung</label>
-									</li>
-									<li>
-										<input id="option4" type="checkbox">
-										<label class="checkbox" for="option4">mi</label>
-									</li>
-									<li>
-										<input id="option5" type="checkbox">
-										<label class="checkbox" for="option5">micromax</label>
-									</li>
-								</ul>
-							</form>
-						</div>
-						<hr class="line">
-						<div class="price filter">
-							<p>price</p>
-
-							<hr class="line">
-							<div class="rupee" range-slider min="demo2.range.min" max="demo2.range.max" model-min="demo2.minPrice" model-max="demo2.maxPrice" filter="currency:'₹'" step="100"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">	
-					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
+					<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box" ng-click="categorydetail(pro.id);">
 							<div class="img-box pdn">
 								<div class="pro-img1 img1" ng-if="pro.image1">
 									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
 								</div>
-								<div class="pro-img2 img2" ng-if="!pro.image1">
-									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-								</div>
 								<div class="pro-img2 img2" ng-if="pro.image2">
 									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+								</div>
+								<div class="pro-img1 img1" ng-if="!pro.image1 && !pro.image2">
+									<img ng-src="{{ggg | serverimage}}" class="img-responsive">
 								</div>
 							</div>
 							<div class="pro-name nopdl">

@@ -172,7 +172,7 @@ firstapp.filter('serverimage', function() {
         if (image)
             return adminimage + image;
         else
-            return "favicon.ico";
+            return "img/noimage.png";
     };
 })
 

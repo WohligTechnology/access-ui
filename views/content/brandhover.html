@@ -7,7 +7,8 @@
 			<div class="row">
 				<div class="col-md-3" ng-repeat="brndhov in brandhover">
 					<div class="img-holder">
-						<img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);">
+						<img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);" ng-if="brndhov.logo">
+						<img ng-src="{{ggg | serverimage}}" alt="Brands" class="img-responsive" ng-click="getproductbybrand(brndhov.id);" ng-if="!brndhov.logo">
 					</div>
 				</div>
 			</div>
