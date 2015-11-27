@@ -79,7 +79,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 })
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $location) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
@@ -115,19 +115,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     });
 
+    NavigationService.getHomeSlider(function(data) {
+        if (data) {
+            $scope.slides = data;
+            console.log(data);
+        }
+    });
+
+    $scope.goToProductDetail = function(id) {
+        $location.url("/productdetail/" + id);
+    }
+
     //    $scope.slides = [
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
     //    ];
-    $scope.slides = [
-        'img/slider/1.jpg',
-        'img/slider/2.jpg',
-        'img/slider/3.jpg',
-        'img/slider/4.jpg'
+    // $scope.slides = [
+    //     'img/slider/1.jpg',
+    //     'img/slider/2.jpg',
+    //     'img/slider/3.jpg',
+    //     'img/slider/4.jpg'
 
-    ];
+    // ];
 
 
     $scope.products = [{
@@ -173,6 +184,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.filters.brand = "";
     $scope.filters.pricemin = "";
     $scope.filters.pricemax = "";
+    $scope.filters.microphone = "";
+    $scope.filters.size = "";
+    $scope.filters.clength = "";
+    $scope.filters.voltage = "";
+    $scope.filters.capacity = "";
 
     $scope.colorfilter = [];
 
@@ -199,6 +215,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
     $scope.alignFilterId = function(str) {
+        $scope.filters[str] = "";
         var objsend = $scope.showfilter[str];
         var objfil = $scope.filters[str];
         console.log(objsend);
@@ -208,6 +225,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
         objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
         console.log(objfil);
         $scope.getFilterResults();
     }
@@ -433,6 +451,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     })
                     data.compatibledevice = arr;
                 }
+                if (data.compatiblewith && data.compatiblewith.length > 0) {
+                    var arr = [];
+                    _.each(data.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                            console.log(arr);
+                        })
+                    })
+                    data.compatiblewith = arr;
+                }
                 $scope.filters.pricemin = data.price.min;
                 $scope.filters.pricemax = data.price.max;
                 $scope.pageno = 1;
@@ -448,13 +479,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.filters.brand = "";
                 $scope.filters.pricemin = "";
                 $scope.filters.pricemax = "";
-                // if ($stateParams.brand != 0) {
-                //     NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
-                // } else if ($stateParams.parent != 0) {
-                //     NavigationService.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
-                // } else {
-                //     NavigationService.getallproduct(1, getproductbybrandcallback);
-                // }
+                $scope.filters.microphone = "";
+                $scope.filters.size = "";
+                $scope.filters.clength = "";
+                $scope.filters.voltage = "";
+                $scope.filters.capacity = "";
+
+                if ($stateParams.brand != 0) {
+                    NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+                } else if ($stateParams.parent != 0) {
+                    NavigationService.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+                } else {
+                    NavigationService.getallproduct(1, getproductbybrandcallback);
+                }
             }
         });
     }

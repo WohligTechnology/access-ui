@@ -1,3 +1,4 @@
+<!-- Last Option 14 -->
 <div class="container">
     <div class="row">
         <div class="pro-set">
@@ -5,25 +6,27 @@
                 <div class="product-filter">
                     <h4>product filters</h4>
                     <div class="all">
+                        <!-- Category Filter -->
                         <div class="filter" ng-if="showfilter.category && showfilter.category.length>1">
                             <p>Categories</p>
                             <hr class="line">
                             <form class="sub-catgame">
                                 <ul>
-                                    <li ng-repeat="val in showfilter.category">
+                                    <li ng-repeat="val in showfilter.category" ng-if="val.name">
                                         <input id="Option8{{$index}}" type="checkbox" ng-model="showfilter.category[$index].status" ng-change="alignFilterId('category')">
                                         <label for="Option8{{$index}}" class="checkbox">{{val.name}}</label>
                                     </li>
                                 </ul>
                             </form>
                         </div>
-                        <hr class="line" ng-if="showfilter.brand && showfilter.brand.length>1">
+                        <hr class="line" ng-if="showfilter.category && showfilter.category.length>1">
+                        <!-- Brand Filter -->
                         <div class="filter" ng-if="showfilter.brand && showfilter.brand.length>1">
                             <p>Brands</p>
                             <hr class="line">
-                            <form class="sub-catgame">
+                            <form class="sub-catgame colsm">
                                 <ul>
-                                    <li ng-repeat="val in showfilter.brand">
+                                    <li ng-repeat="val in showfilter.brand" ng-if="val.name">
                                         <input id="Option7{{$index}}" type="checkbox" ng-model="showfilter.brand[$index].status" ng-change="alignFilterId('brand')">
                                         <label for="Option7{{$index}}" class="checkbox">{{val.name}}</label>
                                     </li>
@@ -31,12 +34,125 @@
                             </form>
                         </div>
                         <hr class="line" ng-if="showfilter.brand && showfilter.brand.length>1">
-                        <div class="filter" ng-if="showfilter.color && showfilter.color.length>1">
-                            <p>Colors</p>
+                        <!-- Compatible With Filter -->
+                        <div class="filter" ng-if="showfilter.compatiblewith && showfilter.compatiblewith.length>1">
+                            <p>Compatible With</p>
                             <hr class="line">
                             <form class="sub-catgame">
                                 <ul>
-                                    <li ng-repeat="val in showfilter.color">
+                                    <li ng-repeat="val in showfilter.compatiblewith" ng-if="val.compatiblewith">
+                                        <input id="Option2{{$index}}" type="checkbox" ng-model="showfilter.compatiblewith[$index].status" ng-change="alignFilter('compatiblewith')">
+                                        <label for="Option2{{$index}}" class="checkbox">{{val.compatiblewith}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.compatiblewith && showfilter.compatiblewith.length>1">
+                        <!-- Type Filter -->
+                        <div class="filter" ng-if="showfilter.type && showfilter.type.length>1">
+                            <p>Type</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.type" ng-if="val.name">
+                                        <input id="Option6{{$index}}" type="checkbox" ng-model="showfilter.type[$index].status" ng-change="alignFilterId('type')">
+                                        <label for="Option6{{$index}}" class="checkbox">{{val.name}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.type && showfilter.type.length>1">
+                        <!-- Finish Filter -->
+                        <div class="filter" ng-if="showfilter.finish && showfilter.finish.length>1">
+                            <p>Finish</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.finish" ng-if="val.finish">
+                                        <input id="Option4{{$index}}" type="checkbox" ng-model="showfilter.finish[$index].status" ng-change="alignFilter('finish')">
+                                        <label for="Option4{{$index}}" class="checkbox">{{val.finish}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.finish && showfilter.finish.length>1">
+                        <!-- Size Filter -->
+                        <div class="filter" ng-if="showfilter.size && showfilter.size.length>1">
+                            <p>Size</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.size" ng-if="val.size">
+                                        <input id="Option14{{$index}}" type="checkbox" ng-model="showfilter.size[$index].status" ng-change="alignFilter('size')">
+                                        <label for="Option14{{$index}}" class="checkbox">{{val.size}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.size && showfilter.size.length>1">
+                        <!-- Microphone Filter -->
+                        <div class="filter" ng-if="showfilter.microphone && showfilter.microphone.length>1">
+                            <p>Microphone</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.microphone" ng-if="val.microphone">
+                                        <input id="Option10{{$index}}" type="checkbox" ng-model="showfilter.microphone[$index].status" ng-change="alignFilter('microphone')">
+                                        <label for="Option10{{$index}}" class="checkbox">{{val.microphone}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.microphone && showfilter.microphone.length>1">
+                        <!-- Cable Length Filter -->
+                        <div class="filter" ng-if="showfilter.clength && showfilter.clength.length>1">
+                            <p>Cable Length</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.clength" ng-if="val.clength">
+                                        <input id="Option11{{$index}}" type="checkbox" ng-model="showfilter.clength[$index].status" ng-change="alignFilter('clength')">
+                                        <label for="Option11{{$index}}" class="checkbox">{{val.clength}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.clength && showfilter.clength.length>1">
+                        <!-- Voltage Filter -->
+                        <div class="filter" ng-if="showfilter.voltage && showfilter.voltage.length>1">
+                            <p>Voltage</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.voltage" ng-if="val.voltage">
+                                        <input id="Option12{{$index}}" type="checkbox" ng-model="showfilter.voltage[$index].status" ng-change="alignFilter('voltage')">
+                                        <label for="Option12{{$index}}" class="checkbox">{{val.voltage}} Amp</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.voltage && showfilter.voltage.length>1">
+                        <!-- Capacity Filter -->
+                        <div class="filter" ng-if="showfilter.capacity && showfilter.capacity.length>1">
+                            <p>Capacity</p>
+                            <hr class="line">
+                            <form class="sub-catgame">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.capacity" ng-if="val.capacity">
+                                        <input id="Option13{{$index}}" type="checkbox" ng-model="showfilter.capacity[$index].status" ng-change="alignFilter('capacity')">
+                                        <label for="Option13{{$index}}" class="checkbox">{{val.capacity}}</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <hr class="line" ng-if="showfilter.capacity && showfilter.capacity.length>1">
+                        <!-- Colors Filter -->
+                        <div class="filter" ng-if="showfilter.color && showfilter.color.length>1">
+                            <p>Colors</p>
+                            <hr class="line">
+                            <form class="sub-catgame colsm">
+                                <ul>
+                                    <li ng-repeat="val in showfilter.color" ng-if="val.color">
                                         <input id="Option{{$index}}" type="checkbox" ng-model="showfilter.color[$index].status" ng-change="alignFilter('color')">
                                         <label for="Option{{$index}}" class="checkbox">{{val.color}}</label>
                                     </li>
@@ -44,7 +160,7 @@
                             </form>
                         </div>
                         <hr class="line" ng-if="showfilter.color && showfilter.color.length>1">
-                        <div class="filter" ng-if="showfilter.compatibledevice && showfilter.compatibledevice.length>1">
+                        <!-- <div class="filter" ng-if="showfilter.compatibledevice && showfilter.compatibledevice.length>1">
                             <p>Compatible Devices</p>
                             <hr class="line">
                             <form class="sub-catgame">
@@ -56,21 +172,8 @@
                                 </ul>
                             </form>
                         </div>
-                        <hr class="line" ng-if="showfilter.compatibledevice && showfilter.compatibledevice.length>1">
-                        <div class="filter" ng-if="showfilter.compatiblewith && showfilter.compatiblewith.length>1">
-                            <p>Compatible With</p>
-                            <hr class="line">
-                            <form class="sub-catgame">
-                                <ul>
-                                    <li ng-repeat="val in showfilter.compatiblewith">
-                                        <input id="Option2{{$index}}" type="checkbox" ng-model="showfilter.compatiblewith[$index].status" ng-change="alignFilter('compatiblewith')">
-                                        <label for="Option2{{$index}}" class="checkbox">{{val.compatiblewith}}</label>
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <hr class="line" ng-if="showfilter.compatiblewith && showfilter.compatiblewith.length>1">
-                        <div class="filter" ng-if="showfilter.design && showfilter.design.length>1">
+                        <hr class="line" ng-if="showfilter.compatibledevice && showfilter.compatibledevice.length>1"> -->
+                        <!-- <div class="filter" ng-if="showfilter.design && showfilter.design.length>1">
                             <p>Design</p>
                             <hr class="line">
                             <form class="sub-catgame">
@@ -82,21 +185,8 @@
                                 </ul>
                             </form>
                         </div>
-                        <hr class="line" ng-if="showfilter.design && showfilter.design.length>1">
-                        <div class="filter" ng-if="showfilter.finish && showfilter.finish.length>1">
-                            <p>Finish</p>
-                            <hr class="line">
-                            <form class="sub-catgame">
-                                <ul>
-                                    <li ng-repeat="val in showfilter.finish">
-                                        <input id="Option4{{$index}}" type="checkbox" ng-model="showfilter.finish[$index].status" ng-change="alignFilter('finish')">
-                                        <label for="Option4{{$index}}" class="checkbox">{{val.finish}}</label>
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <hr class="line" ng-if="showfilter.finish && showfilter.finish.length>1">
-                        <div class="filter" ng-if="showfilter.material && showfilter.material.length>1">
+                        <hr class="line" ng-if="showfilter.design && showfilter.design.length>1"> -->
+                        <!-- <div class="filter" ng-if="showfilter.material && showfilter.material.length>1">
                             <p>Material</p>
                             <hr class="line">
                             <form class="sub-catgame">
@@ -108,7 +198,8 @@
                                 </ul>
                             </form>
                         </div>
-                        <hr class="line" ng-if="showfilter.material && showfilter.material.length>1">
+                        <hr class="line" ng-if="showfilter.material && showfilter.material.length>1"> -->
+                        <!-- Price Filter -->
                         <div class="price filter">
                             <p>Price</p>
                             <hr class="line">
@@ -123,19 +214,6 @@
                             <a class="click" ng-click="getFilterResults();">Apply</a>
                         </div>
                         <hr class="line" ng-if="showfilter.material && showfilter.material.length>1">
-                        <div class="filter" ng-if="showfilter.type && showfilter.type.length>1">
-                            <p>Type</p>
-                            <hr class="line">
-                            <form class="sub-catgame">
-                                <ul>
-                                    <li ng-repeat="val in showfilter.type">
-                                        <input id="Option6{{$index}}" type="checkbox" ng-model="showfilter.type[$index].status" ng-change="alignFilterId('type')">
-                                        <label for="Option6{{$index}}" class="checkbox">{{val.name}}</label>
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <hr class="line" ng-if="showfilter.type && showfilter.type.length>1">
                         <div class="select-me clearfix text-center">
                             <!-- <a class="ad-cart click pull-left" ng-click="getFilterResults();">Apply</a> -->
                             <a class="click" ng-click="clearFilters();">Clear</a>

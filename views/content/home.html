@@ -1,13 +1,13 @@
 <div class="slider">
-    <flex-slider class="carousel" flex-slide="s in slides" animation="slide" animation-loop="false">
+    <flex-slider class="carousel" flex-slide="s in slides track by $index" animation="slide" animation-loop="true">
         <li>
-            <img ng-src="{{s}}">
+            <img ng-src="{{s.image | serverimage}}" ng-click="goToProductDetail(s.product);">
         </li>
     </flex-slider>
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 padr" ng-if="homeProducts.length>=1">
+        <div class="col-md-6 padr" ng-if="homeProducts.length>=1">
             <div class="pro-imgleft grid cs-style-3">
                 <figure>
                     <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[0].images.length==0">
@@ -20,8 +20,8 @@
                 </figure>
             </div>
         </div>
-        <div class="col-md-4" ng-if="homeProducts.length>=2">
-            <div class="pro-imgright grid cs-style-3">
+        <div class="col-md-6 padr" ng-if="homeProducts.length>=2">
+            <div class="pro-imgleft grid cs-style-3">
                 <figure>
                     <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[1].images.length==0">
                     <img ng-src="{{homeProducts[1].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[1].images.length>0">
@@ -36,11 +36,11 @@
     </div>
     <div class="row">
         <div class="scond-pro">
-            <div class="col-md-4 padr" ng-if="homeProducts.length>=3">
-                <div class="pro-imgright grid cs-style-3">
+            <div class="col-md-6 padr" ng-if="homeProducts.length>=3">
+                <div class="pro-imgleft grid cs-style-3">
                     <figure>
-                          <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[2].images.length==0">
-                          <img ng-src="{{homeProducts[2].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[2].images.length>0">
+                        <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[2].images.length==0">
+                        <img ng-src="{{homeProducts[2].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[2].images.length>0">
                         <figcaption>
                             <h3>{{homeProducts[2].name}}</h3>
                             <span>Rs {{homeProducts[2].price}}</span>
@@ -49,11 +49,11 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-md-8" ng-if="homeProducts.length>=4">
+            <div class="col-md-6 padr" ng-if="homeProducts.length>=4">
                 <div class="pro-imgleft grid cs-style-3">
                     <figure>
-                          <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[3].images.length==0">
-                          <img ng-src="{{homeProducts[3].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[3].images.length>0">
+                        <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[3].images.length==0">
+                        <img ng-src="{{homeProducts[3].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[3].images.length>0">
                         <figcaption>
                             <h3>{{homeProducts[3].name}}</h3>
                             <span>Rs {{homeProducts[3].price}}</span>

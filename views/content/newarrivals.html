@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="row">
 		<div class="pro-set">
-			<div class="col-md-3">
+			<!-- <div class="col-md-3">
 				<div class="product-filter">
 					<h4>product filters</h4>
 					<div class="all">
@@ -44,10 +44,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-9">
+			</div> -->
+			<div class="col-md-12">
 				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
-					<div class="col-md-4 col-sm-6" ng-repeat="pro in products">
+					<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box">
 							<div class="img-box" ng-click="getproductdetails(pro.id)">
 								<div class="pro-img1" ng-if="pro.image1">
