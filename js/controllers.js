@@ -238,8 +238,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
-
-
     $scope.addtowishlist = function(product) {
         if (NavigationService.getuser()) {
             NavigationService.addtowishlist(product.id, function(data, status) {
@@ -380,18 +378,85 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
-        _.each(data.queryresult, function(n) {
+        _.each(data.data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
             }
             $scope.products.push(n);
         });
+        $scope.products = _.uniq($scope.products);
         if ($scope.products == "") {
             $scope.dataload = "No data found";
         }
-        lastpage = data.lastpage;
-        // console.log("lastpage=" + lastpage);
+        lastpage = data.data.lastpage;
+
+        if (data.filter) {
+            if ($scope.filters.category == "" && data.filter.category) {
+                $scope.showfilter.category = data.filter.category;
+            }
+            if ($scope.filters.color == "" && data.filter.color) {
+                $scope.showfilter.color = data.filter.color;
+            }
+            if ($scope.filters.type == "" && data.filter.type) {
+                $scope.showfilter.type = data.filter.type;
+            }
+            if ($scope.filters.material == "" && data.filter.material) {
+                $scope.showfilter.material = data.filter.material;
+            }
+            if ($scope.filters.finish == "" && data.filter.finish) {
+                $scope.showfilter.finish = data.filter.finish;
+            }
+            if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
+                var arr = [];
+                _.each(data.filter.compatibledevice, function(n) {
+                    n.compatibledevice = n.compatibledevice.split(",");
+                    _.each(n.compatibledevice, function(m) {
+                        arr.push({
+                            "compatibledevice": m
+                        });
+                    })
+                })
+                $scope.showfilter.compatibledevice = arr;
+            }
+            if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
+                _.each(data.filter.compatiblewith, function(n) {
+                    n.compatiblewith = n.compatiblewith.split(",");
+                    _.each(n.compatiblewith, function(m) {
+                        arr.push({
+                            "compatiblewith": m
+                        });
+                    })
+                })
+                $scope.showfilter.compatiblewith = arr;
+            }
+            if ($scope.filters.brand == "" && data.filter.brand) {
+                $scope.showfilter.brand = data.filter.brand;
+            }
+            if ($scope.filters.microphone == "" && data.filter.microphone) {
+                $scope.showfilter.microphone = data.filter.microphone;
+            }
+            if ($scope.filters.size == "" && data.filter.size) {
+                $scope.showfilter.size = data.filter.size;
+            }
+            if ($scope.filters.clength == "" && data.filter.clength) {
+                $scope.showfilter.clength = data.filter.clength;
+            }
+            if ($scope.filters.voltage == "" && data.filter.voltage) {
+                $scope.showfilter.voltage = data.filter.voltage;
+            }
+            if ($scope.filters.capacity == "" && data.filter.capacity) {
+                $scope.showfilter.capacity = data.filter.capacity;
+            }
+            if (data.filter.price && data.filter.price.min) {
+                $scope.filters.pricemin = data.filter.price.min;
+            }
+            if (data.filter.price && data.filter.price.max) {
+                $scope.filters.pricemax = data.filter.price.max;
+            }
+            console.log($scope.showfilter);
+        }
     }
+
     $scope.brandid = $stateParams.brand;
 
     $scope.addMoreItems = function() {
@@ -437,7 +502,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getFilters($stateParams.parent, $stateParams.brand, function(data) {
             if (data) {
                 $scope.showfilter = data;
-                console.log(data);
                 if (data.compatibledevice && data.compatibledevice.length > 0) {
                     var arr = [];
                     _.each(data.compatibledevice, function(n) {
@@ -446,7 +510,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             arr.push({
                                 "compatibledevice": m
                             });
-                            console.log(arr);
                         })
                     })
                     data.compatibledevice = arr;
@@ -459,7 +522,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             arr.push({
                                 "compatiblewith": m
                             });
-                            console.log(arr);
                         })
                     })
                     data.compatiblewith = arr;
