@@ -164,8 +164,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Product");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.pageno = 0;
-    var lastpage = 1;
+    $scope.pageno = 1;
+    var lastpage = 0;
     $scope.price = {};
     $scope.price.minPrice = 0;
     $scope.price.maxPrice = 100;
@@ -407,27 +407,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.showfilter.finish = data.filter.finish;
             }
             if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
-                var arr = [];
-                _.each(data.filter.compatibledevice, function(n) {
-                    n.compatibledevice = n.compatibledevice.split(",");
-                    _.each(n.compatibledevice, function(m) {
-                        arr.push({
-                            "compatibledevice": m
-                        });
+                if (data.filter.compatibledevice.length > 1) {
+                    var arr = [];
+                    _.each(data.filter.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                        })
                     })
-                })
-                $scope.showfilter.compatibledevice = arr;
+                    $scope.showfilter.compatibledevice = arr;
+                }
             }
             if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
-                _.each(data.filter.compatiblewith, function(n) {
-                    n.compatiblewith = n.compatiblewith.split(",");
-                    _.each(n.compatiblewith, function(m) {
-                        arr.push({
-                            "compatiblewith": m
-                        });
+                if (data.filter.compatiblewith.lenght > 1) {
+                    _.each(data.filter.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                        })
                     })
-                })
-                $scope.showfilter.compatiblewith = arr;
+                    $scope.showfilter.compatiblewith = arr;
+                }
             }
             if ($scope.filters.brand == "" && data.filter.brand) {
                 $scope.showfilter.brand = data.filter.brand;
