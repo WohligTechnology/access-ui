@@ -117,7 +117,7 @@
                                         <td>Capacity</td>
                                         <td>{{product.product.capacity}}</td>
                                     </tr>
-                                    <tr ng-if="product.product.voltage">
+                                    <tr ng-if="product.product.voltage && product.product.voltage!='0'">
                                         <td>Voltage</td>
                                         <td>{{product.product.voltage}}</td>
                                     </tr>
