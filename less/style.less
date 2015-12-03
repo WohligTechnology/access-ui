@@ -742,6 +742,7 @@
 			}
 			.rel {
                 position: relative;
+                min-height: 575px;
 }
 			.det-img {
 			    .box-img {
@@ -764,18 +765,20 @@
 			        }
 			    }
 			    .video {
-			        width: 100%;
+			        width: 75%;
+                    height: auto;
+                    min-height: 100%;
 			        iframe {
 			            height: auto;
-			            min-height: 250px;
+			            min-height: 350px;
 			        }
 			    }
 			    .mini-img {
 			        width: 52%;
                     position: absolute;
                     left: 135%;
-                    top: 50%;
-                    .transform(translate(-135%,-50%) rotate(90deg));
+                    top: 45%;
+                    .transform(translate(-135%,-45%) rotate(90deg));
 			        margin: 0 auto;
 			        .slide {
 			            img {
@@ -1568,6 +1571,7 @@
 			        }
 			    }
 			    .carousel-indicators li {
+                    margin-right: 7px;
 			        border: 2px solid #333 !important;
 			    }
 			    .carousel-indicators .active {
