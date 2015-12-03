@@ -6,6 +6,7 @@
                     <h3>{{product.product.name}}</h3>
                     <!--					<p ng-bind-html="product.product.description| cut:true:120:'. . .'| rawHtml"></p>-->
                     <span class="avi">availability :<p>{{availability}}</p></span>
+                    <!--
                     <div class="rat">
                         <span class="spanli">
 	                        <ul>
@@ -17,6 +18,7 @@
 							</ul>
 						</span>
                     </div>
+-->
                     <hr class="line">
                 </div>
                 <div class="pro-desc">
@@ -41,20 +43,22 @@
                 <div class="det-img">
                     <div class="row">
                         <div class="col-md-12">
+                           <div class="rel">
                             <div class="box-img" ng-if="!playvideo">
                                 <img src="{{product.product.img}}" class="img-responsive">
                             </div>
                             <div class="video" style="min-height:355px" ng-if="playvideo" youtube code="product.product.img"></div>
-                        </div>
-                    </div>
-                    <div class="mini-img">
-                        <flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="150" item-margin="5" ng-if="productdetail.length>0">
-                            <li ng-click="onimgclick(prd)" class="slide">
-                                <!--								<img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide">-->
-                                <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
+                                <div class="mini-img">
+                                    <flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="130" item-margin="5" ng-if="productdetail.length>0">
+                                        <li ng-click="onimgclick(prd)" class="slide">
+                                            <!--								<img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide">-->
+                                            <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
+                                            </div>
+                                        </li>
+                                    </flex-slider>
                                 </div>
-                            </li>
-                        </flex-slider>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,7 +145,7 @@
                                         <td>EAN/UPC</td>
                                         <td>{{product.product.eanorupc}}</td>
                                     </tr>
-                                    
+
                                     <!-- <tr ng-if="product.product.modelname">
                                         <td>Model Name</td>
                                         <td>{{product.product.modelname}}</td>
