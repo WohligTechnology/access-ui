@@ -106,6 +106,7 @@
 				<div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
 					<a href="" class="contn pull-right">Continue</a>
 				</div>
+<!--
 				<div class="pay-info" ng-show="paymentinfo">
 					<h3 class="head">payment information</h3>
 					<div class="payment-panel">
@@ -121,6 +122,7 @@
 						</div>
 					</div>
 				</div>
+-->
 				<div class="order-info">
 					<h3 class="head">Order review</h3>
 					<div class="row">
@@ -154,10 +156,47 @@
 		</form>
 
 		<div class="continue-btn" ng-if="lastcontinue" ng-click="placeorder();">
-			<a href="" class="contn pull-right">Continue</a>
+			<a href="" class="contn pull-right">Continuedfasdfasdfas</a>
 		</div>
-		<div class="placeorder" ng-show="paymentinfo">
-			<a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>
+		
+		
+		
+		
+		<div class="placeorder" ng-show="paymentinfo" >
+		
+		<form action="http://localhost/accessback/paymentgateway/Checkout.php" method="post" style="padding-top:20px;">
+                                    <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
+
+                                    <!--               CHECKOUT POST FORM START                    -->
+
+
+                                    <input type="text" name="orderid" ng-model="orderid">
+                                    <input type="text" name="amount" ng-model="amount" >
+                                    <input type="text" name="firstname" ng-model="checkout.firstname" >
+                                    <input type="text" name="lastname" ng-model="checkout.lastname" >
+                                    <input type="text" name="billingaddress" ng-model="checkout.billingaddress" >
+                                    <!--                                    <input type="text" name="billingcountry" ng-model="checkout.billingcountry">-->
+                                    <input type="text" name="billingstate" ng-model="checkout.billingstate" >
+                                    <input type="text" name="billingcity" ng-model="checkout.billingcity" >
+                                    <input type="text" name="billingpincode" ng-model="checkout.billingpincode" >
+                                    <input type="text" name="phone" ng-model="checkout.billingcontact" >
+                                    <input type="text" name="email" ng-model="checkout.email" >
+                                    <input type="text" name="shippingname" ng-model="checkout.shippingname" >
+                                    <input type="text" name="shippingaddress" ng-model="checkout.shippingaddress" >
+                                    <!--                                    <input type="text" name="shippingcountry" ng-model="checkout.shippingcountry">-->
+                                    <input type="text" name="shippingcity" ng-model="checkout.shippingcity" >
+                                    <input type="text" name="shippingstate" ng-model="checkout.shippingstate" >
+                                    <input type="text" name="shippingpincode" ng-model="checkout.shippingpincode" >
+                                    <input type="text" name="shippingtel" ng-model="checkout.shippingtel" >
+
+                                    <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
+
+                                    <!--               CHECKOUT POST FORM START                    -->
+                                </form>
+		
+		
+		
+<!--			<a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->
 		</div>
 	</div>
 </div>
