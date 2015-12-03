@@ -1,28 +1,28 @@
 <div class="deals">
-	<div class="container">
+    <div class="container">
 
-		<div class="deals-head">
-			<div class="row">
-				<div class="col-md-3 prev">
-					<div class="deals-before">
-						<p class="tagline text-center">Past Deals</p>
-						<div class="deals-offer">
-							<div class="col-md-12 prev ">
-								<div class="box">
-									<div class="prod">
-										<span class="off">Buy This</span>
-										<div class="images_prod">
-											<div class="img1">
-												<img src="{{pastdealproducts[0].image1 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img src="{{pastdealproducts[0].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="">{{pastdealproducts[0].name}}</h5> 
-										</div>
-<!--
+        <div class="deals-head">
+            <div class="row">
+                <div class="col-md-3 prev">
+                    <div class="deals-before">
+                        <p class="tagline text-center">Past Deals</p>
+                        <div class="deals-offer">
+                            <div class="col-md-12 prev ">
+                                <div class="box">
+                                    <div class="prod">
+                                        <span class="off">Buy This</span>
+                                        <div class="images_prod">
+                                            <div class="img1">
+                                                <img src="{{pastdealproducts[0].image1 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img src="{{pastdealproducts[0].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="">{{pastdealproducts[0].name}}</h5>
+                                        </div>
+                                        <!--
 										<div class="rating">
 											<ul>
 												<li><i class="fa fa-star"></i></li>
@@ -33,21 +33,21 @@
 											</ul>
 										</div>
 -->
-									</div>
-									<div class="off-prod">
-										<span class="off">Get This</span>
-										<div class="off-images">
-											<div class="img1">
-												<img ng-src="{{pastdealproducts[1].image1 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img ng-src="{{pastdealproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="">{{pastdealproducts[1].name}}</h5>
-										</div>
-<!--
+                                    </div>
+                                    <div class="off-prod">
+                                        <span class="off">Get This</span>
+                                        <div class="off-images">
+                                            <div class="img1">
+                                                <img ng-src="{{pastdealproducts[1].image1 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img ng-src="{{pastdealproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="">{{pastdealproducts[1].name}}</h5>
+                                        </div>
+                                        <!--
 										<div class="rating">
 											<ul>
 												<li><i class="fa fa-star"></i></li>
@@ -58,106 +58,84 @@
 											</ul>
 										</div>
 -->
-									</div>
-									<div class="prd-foot text-center">
-										<ul>
-											<li class="single"><i class="fa fa-inr"></i>{{pastdeals[0].price}}</li>
-											<li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
-											<li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<p class="tagline mid text-center">Todays Deals</p>
-					<div class="slide-deal">
-						<flex-slider class="carousel" flex-slide="deal in slideoffer track by $index" animation="slide" item-width="210">
-							<li>
-								<img ng-src="{{deal.img | serverimage}}" alt="Deals" ng-click="sliderclick(deal)">
-							</li>
-						</flex-slider>
-					</div>
-				</div>
-				<div class="col-md-3 prev">
-					<div class="deals-coming">
-						<p class="tagline text-center">Futures Deals</p>
-						<div class="deals-offer">
-							<div class="col-md-12 prev ">
-								<div class="box">
-									<div class="prod">
-										<span class="off">Buy This</span>
-										<div class="images_prod">
-											<div class="img1">
-												<img src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="text-center">{{upcomingofferproducts[0].name}}</h5>
-										</div>
-<!--
-										<div class="rating">
-											<ul>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
--->
-									</div>
-									<div class="off-prod">
-										<span class="off">Get This</span>
-										<div class="off-images">
-											<div class="img1">
-												<img ng-src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img ng-src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="text-center">{{upcomingofferproducts[1].name}}</h5>
-										</div>
-<!--
-										<div class="rating">
-											<ul>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
--->
-									</div>
-									<div class="prd-foot text-center">
-										<ul>
-											<li class="single"><i class="fa fa-inr"></i>{{upcomingoffer[0].price}}</li>
-											<li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
-											<li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                                    </div>
+                                    <div class="prd-foot text-center">
+                                        <ul>
+                                            <li class="single"><i class="fa fa-inr"></i>{{pastdeals[0].price}}</li>
+                                            <li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="tagline mid text-center">Todays Deals</p>
+                    <div class="slide-deal">
+                        <flex-slider class="carousel" flex-slide="deal in slideoffer track by $index" animation="slide" item-width="210">
+                            <li>
+                                <img ng-src="{{deal.img | serverimage}}" alt="Deals" ng-click="sliderclick(deal)">
+                            </li>
+                        </flex-slider>
+                    </div>
+                </div>
+                <div class="col-md-3 prev">
+                    <div class="deals-coming">
+                        <p class="tagline text-center">Futures Deals</p>
+                        <div class="deals-offer">
+                            <div class="col-md-12 prev ">
+                                <div class="box">
+                                    <div class="prod">
+                                        <span class="off">Buy This</span>
+                                        <div class="images_prod">
+                                            <div class="img1">
+                                                <img src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="text-center">{{upcomingofferproducts[0].name}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="off-prod">
+                                        <span class="off">Get This</span>
+                                        <div class="off-images">
+                                            <div class="img1">
+                                                <img ng-src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img ng-src="{{upcomingofferproducts[1].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="text-center">{{upcomingofferproducts[1].name}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="prd-foot text-center">
+                                        <ul>
+                                            <li class="single"><i class="fa fa-inr"></i>{{upcomingoffer[0].price}}</li>
+                                            <li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-		<div class="deals-main">
-			<div class="row">
-				<div class="pro-set">
-					<!-- <div class="col-md-3">
+        <div class="deals-main">
+            <div class="row">
+                <div class="pro-set">
+                    <!-- <div class="col-md-3">
 						<div class="product-filter">
 							<h4>product filters</h4>
 							<div class="all">
@@ -199,73 +177,51 @@
 							</div>
 						</div>
 					</div> -->
-					<div class="col-md-12">
-						<div class="deals-offer">
-							<div class="col-md-6" ng-repeat="offers in deals" ng-if="offers.offerproducts!=''">
-								<div class="box mgb">
-									<div class="prod">
-										<span class="off">Buy This</span>
-										<div class="images_prod">
-											<div class="img1">
-												<img ng-src="{{offers.offerproducts[0].image1 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img ng-src="{{offers.offerproducts[0].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="text-center">{{offers.offerproducts[0].name}}</h5>
-										</div>
-<!--
-										<div class="rating">
-											<ul>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
--->
-									</div>
-									<div class="off-prod">
-										<span class="off">Get This</span>
-										<div class="off-images">
-											<div class="img1">
-												<img ng-src="{{offers.offerproducts[1].image1 | serverimage}}" alt="" class="img-responsive">
-											</div>
-											<div class="img2">
-												<img ng-src="{{offers.offerproducts[2].image2 | serverimage}}" alt="" class="img-responsive">
-											</div>
-										</div>
-										<div class="descp-prd">
-											<h5 class="text-center">{{offers.offerproducts[1].name}}</h5>
-										</div>
-<!--
-										<div class="rating">
-											<ul>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
--->
-									</div>
-									<div class="prd-foot text-center">
-										<ul>
-											<li class="single"><i class="fa fa-inr"></i> {{offers.price}}</li>
-											<li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
-											<li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div class="col-md-12">
+                        <div class="deals-offer">
+                            <div class="col-md-6" ng-repeat="offers in deals" ng-if="offers.offerproducts!=''">
+                                <div class="box mgb">
+                                    <div class="prod">
+                                        <span class="off">Buy This</span>
+                                        <div class="images_prod">
+                                            <div class="img1">
+                                                <img ng-src="{{offers.offerproducts[0].image1 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img ng-src="{{offers.offerproducts[0].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="text-center">{{offers.offerproducts[0].name}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="off-prod">
+                                        <span class="off">Get This</span>
+                                        <div class="off-images">
+                                            <div class="img1">
+                                                <img ng-src="{{offers.offerproducts[1].image1 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="img2">
+                                                <img ng-src="{{offers.offerproducts[2].image2 | serverimage}}" alt="" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="descp-prd">
+                                            <h5 class="text-center">{{offers.offerproducts[1].name}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="prd-foot text-center">
+                                        <ul>
+                                            <li class="single"><i class="fa fa-inr"></i> {{offers.price}}</li>
+                                            <li class="carts" ng-click="openModal();"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li class="carts"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
