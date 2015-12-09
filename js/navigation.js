@@ -1,5 +1,5 @@
- var admin_url = "http://localhost/accessback/index.php/";
-//var admin_url = "http://wohlig.co.in/accessbackend/index.php/";
+var admin_url = "http://localhost/accessback/index.php/";
+var admin_url = "http://wohlig.co.in/accessbackend/index.php/";
 var adminhauth = admin_url + "hauth/";
 // var adminbase = "http://localhost/accessback/";
 var adminbase = "http://wohlig.co.in/accessbackend/";
@@ -109,7 +109,7 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         getbrand: function(pageno, callback) {
-            return $http.get(admin_url + 'json/getbrand?maxrow=12&pageno=' + pageno, {}, {
+            return $http.get(admin_url + 'json/getbrand?maxrow=18&pageno=' + pageno, {}, {
                 withCredentials: true
             }).success(callback);
         },
@@ -162,7 +162,7 @@ var navigationservice = angular.module('navigationservice', [])
         getproductbycategory: function(pageno, category, filters, callback) {
             console.log("getproductbycategory");
             console.log(filters);
-            return $http.get(admin_url + 'json/getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity, {}, {
+            return $http.get(admin_url + 'json/getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity + '&maxrow=18', {}, {
                 withCredentials: true
             }).success(callback);
         },

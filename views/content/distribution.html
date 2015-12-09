@@ -1,16 +1,18 @@
 <div class="distribution">
-	<div class="container">
-		<div class="distributon-head">
-			<h3 class="text-center text-uppercase">Distributors</h3>
-		</div>
-		<div class="distributer">
-			<div class="row">
-				<div class="col-md-3" ng-repeat="dist in distributer" ng-if="dist.isdistributer==1">
-					<div class="img-holder">
-						<img ng-src="{{dist.logo | serverimage}}" alt="" class="img-responsive">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="distributon-head">
+            <h3 class="text-center text-uppercase">Distributors</h3>
+        </div>
+        <div class="distributer">
+            <div class="row" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
+                <div class="col-md-3" ng-repeat="dist in distributer" ng-if="dist.isdistributer==1">
+                    <a href="#/product/0/0/{{dist.id}}">
+                        <div class="img-holder">
+                            <img ng-src="{{dist.logo | serverimage}}" alt="" class="img-responsive">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
