@@ -1323,7 +1323,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         console.log($scope.products);
         if ($scope.products == "") {
-            $scope.dataload = "No data found";
+            $scope.dataload = "No data found !";
         }
     }
 
