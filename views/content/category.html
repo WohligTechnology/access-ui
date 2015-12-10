@@ -6,13 +6,20 @@
 					<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
 						<div class="pro-box" ng-click="categorydetail(pro.id);">
 							<div class="img-box pdn">
-								<div class="pro-img1 img1" ng-if="pro.image1">
-									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
-								</div>
-								<div class="pro-img2 img2" ng-if="pro.image2">
-									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-								</div>
-								<div class="pro-img1 img1" ng-if="!pro.image1 && !pro.image2">
+								<span ng-if="!pro.image2 && pro.image1">
+									<div class="pro-img1 img1" style="opacity:1;" ng-if="pro.image1" >
+										<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
+									</div>
+								</span>
+								<span ng-if="pro.image2">
+									<div class="pro-img1 img1" ng-if="pro.image1" >
+										<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
+									</div>
+									<div class="pro-img2 img2" ng-if="pro.image2">
+										<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+									</div>
+								</span>
+								<div class="pro-img1 img1" style="opacity:1;" ng-if="!pro.image1 && !pro.image2">
 									<img ng-src="{{ggg | serverimage}}" class="img-responsive">
 								</div>
 							</div>

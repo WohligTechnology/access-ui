@@ -271,9 +271,9 @@ a {
 }
 
 //.flexslider-container {
-//		width: 50%;
-//		margin: 10px auto;
-//	}
+//      width: 50%;
+//      margin: 10px auto;
+//  }
 .slider {
     margin-top: -10px;
     z-index: 0;
@@ -639,6 +639,26 @@ img.doneLoading {
         .cartli {
             border-top: 1px solid @color1;
             text-align: center;
+            ul {
+                width: 100%;
+                .wd55 {
+                    width: 55%;
+                }
+                .single.wd55 {
+                    padding: 0;
+                }
+                .wd20 {
+                    width: 20%;
+                }
+                .price {
+                    margin: 0 4px;
+                    display: inline-block;
+                }
+                .sec-p {
+                    font-size: 11px;
+                    opacity: .6;
+                }
+            }
         }
         .cartli ul {
             list-style: none;
@@ -748,7 +768,7 @@ img.doneLoading {
 
 .det-img {
     .box-img {
-        //				border: 1px solid @color1;
+        //              border: 1px solid @color1;
         display: inline-block;
         margin-bottom: 20px;
         height: 550px;
@@ -1550,7 +1570,7 @@ img.doneLoading {
 //brandhover
 .brandhover {
     width: 1000px;
-    min-height: 438px;
+    min-height: 541px;
     border-bottom: 1px solid @color1;
     border-left: 1px solid @color1;
     border-right: 1px solid @color1;
@@ -1573,19 +1593,28 @@ img.doneLoading {
             }
         }
     }
-    .carousel-indicators li {
-        margin-right: 7px;
-        border: 2px solid #333 !important;
+    .carousel-indicators {
+        position: fixed;
+        li {
+            margin-right: 7px;
+            border: 2px solid #333 !important;
+        }
     }
     .carousel-indicators .active {
         background-color: #333 !important;
-        //					border: 2px solid #333;
+        //                  border: 2px solid #333;
     }
     a.carousel-control.left {
-        display: none;
+        width: 25px;
+        color: #000;
+        left: 0;
+        background-image: none;
     }
     a.carousel-control.right {
-        display: none;
+        width: 25px;
+        color: #000;
+        right: 0;
+        background-image: none;
     }
     .brand_hover {
         left: 45% !important;
@@ -1614,6 +1643,7 @@ span.prev {
     .transform(translate(-50%,
     -2%));
     cursor: pointer;
+    display: none;
 }
 
 span.next {
@@ -1627,6 +1657,7 @@ span.next {
     .transform(translate(-50%,
     -0));
     cursor: pointer;
+    display: none;
 }
 
 //product hover
@@ -1911,7 +1942,7 @@ span.next {
 
 div.megamenu {
     width: auto;
-    //			border: 1px solid rgba(0, 0, 0, 0.15); 
+    //          border: 1px solid rgba(0, 0, 0, 0.15); 
     margin: 0 auto;
     position: absolute;
     top: 100%;
@@ -2078,19 +2109,19 @@ a {
 
 
 /*.proset-set {
-				.pro-spec-table {
-					padding: 0 !important;
-					position: static !important;
-					.pro-spec {
-						width: 100%;
-						position: static !important;
-						opacity: 1 !important;
-					}
-					.nobd {
-						border: none;
-					}
-				}
-			}*/
+                .pro-spec-table {
+                    padding: 0 !important;
+                    position: static !important;
+                    .pro-spec {
+                        width: 100%;
+                        position: static !important;
+                        opacity: 1 !important;
+                    }
+                    .nobd {
+                        border: none;
+                    }
+                }
+            }*/
 
 .pro-spec .table > tbody > tr > td {
     padding: 4px;
@@ -2211,7 +2242,8 @@ ul.img-thumb {
     list-style: none;
     display: block;
 }
-.centerno{
+
+.centerno {
     text-align: center;
     font-size: 33px;
     color: #2DB1BD;

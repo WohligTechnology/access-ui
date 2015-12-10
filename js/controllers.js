@@ -380,6 +380,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (n.isfavid) {
                 n.fav = "fav";
             }
+            if (n.firstsaleprice) {
+                if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in if");
+                } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var death = new Date(n.specialpriceto);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var diff2 = curr.getTime() - death.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                    if (start >= 0 && end <= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 1 else if");
+                } else if (n.specialpricefrom != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (start >= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 2 else if");
+                } else if (n.specialpricefrom == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in 3 else if");
+                }
+                console.log("Show Sale Price = " + n.showSalePrice);
+            }
             $scope.products.push(n);
         });
         $scope.products = _.uniq($scope.products);
@@ -1040,6 +1071,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.product.product.quantity = 1;
 
         $scope.productdetail = [];
+        $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
         _.each($scope.product.productimage, function(n) {
             $scope.productdetail.push({
                 image: $filter("serverimage")(n.image),
@@ -1084,10 +1116,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log("in 3 else if");
             }
             console.log("Show Sale Price = " + $scope.showSalePrice);
+        } else {
+            $scope.showSalePrice = false;
         }
-
-        console.log($scope.productdetail);
-
     }
     NavigationService.getproductdetails($scope.productid).success(getproductdetailscallback);
 
@@ -1317,6 +1348,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         _.each(data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
+            }
+            if (n.firstsaleprice) {
+                if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in if");
+                } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var death = new Date(n.specialpriceto);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var diff2 = curr.getTime() - death.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                    if (start >= 0 && end <= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 1 else if");
+                } else if (n.specialpricefrom != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (start >= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 2 else if");
+                } else if (n.specialpricefrom == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in 3 else if");
+                }
+                console.log("Show Sale Price = " + n.showSalePrice);
             }
             $scope.products.push(n);
         });
@@ -2212,10 +2274,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
     }
 
-
+    $scope.products = [];
     NavigationService.search($stateParams.search, function(data) {
         console.log(data);
-        $scope.products = data;
+        _.each(data, function(n) {
+            if (n.isfavid) {
+                n.fav = "fav";
+            }
+            if (n.firstsaleprice) {
+                if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in if");
+                } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var death = new Date(n.specialpriceto);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var diff2 = curr.getTime() - death.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                    if (start >= 0 && end <= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 1 else if");
+                } else if (n.specialpricefrom != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (start >= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 2 else if");
+                } else if (n.specialpricefrom == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in 3 else if");
+                }
+                console.log("Show Sale Price = " + n.showSalePrice);
+            }
+            $scope.products.push(n);
+        });
+        // $scope.products = data;
     });
 
 })
@@ -2229,6 +2328,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.category = {};
     $scope.pageno = 1;
     $scope.splideno = 0;
+    $scope.slides = [];
 
     //PRODUCT HOVER CLICK
 
@@ -2246,21 +2346,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     var getbrandsuccess = function(data, status) {
         $scope.lastpage = data.lastpage;
         $scope.splideno = data.lastpage;
-        $scope.brandhover = data.queryresult;
-
+        var brands = _.chunk(data.queryresult, 4);
+        var brands2 = _.chunk(brands, 4);
+        $scope.brandhover = brands2;
+        console.log($scope.brandhover);
         //add slide
-        $scope.addSlide = function() {
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: '//placekitten.com/' + newWidth + '/300',
-                text: [slides.length % $scope.splideno] + ' ' + [slides.length % $scope.splideno]
-            });
-        };
-        for (var i = 0; i < $scope.splideno; i++) {
-            $scope.addSlide();
-        }
+        // $scope.addSlide = function() {
+        //     var newWidth = 600 + slides.length + 1;
+        //     slides.push({
+        //         image: '//placekitten.com/' + newWidth + '/300',
+        //         text: [slides.length % $scope.splideno] + ' ' + [slides.length % $scope.splideno]
+        //     });
+        // };
+        // for (var i = 0; i < $scope.splideno; i++) {
+        //     $scope.addSlide();
+        // }
     }
-    NavigationService.getbrand($scope.pageno, getbrandsuccess);
+    NavigationService.getAllBrands($scope.pageno, getbrandsuccess);
 
 
 
@@ -2291,53 +2393,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [];
 
-    $scope.prev = function() {
-
-        var i = 0;
-
-        _.each(slides, function(n, key) {
-            if (n.active) {
-                i = key;
-            }
-            console.log(i);
-            n.active = false;
-        });
-        if (i == 0) {
-            i = slides.length;
-        }
-        slides[i - 1].active = true;
-
-        if ($scope.pageno > 1) {
-            $scope.brandhover = [];
-            $scope.slidebrands(--$scope.pageno);
-        } else {
-            $scope.slidebrands($scope.pageno = $scope.lastpage);
-        }
-    };
-
-    $scope.next = function() {
-        var i = 0;
-
-        _.each(slides, function(n, key) {
-            if (n.active) {
-                i = key;
-            }
-            console.log(i);
-            n.active = false;
-        });
-        if (i == (slides.length - 1)) {
-            i = -1;
-        }
-        slides[i + 1].active = true;
-        if ($scope.pageno < $scope.splideno) {
-
-            $scope.brandhover = [];
-            $scope.slidebrands(++$scope.pageno);
-        } else {
-            $scope.slidebrands($scope.pageno = 1);
-        }
-
-    };
+   
 
     $scope.navbar = navbarjson;
 

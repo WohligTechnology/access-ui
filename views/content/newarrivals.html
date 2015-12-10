@@ -1,9 +1,8 @@
 <!--same as wishlist-->
-
 <div class="container">
-	<div class="row">
-		<div class="pro-set">
-			<!-- <div class="col-md-3">
+    <div class="row">
+        <div class="pro-set">
+            <!-- <div class="col-md-3">
 				<div class="product-filter">
 					<h4>product filters</h4>
 					<div class="all">
@@ -45,38 +44,55 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="col-md-12">
-				<div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
-					<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
-						<div class="pro-box">
-							<div class="img-box" ng-click="getproductdetails(pro.id)">
-								<div class="pro-img1" ng-if="pro.image1">
-									<img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
-								</div>
-								<div class="pro-img2" ng-if="pro.image2">
-									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-								</div>
-								<div class="pro-img2" ng-if="!pro.image1">
-									<img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
-								</div>
-							</div>
-							<div class="pro-name">
-								<h5>{{pro.name}}</h5>
-
-								<div class="cartli">
-									<ul>
-										<li class="single"><i class="fa fa-inr"></i> {{pro.price}}</li>
-										<li class="carts" ng-click="addtowishlist(pro);"><i class="fa fa-heart {{pro.fav}}"></i>
-										</li>
-										<li class="carts"><a ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="col-md-12">
+                <div class="product-list" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
+                    <div class="col-md-3 col-sm-6" ng-repeat="pro in products">
+                        <div class="pro-box">
+                            <a href="#/productdetail/{{pro.id}}">
+                                <div class="img-box">
+                                    <span ng-if="!pro.image2 && pro.image1">
+                                    <div class="pro-img1 img1" style="opacity:1;" ng-if="pro.image1" >
+                                        <img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
+                                    </div>
+                                </span>
+                                    <span ng-if="pro.image2">
+                                    <div class="pro-img1 img1" ng-if="pro.image1" >
+                                        <img ng-src="{{pro.image1 | serverimage}}" class="img-responsive">
+                                    </div>
+                                    <div class="pro-img2 img2" ng-if="pro.image2">
+                                        <img ng-src="{{pro.image2 | serverimage}}" class="img-responsive">
+                                    </div>
+                                </span>
+                                    <div class="pro-img1 img1" style="opacity:1;" ng-if="!pro.image1 && !pro.image2">
+                                        <img ng-src="{{ggg | serverimage}}" class="img-responsive">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="pro-name">
+                                <h5>{{pro.name}}</h5>
+                                <div class="cartli">
+                                    <ul>
+                                        <li class="single wd55" ng-show="pro.showSalePrice">
+                                            <span class="first-p price">
+                                        <i class="fa fa-inr"></i> {{pro.firstsaleprice}}
+                                        </span>
+                                            <span style="text-decoration: line-through;" class="sec-p price">
+                                        <i class="fa fa-inr"></i> {{pro.price}}
+                                        </span>
+                                        </li>
+                                        <!-- <li class="single" style="text-decoration: line-through;" ng-show="pro.showSalePrice"><i class="fa fa-inr"></i> {{pro.price}}</li> -->
+                                        <li class="single wd60" ng-hide="pro.showSalePrice"><i class="fa fa-inr"></i> {{pro.price}}</li>
+                                        <li class="carts wd20" ng-click="addtowishlist(pro);"><i class="fa fa-heart {{pro.fav}}"></i>
+                                        </li>
+                                        <li class="carts wd20"><a ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

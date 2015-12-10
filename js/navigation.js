@@ -109,7 +109,12 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         getbrand: function(pageno, callback) {
-            return $http.get(admin_url + 'json/getbrand?maxrow=18&pageno=' + pageno, {}, {
+            return $http.get(admin_url + 'json/getbrand?maxrow=16&pageno=' + pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getAllBrands: function(pageno, callback) {
+            return $http.get(admin_url + 'json/getbrand?maxrow=500000&pageno=' + pageno, {}, {
                 withCredentials: true
             }).success(callback);
         },
