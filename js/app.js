@@ -123,15 +123,15 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     })
 
     .state('privacy', {
-        url: "/privacy",
-        templateUrl: "views/template.html",
-        controller: 'PrivacyCtrl'
-    })
-    .state('faq', {
-        url: "/faq",
-        templateUrl: "views/template.html",
-        controller: 'FaqCtrl'
-    })
+            url: "/privacy",
+            templateUrl: "views/template.html",
+            controller: 'PrivacyCtrl'
+        })
+        .state('faq', {
+            url: "/faq",
+            templateUrl: "views/template.html",
+            controller: 'FaqCtrl'
+        })
 
     .state('storelocator', {
             url: "/storelocator",
@@ -159,6 +159,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             url: "/forgotpassword",
             templateUrl: "views/template.html",
             controller: 'forgotpasswordCtrl'
+        })
+        .state('brandproducts', {
+            url: "/brandproducts/:brand",
+            templateUrl: "views/template.html",
+            controller: 'brandProductsCtrl'
         })
 
     $urlRouterProvider.otherwise("/home");
@@ -243,31 +248,31 @@ firstapp.directive('youtube', function($sce) {
 });
 
 firstapp.filter('cut', function() {
-  return function(value, wordwise, max, tail) {
-    if (!value) return '';
+    return function(value, wordwise, max, tail) {
+        if (!value) return '';
 
-    max = parseInt(max, 10);
-    if (!max) return value;
-    if (value.length <= max) return value;
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
 
-    value = value.substr(0, max);
-    if (wordwise) {
-      var lastspace = value.lastIndexOf(' ');
-      if (lastspace != -1) {
-        value = value.substr(0, lastspace);
-      }
-    }
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
+            }
+        }
 
-    return value + (tail || ' …');
-  };
+        return value + (tail || ' …');
+    };
 });
 
 firstapp.filter('rawHtml', ['$sce',
-  function($sce) {
-    return function(val) {
-      return $sce.trustAsHtml(val);
-    };
-  }
+    function($sce) {
+        return function(val) {
+            return $sce.trustAsHtml(val);
+        };
+    }
 ]);
 
 
@@ -291,11 +296,11 @@ firstapp.directive('img', function($compile, $parse) {
     };
 });
 
-firstapp.directive("disableRightClick", function () {
+firstapp.directive("disableRightClick", function() {
     return {
         restict: 'A',
-        link: function (scope, el) {
-            el.bind("contextmenu", function (e) {
+        link: function(scope, el) {
+            el.bind("contextmenu", function(e) {
                 e.preventDefault();
             });
         }

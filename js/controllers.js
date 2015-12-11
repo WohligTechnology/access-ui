@@ -2393,7 +2393,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.noWrapSlides = false;
     var slides = $scope.slides = [];
 
-   
+
 
     $scope.navbar = navbarjson;
 
@@ -2410,4 +2410,428 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
-});
+})
+
+.controller('brandProductsCtrl', function($scope, TemplateService, NavigationService, ngDialog, $stateParams, $location, $timeout) {
+    $scope.template = TemplateService.changecontent("product");
+    $scope.menutitle = NavigationService.makeactive("Product");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.pageno = 1;
+    var lastpage = 0;
+    $scope.price = {};
+    $scope.price.minPrice = 0;
+    $scope.price.maxPrice = 100;
+
+    $scope.products = [];
+    $scope.showfilter = [];
+    $scope.dataload = "Loading ...";
+    $scope.filters = {};
+    $scope.filters.category = "";
+    $scope.filters.color = "";
+    $scope.filters.type = "";
+    $scope.filters.material = "";
+    $scope.filters.finish = "";
+    $scope.filters.compatibledevice = "";
+    $scope.filters.compatiblewith = "";
+    $scope.filters.brand = "";
+    $scope.filters.pricemin = "";
+    $scope.filters.pricemax = "";
+    $scope.filters.microphone = "";
+    $scope.filters.size = "";
+    $scope.filters.clength = "";
+    $scope.filters.voltage = "";
+    $scope.filters.capacity = "";
+
+    $scope.colorfilter = [];
+
+    $scope.getFilterResults = function() {
+        $scope.pageno = 1;
+        $scope.products = [];
+        NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+    }
+
+    $scope.alignFilter = function(str) {
+        $scope.filters[str] = "";
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n[str] + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
+        console.log($scope.filters[str]);
+        $scope.getFilterResults();
+    }
+
+    $scope.alignFilterId = function(str) {
+        $scope.filters[str] = "";
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n.id + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
+        console.log(objfil);
+        $scope.getFilterResults();
+    }
+
+    for (var i = 0; i < navbarjson.length; i++) {
+        if (i == 0) {
+            navbarjson[i].class = "color";
+        } else {
+            navbarjson[i].class = "";
+        }
+    }
+
+    $scope.addtowishlist = function(product) {
+        if (NavigationService.getuser()) {
+            NavigationService.addtowishlist(product.id, function(data, status) {
+                console.log(data);
+                if (data == "true") {
+                    product.fav = "fav";
+                    var xyz = ngDialog.open({
+                        template: '<div class="pop-up"><h5 class="popup-wishlist">your product has been Added to wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                        plain: true
+                    });
+                    $timeout(function() {
+                        xyz.close();
+                    }, 3000)
+                } else if (data == "0") {
+                    var xyz = ngDialog.open({
+                        template: '<div class="pop-up"><h5 class="popup-wishlist">Already added to wishlist!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                        plain: true
+                    });
+                    $timeout(function() {
+                        xyz.close();
+                    }, 3000)
+                } else {
+                    var xyz = ngDialog.open({
+                        template: '<div class="pop-up"><h5 class="popup-wishlist">Oops something went wrong!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                        plain: true
+                    });
+                    $timeout(function() {
+                        xyz.close();
+                    }, 3000)
+                }
+            });
+        } else {
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Login for wishlist</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true,
+                controller: 'ProductCtrl'
+            });
+            $timeout(function() {
+                xyz.close();
+            }, 3000)
+        }
+    }
+
+
+    $scope.demo2 = {
+        range: {
+            min: 0,
+            max: 10050
+        },
+        minPrice: 0,
+        maxPrice: 10050
+    };
+    $scope.brands = [{
+        name: "Apple"
+
+
+    }, {
+        name: "nokia"
+
+
+    }, {
+        name: "samsung"
+
+    }, {
+        name: "mi"
+
+    }, {
+        name: "micromax"
+
+    }];
+
+    $scope.max = 5;
+    $scope.isReadonly = false;
+
+    $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+    };
+
+    $scope.ratingStates = [{
+        stateOn: 'glyphicon-ok-sign',
+        stateOff: 'glyphicon-ok-circle'
+    }, {
+        stateOn: 'glyphicon-star',
+        stateOff: 'glyphicon-star-empty'
+    }, {
+        stateOn: 'glyphicon-heart',
+        stateOff: 'glyphicon-ban-circle'
+    }, {
+        stateOn: 'glyphicon-heart'
+    }, {
+        stateOff: 'glyphicon-off'
+    }];
+
+    $scope.$watch('rate', function(val) {
+
+            function sucess(data) {
+
+                console.log(data);
+
+            };
+
+            function error(response) {
+
+                console.log(response)
+
+                alert("Can't post " + response.data + " Error:" + response.status);
+
+            }
+
+
+
+            if (val) {
+
+                var data = {
+                    rating: val,
+                    user: "userId" // I'm not sure where is your userId
+
+                }
+
+                $http.post("yourUrl", data).then(sucess, error);
+
+
+            }
+        })
+        // PRODUCTS SELECTED FROM CATEGORY
+    var getproductbycategorycallback = function(data, status) {
+        console.log(data.queryresult);
+        $scope.products = data.queryresult;
+    }
+
+    //GO TO PRODUCT DETAIL
+    $scope.getproductdetails = function(productid) {
+        $location.url("/productdetail/" + productid);
+    }
+
+    var getproductbybrandcallback = function(data, status) {
+        console.log(data);
+        _.each(data.data.queryresult, function(n) {
+            if (n.isfavid) {
+                n.fav = "fav";
+            }
+            if (n.firstsaleprice) {
+                if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in if");
+                } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var death = new Date(n.specialpriceto);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var diff2 = curr.getTime() - death.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                    if (start >= 0 && end <= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 1 else if");
+                } else if (n.specialpricefrom != "0000-00-00") {
+                    var birth = new Date(n.specialpricefrom);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (start >= 0) {
+                        n.showSalePrice = true;
+                    }
+                    console.log("in 2 else if");
+                } else if (n.specialpricefrom == "0000-00-00") {
+                    n.showSalePrice = true;
+                    console.log("in 3 else if");
+                }
+                console.log("Show Sale Price = " + n.showSalePrice);
+            }
+            $scope.products.push(n);
+        });
+        $scope.products = _.uniq($scope.products);
+        if ($scope.products == "") {
+            $scope.dataload = "No data found";
+        }
+        lastpage = data.data.lastpage;
+
+        if (data.filter) {
+            if ($scope.filters.category == "" && data.filter.category) {
+                $scope.showfilter.category = data.filter.category;
+            }
+            if ($scope.filters.color == "" && data.filter.color) {
+                $scope.showfilter.color = data.filter.color;
+            }
+            if ($scope.filters.type == "" && data.filter.type) {
+                $scope.showfilter.type = data.filter.type;
+            }
+            if ($scope.filters.material == "" && data.filter.material) {
+                $scope.showfilter.material = data.filter.material;
+            }
+            if ($scope.filters.finish == "" && data.filter.finish) {
+                $scope.showfilter.finish = data.filter.finish;
+            }
+            if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
+                if (data.filter.compatibledevice.length > 1) {
+                    var arr = [];
+                    _.each(data.filter.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                        })
+                    })
+                    $scope.showfilter.compatibledevice = arr;
+                }
+            }
+            if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
+                if (data.filter.compatiblewith.lenght > 1) {
+                    _.each(data.filter.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                        })
+                    })
+                    $scope.showfilter.compatiblewith = arr;
+                }
+            }
+            // if ($scope.filters.brand == "" && data.filter.brand) {
+            //     $scope.showfilter.brand = data.filter.brand;
+            // }
+            if ($scope.filters.microphone == "" && data.filter.microphone) {
+                $scope.showfilter.microphone = data.filter.microphone;
+            }
+            if ($scope.filters.size == "" && data.filter.size) {
+                $scope.showfilter.size = data.filter.size;
+            }
+            if ($scope.filters.clength == "" && data.filter.clength) {
+                $scope.showfilter.clength = data.filter.clength;
+            }
+            if ($scope.filters.voltage == "" && data.filter.voltage) {
+                $scope.showfilter.voltage = data.filter.voltage;
+            }
+            if ($scope.filters.capacity == "" && data.filter.capacity) {
+                $scope.showfilter.capacity = data.filter.capacity;
+            }
+            if (data.filter.price && data.filter.price.min) {
+                $scope.filters.pricemin = data.filter.price.min;
+            }
+            if (data.filter.price && data.filter.price.max) {
+                $scope.filters.pricemax = data.filter.price.max;
+            }
+            console.log($scope.showfilter);
+        }
+    }
+
+    $scope.brandid = $stateParams.brand;
+
+    $scope.addMoreItems = function() {
+        // console.log("lastpage=" + lastpage);
+        // console.log("pageno=" + $scope.pageno);
+        if ($scope.pageno <= lastpage) {
+            ++$scope.pageno;
+            NavigationService.getproductbybrand($scope.pageno, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+        }
+    }
+
+    // $scope.addMoreItems();
+
+    $scope.addtocart = function(product) {
+        console.log(product);
+        var selectedproduct = {};
+        selectedproduct.product = product.id;
+        selectedproduct.productname = product.name;
+        selectedproduct.price = product.price;
+        selectedproduct.quantity = 1;
+        NavigationService.addtocart(selectedproduct, function(data) {
+            console.log(data);
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true,
+                controller: 'ProductCtrl'
+            });
+            $timeout(function() {
+                    xyz.close();
+                }, 3000)
+                //          $location.url("/cart");
+            myfunction();
+        });
+    }
+
+    $scope.clearFilters = function() {
+        NavigationService.getFilters($stateParams.parent, $stateParams.brand, function(data) {
+            if (data) {
+                $scope.showfilter = data;
+                if (data.compatibledevice && data.compatibledevice.length > 0) {
+                    var arr = [];
+                    _.each(data.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                        })
+                    })
+                    data.compatibledevice = arr;
+                }
+                if (data.compatiblewith && data.compatiblewith.length > 0) {
+                    var arr = [];
+                    _.each(data.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                        })
+                    })
+                    data.compatiblewith = arr;
+                }
+                $scope.filters.pricemin = data.price.min;
+                $scope.filters.pricemax = data.price.max;
+                $scope.pageno = 1;
+                $scope.products = [];
+                $scope.filters = {};
+                $scope.filters.category = "";
+                $scope.filters.color = "";
+                $scope.filters.type = "";
+                $scope.filters.material = "";
+                $scope.filters.finish = "";
+                $scope.filters.compatibledevice = "";
+                $scope.filters.compatiblewith = "";
+                $scope.filters.brand = "";
+                $scope.filters.pricemin = "";
+                $scope.filters.pricemax = "";
+                $scope.filters.microphone = "";
+                $scope.filters.size = "";
+                $scope.filters.clength = "";
+                $scope.filters.voltage = "";
+                $scope.filters.capacity = "";
+
+                NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+            }
+        });
+    }
+
+    $scope.clearFilters();
+
+})

@@ -3,7 +3,7 @@
         <slide ng-repeat="brandhovers in brandhover track by $index" active="slide.active">
             <div class="row" ng-repeat="brndhovs in brandhovers track by $index">
                 <div class="col-md-3" ng-repeat="brndhov in brndhovs track by $index">
-                    <a href="#/product/0/0/{{brndhov.id}}">
+                    <a href="#/brandproducts/{{brndhov.id}}">
                         <div class="img-holder">
                             <img ng-src="{{brndhov.logo | serverimage}}" alt="Brands" class="img-responsive" ng-if="brndhov.logo">
                             <img ng-src="{{ggg | serverimage}}" alt="Brands" class="img-responsive" ng-if="!brndhov.logo">

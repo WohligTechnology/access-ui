@@ -6,7 +6,7 @@
 					<div class="col-md-3" ng-repeat="brnd in brandimages" >
 						<div class="img-holder">
 <!--								<a ng-click="getproductbybrand(brnd.id);"><img ng-src="{{brnd.logo | serverimage}}" alt="Brands" class="img-responsive" ></a>-->
-								<a href="#/product/0/0/{{brnd.id}}">
+								<a href="#/brandproducts/{{brnd.id}}">
 								<img ng-src="{{brnd.logo | serverimage}}" alt="Brands" class="img-responsive" ng-if="brnd.logo">
 								<img ng-src="{{ggg | serverimage}}" alt="Brands" class="img-responsive" ng-if="!brnd.logo">
 								</a>
