@@ -9,26 +9,30 @@
     <div class="row">
         <div class="col-md-6 padr" ng-if="homeProducts.length>=1">
             <div class="pro-imgleft grid cs-style-3">
-                <figure>
+                <figure ng-click="goToProductDetail(homeProducts[0].id);">
                     <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[0].images.length==0">
                     <img ng-src="{{homeProducts[0].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[0].images.length>0">
                     <figcaption>
                         <h3>{{homeProducts[0].name}}</h3>
-                        <span>Rs {{homeProducts[0].price}}</span>
-                        <a href="#/productdetail/{{homeProducts[0].id}}">Shop Now</a>
+                        <span ng-show="homeProducts[0].showSalePrice">Rs {{homeProducts[0].firstsaleprice}}</span>
+                        <span class="cross" ng-show="homeProducts[0].showSalePrice">Rs {{homeProducts[0].price}}</span>
+                        <span ng-hide="homeProducts[0].showSalePrice">Rs {{homeProducts[0].price}}</span>
+                        <a>Shop Now</a>
                     </figcaption>
                 </figure>
             </div>
         </div>
         <div class="col-md-6 padr" ng-if="homeProducts.length>=2">
             <div class="pro-imgleft grid cs-style-3">
-                <figure>
+                <figure ng-click="goToProductDetail(homeProducts[1].id);">
                     <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[1].images.length==0">
                     <img ng-src="{{homeProducts[1].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[1].images.length>0">
                     <figcaption>
                         <h3>{{homeProducts[1].name}}</h3>
-                        <span>Rs {{homeProducts[1].price}}</span>
-                        <a href="#/productdetail/{{homeProducts[1].id}}">Shop Now</a>
+                        <span ng-show="homeProducts[1].showSalePrice">Rs {{homeProducts[1].firstsaleprice}}</span>
+                        <span class="cross" ng-show="homeProducts[1].showSalePrice">Rs {{homeProducts[1].price}}</span>
+                        <span ng-hide="homeProducts[1].showSalePrice">Rs {{homeProducts[1].price}}</span>
+                        <a>Shop Now</a>
                     </figcaption>
                 </figure>
             </div>
@@ -38,26 +42,30 @@
         <div class="scond-pro">
             <div class="col-md-6 padr" ng-if="homeProducts.length>=3">
                 <div class="pro-imgleft grid cs-style-3">
-                    <figure>
+                    <figure ng-click="goToProductDetail(homeProducts[2].id);">
                         <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[2].images.length==0">
                         <img ng-src="{{homeProducts[2].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[2].images.length>0">
                         <figcaption>
                             <h3>{{homeProducts[2].name}}</h3>
-                            <span>Rs {{homeProducts[2].price}}</span>
-                            <a href="#/productdetail/{{homeProducts[2].id}}">Shop Now</a>
+                            <span ng-show="homeProducts[2].showSalePrice">Rs {{homeProducts[2].firstsaleprice}}</span>
+                            <span class="cross" ng-show="homeProducts[2].showSalePrice">Rs {{homeProducts[2].price}}</span>
+                            <span ng-hide="homeProducts[2].showSalePrice">Rs {{homeProducts[2].price}}</span>
+                            <a>Shop Now</a>
                         </figcaption>
                     </figure>
                 </div>
             </div>
             <div class="col-md-6 padr" ng-if="homeProducts.length>=4">
                 <div class="pro-imgleft grid cs-style-3">
-                    <figure>
+                    <figure ng-click="goToProductDetail(homeProducts[3].id);">
                         <img src="img/icon.png" class="img-responsive" ng-if="homeProducts[3].images.length==0">
                         <img ng-src="{{homeProducts[3].images[0][0].image | serverimage}}" class="img-responsive" ng-if="homeProducts[3].images.length>0">
                         <figcaption>
                             <h3>{{homeProducts[3].name}}</h3>
-                            <span>Rs {{homeProducts[3].price}}</span>
-                            <a href="#/productdetail/{{homeProducts[3].id}}">Shop Now</a>
+                            <span ng-show="homeProducts[3].showSalePrice">Rs {{homeProducts[3].firstsaleprice}}</span>
+                            <span class="cross" ng-show="homeProducts[3].showSalePrice">Rs {{homeProducts[3].price}}</span>
+                            <span ng-hide="homeProducts[3].showSalePrice">Rs {{homeProducts[3].price}}</span>
+                            <a>Shop Now</a>
                         </figcaption>
                     </figure>
                 </div>
@@ -68,7 +76,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 text-center">
                 <h3>sign up to receive our updates</h3>
-                <p>Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat.</p>
+                <!-- <p>Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat.</p> -->
                 <div class="search padtp">
                     <p>{{msg}}</p>
                     <div class="input-group">

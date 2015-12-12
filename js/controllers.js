@@ -106,10 +106,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
+    $scope.homeProducts = [];
     NavigationService.getHomeProducts(function(data) {
         if (data) {
-            $scope.homeProducts = data;
-            console.log(data);
+            _.each(data, function(n) {
+                if (n.firstsaleprice) {
+                    if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in if");
+                    } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var death = new Date(n.specialpriceto);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var diff2 = curr.getTime() - death.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                        if (start >= 0 && end <= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 1 else if");
+                    } else if (n.specialpricefrom != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        if (start >= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 2 else if");
+                    } else if (n.specialpricefrom == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in 3 else if");
+                    }
+                    console.log("Show Sale Price = " + n.showSalePrice);
+                }
+                $scope.homeProducts.push(n);
+            });
         }
     });
 
