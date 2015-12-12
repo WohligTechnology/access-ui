@@ -1692,6 +1692,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.shippingbilling = function() {
         console.log("test billing");
         console.log($scope.openship.open);
+        var check = false;
         if ($scope.openship.open == "closemodalship") {
             $scope.allvalidation = [{
                 field: $scope.checkout.firstname,
@@ -1721,7 +1722,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 field: $scope.checkout.billingcontact,
                 validation: ""
             }];
-            var check = formvalidation($scope.allvalidation);
+            check = formvalidation($scope.allvalidation);
 
         } else {
             console.log("on shipping");
@@ -1774,7 +1775,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 field: $scope.checkout.customernote,
                 validation: ""
             }];
-            var check = formvalidation($scope.allvalidation);
+            check = formvalidation($scope.allvalidation);
         }
 
         if (check) {
