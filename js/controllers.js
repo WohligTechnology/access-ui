@@ -850,7 +850,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }
 
-    //LOGIN 
+    //LOGIN
     $scope.login = {};
     var getlogin = function(data, status) {
         console.log(data);
@@ -1797,10 +1797,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log(data);
                     $scope.orderid = data;
                     $scope.amount = $scope.totalcart - $scope.discount;
-                    ngDialog.open({
-                        template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-                        plain: true
-                    });
+                    // ngDialog.open({
+                    //     template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                    //     plain: true
+                    // });
                 });
 
             });

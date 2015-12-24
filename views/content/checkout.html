@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
-                    <a href="" class="contn pull-right">Continuewuey</a>
+                    <a href="" class="contn pull-right">Continue</a>
                 </div>
                 <!--
 				<div class="pay-info" ng-show="paymentinfo">
@@ -193,37 +193,37 @@
             </div>
         </form>
         <div class="continue-btn" ng-if="lastcontinue" ng-click="placeorder();">
-            <a href="" class="contn pull-right">Continuedfasdfasdfas</a>
+            <a href="" class="contn pull-right">Continue</a>
         </div>
         <div class="placeorder" ng-show="paymentinfo">
-            <form action="http://accessinfoworld.com/pav-bhaji/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
+            <form action="http://accessinfoworld.com/accessfront/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
                 <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
                 <!--               CHECKOUT POST FORM START                    -->
-                <input type="text" name="tid" id="tid" />
-                <input type="text" name="order_id" ng-model="orderid">
-                <input type="text" name="merchant_id" value="76752">
-                <input type="text" name="amount" ng-model="amount">
-                <input type="text" name="billing_name" ng-model="checkout.firstname">
-                <input type="text" name="currency" value="INR">
-                <input type="text" name="redirect_url" value="http://accessinfoworld.com/accessback/index.php/json/payumoneysuccess">
-                <input type="text" name="cancel_url" value="htt://accessinfoworld.com/pav-bhaji/#/checkout"/>
-                <input type="text" name="language" value="EN"/>
+                <input type="text" hidden name="tid" id="tid" />
+                <input type="text" hidden name="order_id" ng-model="orderid">
+                <input type="text" hidden name="merchant_id" value="76752">
+                <input type="text" hidden name="amount" ng-model="amount">
+                <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
+                <input type="text" hidden name="currency" value="INR">
+                <input type="text" hidden name="redirect_url" value="http://accessinfoworld.com/accessbackend/index.php/json/payumoneysuccess">
+                <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/accessfront/#/checkout"/>
+                <input type="text" hidden name="language" value="EN"/>
                 <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
-                <input type="text" name="billing_address" ng-model="checkout.billingaddress">
-                <input type="text" name="billing_country" ng-model="checkout.billingcountry">
-                <input type="text" name="billing_state" ng-model="checkout.billingstate">
-                <input type="text" name="billing_city" ng-model="checkout.billingcity">
-                <input type="text" name="billing_zip" ng-model="checkout.billingpincode">
-                <input type="text" name="billing_tel" ng-model="checkout.billingcontact">
-                <input type="text" name="billing_email" ng-model="checkout.email">
-                <input type="text" name="delivery_name" ng-model="checkout.shippingname">
-                <input type="text" name="delivery_address" ng-model="checkout.shippingaddress">
-                <input type="text" name="delivery_country" ng-model="checkout.shippingcountry">
-                <input type="text" name="delivery_city" ng-model="checkout.shippingcity">
-                <input type="text" name="delivery_state" ng-model="checkout.shippingstate">
-                <input type="text" name="delivery_zip" ng-model="checkout.shippingpincode">
-                <input type="text" name="delivery_tel" ng-model="checkout.shippingtel">
-                <input type="text" name="integration_type" value="iframe_normal"/>
+                <input type="text" hidden name="billing_address" ng-model="checkout.billingaddress">
+                <input type="text" hidden name="billing_country" ng-model="checkout.billingcountry">
+                <input type="text" hidden name="billing_state" ng-model="checkout.billingstate">
+                <input type="text" hidden name="billing_city" ng-model="checkout.billingcity">
+                <input type="text" hidden name="billing_zip" ng-model="checkout.billingpincode">
+                <input type="text" hidden name="billing_tel" ng-model="checkout.billingcontact">
+                <input type="text" hidden name="billing_email" ng-model="checkout.email">
+                <input type="text" hidden name="delivery_name" ng-model="checkout.shippingname">
+                <input type="text" hidden name="delivery_address" ng-model="checkout.shippingaddress">
+                <input type="text" hidden name="delivery_country" ng-model="checkout.shippingcountry">
+                <input type="text" hidden name="delivery_city" ng-model="checkout.shippingcity">
+                <input type="text" hidden name="delivery_state" ng-model="checkout.shippingstate">
+                <input type="text" hidden name="delivery_zip" ng-model="checkout.shippingpincode">
+                <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingtel">
+                <input type="text" hidden name="integration_type" value="iframe_normal"/>
                 <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
                 <!--               CHECKOUT POST FORM START                    -->
             </form>
