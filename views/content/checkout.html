@@ -62,51 +62,16 @@
                                     <input type="email" class="form-control form-divider" ng-model="checkout.email" placeholder="Email *" ng-class="allvalidation[2].validation" required>
                                     <textarea name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.billingaddress" placeholder="Address *" ng-class="allvalidation[3].validation" required></textarea>
                                     <input type="text" class="form-control form-divider" ng-model="checkout.billingcity" placeholder="City *" ng-class="allvalidation[4].validation" required>
-                                    <!-- <input type="text" class="form-control form-divider" ng-model="checkout.billingstate" placeholder="State/Province *" ng-class="allvalidation[5].validation" required> -->
-                                    <select class="form-control form-divider" ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required>
-                                        <option value="">Select State *</option>
-                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                        <option value="Assam">Assam</option>
-                                        <option value="Bihar">Bihar</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Chhattisgarh">Chhattisgarh</option>
-                                        <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                        <option value="Daman and Diu">Daman and Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Goa">Goa</option>
-                                        <option value="Gujarat">Gujarat</option>
-                                        <option value="Haryana">Haryana</option>
-                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                        <option value="Jharkhand">Jharkhand</option>
-                                        <option value="Karnataka">Karnataka</option>
-                                        <option value="Kerala">Kerala</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Manipur">Manipur</option>
-                                        <option value="Meghalaya">Meghalaya</option>
-                                        <option value="Mizoram">Mizoram</option>
-                                        <option value="Nagaland">Nagaland</option>
-                                        <option value="Orissa">Orissa</option>
-                                        <option value="Pondicherry">Pondicherry</option>
-                                        <option value="Punjab">Punjab</option>
-                                        <option value="Rajasthan">Rajasthan</option>
-                                        <option value="Sikkim">Sikkim</option>
-                                        <option value="Tamil Nadu">Tamil Nadu</option>
-                                        <option value="Tripura">Tripura</option>
-                                        <option value="Uttaranchal">Uttaranchal</option>
-                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                        <option value="West Bengal">West Bengal</option>
-                                    </select>
-                                    <input type="text" class="form-control form-divider" ng-model="checkout.billingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[6].validation" maxlength="6" required only-digits ng-trim="false">
+                                    <input type="text" class="form-control form-divider" ng-model="checkout.billingstate" placeholder="State/Province *" ng-class="allvalidation[5].validation" required>
+                                    <!-- <select class="form-control form-divider" ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required> -->
+
+                                    <!-- </select> -->
+                                    <input type="text" class="form-control form-divider" ng-model="checkout.billingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[6].validation" maxlength="6" required ng-trim="false">
                                     <select class="form-control form-divider" ng-model="checkout.billingcountry" ng-class="allvalidation[7].validation" required>
                                         <option value="">Select Country *</option>
                                         <option value="India" selected>India</option>
                                     </select>
-                                    <input type="number" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" only-digits ng-trim="false" maxlength="10">
+                                    <input type="number" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" ng-trim="false" maxlength="10">
                                     <label class="form-divider">
                                         <input type="radio" name="check" value="closemodalship" ng-model="openship.open" ng-click="showshipping=false"> Ship to this address</label>
                                     <label class="form-divider">
@@ -164,12 +129,12 @@
                                         <option value="Uttar Pradesh">Uttar Pradesh</option>
                                         <option value="West Bengal">West Bengal</option>
                                     </select>
-                                    <input type="text" class="form-control form-divider" ng-model="checkout.shippingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[13].validation" required only-digits ng-trim="false" maxlength="10">
+                                    <input type="text" class="form-control form-divider" ng-model="checkout.shippingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[13].validation" required ng-trim="false" maxlength="10">
                                     <select class="form-control form-divider" ng-model="checkout.shippingcountry" ng-class="allvalidation[14].validation">
                                         <option value="">Select Country *</option>
                                         <option value="India" selected>India</option>
                                     </select>
-                                    <input type="number" class="form-control form-divider" ng-model="checkout.shippingcontact" placeholder="Telephone *" only-digits ng-trim="false" maxlength="10">
+                                    <input type="number" class="form-control form-divider" ng-model="checkout.shippingcontact" placeholder="Telephone *" ng-trim="false" maxlength="10">
                                     <textarea name="" class="form-control form-divider" ng-model="checkout.customernote" placeholder="Customer Notes *" ng-class="allvalidation[15].validation"></textarea>
                                 </div>
                             </div>
@@ -177,7 +142,7 @@
                     </div>
                 </div>
                 <div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
-                    <a href="" class="contn pull-right">Continue</a>
+                    <a href="" class="contn pull-right">Continuewuey</a>
                 </div>
                 <!--
 				<div class="pay-info" ng-show="paymentinfo">
@@ -231,27 +196,34 @@
             <a href="" class="contn pull-right">Continuedfasdfasdfas</a>
         </div>
         <div class="placeorder" ng-show="paymentinfo">
-            <form action="http://localhost/accessback/paymentgateway/Checkout.php" method="post" style="padding-top:20px;">
+            <form action="http://accessinfoworld.com/pav-bhaji/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
                 <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
                 <!--               CHECKOUT POST FORM START                    -->
-                <input type="text" name="orderid" ng-model="orderid">
+                <input type="text" name="tid" id="tid" />
+                <input type="text" name="order_id" ng-model="orderid">
+                <input type="text" name="merchant_id" value="76752">
                 <input type="text" name="amount" ng-model="amount">
-                <input type="text" name="firstname" ng-model="checkout.firstname">
-                <input type="text" name="lastname" ng-model="checkout.lastname">
-                <input type="text" name="billingaddress" ng-model="checkout.billingaddress">
-                <!--                                    <input type="text" name="billingcountry" ng-model="checkout.billingcountry">-->
-                <input type="text" name="billingstate" ng-model="checkout.billingstate">
-                <input type="text" name="billingcity" ng-model="checkout.billingcity">
-                <input type="text" name="billingpincode" ng-model="checkout.billingpincode">
-                <input type="text" name="phone" ng-model="checkout.billingcontact">
-                <input type="text" name="email" ng-model="checkout.email">
-                <input type="text" name="shippingname" ng-model="checkout.shippingname">
-                <input type="text" name="shippingaddress" ng-model="checkout.shippingaddress">
-                <!--                                    <input type="text" name="shippingcountry" ng-model="checkout.shippingcountry">-->
-                <input type="text" name="shippingcity" ng-model="checkout.shippingcity">
-                <input type="text" name="shippingstate" ng-model="checkout.shippingstate">
-                <input type="text" name="shippingpincode" ng-model="checkout.shippingpincode">
-                <input type="text" name="shippingtel" ng-model="checkout.shippingtel">
+                <input type="text" name="billing_name" ng-model="checkout.firstname">
+                <input type="text" name="currency" value="INR">
+                <input type="text" name="redirect_url" value="http://accessinfoworld.com/accessback/index.php/json/payumoneysuccess">
+                <input type="text" name="cancel_url" value="htt://accessinfoworld.com/pav-bhaji/#/checkout"/>
+                <input type="text" name="language" value="EN"/>
+                <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
+                <input type="text" name="billing_address" ng-model="checkout.billingaddress">
+                <input type="text" name="billing_country" ng-model="checkout.billingcountry">
+                <input type="text" name="billing_state" ng-model="checkout.billingstate">
+                <input type="text" name="billing_city" ng-model="checkout.billingcity">
+                <input type="text" name="billing_zip" ng-model="checkout.billingpincode">
+                <input type="text" name="billing_tel" ng-model="checkout.billingcontact">
+                <input type="text" name="billing_email" ng-model="checkout.email">
+                <input type="text" name="delivery_name" ng-model="checkout.shippingname">
+                <input type="text" name="delivery_address" ng-model="checkout.shippingaddress">
+                <input type="text" name="delivery_country" ng-model="checkout.shippingcountry">
+                <input type="text" name="delivery_city" ng-model="checkout.shippingcity">
+                <input type="text" name="delivery_state" ng-model="checkout.shippingstate">
+                <input type="text" name="delivery_zip" ng-model="checkout.shippingpincode">
+                <input type="text" name="delivery_tel" ng-model="checkout.shippingtel">
+                <input type="text" name="integration_type" value="iframe_normal"/>
                 <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
                 <!--               CHECKOUT POST FORM START                    -->
             </form>

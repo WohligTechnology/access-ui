@@ -1,4 +1,4 @@
-var admin_url = "http://localhost/accessback/index.php/";
+// var admin_url = "http://localhost/accessback/index.php/";
 var admin_url = "http://wohlig.co.in/accessbackend/index.php/";
 var adminhauth = admin_url + "hauth/";
 // var adminbase = "http://localhost/accessback/";
