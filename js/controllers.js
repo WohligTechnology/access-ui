@@ -1687,7 +1687,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showcontinue = true;
     }
 
-
+    $scope.showLoading = false;
     //continue shipping billing
     $scope.shippingbilling = function() {
         console.log("test billing");
@@ -1783,6 +1783,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log("all fill");
 
             $scope.paymentinfo = true;
+            $scope.showLoading = true;
             NavigationService.getcart(function(data) {
                 console.log(data);
                 $scope.cart = data;
@@ -1797,6 +1798,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log(data);
                     $scope.orderid = data;
                     $scope.amount = $scope.totalcart - $scope.discount;
+                    $scope.showLoading = false;
                     // ngDialog.open({
                     //     template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
                     //     plain: true
@@ -1820,8 +1822,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.placeorder = function() {
         console.log();
-
-
+        $scope.showLoading = true;
         NavigationService.getcart(function(data) {
             console.log(data);
             $scope.cart = data;
@@ -1834,6 +1835,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             NavigationService.placeorder($scope.checkout, function(data) {
                 console.log(data);
+                $scope.showLoading = false;
                 ngDialog.open({
                     template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
                     plain: true
