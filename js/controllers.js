@@ -1538,7 +1538,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
 
-.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService, ngDialog, $timeout) {
+.controller('CheckoutCtrl', function($scope, TemplateService, NavigationService, ngDialog, $timeout, $interval, $location) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("checkout");
     $scope.menutitle = NavigationService.makeactive("CheckOut");
@@ -1569,6 +1569,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.checkout = data;
     });
 
+    //SOCIAL LOGIN
+
+        // GOOGLE AND FACEBOOK LOGIN
+        var checktwitter = function(data, status) {
+            if (data != "false") {
+                $interval.cancel(stopinterval);
+                ref.close();
+                NavigationService.authenticate().success(authenticatesuccess);
+            } else {
+
+            }
+
+        };
+
+        var callAtIntervaltwitter = function() {
+            NavigationService.authenticate().success(checktwitter);
+        };
+        var authenticatesuccess = function(data, status) {
+            if (data != "false") {
+                $.jStorage.set("user", data);
+                user = data;
+                window.location.reload();
+            }
+        };
+
+        $scope.facebooklogin = function() {
+            ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function(event) {
+                NavigationService.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+        $scope.googlelogin = function() {
+            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function(event) {
+                NavigationService.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
 
     //CREATE ACCOUNT
     $scope.account = {};
