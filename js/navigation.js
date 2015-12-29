@@ -257,6 +257,7 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         placeorder: function(form, callback) {
+          console.log(form);
             return $http({
                 url: admin_url + "json/placeorder",
                 method: "POST",
