@@ -29,15 +29,15 @@
 									<img ng-src="{{mycart.image | serverimage}}" class="img-responsive">
 								</div>
 							</td>
-							<td>
+							<td ui-sref="productdetail({id:mycart.id})">
 								<h4>{{mycart.options.realname}}</h4>
 								<h5>Ref. 2514/302</h5>
 							</td>
 							<td>
 								<div class="in">
-								<i class="fa fa-minus-circle color" ng-click="changeqty(mycart,'-')"></i>
-									<input type="text" ng-model="mycart.qty" ng-change="onchangeqty(mycart)">
-									<i class="fa fa-plus-circle color" ng-click="changeqty(mycart, '+')"></i>
+								<!-- <i class="fa fa-minus-circle color" ng-click="changeqty(mycart,'-')"></i> -->
+									<input type="text" ng-model="mycart.qty" disabled ng-change="onchangeqty(mycart)">
+									<!-- <i class="fa fa-plus-circle color" ng-click="changeqty(mycart, '+')"></i> -->
 									<a href="#"></a>
 								</div>
 							</td>

@@ -1072,7 +1072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.quantityChange = function(qty){
       console.log(qty);
       console.log($scope.product.product.quantity);
-      if (qty>$scope.product.product.quantity) {
+      if (qty>parseInt($scope.product.product.quantity)) {
         $scope.notqty = false;
       }else{
         $scope.notqty = true;
@@ -1124,6 +1124,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.availability = "In Stock";
         } else {
             $scope.availability = "Out of Stock";
+            $scope.notqty = false;
         }
 
         $scope.product.product.img = $filter("serverimage")($scope.product.productimage[0].image);
