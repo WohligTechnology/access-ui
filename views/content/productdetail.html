@@ -35,9 +35,9 @@
                         <span class="tax">( inclusive of all taxes )</span>
                     </h2>
                     <div class="qua">
-                        <input type="number" value="1" placeholder="1" min="1" ng-model="product.product.quantity">
-                        <a ng-click="addtowishlist(product.product.id)"><i class="fa fa-heart {{product.product.fav}}"></i>Add To Wishlist</a>
-                        <a class="ad-cart" ng-click="addtocart(product.product)"><i class="fa fa-shopping-cart "></i>Add To cart</a>
+                        <input type="number" value="1" placeholder="1" min="1" ng-model="qty" ng-change="quantityChange(qty)">
+                        <a ng-click="addtowishlist(product.product.id)" ng-show="notqty"><i class="fa fa-heart {{product.product.fav}}"></i>Add To Wishlist</a>
+                        <a class="ad-cart" ng-click="addtocart(product.product,qty)" ng-show="notqty"><i class="fa fa-shopping-cart "></i>Add To cart</a>
                     </div>
                     <ul class="img-thumb">
                         <li ng-repeat="color in product.samecolor" ng-click="makeactive(color);" ng-if="color.id!=product.product.id">

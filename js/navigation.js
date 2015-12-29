@@ -262,7 +262,29 @@ var navigationservice = angular.module('navigationservice', [])
                 url: admin_url + "json/placeorder",
                 method: "POST",
                 withCredentials: true,
-                data: form
+                data: {
+                  "billingaddress": form.billingaddress,
+                  "billingcity": form.billingcity,
+                  "billingcontact": form.billingcontact,
+                  "billingcountry": form.billingcountry,
+                  "billingpincode": form.billingpincode,
+                  "billingstate": form.billingstate,
+                  "cart": form.cart,
+                  "email": form.email,
+                  "firstname": form.firstname,
+                  "id": form.id,
+                  "lastname": form.lastname,
+                  "phone": form.phone,
+                  "user": form.user,
+                  "shippingname": form.shippingname,
+                  "shippingaddress":form.shippingaddress,
+                  "shippingcity":form.shippingcity,
+                  "shippingstate":form.shippingstate,
+                  "shippingpincode":form.shippingpincode,
+                  "shippingcountry":form.shippingcountry,
+                  "shippingcontact":form.shippingcontact,
+                  "customernote":form.customernote
+                }
             }).success(callback);
         },
         getcart: function(callback) {

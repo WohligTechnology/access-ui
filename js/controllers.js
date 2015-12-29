@@ -1021,6 +1021,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.productid = $stateParams.id;
     $scope.playvideo = false;
     $scope.showSalePrice = false;
+    $scope.notqty = true;
+    $scope.qty = 1;
 
     var addtowishlistcallback = function(data, status) {
         console.log(data);
@@ -1067,30 +1069,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
-    $scope.addtocart = function(product) {
+    $scope.quantityChange = function(qty){
+      console.log(qty);
+      console.log($scope.product.product.quantity);
+      if (qty>$scope.product.product.quantity) {
+        $scope.notqty = false;
+      }else{
+        $scope.notqty = true;
+      }
+    }
+
+    $scope.addtocart = function(product,qty) {
         console.log(product);
-        var selectedproduct = {};
-        selectedproduct.product = product.id;
-        selectedproduct.productname = product.name;
-        selectedproduct.price = product.price;
-        selectedproduct.quantity = product.quantity;
-        NavigationService.addtocart(selectedproduct, function(data) {
-            console.log(data);
-            var xyz = ngDialog.open({
-                template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-                plain: true
-            });
-            $timeout(function() {
-                    xyz.close();
-                }, 3000)
-                //          $location.url("/cart");
-            myfunction();
-        });
+        if (qty<=$scope.product.product.quantity) {
+          var selectedproduct = {};
+          selectedproduct.product = product.id;
+          selectedproduct.productname = product.name;
+          selectedproduct.price = product.price;
+          selectedproduct.quantity = qty;
+          NavigationService.addtocart(selectedproduct, function(data) {
+              console.log(data);
+              var xyz = ngDialog.open({
+                  template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                  plain: true
+              });
+              $timeout(function() {
+                      xyz.close();
+                  }, 3000)
+                  //          $location.url("/cart");
+              myfunction();
+          });
+        }else{
+          var xyz = ngDialog.open({
+              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid Quantity</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+              plain: true
+          });
+          $timeout(function() {
+                  xyz.close();
+              }, 3000)
+        }
+
     }
 
     var getproductdetailscallback = function(data, status) {
         console.log(data);
         $scope.product = data;
+        if ($scope.product.product.quantity==0) {
+          $scope.notqty = false;
+        }
         if ($scope.product.product.user) {
             $scope.product.product.fav = "fav";
         }
