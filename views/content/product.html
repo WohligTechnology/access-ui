@@ -262,7 +262,7 @@
                                         </li>
                                         <li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i>
                                         </li>
-                                        <li ng-if="pro.quantity < 0" class="stock"><span>Out Of Stock</span></li>
+                                        <li ng-if="pro.quantity <= 0" class="stock"><span>Out Of Stock</span></li>
 
                                     </ul>
                                 </div>
