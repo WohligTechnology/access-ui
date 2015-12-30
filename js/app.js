@@ -8,6 +8,8 @@ var firstapp = angular.module('firstapp', [
 ]);
 
 
+
+
 firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 
     // for http request with session
@@ -87,7 +89,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     //          templateUrl: "views/template.html",
     //          controller: 'BrandhoverCtrl'
     //      })
-    //  
+    //
     .state('cart', {
             url: "/cart",
             templateUrl: "views/template.html",
@@ -220,7 +222,7 @@ firstapp.directive('myloading', function() {
 //        template: '{{obj1}}',
 //
 //        controller: function($scope) {
-//            
+//
 //         $scope.obj1  = $scope.obj;
 //
 //        }

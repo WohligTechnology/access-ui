@@ -42,7 +42,7 @@
                     <ul class="img-thumb">
                         <li ng-repeat="color in product.samecolor" ng-click="makeactive(color);" ng-if="color.id!=product.product.id">
                             <a href="" title="{{color.brandcolor}}">
-                                <!--    <img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="" class="img-responsive"> -->
+                                   <!-- <img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="" class="img-responsive"> -->
                                 <div class="image-mhs" ng-style="{'background-image':'url({{color.samecolorimages[0][0].image | serverimage}})'}">
                                 </div>
                             </a>
@@ -56,15 +56,17 @@
                         <div class="col-md-12">
                             <div class="rel">
                                 <div class="box-img" ng-if="!playvideo">
-                                    <img src="{{product.product.img}}" class="img-responsive">
+                                    <img ng-src="{{product.product.img}}" class="img-responsive">
                                 </div>
                                 <div class="video" style="min-height:355px" ng-if="playvideo" youtube code="product.product.img"></div>
                                 <div class="mini-img">
                                     <flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="130" item-margin="5" ng-if="productdetail.length>0">
                                         <li ng-click="onimgclick(prd)" class="slide">
-                                            <!--                                <img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide">-->
-                                            <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
-                                            </div>
+                                          <div class="mh-hold">
+                                                                           <img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide ">
+                                                                         </div>
+                                            <!-- <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
+                                            </div> -->
                                         </li>
                                     </flex-slider>
                                 </div>
