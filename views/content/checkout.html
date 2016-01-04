@@ -6,7 +6,7 @@
                     <h3 class="head">Checkout</h3>
                     <div class="check-panel">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="check-reg">
                                     <h4 class="text-uppercase">checkout as a guest or register</h4>
                                     <p class="reg">Register with us for future convenience:{{openblock.radiovalue}}</p>
@@ -20,15 +20,26 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="login" ng-show="!register">
-                                    <h4 class="text-uppercase">Login</h4>
-                                    <h5><span style="color: tomato;">{{msg}}</span></h5>
-                                    <input type="text" class="form-control form-divider" placeholder="Username or email" ng-class="allvalidation[0].validation" ng-model="login.email">
-                                    <input type="password" class="form-control form-divider" placeholder="Password" ng-class="allvalidation[1].validation" ng-model="login.password">
-                                    <a href="#" class="pull-left forgot">Forgot Password?</a>
-                                    <a class="pull-right btn-log" ng-click="userlogin(login);">Login</a>
-                                </div>
-                                <div class="login" ng-show="register">
+                              <div class="login">
+                                  <h4 class="text-uppercase">Login</h4>
+                                  <h5><span style="color: tomato;">{{msg}}</span></h5>
+                                  <input type="text" class="form-control form-divider" placeholder="Username or email" ng-class="allvalidation[0].validation" ng-model="login.email">
+                                  <input type="password" class="form-control form-divider" placeholder="Password" ng-class="allvalidation[1].validation" ng-model="login.password">
+<div class="clearfix">
+                                  <a href="#" class="pull-left forgot">Forgot Password?</a>
+                                  <a class="pull-right btn-log" ng-click="userlogin(login);">Login</a>
+                                  </div>
+                                  <div class="clearfix"  style="margin-top:20px">
+                                    <a class="btn btn-primary pull-left g-login g-logins" ng-click="googlelogin()">
+                                      <i class="fa fa-google-plus"></i>Google+</a>
+                                      <a class="btn btn-primary pull-left f-login g-logins" ng-click="facebooklogin()">
+                                        <i class="fa fa-facebook"></i>Facebook</a>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4" ng-show="register">
+
+                                <div class="login">
                                     <h4>create an account</h4>
                                     <h5><span style="color: tomato;">{{msgregister}}</span></h5>
                                     <form>
@@ -40,12 +51,13 @@
                                     </form>
                                     <a class="btns" ng-click="registeruser();">Submit</a>
                                 </div>
+                                <div class="login clearfix" style="margin-top:20px;">
+                                  <a class="btn btn-primary pull-left g-login g-logins" ng-click="googlelogin()">
+                                    <i class="fa fa-google-plus"></i>Google+</a>
+                                    <a class="btn btn-primary pull-left f-login g-logins" ng-click="facebooklogin()">
+                                      <i class="fa fa-facebook"></i>Facebook</a></div>
                             </div>
-                            <p>
-                              <a class="btn btn-primary pull-right g-login g-logins" ng-click="googlelogin()">
-                                <i class="fa fa-google-plus"></i>Google+</a>
-                                <a class="btn btn-primary pull-right f-login g-logins" ng-click="facebooklogin()">
-                                  <i class="fa fa-facebook"></i>Facebook</a></p>
+
                         </div>
                     </div>
                 </div>
@@ -127,7 +139,7 @@
                                                     <i class="fa fa-inr"></i>{{discount}}
                                                 </td>
                                                 <td>
-                                                    <i class="fa fa-inr"></i>{{totalcart - discount}}
+                                                    <i class="fa fa-inr"></i>{{allamount}}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -148,9 +160,10 @@
                     <input type="text" hidden name="tid" id="tid" />
                     <input type="text" hidden name="order_id" ng-model="orderid">
                     <input type="text" hidden name="merchant_id" value="76752">
-                    <input type="text" hidden name="amount" ng-model="amount">
+                    <input type="text" hidden name="amount" ng-model="allamount">
                     <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
                     <input type="text" hidden name="currency" value="INR">
+                    <input type="text" hidden name="merchant_param1" ng-model="couponhave">
                     <input type="text" hidden name="redirect_url" value="http://accessinfoworld.com/admin/index.php/json/payumoneysuccess">
                     <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
                     <input type="text" hidden name="language" value="EN" />
@@ -174,6 +187,9 @@
                     <!--               CHECKOUT POST FORM START                    -->
                 </form>
                 <!--            <a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->
+            </div>
+            <div class="placeorder" ng-show="noamount">
+                    <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
             </div>
         </div>
         <div class="centerno" ng-show="showLoading">

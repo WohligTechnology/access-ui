@@ -637,16 +637,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.nodata = 'Loading..';
     $scope.nodatafound = true;
+    $scope.userdetail = {};
 
     $scope.gettotalcartfunction = function() {
         NavigationService.totalcart(function(data) {
+          if ($scope.userdetail.credits) {
+            $scope.totalcart = data - $scope.userdetail.credits;
+            if ($scope.totalcart<=0) {
+              $scope.totalcart = 0
+            }
+          }else{
             $scope.totalcart = data;
+          }
         });
     }
 
-    $scope.gettotalcartfunction();
 
 
+    NavigationService.getuserdetails(function(data){
+      console.log(data);
+      $scope.userdetail = data;
+      $scope.gettotalcartfunction();
+    });
 
     //check coupons
     $scope.discountamount = 0;
@@ -664,6 +676,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.isamount = parseFloat(data.discountamount);
                 console.log("ABCD");
                 $scope.discountamount = $scope.isamount;
+            }
+            if($scope.totalcart<$scope.discountamount){
+              $scope.totalcart = 0;
             }
         }
         if (data.coupontype == '2') {
@@ -705,7 +720,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     $scope.tocheckout = function() {
+      console.log("cart");
         $.jStorage.set("discountamount", $scope.discountamount);
+        if($.jStorage.get('coupon')){
+        $.jStorage.set('coupon',_.merge($.jStorage.get('coupon'),{'totalcart':$scope.totalcart-$scope.discountamount}));
+      }else {
+        $.jStorage.set('coupon',{'totalcart':$scope.totalcart-$scope.discountamount});
+      }
         $location.url("/checkout");
     }
 
@@ -1581,11 +1602,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.register = false;
     $scope.checkout = {};
     $scope.paymentinfo = false;
+    $scope.noamount= false;
     $scope.discount = 0;
 
-    if ($.jStorage.get("discountamount")) {
-        $scope.discount = $.jStorage.get("discountamount");
-    }
+
     $scope.login = {};
     $scope.showcontinue = false;
     $scope.openblock.radiovalue = "checkoutasguest";
@@ -1733,6 +1753,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //order products
     NavigationService.totalcart(function(data) {
         $scope.totalcart = data;
+        if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode!=null) {
+          $scope.couponhave = $.jStorage.get('coupon').couponcode;
+        }else {
+          $scope.couponhave = 0;
+        }
+        $scope.allamount = $.jStorage.get('coupon').totalcart;
+        if ($.jStorage.get("discountamount")) {
+            $scope.discount = $.jStorage.get("discountamount");
+            // if ($scope.discount>$scope.totalcart) {
+            //   $scope.totalcart = 0;
+            // }
+        }
     });
 
 
@@ -1849,8 +1881,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if (check) {
             //                  NavigationService.registeruser($scope.account, registerusercallback);
             console.log("all fill");
+if ($scope.allamount==0) {
+  $scope.noamount = true;
+}else{
+  $scope.paymentinfo = true;
+}
 
-            $scope.paymentinfo = true;
             $scope.showLoading = true;
             NavigationService.getcart(function(data) {
                 console.log(data);

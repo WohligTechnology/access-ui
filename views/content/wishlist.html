@@ -26,6 +26,9 @@
 															<div class="pro-img1 img1" style="opacity:1;" ng-if="!pro.image1 && !pro.image2">
 																	<img ng-src="{{ggg | serverimage}}" class="img-responsive">
 															</div>
+															<div class="stock" ng-if="pro.quantity<=0">
+																<p class="text-capitalize">out of stock</p>
+															</div>
 													</div>
 											</a>
 											<div class="pro-name">
@@ -41,11 +44,10 @@
 																	</span>
 																	</li>
 																	<li class="single wd60" ng-hide="pro.showSalePrice"><i class="fa fa-inr"></i> {{pro.price}}</li>
-																	<li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtowishlist(pro);"><i class="fa fa-heart {{pro.fav}}"></i>
+																	<!-- <li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtowishlist(pro);"><i class="fa fa-heart {{pro.fav}}"></i> -->
 																	</li>
 																	<li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i>
 																	</li>
-																	<li ng-if="pro.quantity <= 0" class="stock"><span>Out Of Stock</span></li>
 
 															</ul>
 													</div>
