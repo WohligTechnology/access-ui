@@ -628,7 +628,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('CartCtrl', function($scope, TemplateService, NavigationService, $location) {
+.controller('CartCtrl', function($scope, TemplateService, NavigationService, $location, $timeout, ngDialog) {
     $scope.template = TemplateService;
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("cart");
@@ -739,7 +739,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.discountamount = 0;
     var couponsuccess = function(data, status) {
         if (data == 'false') {
-            $scope.validcouponcode = 0;
+          var xyz = ngDialog.open({
+              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid coupon code</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+              plain: true,
+              controller: 'CartCtrl'
+          });
+          $timeout(function() {
+              xyz.close();
+          }, 3000)
         } else {
             console.log("Show it");
             $scope.validcouponcode = 1;
@@ -2290,7 +2297,7 @@ if ($scope.allamount==0) {
 
 })
 
-.controller('WishlistCtrl', function($scope, TemplateService, NavigationService, ngDialog) {
+.controller('WishlistCtrl', function($scope, TemplateService, NavigationService, ngDialog, $timeout) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("wishlist");
     $scope.menutitle = NavigationService.makeactive("Wishlist");
@@ -2330,8 +2337,27 @@ if ($scope.allamount==0) {
 
     }
     $scope.removefromwishlist = function(productid) {
-        console.log(productid);
         NavigationService.removefromwishlist(productid, removefromwishlist);
+    }
+    $scope.addtocart = function(product) {
+        console.log(product);
+        var selectedproduct = {};
+        selectedproduct.product = product.id;
+        selectedproduct.productname = product.name;
+        selectedproduct.price = product.price;
+        selectedproduct.quantity = 1;
+        NavigationService.addtocart(selectedproduct, function(data) {
+            console.log(data);
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
+                    xyz.close();
+                }, 3000)
+                //          $location.url("/cart");
+            myfunction();
+        });
     }
 
 })

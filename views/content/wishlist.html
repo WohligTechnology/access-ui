@@ -44,7 +44,7 @@
 																	</span>
 																	</li>
 																	<li class="single wd60" ng-hide="pro.showSalePrice"><i class="fa fa-inr"></i> {{pro.price}}</li>
-																	<!-- <li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtowishlist(pro);"><i class="fa fa-heart {{pro.fav}}"></i> -->
+																	<li class="carts wd20" ng-click="removefromwishlist(pro.id);"><i class="fa fa-times"></i>
 																	</li>
 																	<li ng-if="pro.quantity > 0" class="carts wd20" ng-click="addtocart(pro)"><i class="fa fa-shopping-cart"></i>
 																	</li>
