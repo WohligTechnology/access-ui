@@ -39,7 +39,7 @@
     "ui-router": "~0.2.15",
     "ui-select": "https://github.com/angular-ui/ui-select.git#~0.12.0",
     "valdr": "~1.1.3",
-    "angular-bootstrap": "~0.13.0",
+    "angular-bootstrap": "~0.13.4",
     "angular-rangeslider": "~0.0.14",
     "jStorage": "~0.4.12"
   }
