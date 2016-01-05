@@ -1,6 +1,7 @@
 var admin_url = "http://accessworld.in/admin/index.php/";
 // var admin_url = "http://localhost/accessback/index.php/";
 // var admin_url = "http://192.168.0.101/accessback/index.php/";
+// var admin_url = "http://192.168.0.126/accessback/index.php/";
 var adminhauth = admin_url + "hauth/";
 var adminbase = "http://accessworld.in/admin/";
 var adminimage = adminbase + "uploads/";

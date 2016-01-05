@@ -970,10 +970,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     // WISHLIST
 
+  window.scrollTo(0, 0);
+
     $scope.fastsearch = function(search) {
         $location.url("/searchresult/" + search);
     }
 
+    myfunction = function() {
+        NavigationService.gettotalcart(function(data) {
+            $scope.totalcart = data;
+        });
+        NavigationService.totalcart(function(data) {
+            $scope.amount = data;
+        });
+    }
 
     globalfunction.cart = function() {
         NavigationService.totalcart(function(data) {
@@ -982,6 +992,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log(globalvariable.totalcart);
         });
     }
+    globalfunction.cart();
+    myfunction();
 
     $scope.getwishlistproduct = function() {
         $location.url("/wishlist");
@@ -1336,7 +1348,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 })
 
-.controller('ResetpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
+.controller('ResetpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("resetpassword");
     $scope.menutitle = NavigationService.makeactive("Resetpassword");
@@ -1355,11 +1367,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
     $scope.newPassword = function() {
         console.log($scope.forgot);
-        NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
+        $scope.allvalidation = [{
+            field: $scope.forgot.newpassword,
+            validation: ""
+        }, {
+            field: $scope.forgot.confirmpassword,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
+        } else {
+          var xyz = ngDialog.open({
+              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+              plain: true
+          });
+          $timeout(function() {
+                  xyz.close();
+              }, 3000)
+        }
+
     }
 })
 
-.controller('AccountCtrl', function($scope, TemplateService, NavigationService) {
+.controller('AccountCtrl', function($scope, TemplateService, NavigationService, ngDialog,$timeout) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("account");
     $scope.menutitle = NavigationService.makeactive("Account");
@@ -1370,14 +1401,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     var updateusercallback = function(data, status) {
         console.log(data);
         if (data == "true") {
-            $scope.msgsuccess = "User updated";
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">User updated</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
+                    xyz.close();
+                }, 3000)
         } else {
-            $scope.msgfailure = "fail to update"
+          var xyz = ngDialog.open({
+              template: '<div class="pop-up"><h5 class="popup-wishlist">Fail to update</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+              plain: true
+          });
+          $timeout(function() {
+                  xyz.close();
+              }, 3000)
         }
 
     }
     $scope.updateuser = function(user) {
-        NavigationService.updateuser(user, updateusercallback)
+      $scope.allvalidation = [{
+          field: $scope.user.email,
+          validation: ""
+      }];
+      var check = formvalidation($scope.allvalidation);
+      if (check) {
+          NavigationService.updateuser(user, updateusercallback);
+      } else {
+        var xyz = ngDialog.open({
+            template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+            plain: true
+        });
+        $timeout(function() {
+                xyz.close();
+            }, 3000)
+      }
     }
 
 
