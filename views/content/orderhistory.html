@@ -1,9 +1,9 @@
 <div class="order-history text-uppercase">
 	<div class="container">
 		<div class="ord-his pads text-center">
-			<h3 class="ord-info"><span>hi michal,</span>this is your order history</h3>
+			<h3 class="ord-info"><span>hi {{user.firstname}},</span>this is your order history</h3>
 		</div>
-		<div class="order-details">
+		<div class="order-details" ng-if="orders!=''">
 			<table class="table">
 				<thead>
 					<th>order no</th>
@@ -14,75 +14,38 @@
 					<th>total amount</th>
 				</thead>
 				<tbody>
-					<tr>
-						<td>#28364</td>
-						<td>21/05/2014</td>
+					<tr ng-repeat="order in orders">
+						<td>#{{order.id}}</td>
+						<td>{{order.date}}</td>
 						<td>
-							<div class="product-info">
+							<div class="product-info clearfix" ng-repeat="ord in order.products">
 								<div class="product-info">
 									<div class="img-holder pull-left">
-										<img src="img/product/13.jpg" alt="" class="img-responsive  size">
+										<img ng-src="{{ord.image|serverimage}}" alt="" class="img-responsive size">
 									</div>
 									<div class="img-desc">
-										<h4>floral plimsoll</h4>
-										<h5>Ref.8246/044</h5>
-									</div>
-								</div>
-								<div class="product-info clear">
-									<div class="img-holder pull-left">
-										<img src="img/product/13.jpg" alt="" class="img-responsive  size">
-									</div>
-									<div class="img-desc">
-										<h4>coated 5 pocket trousersl</h4>
-										<h5>Ref.8246/044</h5>
-									</div>
-								</div>
-								<div class="product-info clear">
-									<div class="img-holder pull-left">
-										<img src="img/product/13.jpg" alt="" class="img-responsive  size">
-									</div>
-									<div class="img-desc">
-										<h4>oversized studio blouse</h4>
-										<h5>Ref.8246/044</h5>
+										<h4>{{ord.name}}</h4>
+										<!-- <h5>Ref.8246/044</h5> -->
 									</div>
 								</div>
 							</div>
 						</td>
-						<td>open</td>
-						<td>22/05/2014</td>
+						<td>{{order.orderstatusname}}</td>
+						<td>-</td>
 						<td>
 							<div class="amt">
-								<i class="fa fa-inr"></i>345.00
-							</div>
-						</td>
-					</tr>
-					<tr class="last-row">
-						<td>#28365</td>
-						<td>11/05/2014</td>
-						<td>
-							<div class="product-info">
-								<div class="img-holder pull-left">
-									<img src="img/product/13.jpg" alt="" class="img-responsive  size">
-								</div>
-								<div class="img-desc">
-									<h4>dress with knot at the back</h4>
-									<h5>Ref.8246/044</h5>
-								</div>
-							</div>
-						</td>
-						<td>paid</td>
-						<td>13/05/2015</td>
-						<td>
-							<div class="amt">
-								<i class="fa fa-inr"></i>105.00
+								<i class="fa fa-inr"></i>{{order.finalamount}}
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<div class="centerno" ng-if="orders==''">
+				{{dataload}}
+		</div>
 	</div>
-	<div class="more-items text-center text-uppercase">
+	<div class="more-items text-center text-uppercase" ng-click="loadMoreOrders()" ng-if="lastpage>pageno">
 		<p>show me more items</p>
 	</div>
 </div>

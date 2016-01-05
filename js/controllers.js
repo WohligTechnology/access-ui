@@ -1254,11 +1254,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Orderhistory");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.pageno = 1;
+    $scope.user = $.jStorage.get("user");
+    $scope.orders = [];
+    $scope.lastpage = 0;
+    $scope.dataload = "Loading..";
 
-    NavigationService.myorders(function(data) {
+  $scope.lodemore = function(){
+    NavigationService.myorders($scope.pageno,function(data) {
         console.log(data.queryresult);
-        $scope.orders = data.queryresult;
+        $scope.lastpage = data.lastpage;
+        _.each(data.queryresult, function(n){
+          $scope.orders.push(n);
+        })
+        if ($scope.orders == "") {
+            $scope.dataload = "No data found !";
+        }
     });
+
+  }
+
+  $scope.lodemore();
+  $scope.loadMoreOrders = function(){
+    $scope.pageno++;
+    if($scope.lastpage>=$scope.pageno){
+      $scope.lodemore();
+    }
+
+  }
+
 })
 
 .controller('ContactCtrl', function($scope, TemplateService, NavigationService, $timeout) {

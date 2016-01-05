@@ -209,10 +209,12 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-        myorders: function(callback) {
-            return $http.post(admin_url + 'json/getuserorders?user' + $.jStorage.get("user").id, {
+        myorders: function(pageno,callback) {
+          if($.jStorage.get("user")){
+            return $http.get(admin_url + 'json/getuserorders?user=' + $.jStorage.get("user").id+'&pageno='+pageno, {
                 withCredentials: true
             }).success(callback);
+          }
         },
         getuserdetails: function(callback) {
             return $http.get(admin_url + 'json/getuserdetails', {}, {
