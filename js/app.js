@@ -53,6 +53,18 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
         controller: 'TermsConditionCtrl'
     })
 
+    .state('sorry', {
+        url: "/sorry",
+        templateUrl: "views/template.html",
+        controller: 'SorryCtrl'
+    })
+
+    .state('thankyou', {
+        url: "/thankyou",
+        templateUrl: "views/template.html",
+        controller: 'ThankyouCtrl'
+    })
+
     .state('category', {
             url: "/category",
             templateUrl: "views/template.html",

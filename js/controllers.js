@@ -2192,6 +2192,22 @@ if ($scope.allamount==0) {
         $scope.navigation = NavigationService.getnav();
 
     })
+    .controller('SorryCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("sorry");
+        $scope.menutitle = NavigationService.makeactive("Sorry");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
+    .controller('ThankyouCtrl', function($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("thankyou");
+        $scope.menutitle = NavigationService.makeactive("Thank You");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+
+    })
     .controller('FaqCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("faq");
