@@ -1062,7 +1062,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.playvideo = false;
     $scope.showSalePrice = false;
     $scope.notqty = true;
-    $scope.qty = 1;
+    $scope.change = {};
+    $scope.change.qty = 1;
 
     var addtowishlistcallback = function(data, status) {
         console.log(data);
@@ -1111,8 +1112,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.quantityChange = function(qty){
       console.log(qty);
-      console.log($scope.product.product.quantity);
-      if (qty>parseInt($scope.product.product.quantity)) {
+      // console.log($scope.product.product.quantity);
+      if (!qty && qty==null) {
         $scope.notqty = false;
       }else{
         $scope.notqty = true;
@@ -1160,7 +1161,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if ($scope.product.product.user) {
             $scope.product.product.fav = "fav";
         }
-        if (data.product.quantity >= 1) {
+        if (data.product.quantity >= 1)  {
             $scope.availability = "In Stock";
         } else {
             $scope.availability = "Out of Stock";
@@ -1168,7 +1169,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.product.product.img = $filter("serverimage")($scope.product.productimage[0].image);
-        $scope.product.product.quantity = 1;
+        // $scope.product.product.quantity = 1;
 
         $scope.productdetail = [];
         $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
