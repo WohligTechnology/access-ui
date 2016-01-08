@@ -721,13 +721,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.tocheckout = function() {
       console.log("cart");
-        $.jStorage.set("discountamount", $scope.discountamount);
-        if($.jStorage.get('coupon')){
-        $.jStorage.set('coupon',_.merge($.jStorage.get('coupon'),{'totalcart':$scope.totalcart-$scope.discountamount}));
-      }else {
-        $.jStorage.set('coupon',{'totalcart':$scope.totalcart-$scope.discountamount});
-      }
-        $location.url("/checkout");
+      NavigationService.checkoutCheck(function(data){
+        if (data.value==true) {
+            $.jStorage.set("discountamount", $scope.discountamount);
+            if($.jStorage.get('coupon')){
+            $.jStorage.set('coupon',_.merge($.jStorage.get('coupon'),{'totalcart':$scope.totalcart-$scope.discountamount}));
+          }else {
+            $.jStorage.set('coupon',{'totalcart':$scope.totalcart-$scope.discountamount});
+          }
+            $location.url("/checkout");
+        }else {
+          var xyz = ngDialog.open({
+              template: '<div class="pop-up"><h5 class="popup-wishlist">Some product has more than quantity available</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+              plain: true,
+              controller: 'ProductCtrl'
+          });
+          $timeout(function() {
+                  xyz.close();
+              }, 3000)
+        }
+      })
+
     }
 
 
@@ -776,6 +790,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     $scope.changeqty = function(mycart, option) {
+
         if (option == '+') {
             ++mycart.qty;
         } else {
@@ -799,6 +814,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getcart(function(data) {
             console.log(data);
             $scope.cart = data;
+            _.each($scope.cart, function(n){
+              if (n.qty>n.maxQuantity) {
+                n.msg = "Quantity more than available quantity";
+              }else {
+                n.msg = "";
+              }
+            })
             if (data == '') {
                 $scope.nodatafound = true;
                 $scope.nodata = "No Data found.";
@@ -2192,20 +2214,27 @@ if ($scope.allamount==0) {
         $scope.navigation = NavigationService.getnav();
 
     })
-    .controller('SorryCtrl', function($scope, TemplateService, NavigationService) {
+    .controller('SorryCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("sorry");
         $scope.menutitle = NavigationService.makeactive("Sorry");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        NavigationService.getorderbyorderid($stateParams.order, function(data){
+          $scope.order = data;
+        })
 
     })
-    .controller('ThankyouCtrl', function($scope, TemplateService, NavigationService) {
+    .controller('ThankyouCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
         $scope.template = TemplateService;
         $scope.template = TemplateService.changecontent("thankyou");
         $scope.menutitle = NavigationService.makeactive("Thank You");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        console.log($stateParams.order);
+        NavigationService.getorderbyorderid($stateParams.order, function(data){
+          $scope.order = data;
+        })
 
     })
     .controller('FaqCtrl', function($scope, TemplateService, NavigationService) {

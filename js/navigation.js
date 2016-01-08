@@ -97,6 +97,16 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
+        getorderbyorderid: function(id,callback) {
+            return $http.get(admin_url + 'json/getorderbyorderid?id=' + id , {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        checkoutCheck: function(callback) {
+            return $http.get(admin_url + 'json/checkoutCheck', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
         getofferdetails: function(callback) {
             return $http({
                 url: admin_url + 'json/getofferdetails',

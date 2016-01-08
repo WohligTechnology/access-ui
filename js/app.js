@@ -54,13 +54,13 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     })
 
     .state('sorry', {
-        url: "/sorry",
+        url: "/sorry/:order",
         templateUrl: "views/template.html",
         controller: 'SorryCtrl'
     })
 
     .state('thankyou', {
-        url: "/thankyou",
+        url: "/thankyou/:order",
         templateUrl: "views/template.html",
         controller: 'ThankyouCtrl'
     })
