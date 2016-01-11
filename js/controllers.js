@@ -1412,6 +1412,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     }
 })
+.controller('changepasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
+    $scope.template = TemplateService;
+    $scope.template = TemplateService.changecontent("changepassword");
+    $scope.menutitle = NavigationService.makeactive("Changepassword");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.changePassword = {};
+
+    $scope.popups = function(msg){
+        var xyz = ngDialog.open({
+            template: '<div class="pop-up"><h5 class="popup-wishlist">'+msg+'</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+            plain: true
+        });
+        $timeout(function() {
+                xyz.close();
+            }, 3000)
+    }
+
+    $scope.newPassword = function(){
+      $scope.allvalidation = [{
+          field: $scope.changePassword.oldpassword,
+          validation: ""
+      }, {
+          field: $scope.changePassword.newpassword,
+          validation: ""
+      }, {
+          field: $scope.changePassword.confirmpassword,
+          validation: ""
+      }];
+      var check = formvalidation($scope.allvalidation);
+      if (check) {
+        if ($scope.changePassword.newpassword===$scope.changePasswordconfirmpassword) {
+          NavigationService.changepassword($scope.changePassword,function(data){
+            console.log(data);
+            if (data==0) {
+              $scope.popups("Wrong Password");
+            }else {
+              $scope.popups("Password changed Successfully");
+            }
+          })
+        }else {
+          $scope.popups("New password and Confirm password should be same");
+        }
+      }else {
+        $scope.popups("All fields are mandatory");
+      }
+    }
+
+})
 
 .controller('AccountCtrl', function($scope, TemplateService, NavigationService, ngDialog,$timeout) {
     $scope.template = TemplateService;

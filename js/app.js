@@ -7,10 +7,6 @@ var firstapp = angular.module('firstapp', [
     'navigationservice'
 ]);
 
-
-
-
-
 firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 
     // for http request with session
@@ -174,6 +170,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             url: "/forgotpassword",
             templateUrl: "views/template.html",
             controller: 'forgotpasswordCtrl'
+        })
+        .state('changepassword', {
+            url: "/changepassword",
+            templateUrl: "views/template.html",
+            controller: 'changepasswordCtrl'
         })
         .state('brandproducts', {
             url: "/brandproducts/:brand",

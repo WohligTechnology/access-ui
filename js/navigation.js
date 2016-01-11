@@ -175,6 +175,18 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
+        changepassword: function(changepassword,callback) {
+            return $http({
+                url: admin_url + 'json/changepassword',
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    'oldpassword': changepassword.oldpassword,
+                    'newpassword': changepassword.newpassword,
+                    'confirmpassword': changepassword.confirmpassword
+                }
+            }).success(callback);
+        },
         getproductbycategory: function(pageno, category, filters, callback) {
             console.log("getproductbycategory");
             console.log(filters);
