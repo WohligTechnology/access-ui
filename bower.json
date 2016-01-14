@@ -31,7 +31,7 @@
     "fontawesome": "~4.3.0",
     "less": "~2.5.1",
     "lesshat": "~3.0.2",
-    "lodash": "~3.10.0",
+    "lodash": "~4.0.0",
     "ng-tags-input": "~3.0.0",
     "ngAutocomplete": "https://github.com/wpalahnuk/ngAutocomplete.git#~1.0.0",
     "ngDialog": "~0.4.0",

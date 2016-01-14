@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                     './bower_components/ui-router/release/angular-ui-router.min.js',
                     './bower_components/valdr/valdr.min.js',
                     './bower_components/valdr/valdr-message.min.js',
-                    './bower_components/lodash/lodash.min.js',
+                    './bower_components/lodash/lodash.js',
                     './js/app.js',
                     './js/controllers.js',
                     './js/templateservice.js',
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
                         collapseBooleanAttributes: true,
                         collapseWhitespace: true,
                         removeAttributeQuotes: true,
-                        removeComments: true, // Only if you don't use comment directives! 
+                        removeComments: true, // Only if you don't use comment directives!
                         removeEmptyAttributes: true,
                         removeRedundantAttributes: true,
                         removeScriptTypeAttributes: true,
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
                         collapseBooleanAttributes: true,
                         collapseWhitespace: true,
                         removeAttributeQuotes: true,
-                        removeComments: true, // Only if you don't use comment directives! 
+                        removeComments: true, // Only if you don't use comment directives!
                         removeEmptyAttributes: true,
                         removeRedundantAttributes: true,
                         removeScriptTypeAttributes: true,
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
                         collapseBooleanAttributes: true,
                         collapseWhitespace: true,
                         removeAttributeQuotes: true,
-                        removeComments: true, // Only if you don't use comment directives! 
+                        removeComments: true, // Only if you don't use comment directives!
                         removeEmptyAttributes: true,
                         removeRedundantAttributes: true,
                         removeScriptTypeAttributes: true,

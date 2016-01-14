@@ -462,55 +462,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($scope.filters.type == "" && data.filter.type) {
                 $scope.showfilter.type = data.filter.type;
             }
-            if ($scope.filters.material == "" && data.filter.material) {
+            if ($scope.filters.material === "" && data.filter.material) {
                 $scope.showfilter.material = data.filter.material;
             }
-            if ($scope.filters.finish == "" && data.filter.finish) {
+            if ($scope.filters.finish === "" && data.filter.finish) {
                 $scope.showfilter.finish = data.filter.finish;
             }
-            if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
+            var arr = [];
+            if ($scope.filters.compatibledevice === "" && data.filter.compatibledevice) {
                 if (data.filter.compatibledevice.length > 1) {
-                    var arr = [];
+
                     _.each(data.filter.compatibledevice, function(n) {
                         n.compatibledevice = n.compatibledevice.split(",");
                         _.each(n.compatibledevice, function(m) {
                             arr.push({
-                                "compatibledevice": m
+                                "compatibledevice": _.trim(m)
                             });
-                        })
-                    })
+                        });
+                    });
+                    arr = _.uniqBy(arr,'compatibledevice');
                     $scope.showfilter.compatibledevice = arr;
                 }
             }
-            if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
-                if (data.filter.compatiblewith.lenght > 1) {
+            var arr2 = [];
+            if ($scope.filters.compatiblewith === "" && data.filter.compatiblewith) {
+
+                if (data.filter.compatiblewith.length > 1) {
                     _.each(data.filter.compatiblewith, function(n) {
                         n.compatiblewith = n.compatiblewith.split(",");
                         _.each(n.compatiblewith, function(m) {
-                            arr.push({
-                                "compatiblewith": m
+                            arr2.push({
+                                "compatiblewith": _.trim(m)
                             });
-                        })
-                    })
-                    $scope.showfilter.compatiblewith = arr;
+                        });
+                    });
+                    arr2 = _.uniqBy(arr2,'compatiblewith');
+                    $scope.showfilter.compatiblewith = arr2;
                 }
             }
-            if ($scope.filters.brand == "" && data.filter.brand) {
+            if ($scope.filters.brand === "" && data.filter.brand) {
                 $scope.showfilter.brand = data.filter.brand;
             }
-            if ($scope.filters.microphone == "" && data.filter.microphone) {
+            if ($scope.filters.microphone === "" && data.filter.microphone) {
                 $scope.showfilter.microphone = data.filter.microphone;
             }
-            if ($scope.filters.size == "" && data.filter.size) {
+            if ($scope.filters.size === "" && data.filter.size) {
                 $scope.showfilter.size = data.filter.size;
             }
-            if ($scope.filters.clength == "" && data.filter.clength) {
+            if ($scope.filters.clength === "" && data.filter.clength) {
                 $scope.showfilter.clength = data.filter.clength;
             }
-            if ($scope.filters.voltage == "" && data.filter.voltage) {
+            if ($scope.filters.voltage === "" && data.filter.voltage) {
                 $scope.showfilter.voltage = data.filter.voltage;
             }
-            if ($scope.filters.capacity == "" && data.filter.capacity) {
+            if ($scope.filters.capacity === "" && data.filter.capacity) {
                 $scope.showfilter.capacity = data.filter.capacity;
             }
             if (data.filter.price && data.filter.price.min) {
@@ -3031,31 +3036,35 @@ if ($scope.allamount==0) {
             if ($scope.filters.finish == "" && data.filter.finish) {
                 $scope.showfilter.finish = data.filter.finish;
             }
+            var arr = [];
             if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
                 if (data.filter.compatibledevice.length > 1) {
-                    var arr = [];
+
                     _.each(data.filter.compatibledevice, function(n) {
                         n.compatibledevice = n.compatibledevice.split(",");
                         _.each(n.compatibledevice, function(m) {
                             arr.push({
-                                "compatibledevice": m
+                                "compatibledevice": _.trim(m)
                             });
                         })
                     })
+                    arr = _.uniqBy(arr,'compatibledevice');
                     $scope.showfilter.compatibledevice = arr;
                 }
             }
+            var arr2 = [];
             if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
                 if (data.filter.compatiblewith.lenght > 1) {
                     _.each(data.filter.compatiblewith, function(n) {
                         n.compatiblewith = n.compatiblewith.split(",");
                         _.each(n.compatiblewith, function(m) {
-                            arr.push({
-                                "compatiblewith": m
+                            arr2.push({
+                                "compatiblewith": _.trim(m)
                             });
                         })
                     })
-                    $scope.showfilter.compatiblewith = arr;
+                    arr2 = _.uniqBy(arr2,'compatiblewith');
+                    $scope.showfilter.compatiblewith = arr2;
                 }
             }
             // if ($scope.filters.brand == "" && data.filter.brand) {

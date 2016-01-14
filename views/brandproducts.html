@@ -38,7 +38,7 @@
                         <div class="filter" ng-if="showfilter.compatiblewith && showfilter.compatiblewith.length>1">
                             <p>Compatible With</p>
                             <hr class="line">
-                            <form class="sub-catgame">
+                            <form class="sub-catgame colsm">
                                 <ul>
                                     <li ng-repeat="val in showfilter.compatiblewith" ng-if="val.compatiblewith">
                                         <input id="Option2{{$index}}" type="checkbox" ng-model="showfilter.compatiblewith[$index].status" ng-change="alignFilter('compatiblewith')">
@@ -52,7 +52,7 @@
                         <div class="filter" ng-if="showfilter.type && showfilter.type.length>1">
                             <p>Type</p>
                             <hr class="line">
-                            <form class="sub-catgame">
+                            <form class="sub-catgame colsm">
                                 <ul>
                                     <li ng-repeat="val in showfilter.type" ng-if="val.name">
                                         <input id="Option6{{$index}}" type="checkbox" ng-model="showfilter.type[$index].status" ng-change="alignFilterId('type')">
