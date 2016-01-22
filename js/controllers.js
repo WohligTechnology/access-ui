@@ -1199,7 +1199,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // $scope.product.product.quantity = 1;
 
         $scope.productdetail = [];
-        $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
+        $scope.product.productimage = _.sortBy($scope.product.productimage, ['order']);
         _.each($scope.product.productimage, function(n) {
             $scope.productdetail.push({
                 image: $filter("serverimage")(n.image),
