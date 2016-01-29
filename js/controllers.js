@@ -1564,7 +1564,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('NewarrivalsCtrl', function($scope, TemplateService, NavigationService, ngDialog, $location) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("newarrivals");
-    $scope.menutitle = NavigationService.makeactive("New Arrivals");
+    $scope.menutitle = NavigationService.makeactive("Deals");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.pageno = 0;

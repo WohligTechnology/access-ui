@@ -38,18 +38,26 @@ var navigationservice = angular.module('navigationservice', [])
         classis: "active",
         subnav: []
     }, {
-        name: "new arrivals",
+        name: "deals",
         active: "",
         link: "#/new arrivals",
         classis: "active",
         subnav: []
-    }, {
-        name: "deals",
-        active: "",
-        link: "#/deals",
-        classis: "active",
-        subnav: []
-    }, {
+    },
+
+    //
+    // {
+    //     name: "deals",
+    //     active: "",
+    //     link: "#/deals",
+    //     classis: "active",
+    //     subnav: []
+    // },
+
+
+
+
+    {
         name: "about us",
         active: "",
         link: "#/about",
