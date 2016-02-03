@@ -1,12 +1,13 @@
 <div class="container">
-    <div class="proset-set">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="det-txt">
-                    <h3>{{product.product.name}}</h3>
-                    <!--                    <p ng-bind-html="product.product.description| cut:true:120:'. . .'| rawHtml"></p>-->
-                    <span class="avi">availability :<p>{{availability}}</p></span>
-                    <!--
+   <div class="proset-set">
+      <div class="row">
+         <div class="col-md-4">
+            <div class="det-txt">
+               <h3>{{product.product.name}}</h3>
+               <!--                    <p ng-bind-html="product.product.description| cut:true:120:'. . .'| rawHtml"></p>-->
+               <span class="avi">availability :<p>{{availability}}</p></span>
+               <p ng-show="showSalePrice"><span class="">discount : </span><b style="color:#7EE1EA">{{product.product.discountinper}}%</b></p>
+               <!--
                     <div class="rat">
                         <span class="spanli">
                             <ul>
@@ -19,10 +20,10 @@
                         </span>
                     </div>
 -->
-                    <hr class="line">
-                </div>
-                <div class="pro-desc">
-                    <h2>
+               <hr class="line">
+            </div>
+            <div class="pro-desc">
+               <h2>
                         <span ng-show="showSalePrice">
                             <i class="fa fa-inr"></i>{{product.product.firstsaleprice}}
                         </span>
@@ -34,133 +35,133 @@
                         </span>
                         <span class="tax">( inclusive of all taxes )</span>
                     </h2>
-                    <div class="qua" >
-                        <input ng-if="availability=='In Stock'" type="number" value="1" placeholder="1" min="1" max="{{product.product.quantity}}" ng-model="change.qty" ng-change="quantityChange(change.qty)">
-                        <a ng-click="addtowishlist(product.product.id)"><i class="fa fa-heart {{product.product.fav}}"></i>Add To Wishlist</a>
-                        <a ng-if="availability=='In Stock'" class="ad-cart" ng-click="addtocart(product.product,change.qty)" ng-show="notqty"><i class="fa fa-shopping-cart "></i>Add To cart</a>
-                    </div>
-                    <ul class="img-thumb">
-                        <li ng-repeat="color in product.samecolor" ng-click="makeactive(color);" ng-if="color.id!=product.product.id">
-                            <a href="" title="{{color.brandcolor}}">
-                                   <!-- <img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="" class="img-responsive"> -->
-                                <div class="image-mhs" ng-style="{'background-image':'url({{color.samecolorimages[0][0].image | serverimage}})'}">
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="det-img">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rel">
-                                <div class="box-img" ng-if="!playvideo">
-                                    <img ng-src="{{product.product.img}}" class="img-responsive">
-                                </div>
-                                <div class="video" style="min-height:355px" ng-if="playvideo" youtube code="product.product.img"></div>
-                                <div class="mini-img">
-                                    <flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="130" item-margin="5" ng-if="productdetail.length>0">
-                                        <li ng-click="onimgclick(prd)" class="slide">
-                                          <div class="mh-hold">
-                                                                           <img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide ">
-                                                                         </div>
-                                            <!-- <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
-                                            </div> -->
-                                        </li>
-                                    </flex-slider>
-                                </div>
-                            </div>
+               <div class="qua">
+                  <input ng-if="availability=='In Stock'" type="number" value="1" placeholder="1" min="1" max="{{product.product.quantity}}" ng-model="change.qty" ng-change="quantityChange(change.qty)">
+                  <a ng-click="addtowishlist(product.product.id)"><i class="fa fa-heart {{product.product.fav}}"></i>Add To Wishlist</a>
+                  <a ng-if="availability=='In Stock'" class="ad-cart" ng-click="addtocart(product.product,change.qty)" ng-show="notqty"><i class="fa fa-shopping-cart "></i>Add To cart</a>
+               </div>
+               <ul class="img-thumb">
+                  <li ng-repeat="color in product.samecolor" ng-click="makeactive(color);" ng-if="color.id!=product.product.id">
+                     <a href="" title="{{color.brandcolor}}">
+                        <!-- <img src="{{color.samecolorimages[0][0].image | serverimage}}" alt="" class="img-responsive"> -->
+                        <div class="image-mhs" ng-style="{'background-image':'url({{color.samecolorimages[0][0].image | serverimage}})'}">
                         </div>
-                    </div>
-                </div>
+                     </a>
+                  </li>
+               </ul>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="tab">
-                    <div class="tab-button">
-                        <a class="tab-btn {{descAcvtive}}" ng-click="ShowDescHideSpec();">Description</a>
-                        <a class="tab-btn {{specAcvtive}}" ng-click="ShowSpecHideDesc();">Specification</a>
-                    </div>
-                    <div class="content1 spec" ng-show="showDesc" ng-bind-html="product.product.description">
+         </div>
+         <div class="col-md-8">
+            <div class="det-img">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="rel">
+                        <div class="box-img" ng-if="!playvideo">
+                           <img ng-src="{{product.product.img}}" class="img-responsive">
+                        </div>
+                        <div class="video" style="min-height:355px" ng-if="playvideo" youtube code="product.product.img"></div>
+                        <div class="mini-img">
+                           <flex-slider class="carousel" flex-slide="prd in productdetail track by $index" animation="slide" animation-loop="false" item-width="130" item-margin="5" ng-if="productdetail.length>0">
+                              <li ng-click="onimgclick(prd)" class="slide">
+                                 <div class="mh-hold">
+                                    <img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide ">
+                                 </div>
+                                 <!-- <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
+                                            </div> -->
+                              </li>
+                           </flex-slider>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12 col-sm-12">
+            <div class="tab">
+               <div class="tab-button">
+                  <a class="tab-btn {{descAcvtive}}" ng-click="ShowDescHideSpec();">Description</a>
+                  <a class="tab-btn {{specAcvtive}}" ng-click="ShowSpecHideDesc();">Specification</a>
+               </div>
+               <div class="content1 spec" ng-show="showDesc" ng-bind-html="product.product.description">
 
-                    </div>
-                    <div class="content2 spec" ng-show="showSpec">
-                        <div class="pro-spec">
-                            <table class="table nobdt" ng-if="product.product">
-                                <tbody>
-                                    <tr ng-if="product.product.modelnumber">
-                                        <td>Model Number</td>
-                                        <td>{{product.product.modelnumber}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.brandcolor">
-                                        <td>Color</td>
-                                        <td>{{product.product.brandcolor}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.compatiblewith">
-                                        <td>Compatible With</td>
-                                        <td>{{product.product.compatiblewith}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.type">
-                                        <td>Type</td>
-                                        <td>{{product.product.type}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.microphone">
-                                        <td>Microphone</td>
-                                        <td>{{product.product.microphone}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.dimension">
-                                        <td>Dimensions</td>
-                                        <td>{{product.product.dimension}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.weight">
-                                        <td>Weight</td>
-                                        <td>{{product.product.weight}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.material">
-                                        <td>Material</td>
-                                        <td>{{product.product.material}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.finish">
-                                        <td>Finish</td>
-                                        <td>{{product.product.finish}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.clength">
-                                        <td>Cable Length</td>
-                                        <td>{{product.product.clength}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.capacity">
-                                        <td>Capacity</td>
-                                        <td>{{product.product.capacity}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.voltage && product.product.voltage!='0'">
-                                        <td>Voltage</td>
-                                        <td>{{product.product.voltage}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.compatibledevice">
-                                        <td>Compatible Device</td>
-                                        <td>{{product.product.compatibledevice}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.domesticwarranty">
-                                        <td>Warranty</td>
-                                        <td>{{product.product.domesticwarranty}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.warrantysummary">
-                                        <td>Warranty Summary</td>
-                                        <td>{{product.product.warrantysummary}}</td>
-                                    </tr>
-                                    <tr ng-if="product.product.salespackage">
-                                        <td>What's Included</td>
-                                        <td>{{product.product.salespackage}}</td>
-                                    </tr>
-                                    <!--
+               </div>
+               <div class="content2 spec" ng-show="showSpec">
+                  <div class="pro-spec">
+                     <table class="table nobdt" ng-if="product.product">
+                        <tbody>
+                           <tr ng-if="product.product.modelnumber">
+                              <td>Model Number</td>
+                              <td>{{product.product.modelnumber}}</td>
+                           </tr>
+                           <tr ng-if="product.product.brandcolor">
+                              <td>Color</td>
+                              <td>{{product.product.brandcolor}}</td>
+                           </tr>
+                           <tr ng-if="product.product.compatiblewith">
+                              <td>Compatible With</td>
+                              <td>{{product.product.compatiblewith}}</td>
+                           </tr>
+                           <tr ng-if="product.product.type">
+                              <td>Type</td>
+                              <td>{{product.product.type}}</td>
+                           </tr>
+                           <tr ng-if="product.product.microphone">
+                              <td>Microphone</td>
+                              <td>{{product.product.microphone}}</td>
+                           </tr>
+                           <tr ng-if="product.product.dimension">
+                              <td>Dimensions</td>
+                              <td>{{product.product.dimension}}</td>
+                           </tr>
+                           <tr ng-if="product.product.weight">
+                              <td>Weight</td>
+                              <td>{{product.product.weight}}</td>
+                           </tr>
+                           <tr ng-if="product.product.material">
+                              <td>Material</td>
+                              <td>{{product.product.material}}</td>
+                           </tr>
+                           <tr ng-if="product.product.finish">
+                              <td>Finish</td>
+                              <td>{{product.product.finish}}</td>
+                           </tr>
+                           <tr ng-if="product.product.clength">
+                              <td>Cable Length</td>
+                              <td>{{product.product.clength}}</td>
+                           </tr>
+                           <tr ng-if="product.product.capacity">
+                              <td>Capacity</td>
+                              <td>{{product.product.capacity}}</td>
+                           </tr>
+                           <tr ng-if="product.product.voltage && product.product.voltage!='0'">
+                              <td>Voltage</td>
+                              <td>{{product.product.voltage}}</td>
+                           </tr>
+                           <tr ng-if="product.product.compatibledevice">
+                              <td>Compatible Device</td>
+                              <td>{{product.product.compatibledevice}}</td>
+                           </tr>
+                           <tr ng-if="product.product.domesticwarranty">
+                              <td>Warranty</td>
+                              <td>{{product.product.domesticwarranty}}</td>
+                           </tr>
+                           <tr ng-if="product.product.warrantysummary">
+                              <td>Warranty Summary</td>
+                              <td>{{product.product.warrantysummary}}</td>
+                           </tr>
+                           <tr ng-if="product.product.salespackage">
+                              <td>What's Included</td>
+                              <td>{{product.product.salespackage}}</td>
+                           </tr>
+                           <!--
                                     <tr ng-if="product.product.eanorupc">
                                         <td>EAN/UPC</td>
                                         <td>{{product.product.eanorupc}}</td>
                                     </tr>
 -->
-                                    <!-- <tr ng-if="product.product.modelname">
+                           <!-- <tr ng-if="product.product.modelname">
                                         <td>Model Name</td>
                                         <td>{{product.product.modelname}}</td>
                                     </tr>
@@ -184,11 +185,11 @@
                                         <td>Type Name</td>
                                         <td>{{product.product.modelname}}</td>
                                     </tr> -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>

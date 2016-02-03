@@ -8,6 +8,7 @@
             <div class="product-list">
                 <div class="col-md-3 col-sm-6" ng-repeat="pro in products">
                   <div class="pro-box">
+                    <a class="discper" href="" ng-show="pro.showSalePrice">{{pro.discountinper}}%</a>
                       <a href="#/productdetail/{{pro.id}}">
                           <div class="img-box">
                               <span ng-if="!pro.image2 && pro.image1">

@@ -443,6 +443,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log("in 3 else if");
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
+                if (n.showSalePrice == true) {
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                }
             }
             $scope.products.push(n);
         });
@@ -480,7 +483,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             });
                         });
                     });
-                    arr = _.uniqBy(arr,'compatibledevice');
+                    arr = _.uniqBy(arr, 'compatibledevice');
                     $scope.showfilter.compatibledevice = arr;
                 }
             }
@@ -496,7 +499,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             });
                         });
                     });
-                    arr2 = _.uniqBy(arr2,'compatiblewith');
+                    arr2 = _.uniqBy(arr2, 'compatiblewith');
                     $scope.showfilter.compatiblewith = arr2;
                 }
             }
@@ -646,23 +649,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.gettotalcartfunction = function() {
         NavigationService.totalcart(function(data) {
-          if ($scope.userdetail.credits) {
-            $scope.totalcart = data - $scope.userdetail.credits;
-            if ($scope.totalcart<=0) {
-              $scope.totalcart = 0
+            if ($scope.userdetail.credits) {
+                $scope.totalcart = data - $scope.userdetail.credits;
+                if ($scope.totalcart <= 0) {
+                    $scope.totalcart = 0
+                }
+            } else {
+                $scope.totalcart = data;
             }
-          }else{
-            $scope.totalcart = data;
-          }
         });
     }
 
 
 
-    NavigationService.getuserdetails(function(data){
-      console.log(data);
-      $scope.userdetail = data;
-      $scope.gettotalcartfunction();
+    NavigationService.getuserdetails(function(data) {
+        console.log(data);
+        $scope.userdetail = data;
+        $scope.gettotalcartfunction();
     });
 
     //check coupons
@@ -682,8 +685,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log("ABCD");
                 $scope.discountamount = $scope.isamount;
             }
-            if($scope.totalcart<$scope.discountamount){
-              $scope.totalcart = 0;
+            if ($scope.totalcart < $scope.discountamount) {
+                $scope.totalcart = 0;
             }
         }
         if (data.coupontype == '2') {
@@ -725,27 +728,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     $scope.tocheckout = function() {
-      console.log("cart");
-      NavigationService.checkoutCheck(function(data){
-        if (data.value==true) {
-            $.jStorage.set("discountamount", $scope.discountamount);
-            if($.jStorage.get('coupon')){
-            $.jStorage.set('coupon',_.merge($.jStorage.get('coupon'),{'totalcart':$scope.totalcart-$scope.discountamount}));
-          }else {
-            $.jStorage.set('coupon',{'totalcart':$scope.totalcart-$scope.discountamount});
-          }
-            $location.url("/checkout");
-        }else {
-          var xyz = ngDialog.open({
-              template: '<div class="pop-up"><h5 class="popup-wishlist">Some product has more than quantity available</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-              plain: true,
-              controller: 'ProductCtrl'
-          });
-          $timeout(function() {
-                  xyz.close();
-              }, 3000)
-        }
-      })
+        console.log("cart");
+        NavigationService.checkoutCheck(function(data) {
+            if (data.value == true) {
+                $.jStorage.set("discountamount", $scope.discountamount);
+                if ($.jStorage.get('coupon')) {
+                    $.jStorage.set('coupon', _.merge($.jStorage.get('coupon'), {
+                        'totalcart': $scope.totalcart - $scope.discountamount
+                    }));
+                } else {
+                    $.jStorage.set('coupon', {
+                        'totalcart': $scope.totalcart - $scope.discountamount
+                    });
+                }
+                $location.url("/checkout");
+            } else {
+                var xyz = ngDialog.open({
+                    template: '<div class="pop-up"><h5 class="popup-wishlist">Some product has more than quantity available</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                    plain: true,
+                    controller: 'ProductCtrl'
+                });
+                $timeout(function() {
+                    xyz.close();
+                }, 3000)
+            }
+        })
 
     }
 
@@ -758,14 +765,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.discountamount = 0;
     var couponsuccess = function(data, status) {
         if (data == 'false') {
-          var xyz = ngDialog.open({
-              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid coupon code</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-              plain: true,
-              controller: 'CartCtrl'
-          });
-          $timeout(function() {
-              xyz.close();
-          }, 3000)
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid coupon code</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true,
+                controller: 'CartCtrl'
+            });
+            $timeout(function() {
+                xyz.close();
+            }, 3000)
         } else {
             console.log("Show it");
             $scope.validcouponcode = 1;
@@ -819,12 +826,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getcart(function(data) {
             console.log(data);
             $scope.cart = data;
-            _.each($scope.cart, function(n){
-              if (n.qty>n.maxQuantity) {
-                n.msg = "Quantity more than available quantity";
-              }else {
-                n.msg = "";
-              }
+            _.each($scope.cart, function(n) {
+                if (n.qty > n.maxQuantity) {
+                    n.msg = "Quantity more than available quantity";
+                } else {
+                    n.msg = "";
+                }
             })
             if (data == '') {
                 $scope.nodatafound = true;
@@ -997,7 +1004,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     // WISHLIST
 
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 
     $scope.fastsearch = function(search) {
         $location.url("/searchresult/" + search);
@@ -1137,44 +1144,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     }
 
-    $scope.quantityChange = function(qty){
-      console.log(qty);
-      // console.log($scope.product.product.quantity);
-      if (!qty && qty==null) {
-        $scope.notqty = false;
-      }else{
-        $scope.notqty = true;
-      }
+    $scope.quantityChange = function(qty) {
+        console.log(qty);
+        // console.log($scope.product.product.quantity);
+        if (!qty && qty == null) {
+            $scope.notqty = false;
+        } else {
+            $scope.notqty = true;
+        }
     }
 
-    $scope.addtocart = function(product,qty) {
+    $scope.addtocart = function(product, qty) {
         console.log(product);
-        if (qty<=$scope.product.product.quantity) {
-          var selectedproduct = {};
-          selectedproduct.product = product.id;
-          selectedproduct.productname = product.name;
-          selectedproduct.price = product.price;
-          selectedproduct.quantity = qty;
-          NavigationService.addtocart(selectedproduct, function(data) {
-              console.log(data);
-              var xyz = ngDialog.open({
-                  template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-                  plain: true
-              });
-              $timeout(function() {
-                      xyz.close();
-                  }, 3000)
-                  //          $location.url("/cart");
-              myfunction();
-          });
-        }else{
-          var xyz = ngDialog.open({
-              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid Quantity</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-              plain: true
-          });
-          $timeout(function() {
-                  xyz.close();
-              }, 3000)
+        if (qty <= $scope.product.product.quantity) {
+            var selectedproduct = {};
+            selectedproduct.product = product.id;
+            selectedproduct.productname = product.name;
+            selectedproduct.price = product.price;
+            selectedproduct.quantity = qty;
+            NavigationService.addtocart(selectedproduct, function(data) {
+                console.log(data);
+                var xyz = ngDialog.open({
+                    template: '<div class="pop-up"><h5 class="popup-wishlist">Added to cart</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                    plain: true
+                });
+                $timeout(function() {
+                        xyz.close();
+                    }, 3000)
+                    //          $location.url("/cart");
+                myfunction();
+            });
+        } else {
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid Quantity</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
+                xyz.close();
+            }, 3000)
         }
 
     }
@@ -1182,13 +1189,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     var getproductdetailscallback = function(data, status) {
         console.log(data);
         $scope.product = data;
-        if ($scope.product.product.quantity==0) {
-          $scope.notqty = false;
+        if ($scope.product.product.quantity == 0) {
+            $scope.notqty = false;
         }
         if ($scope.product.product.user) {
             $scope.product.product.fav = "fav";
         }
-        if (data.product.quantity >= 1)  {
+        if (data.product.quantity >= 1) {
             $scope.availability = "In Stock";
         } else {
             $scope.availability = "Out of Stock";
@@ -1242,6 +1249,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else if ($scope.product.product.specialpricefrom == "0000-00-00") {
                 $scope.showSalePrice = true;
                 console.log("in 3 else if");
+            }
+            if ($scope.showSalePrice == true) {
+                // $scope.product.product.discountinper = Math.round(parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price) * 100);
+                $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price)))*100);
             }
             console.log("Show Sale Price = " + $scope.showSalePrice);
         } else {
@@ -1300,28 +1311,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.lastpage = 0;
     $scope.dataload = "Loading..";
 
-  $scope.lodemore = function(){
-    NavigationService.myorders($scope.pageno,function(data) {
-        console.log(data.queryresult);
-        $scope.lastpage = data.lastpage;
-        _.each(data.queryresult, function(n){
-          $scope.orders.push(n);
-        })
-        if ($scope.orders == "") {
-            $scope.dataload = "No data found !";
-        }
-    });
+    $scope.lodemore = function() {
+        NavigationService.myorders($scope.pageno, function(data) {
+            console.log(data.queryresult);
+            $scope.lastpage = data.lastpage;
+            _.each(data.queryresult, function(n) {
+                $scope.orders.push(n);
+            })
+            if ($scope.orders == "") {
+                $scope.dataload = "No data found !";
+            }
+        });
 
-  }
-
-  $scope.lodemore();
-  $scope.loadMoreOrders = function(){
-    $scope.pageno++;
-    if($scope.lastpage>=$scope.pageno){
-      $scope.lodemore();
     }
 
-  }
+    $scope.lodemore();
+    $scope.loadMoreOrders = function() {
+        $scope.pageno++;
+        if ($scope.lastpage >= $scope.pageno) {
+            $scope.lodemore();
+        }
+
+    }
 
 })
 
@@ -1377,97 +1388,97 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 })
 
 .controller('ResetpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
-    $scope.template = TemplateService;
-    $scope.template = TemplateService.changecontent("resetpassword");
-    $scope.menutitle = NavigationService.makeactive("Resetpassword");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("resetpassword");
+        $scope.menutitle = NavigationService.makeactive("Resetpassword");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
 
-    $scope.forgot = [];
-    $scope.forgot.hashcode = $stateParams.id;
-    //  REDIRECT CHANGE PASSWORD STARTS
-    var newPasswordSuccess = function(data, status) {
-        if (data == '1') {
-            $location.url("/login");
-        } else {
-            $scope.msg = "Sorry not able to change password..Try Again!";
+        $scope.forgot = [];
+        $scope.forgot.hashcode = $stateParams.id;
+        //  REDIRECT CHANGE PASSWORD STARTS
+        var newPasswordSuccess = function(data, status) {
+            if (data == '1') {
+                $location.url("/login");
+            } else {
+                $scope.msg = "Sorry not able to change password..Try Again!";
+            }
         }
-    }
-    $scope.newPassword = function() {
-        console.log($scope.forgot);
-        $scope.allvalidation = [{
-            field: $scope.forgot.newpassword,
-            validation: ""
-        }, {
-            field: $scope.forgot.confirmpassword,
-            validation: ""
-        }];
-        var check = formvalidation($scope.allvalidation);
-        if (check) {
-            NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
-        } else {
-          var xyz = ngDialog.open({
-              template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-              plain: true
-          });
-          $timeout(function() {
-                  xyz.close();
-              }, 3000)
+        $scope.newPassword = function() {
+            console.log($scope.forgot);
+            $scope.allvalidation = [{
+                field: $scope.forgot.newpassword,
+                validation: ""
+            }, {
+                field: $scope.forgot.confirmpassword,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+                NavigationService.newPassword($scope.forgot).success(newPasswordSuccess);
+            } else {
+                var xyz = ngDialog.open({
+                    template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                    plain: true
+                });
+                $timeout(function() {
+                    xyz.close();
+                }, 3000)
+            }
+
         }
+    })
+    .controller('changepasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
+        $scope.template = TemplateService;
+        $scope.template = TemplateService.changecontent("changepassword");
+        $scope.menutitle = NavigationService.makeactive("Changepassword");
+        TemplateService.title = $scope.menutitle;
+        $scope.navigation = NavigationService.getnav();
+        $scope.changePassword = {};
 
-    }
-})
-.controller('changepasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
-    $scope.template = TemplateService;
-    $scope.template = TemplateService.changecontent("changepassword");
-    $scope.menutitle = NavigationService.makeactive("Changepassword");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.changePassword = {};
-
-    $scope.popups = function(msg){
-        var xyz = ngDialog.open({
-            template: '<div class="pop-up"><h5 class="popup-wishlist">'+msg+'</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-            plain: true
-        });
-        $timeout(function() {
+        $scope.popups = function(msg) {
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">' + msg + '</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
                 xyz.close();
             }, 3000)
-    }
-
-    $scope.newPassword = function(){
-      $scope.allvalidation = [{
-          field: $scope.changePassword.oldpassword,
-          validation: ""
-      }, {
-          field: $scope.changePassword.newpassword,
-          validation: ""
-      }, {
-          field: $scope.changePassword.confirmpassword,
-          validation: ""
-      }];
-      var check = formvalidation($scope.allvalidation);
-      if (check) {
-        if ($scope.changePassword.newpassword===$scope.changePasswordconfirmpassword) {
-          NavigationService.changepassword($scope.changePassword,function(data){
-            console.log(data);
-            if (data==0) {
-              $scope.popups("Wrong Password");
-            }else {
-              $scope.popups("Password changed Successfully");
-            }
-          })
-        }else {
-          $scope.popups("New password and Confirm password should be same");
         }
-      }else {
-        $scope.popups("All fields are mandatory");
-      }
-    }
 
-})
+        $scope.newPassword = function() {
+            $scope.allvalidation = [{
+                field: $scope.changePassword.oldpassword,
+                validation: ""
+            }, {
+                field: $scope.changePassword.newpassword,
+                validation: ""
+            }, {
+                field: $scope.changePassword.confirmpassword,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+                if ($scope.changePassword.newpassword === $scope.changePasswordconfirmpassword) {
+                    NavigationService.changepassword($scope.changePassword, function(data) {
+                        console.log(data);
+                        if (data == 0) {
+                            $scope.popups("Wrong Password");
+                        } else {
+                            $scope.popups("Password changed Successfully");
+                        }
+                    })
+                } else {
+                    $scope.popups("New password and Confirm password should be same");
+                }
+            } else {
+                $scope.popups("All fields are mandatory");
+            }
+        }
 
-.controller('AccountCtrl', function($scope, TemplateService, NavigationService, ngDialog,$timeout) {
+    })
+
+.controller('AccountCtrl', function($scope, TemplateService, NavigationService, ngDialog, $timeout) {
     $scope.template = TemplateService;
     $scope.template = TemplateService.changecontent("account");
     $scope.menutitle = NavigationService.makeactive("Account");
@@ -1483,36 +1494,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 plain: true
             });
             $timeout(function() {
-                    xyz.close();
-                }, 3000)
+                xyz.close();
+            }, 3000)
         } else {
-          var xyz = ngDialog.open({
-              template: '<div class="pop-up"><h5 class="popup-wishlist">Fail to update</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-              plain: true
-          });
-          $timeout(function() {
-                  xyz.close();
-              }, 3000)
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Fail to update</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
+                xyz.close();
+            }, 3000)
         }
 
     }
     $scope.updateuser = function(user) {
-      $scope.allvalidation = [{
-          field: $scope.user.email,
-          validation: ""
-      }];
-      var check = formvalidation($scope.allvalidation);
-      if (check) {
-          NavigationService.updateuser(user, updateusercallback);
-      } else {
-        var xyz = ngDialog.open({
-            template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-            plain: true
-        });
-        $timeout(function() {
+        $scope.allvalidation = [{
+            field: $scope.user.email,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            NavigationService.updateuser(user, updateusercallback);
+        } else {
+            var xyz = ngDialog.open({
+                template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid data try again!!</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+                plain: true
+            });
+            $timeout(function() {
                 xyz.close();
             }, 3000)
-      }
+        }
     }
 
 
@@ -1626,6 +1637,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log("in 3 else if");
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
+                if (n.showSalePrice == true) {
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                }
             }
             $scope.products.push(n);
         });
@@ -1768,7 +1782,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.register = false;
     $scope.checkout = {};
     $scope.paymentinfo = false;
-    $scope.noamount= false;
+    $scope.noamount = false;
     $scope.discount = 0;
 
 
@@ -1784,45 +1798,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     //SOCIAL LOGIN
 
-        // GOOGLE AND FACEBOOK LOGIN
-        var checktwitter = function(data, status) {
-            if (data != "false") {
-                $interval.cancel(stopinterval);
-                ref.close();
-                NavigationService.authenticate().success(authenticatesuccess);
-            } else {
+    // GOOGLE AND FACEBOOK LOGIN
+    var checktwitter = function(data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            NavigationService.authenticate().success(authenticatesuccess);
+        } else {
 
-            }
-
-        };
-
-        var callAtIntervaltwitter = function() {
-            NavigationService.authenticate().success(checktwitter);
-        };
-        var authenticatesuccess = function(data, status) {
-            if (data != "false") {
-                $.jStorage.set("user", data);
-                user = data;
-                window.location.reload();
-            }
-        };
-
-        $scope.facebooklogin = function() {
-            ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function(event) {
-                NavigationService.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
         }
-        $scope.googlelogin = function() {
-            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function(event) {
-                NavigationService.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
+
+    };
+
+    var callAtIntervaltwitter = function() {
+        NavigationService.authenticate().success(checktwitter);
+    };
+    var authenticatesuccess = function(data, status) {
+        if (data != "false") {
+            $.jStorage.set("user", data);
+            user = data;
+            window.location.reload();
         }
+    };
+
+    $scope.facebooklogin = function() {
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function(event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.googlelogin = function() {
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function(event) {
+            NavigationService.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
 
     //CREATE ACCOUNT
     $scope.account = {};
@@ -1919,10 +1933,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //order products
     NavigationService.totalcart(function(data) {
         $scope.totalcart = data;
-        if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode!=null) {
-          $scope.couponhave = $.jStorage.get('coupon').couponcode;
-        }else {
-          $scope.couponhave = 0;
+        if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode != null) {
+            $scope.couponhave = $.jStorage.get('coupon').couponcode;
+        } else {
+            $scope.couponhave = 0;
         }
         $scope.allamount = $.jStorage.get('coupon').totalcart;
         if ($.jStorage.get("discountamount")) {
@@ -2047,11 +2061,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if (check) {
             //                  NavigationService.registeruser($scope.account, registerusercallback);
             console.log("all fill");
-if ($scope.allamount==0) {
-  $scope.noamount = true;
-}else{
-  $scope.paymentinfo = true;
-}
+            if ($scope.allamount == 0) {
+                $scope.noamount = true;
+            } else {
+                $scope.paymentinfo = true;
+            }
 
             $scope.showLoading = true;
             NavigationService.getcart(function(data) {
@@ -2274,8 +2288,8 @@ if ($scope.allamount==0) {
         $scope.menutitle = NavigationService.makeactive("Sorry");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        NavigationService.getorderbyorderid($stateParams.order, function(data){
-          $scope.order = data;
+        NavigationService.getorderbyorderid($stateParams.order, function(data) {
+            $scope.order = data;
         })
 
     })
@@ -2286,8 +2300,8 @@ if ($scope.allamount==0) {
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
         console.log($stateParams.order);
-        NavigationService.getorderbyorderid($stateParams.order, function(data){
-          $scope.order = data;
+        NavigationService.getorderbyorderid($stateParams.order, function(data) {
+            $scope.order = data;
         })
 
     })
@@ -2659,6 +2673,9 @@ if ($scope.allamount==0) {
                     console.log("in 3 else if");
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
+                if (n.showSalePrice == true) {
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                }
             }
             $scope.products.push(n);
         });
@@ -3011,6 +3028,9 @@ if ($scope.allamount==0) {
                     console.log("in 3 else if");
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
+                if (n.showSalePrice == true) {
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                }
             }
             $scope.products.push(n);
         });
@@ -3048,7 +3068,7 @@ if ($scope.allamount==0) {
                             });
                         })
                     })
-                    arr = _.uniqBy(arr,'compatibledevice');
+                    arr = _.uniqBy(arr, 'compatibledevice');
                     $scope.showfilter.compatibledevice = arr;
                 }
             }
@@ -3063,7 +3083,7 @@ if ($scope.allamount==0) {
                             });
                         })
                     })
-                    arr2 = _.uniqBy(arr2,'compatiblewith');
+                    arr2 = _.uniqBy(arr2, 'compatiblewith');
                     $scope.showfilter.compatiblewith = arr2;
                 }
             }
