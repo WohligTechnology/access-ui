@@ -1651,7 +1651,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
     $scope.addMoreItems = function() {
-        console.log("load more444444");
         if (lastpage != $scope.pageno) {
             ++$scope.pageno;
             NavigationService.getexclusiveandnewarrival($scope.pageno, 2, getexclusiveandnewarrivalcallback);
