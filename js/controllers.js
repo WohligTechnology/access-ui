@@ -58,6 +58,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.subscribe = {};
 
+    $.jStorage.set("filters", null);
+
     NavigationService.getallcategory(function(data) {
         console.log(data);
         $scope.products = data;
@@ -85,7 +87,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     $scope.subscribe = {};
     $scope.msg = "";
-
+    $.jStorage.set("filters", null);
     $scope.usersubscribtion = function() {
         $scope.allvalidation = [{
             field: $scope.subscribe.email,
@@ -203,7 +205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.products = [];
     $scope.showfilter = [];
-    $scope.dataload = "Loading ...";
+    $scope.dataload = "Give us a moment..";
     $scope.filters = {};
     $scope.filters.category = "";
     $scope.filters.color = "";
@@ -224,6 +226,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.colorfilter = [];
 
     $scope.getFilterResults = function() {
+        $.jStorage.set("filters", $scope.filters);
+        $scope.notOver = false;
         $scope.pageno = 1;
         $scope.products = [];
         NavigationService.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
@@ -406,9 +410,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.getproductdetails = function(productid) {
         $location.url("/productdetail/" + productid);
     }
-
+    $scope.notOver = false;
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
+        $scope.notOver = true;
         _.each(data.data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
@@ -444,32 +449,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
                 if (n.showSalePrice == true) {
-                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
                 }
             }
             $scope.products.push(n);
         });
         $scope.products = _.uniq($scope.products);
         if ($scope.products == "") {
-            $scope.dataload = "No data found";
+            $scope.dataload = "Nothing to Show, Folks!";
         }
         lastpage = data.data.lastpage;
-
+        if (data.data.lastpage == data.data.pageno) {
+            $scope.notOver = false;
+        }
         if (data.filter) {
             if ($scope.filters.category == "" && data.filter.category) {
                 $scope.showfilter.category = data.filter.category;
             }
             if ($scope.filters.color == "" && data.filter.color) {
                 $scope.showfilter.color = data.filter.color;
+            } else {
+                _.each(data.filter.color, function(n) {
+                    var index = _.findIndex($scope.showfilter.color, {
+                        "color": n.color
+                    });
+                    $scope.showfilter.color[index].status = true;
+                })
             }
             if ($scope.filters.type == "" && data.filter.type) {
                 $scope.showfilter.type = data.filter.type;
             }
             if ($scope.filters.material === "" && data.filter.material) {
                 $scope.showfilter.material = data.filter.material;
+            } else {
+                _.each(data.filter.material, function(n) {
+                    var index = _.findIndex($scope.showfilter.material, {
+                        "material": n.material
+                    });
+                    $scope.showfilter.material[index].status = true;
+                })
             }
             if ($scope.filters.finish === "" && data.filter.finish) {
                 $scope.showfilter.finish = data.filter.finish;
+            } else {
+                _.each(data.filter.finish, function(n) {
+                    var index = _.findIndex($scope.showfilter.finish, {
+                        "finish": n.finish
+                    });
+                    $scope.showfilter.finish[index].status = true;
+                })
             }
             var arr = [];
             if ($scope.filters.compatibledevice === "" && data.filter.compatibledevice) {
@@ -502,15 +530,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     arr2 = _.uniqBy(arr2, 'compatiblewith');
                     $scope.showfilter.compatiblewith = arr2;
                 }
+            } else {
+                _.each(data.filter.compatiblewith, function(n) {
+                    var index = _.findIndex($scope.showfilter.compatiblewith, {
+                        "compatiblewith": n.compatiblewith
+                    });
+                    $scope.showfilter.compatiblewith[index].status = true;
+                })
             }
             if ($scope.filters.brand === "" && data.filter.brand) {
                 $scope.showfilter.brand = data.filter.brand;
+            } else {
+                _.each(data.filter.brand, function(n) {
+                    var index = _.findIndex($scope.showfilter.brand, {
+                        "id": n.id
+                    });
+                    $scope.showfilter.brand[index].status = true;
+                })
             }
             if ($scope.filters.microphone === "" && data.filter.microphone) {
                 $scope.showfilter.microphone = data.filter.microphone;
+            } else {
+                _.each(data.filter.microphone, function(n) {
+                    var index = _.findIndex($scope.showfilter.microphone, {
+                        "microphone": n.microphone
+                    });
+                    $scope.showfilter.microphone[index].status = true;
+                })
             }
             if ($scope.filters.size === "" && data.filter.size) {
                 $scope.showfilter.size = data.filter.size;
+            } else {
+                _.each(data.filter.size, function(n) {
+                    var index = _.findIndex($scope.showfilter.size, {
+                        "size": n.size
+                    });
+                    $scope.showfilter.size[index].status = true;
+                })
             }
             if ($scope.filters.clength === "" && data.filter.clength) {
                 $scope.showfilter.clength = data.filter.clength;
@@ -534,8 +590,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.brandid = $stateParams.brand;
 
     $scope.addMoreItems = function() {
-        // console.log("lastpage=" + lastpage);
-        // console.log("pageno=" + $scope.pageno);
+        $scope.notOver = false;
         if ($scope.pageno <= lastpage) {
             ++$scope.pageno;
             if ($stateParams.brand != 0) {
@@ -604,22 +659,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.filters.pricemax = data.price.max;
                 $scope.pageno = 1;
                 $scope.products = [];
-                $scope.filters = {};
-                $scope.filters.category = "";
-                $scope.filters.color = "";
-                $scope.filters.type = "";
-                $scope.filters.material = "";
-                $scope.filters.finish = "";
-                $scope.filters.compatibledevice = "";
-                $scope.filters.compatiblewith = "";
-                $scope.filters.brand = "";
-                $scope.filters.pricemin = "";
-                $scope.filters.pricemax = "";
-                $scope.filters.microphone = "";
-                $scope.filters.size = "";
-                $scope.filters.clength = "";
-                $scope.filters.voltage = "";
-                $scope.filters.capacity = "";
+                if (!$.jStorage.get("filters")) {
+                    $scope.filters = {};
+                    $scope.filters.category = "";
+                    $scope.filters.color = "";
+                    $scope.filters.type = "";
+                    $scope.filters.material = "";
+                    $scope.filters.finish = "";
+                    $scope.filters.compatibledevice = "";
+                    $scope.filters.compatiblewith = "";
+                    $scope.filters.brand = "";
+                    $scope.filters.pricemin = "";
+                    $scope.filters.pricemax = "";
+                    $scope.filters.microphone = "";
+                    $scope.filters.size = "";
+                    $scope.filters.clength = "";
+                    $scope.filters.voltage = "";
+                    $scope.filters.capacity = "";
+                } else {
+                    $scope.filters = $.jStorage.get("filters");
+                }
 
                 if ($stateParams.brand != 0) {
                     NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
@@ -660,7 +719,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
     }
 
-
+    $.jStorage.set("filters", null);
 
     NavigationService.getuserdetails(function(data) {
         console.log(data);
@@ -835,7 +894,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             })
             if (data == '') {
                 $scope.nodatafound = true;
-                $scope.nodata = "No Data found.";
+                $scope.nodata = "Nothing to Show, Folks!.";
             } else {
                 $scope.nodatafound = false;
             }
@@ -869,6 +928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
     //CREATE ACCOUNT
     $scope.account = {};
+    $.jStorage.set("filters", null);
 
     var registerusercallback = function(data, status) {
         console.log(data);
@@ -998,6 +1058,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.forgotPassword = function(email) {
         NavigationService.forgotPassword(email, forgotPasswordcallback);
     }
+    $.jStorage.set("filters", null);
 })
 
 .controller('headerctrl', function($scope, TemplateService, NavigationService, $location, $window) {
@@ -1252,7 +1313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             if ($scope.showSalePrice == true) {
                 // $scope.product.product.discountinper = Math.round(parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price) * 100);
-                $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price)))*100);
+                $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price))) * 100);
             }
             console.log("Show Sale Price = " + $scope.showSalePrice);
         } else {
@@ -1319,7 +1380,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.orders.push(n);
             })
             if ($scope.orders == "") {
-                $scope.dataload = "No data found !";
+                $scope.dataload = "Nothing to Show, Folks! !";
             }
         });
 
@@ -1333,6 +1394,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
     }
+    $.jStorage.set("filters", null);
 
 })
 
@@ -1377,6 +1439,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
     }
+    $.jStorage.set("filters", null);
 })
 
 .controller('StorelocatorCtrl', function($scope, TemplateService, NavigationService) {
@@ -1385,6 +1448,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("StoreLocator");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $.jStorage.set("filters", null);
 })
 
 .controller('ResetpasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
@@ -1427,6 +1491,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
 
         }
+        $.jStorage.set("filters", null);
     })
     .controller('changepasswordCtrl', function($scope, TemplateService, NavigationService, $stateParams, ngDialog, $timeout) {
         $scope.template = TemplateService;
@@ -1475,7 +1540,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.popups("All fields are mandatory");
             }
         }
-
+        $.jStorage.set("filters", null);
     })
 
 .controller('AccountCtrl', function($scope, TemplateService, NavigationService, ngDialog, $timeout) {
@@ -1485,7 +1550,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.user = {};
-
+    $.jStorage.set("filters", null);
     var updateusercallback = function(data, status) {
         console.log(data);
         if (data == "true") {
@@ -1543,7 +1608,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Addwish");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $.jStorage.set("filters", null);
 
 })
 
@@ -1561,7 +1626,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             navbarjson[i].class = "";
         }
     }
-
+    $.jStorage.set("filters", null);
 
     var getaboutuscallback = function(data, status) {
         console.log(data);
@@ -1579,9 +1644,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.pageno = 0;
-    $scope.dataload = "Loading ...";
+    $scope.dataload = "Give us a moment..";
     $scope.products = [];
-
+    $.jStorage.set("filters", null);
     for (var i = 0; i < navbarjson.length; i++) {
         if (i == 2) {
             navbarjson[i].class = "color";
@@ -1638,7 +1703,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
                 if (n.showSalePrice == true) {
-                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
                 }
             }
             $scope.products.push(n);
@@ -1646,7 +1711,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         console.log($scope.products);
         if ($scope.products == "") {
-            $scope.dataload = "No data found !";
+            $scope.dataload = "Nothing to Show, Folks! !";
         }
     }
 
@@ -1771,6 +1836,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("CheckOut");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $.jStorage.set("filters", null);
 
     $scope.openblock = {};
     $scope.openship = {};
@@ -1783,7 +1849,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.paymentinfo = false;
     $scope.noamount = false;
     $scope.discount = 0;
-
 
     $scope.login = {};
     $scope.showcontinue = false;
@@ -2140,7 +2205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Deals");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $.jStorage.set("filters", null);
     for (var i = 0; i < navbarjson.length; i++) {
         if (i == 3) {
             navbarjson[i].class = "color";
@@ -2234,7 +2299,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Distribution");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $.jStorage.set("filters", null);
     $scope.pageno = 0;
     var lastpage = 1;
     $scope.distributer = [];
@@ -2271,7 +2336,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("TermsCondition");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-
+        $.jStorage.set("filters", null);
     })
     .controller('PrivacyCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
@@ -2279,7 +2344,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("Privacy");
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-
+        $.jStorage.set("filters", null);
     })
     .controller('SorryCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
         $scope.template = TemplateService;
@@ -2290,7 +2355,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getorderbyorderid($stateParams.order, function(data) {
             $scope.order = data;
         })
-
+        $.jStorage.set("filters", null);
     })
     .controller('ThankyouCtrl', function($scope, TemplateService, NavigationService, $stateParams) {
         $scope.template = TemplateService;
@@ -2302,7 +2367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         NavigationService.getorderbyorderid($stateParams.order, function(data) {
             $scope.order = data;
         })
-
+        $.jStorage.set("filters", null);
     })
     .controller('FaqCtrl', function($scope, TemplateService, NavigationService) {
         $scope.template = TemplateService;
@@ -2347,6 +2412,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             };
 
         }
+        $.jStorage.set("filters", null);
     })
 
 .controller('ExclusiveCtrl', function($scope, TemplateService, NavigationService, ngDialog, $location) {
@@ -2355,7 +2421,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Exclusive");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $.jStorage.set("filters", null);
     $scope.demo2 = {
         range: {
             min: 0,
@@ -2454,7 +2520,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.brandimages = [];
     $scope.pageno = 0;
     var lastpage = 1;
-
+    $.jStorage.set("filters", null);
     for (var i = 0; i < navbarjson.length; i++) {
         if (i == 0) {
             navbarjson[i].class = "color";
@@ -2499,7 +2565,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.loading = "loading..";
-
+    $.jStorage.set("filters", null);
     // WISHLIST PRODUCTS
 
     $scope.getproductdetails = function(productid) {
@@ -2512,7 +2578,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.products = data.queryresult;
         console.log($scope.products);
         if (data.queryresult == '') {
-            $scope.loading = "No data found..";
+            $scope.loading = "Nothing to Show, Folks!..";
         } else {
             $scope.loading = "";
         }
@@ -2563,7 +2629,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("SearchResult");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $.jStorage.set("filters", null);
     $scope.searchfor = $stateParams.search;
 
     $scope.getproductdetails = function(productid) {
@@ -2673,7 +2739,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
                 if (n.showSalePrice == true) {
-                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
                 }
             }
             $scope.products.push(n);
@@ -2789,7 +2855,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.products = [];
     $scope.showfilter = [];
-    $scope.dataload = "Loading ...";
+    $scope.dataload = "Give us a moment..";
     $scope.filters = {};
     $scope.filters.category = "";
     $scope.filters.color = "";
@@ -2990,9 +3056,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.getproductdetails = function(productid) {
         $location.url("/productdetail/" + productid);
     }
-
+    $scope.notOver = false;
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
+        $scope.notOver = true;
         _.each(data.data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
@@ -3028,35 +3095,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
                 console.log("Show Sale Price = " + n.showSalePrice);
                 if (n.showSalePrice == true) {
-                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                    n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
                 }
             }
             $scope.products.push(n);
         });
         $scope.products = _.uniq($scope.products);
         if ($scope.products == "") {
-            $scope.dataload = "No data found";
+            $scope.dataload = "Nothing to Show, Folks!";
         }
         lastpage = data.data.lastpage;
-
+        if (data.data.lastpage == data.data.pageno) {
+            $scope.notOver = false;
+        }
         if (data.filter) {
             if ($scope.filters.category == "" && data.filter.category) {
                 $scope.showfilter.category = data.filter.category;
             }
             if ($scope.filters.color == "" && data.filter.color) {
                 $scope.showfilter.color = data.filter.color;
+            } else {
+                _.each(data.filter.color, function(n) {
+                    var index = _.findIndex($scope.showfilter.color, {
+                        "color": n.color
+                    });
+                    $scope.showfilter.color[index].status = true;
+                })
             }
             if ($scope.filters.type == "" && data.filter.type) {
                 $scope.showfilter.type = data.filter.type;
             }
-            if ($scope.filters.material == "" && data.filter.material) {
+            if ($scope.filters.material === "" && data.filter.material) {
                 $scope.showfilter.material = data.filter.material;
+            } else {
+                _.each(data.filter.material, function(n) {
+                    var index = _.findIndex($scope.showfilter.material, {
+                        "material": n.material
+                    });
+                    $scope.showfilter.material[index].status = true;
+                })
             }
-            if ($scope.filters.finish == "" && data.filter.finish) {
+            if ($scope.filters.finish === "" && data.filter.finish) {
                 $scope.showfilter.finish = data.filter.finish;
+            } else {
+                _.each(data.filter.finish, function(n) {
+                    var index = _.findIndex($scope.showfilter.finish, {
+                        "finish": n.finish
+                    });
+                    $scope.showfilter.finish[index].status = true;
+                })
             }
             var arr = [];
-            if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
+            if ($scope.filters.compatibledevice === "" && data.filter.compatibledevice) {
                 if (data.filter.compatibledevice.length > 1) {
 
                     _.each(data.filter.compatibledevice, function(n) {
@@ -3065,43 +3155,72 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             arr.push({
                                 "compatibledevice": _.trim(m)
                             });
-                        })
-                    })
+                        });
+                    });
                     arr = _.uniqBy(arr, 'compatibledevice');
                     $scope.showfilter.compatibledevice = arr;
                 }
             }
             var arr2 = [];
-            if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
-                if (data.filter.compatiblewith.lenght > 1) {
+            if ($scope.filters.compatiblewith === "" && data.filter.compatiblewith) {
+
+                if (data.filter.compatiblewith.length > 1) {
                     _.each(data.filter.compatiblewith, function(n) {
                         n.compatiblewith = n.compatiblewith.split(",");
                         _.each(n.compatiblewith, function(m) {
                             arr2.push({
                                 "compatiblewith": _.trim(m)
                             });
-                        })
-                    })
+                        });
+                    });
                     arr2 = _.uniqBy(arr2, 'compatiblewith');
                     $scope.showfilter.compatiblewith = arr2;
                 }
+            } else {
+                _.each(data.filter.compatiblewith, function(n) {
+                    var index = _.findIndex($scope.showfilter.compatiblewith, {
+                        "compatiblewith": n.compatiblewith
+                    });
+                    $scope.showfilter.compatiblewith[index].status = true;
+                })
             }
-            // if ($scope.filters.brand == "" && data.filter.brand) {
-            //     $scope.showfilter.brand = data.filter.brand;
-            // }
-            if ($scope.filters.microphone == "" && data.filter.microphone) {
+            if ($scope.filters.brand === "" && data.filter.brand) {
+                $scope.showfilter.brand = data.filter.brand;
+            } else {
+                _.each(data.filter.brand, function(n) {
+                    var index = _.findIndex($scope.showfilter.brand, {
+                        "id": n.id
+                    });
+                    $scope.showfilter.brand[index].status = true;
+                })
+            }
+            if ($scope.filters.microphone === "" && data.filter.microphone) {
                 $scope.showfilter.microphone = data.filter.microphone;
+            } else {
+                _.each(data.filter.microphone, function(n) {
+                    var index = _.findIndex($scope.showfilter.microphone, {
+                        "microphone": n.microphone
+                    });
+                    $scope.showfilter.microphone[index].status = true;
+                })
             }
-            if ($scope.filters.size == "" && data.filter.size) {
+            if ($scope.filters.size === "" && data.filter.size) {
                 $scope.showfilter.size = data.filter.size;
+            } else {
+                _.each(data.filter.size, function(n) {
+                    var index = _.findIndex($scope.showfilter.size, {
+                        "size": n.size
+                    });
+                    $scope.showfilter.size[index].status = true;
+                })
             }
-            if ($scope.filters.clength == "" && data.filter.clength) {
+            if ($scope.filters.clength === "" && data.filter.clength) {
                 $scope.showfilter.clength = data.filter.clength;
             }
-            if ($scope.filters.voltage == "" && data.filter.voltage) {
+            if ($scope.filters.voltage === "" && data.filter.voltage) {
                 $scope.showfilter.voltage = data.filter.voltage;
             }
-            if ($scope.filters.capacity == "" && data.filter.capacity) {
+            if ($scope.filters.capacity === "" && data.filter.capacity) {
                 $scope.showfilter.capacity = data.filter.capacity;
             }
             if (data.filter.price && data.filter.price.min) {
@@ -3181,22 +3300,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.filters.pricemax = data.price.max;
                 $scope.pageno = 1;
                 $scope.products = [];
-                $scope.filters = {};
-                $scope.filters.category = "";
-                $scope.filters.color = "";
-                $scope.filters.type = "";
-                $scope.filters.material = "";
-                $scope.filters.finish = "";
-                $scope.filters.compatibledevice = "";
-                $scope.filters.compatiblewith = "";
-                $scope.filters.brand = "";
-                $scope.filters.pricemin = "";
-                $scope.filters.pricemax = "";
-                $scope.filters.microphone = "";
-                $scope.filters.size = "";
-                $scope.filters.clength = "";
-                $scope.filters.voltage = "";
-                $scope.filters.capacity = "";
+                if (!$.jStorage.get("filters")) {
+                    $scope.filters = {};
+                    $scope.filters.category = "";
+                    $scope.filters.color = "";
+                    $scope.filters.type = "";
+                    $scope.filters.material = "";
+                    $scope.filters.finish = "";
+                    $scope.filters.compatibledevice = "";
+                    $scope.filters.compatiblewith = "";
+                    $scope.filters.brand = "";
+                    $scope.filters.pricemin = "";
+                    $scope.filters.pricemax = "";
+                    $scope.filters.microphone = "";
+                    $scope.filters.size = "";
+                    $scope.filters.clength = "";
+                    $scope.filters.voltage = "";
+                    $scope.filters.capacity = "";
+                } else {
+                    $scope.filters = $.jStorage.get("filters");
+                }
 
                 NavigationService.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
             }

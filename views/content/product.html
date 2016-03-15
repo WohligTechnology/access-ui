@@ -1,5 +1,5 @@
 <!-- Last Option 14 -->
-<div class="container" infinite-scroll='addMoreItems();' infinite-scroll-distance="0" infinite-scroll-disabled="shouldscroll">
+<div class="container">
    <div class="row">
       <div class="pro-set">
          <div class="col-md-3">
@@ -225,7 +225,7 @@
             <div class="product-list">
                <div class="col-md-4 col-sm-6" ng-repeat="pro in products">
                   <div class="pro-box">
-                    <a class="discper" href="" ng-show="pro.showSalePrice">{{pro.discountinper}}%</a>
+                     <a class="discper" href="" ng-show="pro.showSalePrice">{{pro.discountinper}}%</a>
                      <a href="#/productdetail/{{pro.id}}">
                         <div class="img-box">
                            <span ng-if="!pro.image2 && pro.image1">
@@ -274,6 +274,9 @@
                      </div>
                   </div>
                </div>
+            </div>
+            <div class="text-center select-me " ng-show="notOver">
+               <a class="ad-cart click" ng-click="addMoreItems();">Not Over Yet</a>
             </div>
          </div>
       </div>
