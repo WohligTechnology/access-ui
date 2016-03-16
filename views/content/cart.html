@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<div class="sign text-center pads">
 				<h3>Your Shopping Bag</h3>
-<!--				<p>Items reserved for limited time only</p>-->
+				<!--				<p>Items reserved for limited time only</p>-->
 			</div>
 			<div class="text-center" ng-if="nodatafound">
 				<p>
@@ -35,15 +35,22 @@
 							</td>
 							<td>
 								<div class="in">
-								<i class="fa fa-minus-circle color" ng-click="changeqty(mycart,'-')"></i>
+									<i class="fa fa-minus-circle color" ng-click="changeqty(mycart,'-')"></i>
 									<input type="text" ng-model="mycart.qty" ng-change="onchangeqty(mycart)">
 									<i class="fa fa-plus-circle color" ng-click="changeqty(mycart, '+')"></i>
-									<p><h6 style="color:red" ng-if="mycart.msg!=''">{{mycart.msg}}</h6></p>
+									<p>
+										<h6 style="color:red" ng-if="mycart.msg!=''">{{mycart.msg}}</h6></p>
 									<a href="#"></a>
 								</div>
 							</td>
 							<td>
-								<p><i class="fa fa-inr"></i>{{mycart.price}}</p>
+								<p ng-if="mycart.options.originalprice != mycart.price" style="margin-left: -36px;">
+									<i class="fa fa-inr strike">{{mycart.options.originalprice}}</i>
+									<i class="fa fa-inr">{{mycart.price}}</i>
+								</p>
+								<p ng-if="mycart.options.originalprice == mycart.price">
+									<i class="fa fa-inr">{{mycart.price}}</i>
+								</p>
 							</td>
 							<td>
 								<p><i class="fa fa-inr"></i>{{mycart.price * mycart.qty}}</p>
