@@ -352,53 +352,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.percent = 100 * (value / $scope.max);
     };
 
-    $scope.ratingStates = [{
-        stateOn: 'glyphicon-ok-sign',
-        stateOff: 'glyphicon-ok-circle'
-    }, {
-        stateOn: 'glyphicon-star',
-        stateOff: 'glyphicon-star-empty'
-    }, {
-        stateOn: 'glyphicon-heart',
-        stateOff: 'glyphicon-ban-circle'
-    }, {
-        stateOn: 'glyphicon-heart'
-    }, {
-        stateOff: 'glyphicon-off'
-    }];
-
-    $scope.$watch('rate', function(val) {
-
-            function sucess(data) {
-
-                console.log(data);
-
-            };
-
-            function error(response) {
-
-                console.log(response)
-
-                alert("Can't post " + response.data + " Error:" + response.status);
-
-            }
 
 
-
-            if (val) {
-
-                var data = {
-                    rating: val,
-                    user: "userId" // I'm not sure where is your userId
-
-                }
-
-                $http.post("yourUrl", data).then(sucess, error);
-
-
-            }
-        })
-        // PRODUCTS SELECTED FROM CATEGORY
+    // PRODUCTS SELECTED FROM CATEGORY
     var getproductbycategorycallback = function(data, status) {
         console.log(data.queryresult);
         $scope.products = data.queryresult;
@@ -411,6 +367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $location.url("/productdetail/" + productid);
     }
     $scope.notOver = false;
+    $scope.giveUsMoment = false;
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
         $scope.notOver = true;
@@ -585,12 +542,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             console.log($scope.showfilter);
         }
+        $scope.giveUsMoment = false;
     }
 
     $scope.brandid = $stateParams.brand;
 
     $scope.addMoreItems = function() {
         $scope.notOver = false;
+        $scope.giveUsMoment = true;
         if ($scope.pageno <= lastpage) {
             ++$scope.pageno;
             if ($stateParams.brand != 0) {
@@ -3015,38 +2974,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         stateOff: 'glyphicon-off'
     }];
 
-    $scope.$watch('rate', function(val) {
 
-            function sucess(data) {
-
-                console.log(data);
-
-            };
-
-            function error(response) {
-
-                console.log(response)
-
-                alert("Can't post " + response.data + " Error:" + response.status);
-
-            }
-
-
-
-            if (val) {
-
-                var data = {
-                    rating: val,
-                    user: "userId" // I'm not sure where is your userId
-
-                }
-
-                $http.post("yourUrl", data).then(sucess, error);
-
-
-            }
-        })
-        // PRODUCTS SELECTED FROM CATEGORY
+    // PRODUCTS SELECTED FROM CATEGORY
     var getproductbycategorycallback = function(data, status) {
         console.log(data.queryresult);
         $scope.products = data.queryresult;
@@ -3057,9 +2986,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $location.url("/productdetail/" + productid);
     }
     $scope.notOver = false;
+    $scope.giveUsMoment = false;
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
         $scope.notOver = true;
+        $scope.giveUsMoment = false;
         _.each(data.data.queryresult, function(n) {
             if (n.isfavid) {
                 n.fav = "fav";
@@ -3236,6 +3167,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.brandid = $stateParams.brand;
 
     $scope.addMoreItems = function() {
+        $scope.giveUsMoment = true;
         // console.log("lastpage=" + lastpage);
         // console.log("pageno=" + $scope.pageno);
         if ($scope.pageno <= lastpage) {
