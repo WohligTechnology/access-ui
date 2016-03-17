@@ -782,7 +782,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.isfreedelivery = 0;
     $scope.discountamount = 0;
     var couponsuccess = function(data, status) {
-        if (data == 'false') {
+        if (data != 'false' && data.status != "0") {
+            console.log("Show it");
+            $scope.validcouponcode = 1;
+            NavigationService.setcoupondetails(data);
+            calcdiscountamount();
+        } else {
+            NavigationService.setcoupondetails(null);
             var xyz = ngDialog.open({
                 template: '<div class="pop-up"><h5 class="popup-wishlist">Invalid coupon code</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
                 plain: true,
@@ -791,13 +797,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $timeout(function() {
                 xyz.close();
             }, 3000)
-        } else {
-            console.log("Show it");
-            $scope.validcouponcode = 1;
-
-            NavigationService.setcoupondetails(data);
-            calcdiscountamount();
-
         }
     }
 
@@ -1955,15 +1954,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     //order products
     NavigationService.totalcart(function(data) {
+        console.log(data);
         $scope.totalcart = data;
+        $scope.allamount = data;
         if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode != null) {
             $scope.couponhave = $.jStorage.get('coupon').couponcode;
         } else {
             $scope.couponhave = 0;
         }
-        $scope.allamount = $.jStorage.get('coupon').totalcart;
         if ($.jStorage.get("discountamount")) {
             $scope.discount = $.jStorage.get("discountamount");
+            $scope.allamount = parseFloat($scope.allamount) - $.jStorage.get("discountamount");
             // if ($scope.discount>$scope.totalcart) {
             //   $scope.totalcart = 0;
             // }
