@@ -412,8 +412,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.products.push(n);
         });
         $scope.products = _.uniq($scope.products);
-        if ($scope.products == "") {
+        if ($scope.products.length == 0 || $scope.products == '') {
             $scope.dataload = "Nothing to Show, Folks!";
+            $scope.notOver = false;
         }
         lastpage = data.data.lastpage;
         if (data.data.lastpage == data.data.pageno) {
