@@ -2108,10 +2108,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.orderid = data;
                     $scope.amount = $scope.totalcart - $scope.discount;
                     $scope.showLoading = false;
-                    // ngDialog.open({
-                    //     template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-                    //     plain: true
-                    // });
+                    var found = _.findIndex(codpincodes, {
+                        "pincode": $scope.checkout.billingpincode
+                    });
+                    if (found != -1)
+                        $scope.showPaymentMethod = true;
+                    else
+                        $scope.showPaymentMethod = false;
                 });
 
             });

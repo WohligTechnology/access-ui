@@ -9,67 +9,68 @@ var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function($http) {
     var navigation = [{
-        name: "Brands",
-        classis: "active",
-        link: "#/brand",
-        subnav: [{
-            name: "Subnav1",
+            name: "Brands",
             classis: "active",
-            link: "#/home"
+            link: "#/brand",
+            subnav: [{
+                name: "Subnav1",
+                classis: "active",
+                link: "#/home"
+            }, {
+                name: "Subnav2",
+                classis: "active",
+                link: "#/home"
+            }, {
+                name: "Subnav3",
+                classis: "active",
+                link: "#/home"
+            }]
         }, {
-            name: "Subnav2",
+            name: "products",
+            active: "",
+            link: "#/product",
             classis: "active",
-            link: "#/home"
+            subnav: []
         }, {
-            name: "Subnav3",
+            name: "exclusive",
+            active: "",
+            link: "#/exclusive",
             classis: "active",
-            link: "#/home"
-        }]
-    }, {
-        name: "products",
-        active: "",
-        link: "#/product",
-        classis: "active",
-        subnav: []
-    }, {
-        name: "exclusive",
-        active: "",
-        link: "#/exclusive",
-        classis: "active",
-        subnav: []
-    }, {
-        name: "deals",
-        active: "",
-        link: "#/new arrivals",
-        classis: "active",
-        subnav: []
-    },
+            subnav: []
+        }, {
+            name: "deals",
+            active: "",
+            link: "#/new arrivals",
+            classis: "active",
+            subnav: []
+        },
 
-    //
-    // {
-    //     name: "deals",
-    //     active: "",
-    //     link: "#/deals",
-    //     classis: "active",
-    //     subnav: []
-    // },
+        //
+        // {
+        //     name: "deals",
+        //     active: "",
+        //     link: "#/deals",
+        //     classis: "active",
+        //     subnav: []
+        // },
 
 
 
 
-    {
-        name: "about us",
-        active: "",
-        link: "#/about",
-        classis: "active",
-        subnav: []
-    }, {
-        name: "contact",
-        active: "",
-        link: "#/contact",
-        classis: "active",
-        subnav: []
-    }];
+        {
+            name: "about us",
+            active: "",
+            link: "#/about",
+            classis: "active",
+            subnav: []
+        }, {
+            name: "contact",
+            active: "",
+            link: "#/contact",
+            classis: "active",
+            subnav: []
+        }
+    ];
 
     var coupondetails = $.jStorage.get("coupon");
 
@@ -105,8 +106,8 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-        getorderbyorderid: function(id,callback) {
-            return $http.get(admin_url + 'json/getorderbyorderid?id=' + id , {}, {
+        getorderbyorderid: function(id, callback) {
+            return $http.get(admin_url + 'json/getorderbyorderid?id=' + id, {}, {
                 withCredentials: true
             }).success(callback);
         },
@@ -183,7 +184,7 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        changepassword: function(changepassword,callback) {
+        changepassword: function(changepassword, callback) {
             return $http({
                 url: admin_url + 'json/changepassword',
                 method: "POST",
@@ -240,12 +241,12 @@ var navigationservice = angular.module('navigationservice', [])
                 withCredentials: true
             }).success(callback);
         },
-        myorders: function(pageno,callback) {
-          if($.jStorage.get("user")){
-            return $http.get(admin_url + 'json/getuserorders?user=' + $.jStorage.get("user").id+'&pageno='+pageno, {
-                withCredentials: true
-            }).success(callback);
-          }
+        myorders: function(pageno, callback) {
+            if ($.jStorage.get("user")) {
+                return $http.get(admin_url + 'json/getuserorders?user=' + $.jStorage.get("user").id + '&pageno=' + pageno, {
+                    withCredentials: true
+                }).success(callback);
+            }
         },
         getuserdetails: function(callback) {
             return $http.get(admin_url + 'json/getuserdetails', {}, {
@@ -291,33 +292,33 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         placeorder: function(form, callback) {
-          console.log(form);
+            console.log(form);
             return $http({
                 url: admin_url + "json/placeorder",
                 method: "POST",
                 withCredentials: true,
                 data: {
-                  "billingaddress": form.billingaddress,
-                  "billingcity": form.billingcity,
-                  "billingcontact": form.billingcontact,
-                  "billingcountry": form.billingcountry,
-                  "billingpincode": form.billingpincode,
-                  "billingstate": form.billingstate,
-                  "cart": form.cart,
-                  "email": form.email,
-                  "firstname": form.firstname,
-                  "id": form.id,
-                  "lastname": form.lastname,
-                  "phone": form.phone,
-                  "user": form.user,
-                  "shippingname": form.shippingname,
-                  "shippingaddress":form.shippingaddress,
-                  "shippingcity":form.shippingcity,
-                  "shippingstate":form.shippingstate,
-                  "shippingpincode":form.shippingpincode,
-                  "shippingcountry":form.shippingcountry,
-                  "shippingcontact":form.shippingcontact,
-                  "customernote":form.customernote
+                    "billingaddress": form.billingaddress,
+                    "billingcity": form.billingcity,
+                    "billingcontact": form.billingcontact,
+                    "billingcountry": form.billingcountry,
+                    "billingpincode": form.billingpincode,
+                    "billingstate": form.billingstate,
+                    "cart": form.cart,
+                    "email": form.email,
+                    "firstname": form.firstname,
+                    "id": form.id,
+                    "lastname": form.lastname,
+                    "phone": form.phone,
+                    "user": form.user,
+                    "shippingname": form.shippingname,
+                    "shippingaddress": form.shippingaddress,
+                    "shippingcity": form.shippingcity,
+                    "shippingstate": form.shippingstate,
+                    "shippingpincode": form.shippingpincode,
+                    "shippingcountry": form.shippingcountry,
+                    "shippingcontact": form.shippingcontact,
+                    "customernote": form.customernote
                 }
             }).success(callback);
         },
@@ -428,3 +429,613 @@ var navigationservice = angular.module('navigationservice', [])
         },
     }
 });
+
+var codpincodes = [{
+    "pincode": 400037
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400014
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400014
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400019
+}, {
+    "pincode": 400024
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400072
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400072
+}, {
+    "pincode": 400002
+}, {
+    "pincode": 400005
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400020
+}, {
+    "pincode": 400020
+}, {
+    "pincode": 400005
+}, {
+    "pincode": 400005
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400032
+}, {
+    "pincode": 400005
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400032
+}, {
+    "pincode": 400021
+}, {
+    "pincode": 400021
+}, {
+    "pincode": 400032
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400001
+}, {
+    "pincode": 400005
+}, {
+    "pincode": 421501
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400020
+}, {
+    "pincode": 400004
+}, {
+    "pincode": 400002
+}, {
+    "pincode": 400002
+}, {
+    "pincode": 400002
+}, {
+    "pincode": 400053
+}, {
+    "pincode": 400071
+}, {
+    "pincode": 400091
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400019
+}, {
+    "pincode": 400024
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400072
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400072
+}, {
+    "pincode": 400094
+}, {
+    "pincode": 400085
+}, {
+    "pincode": 400084
+}, {
+    "pincode": 400075
+}, {
+    "pincode": 400082
+}, {
+    "pincode": 400042
+}, {
+    "pincode": 400078
+}, {
+    "pincode": 400078
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400089
+}, {
+    "pincode": 400043
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400075
+}, {
+    "pincode": 400075
+}, {
+    "pincode": 400077
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400071
+}, {
+    "pincode": 400089
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400092
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400063
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400095
+}, {
+    "pincode": 400060
+}, {
+    "pincode": 400102
+}, {
+    "pincode": 400101
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400095
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400097
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400103
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400102
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400097
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400063
+}, {
+    "pincode": 400029
+}, {
+    "pincode": 400099
+}, {
+    "pincode": 400069
+}, {
+    "pincode": 400058
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400053
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400050
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400093
+}, {
+    "pincode": 400091
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400008
+}, {
+    "pincode": 400011
+}, {
+    "pincode": 400007
+}, {
+    "pincode": 400011
+}, {
+    "pincode": 400011
+}, {
+    "pincode": 400026
+}, {
+    "pincode": 400026
+}, {
+    "pincode": 400026
+}, {
+    "pincode": 400008
+}, {
+    "pincode": 400026
+}, {
+    "pincode": 400007
+}, {
+    "pincode": 400011
+}, {
+    "pincode": 400034
+}, {
+    "pincode": 400008
+}, {
+    "pincode": 400011
+}, {
+    "pincode": 400008
+}, {
+    "pincode": 400008
+}, {
+    "pincode": 400006
+}, {
+    "pincode": 400007
+}, {
+    "pincode": 400035
+}, {
+    "pincode": 400007
+}, {
+    "pincode": 400007
+}, {
+    "pincode": 400034
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400030
+}, {
+    "pincode": 400013
+}, {
+    "pincode": 400017
+}, {
+    "pincode": 400017
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400025
+}, {
+    "pincode": 400025
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400028
+}, {
+    "pincode": 400030
+}, {
+    "pincode": 400018
+}, {
+    "pincode": 400030
+}, {
+    "pincode": 400018
+}, {
+    "pincode": 400030
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400092
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400063
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400095
+}, {
+    "pincode": 400060
+}, {
+    "pincode": 400102
+}, {
+    "pincode": 400101
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400067
+}, {
+    "pincode": 400095
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400097
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400103
+}, {
+    "pincode": 400104
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400064
+}, {
+    "pincode": 400102
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400097
+}, {
+    "pincode": 400065
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400063
+}, {
+    "pincode": 400050
+}, {
+    "pincode": 400054
+}, {
+    "pincode": 400056
+}, {
+    "pincode": 400052
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400058
+}, {
+    "pincode": 400057
+}, {
+    "pincode": 400099
+}, {
+    "pincode": 400056
+}, {
+    "pincode": 400059
+}, {
+    "pincode": 400049
+}, {
+    "pincode": 400052
+}, {
+    "pincode": 400052
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400061
+}, {
+    "pincode": 400059
+}, {
+    "pincode": 400059
+}, {
+    "pincode": 400069
+}, {
+    "pincode": 400099
+}, {
+    "pincode": 400099
+}, {
+    "pincode": 400054
+}, {
+    "pincode": 400029
+}, {
+    "pincode": 400055
+}, {
+    "pincode": 400054
+}, {
+    "pincode": 400096
+}, {
+    "pincode": 400052
+}, {
+    "pincode": 400055
+}, {
+    "pincode": 400061
+}, {
+    "pincode": 400098
+}, {
+    "pincode": 400057
+}, {
+    "pincode": 400057
+}, {
+    "pincode": 400056
+}, {
+    "pincode": 400009
+}, {
+    "pincode": 400014
+}, {
+    "pincode": 400071
+}, {
+    "pincode": 400016
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400014
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400014
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400031
+}, {
+    "pincode": 400037
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400019
+}, {
+    "pincode": 400024
+}, {
+    "pincode": 400070
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400072
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400022
+}, {
+    "pincode": 400003
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400033
+}, {
+    "pincode": 400010
+}, {
+    "pincode": 400033
+}, {
+    "pincode": 400033
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400003
+}, {
+    "pincode": 400003
+}, {
+    "pincode": 400010
+}, {
+    "pincode": 400010
+}, {
+    "pincode": 400010
+}, {
+    "pincode": 400009
+}, {
+    "pincode": 400003
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400012
+}, {
+    "pincode": 400009
+}, {
+    "pincode": 400033
+}, {
+    "pincode": 400015
+}, {
+    "pincode": 400033
+}, {
+    "pincode": 400027
+}, {
+    "pincode": 400010
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400089
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400074
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400086
+}, {
+    "pincode": 400071
+}, {
+    "pincode": 400089
+}, {
+    "pincode": 400066
+}, {
+    "pincode": 400063
+}, {
+    "pincode": 400060
+}, {
+    "pincode": 400101
+}, {
+    "pincode": 400097
+}, {
+    "pincode": 400069
+}, {
+    "pincode": 400051
+}, {
+    "pincode": 400055
+}, {
+    "pincode": 400057
+}];
