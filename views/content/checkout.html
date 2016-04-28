@@ -260,6 +260,7 @@
                <input type="text" hidden name="delivery_zip" ng-model="checkout.shippingpincode">
                <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingtel">
                <input type="text" hidden name="integration_type" value="iframe_normal" />
+                          <a class="btn-all pull-right" ng-if="hasCOD" ng-click="askCOD()">Pay by COD</a>
                <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
                <!--               CHECKOUT POST FORM START                    -->
             </form>
