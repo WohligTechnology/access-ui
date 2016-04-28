@@ -1820,7 +1820,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
     //SOCIAL LOGIN
-
+    // $scope.sameShipping = function(flag){
+    //   if(flag == "closemodalship"){
+    //     $scope.checkout.billingline1 =
+    //   }
+    // }
     // GOOGLE AND FACEBOOK LOGIN
     var checktwitter = function(data, status) {
         if (data != "false") {

@@ -124,9 +124,9 @@
                               </select>
                               <input type="text" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" ng-trim="false">
                               <label class="form-divider">
-                                 <input type="radio" name="check" value="closemodalship" ng-model="openship.open" ng-click="showshipping=false"> Ship to this address</label>
+                                 <input type="radio" name="check" value="closemodalship" ng-model="openship.open" ng-change="sameShipping(openship.open)" ng-click="showshipping=false"> Ship to this address</label>
                               <label class="form-divider">
-                                 <input type="radio" name="check" value="openmodalship" ng-model="openship.open" ng-click="showshipping=true"> Ship to different address</label>
+                                 <input type="radio" name="check" value="openmodalship" ng-model="openship.open" ng-change= "sameShipping(openship.open)" ng-click="showshipping=true"> Ship to different address</label>
                            </div>
                         </div>
                      </div>
