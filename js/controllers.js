@@ -1593,8 +1593,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         console.log($scope.celebimages);
     }
     NavigationService.getaboutus(getaboutuscallback);
-
 })
+
 
 .controller('NewarrivalsCtrl', function($scope, TemplateService, NavigationService, ngDialog, $location) {
     $scope.template = TemplateService;
@@ -1820,11 +1820,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
     //SOCIAL LOGIN
-    // $scope.sameShipping = function(flag){
-    //   if(flag == "closemodalship"){
-    //     $scope.checkout.billingline1 =
-    //   }
-    // }
+    $scope.sameShipping = function(flag,frombilling){
+      console.log(flag);
+      if(flag == "closemodalship"){
+        $scope.checkout.shippingaddress = $scope.checkout.billingaddress;
+        $scope.checkout.shippingpincode =$scope.checkout.billingpincode;
+        $scope.checkout.shippingstate = $scope.checkout.billingstate;
+        $scope.checkout.shippingcity = $scope.checkout.billingcity;
+        $scope.checkout.shippingcontact  = $scope.checkout.billingcontact;
+        $scope.checkout.shippingcountry = $scope.checkout.billingcountry;
+      }else if(frombilling == true){
+      }else{
+        $scope.checkout.shippingaddress = "";
+$scope.checkout.shippingpincode = 0;
+$scope.checkout.shippingstate = "";
+$scope.checkout.shippingcity = "";
+$scope.checkout.shippingcontact  = 0;
+$scope.checkout.shippingcountry = "";
+      }
+    }
     // GOOGLE AND FACEBOOK LOGIN
     var checktwitter = function(data, status) {
         if (data != "false") {

@@ -70,14 +70,14 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="billing-reg">
-                              <input type="text" class="form-control form-divider" ng-model="checkout.firstname" placeholder="First Name *" ng-class="allvalidation[0].validation" required>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.lastname" placeholder="Last Name *" ng-class="allvalidation[1].validation" required>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.company" placeholder="Company">
-                              <input type="email" class="form-control form-divider" ng-model="checkout.email" placeholder="Email *" ng-class="allvalidation[2].validation" required>
-                              <textarea name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.billingaddress" placeholder="Address *" ng-class="allvalidation[3].validation" required></textarea>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.billingcity" placeholder="City *" ng-class="allvalidation[4].validation" required>
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.firstname" placeholder="First Name *" ng-class="allvalidation[0].validation" required>
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.lastname" placeholder="Last Name *" ng-class="allvalidation[1].validation" required>
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.company" placeholder="Company">
+                              <input ng-change="sameShipping(openship.open,true)"type="email" class="form-control form-divider" ng-model="checkout.email" placeholder="Email *" ng-class="allvalidation[2].validation" required>
+                              <textarea ng-change="sameShipping(openship.open,true)"name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.billingaddress" placeholder="Address *" ng-class="allvalidation[3].validation" required></textarea>
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingcity" placeholder="City *" ng-class="allvalidation[4].validation" required>
                               <!-- <input type="text" class="form-control form-divider" ng-model="checkout.billingstate" placeholder="State/Province *" ng-class="allvalidation[5].validation" required> -->
-                              <select class="form-control" ng-model="checkout.billingstate">
+                              <select ng-change="sameShipping(openship.open,true)"class="form-control" ng-model="checkout.billingstate">
                                  <option value="">Select State</option>
                                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                  <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -117,12 +117,12 @@
                               </select>
                               <!-- <select class="form-control form-divider" ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required> -->
                               <!-- </select> -->
-                              <input type="text" class="form-control form-divider" ng-model="checkout.billingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[6].validation" maxlength="6" required ng-trim="false">
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[6].validation" maxlength="6" required ng-trim="false">
                               <select class="form-control form-divider" ng-model="checkout.billingcountry" ng-class="allvalidation[7].validation" required>
                                  <option value="">Select Country *</option>
                                  <option value="India" selected>India</option>
                               </select>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" ng-trim="false">
+                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" ng-trim="false">
                               <label class="form-divider">
                                  <input type="radio" name="check" value="closemodalship" ng-model="openship.open" ng-change="sameShipping(openship.open)" ng-click="showshipping=false"> Ship to this address</label>
                               <label class="form-divider">
