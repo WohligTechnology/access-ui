@@ -227,9 +227,7 @@
                </div>
             </div>
          </form>
-         <div class="continue-btn" ng-if="showPaymentMethod==true" ng-click="placeorder();">
-            <a href="" class="contn pull-right">Continue</a>
-         </div>
+
          <div class="placeorder" ng-show="paymentinfo">
             <form action="http://accessinfoworld.com/admin/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
                <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
@@ -261,7 +259,7 @@
                <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingtel">
                <input type="text" hidden name="integration_type" value="iframe_normal" />
                           <a class="btn-all pull-right" ng-if="hasCOD" ng-click="askCOD()">Pay by COD</a>
-               <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
+               <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Pay online">
                <!--               CHECKOUT POST FORM START                    -->
             </form>
             <!--            <a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->

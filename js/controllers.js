@@ -1808,7 +1808,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.paymentinfo = false;
     $scope.noamount = false;
     $scope.discount = 0;
-
+    $scope.showPaymentMethod = false;
     $scope.login = {};
     $scope.showcontinue = false;
     $scope.openblock.radiovalue = "checkoutasguest";
@@ -2136,7 +2136,8 @@ $scope.checkout.shippingcountry = "";
                     if (found != -1)
                         $scope.showPaymentMethod = true;
                     else
-                        $scope.showPaymentMethod = false;
+                        $scope.showPaymentMethod = false
+                    $scope.showcontinue=false;
                 });
 
             });
@@ -2155,6 +2156,7 @@ $scope.checkout.shippingcountry = "";
     //      placeorder
 
     $scope.payByCOD = function(){
+      $scope.showPaymentMethod=false;
       ngDialog.closeAll();
       NavigationService.COD({
         id:$scope.orderid
@@ -2166,7 +2168,7 @@ $scope.checkout.shippingcountry = "";
     };
     $scope.askCOD = function(){
       ngDialog.open({
-          template: '<div class="pop-up"><h5 class="popup-wishlist">Are you sure? </h5><button ng-click="closeThisDialog()">No</button><button ng-click="payByCOD()">Yes</button><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+          template: '<div class="pop-up"><h5 class="popup-wishlist">Are you sure? </h5><button class= "btn btn-all" style="float:right;" ng-click="closeThisDialog()">No</button><button class="btn btn-all" style="float:right;" ng-click="payByCOD()">Yes</button><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
           plain: true,
           scope:$scope
       });
@@ -2187,6 +2189,7 @@ $scope.checkout.shippingcountry = "";
             NavigationService.placeorder($scope.checkout, function(data) {
                 console.log(data);
                 $scope.showLoading = false;
+                $scope.showPaymentMethod = true;
                 ngDialog.open({
                     template: '<div class="pop-up"><h5 class="popup-wishlist">Order placed</h5><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
                     plain: true
