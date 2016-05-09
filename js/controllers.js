@@ -1820,26 +1820,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     });
 
     //SOCIAL LOGIN
-    $scope.sameShipping = function(flag,frombilling){
-      console.log(flag);
-      if(flag == "closemodalship"){
-        $scope.checkout.shippingaddress = $scope.checkout.billingaddress;
-        $scope.checkout.shippingpincode =$scope.checkout.billingpincode;
-        $scope.checkout.shippingstate = $scope.checkout.billingstate;
-        $scope.checkout.shippingcity = $scope.checkout.billingcity;
-        $scope.checkout.shippingcontact  = $scope.checkout.billingcontact;
-        $scope.checkout.shippingcountry = $scope.checkout.billingcountry;
-      }else if(frombilling == true){
-      }else{
-        $scope.checkout.shippingaddress = "";
-$scope.checkout.shippingpincode = 0;
-$scope.checkout.shippingstate = "";
-$scope.checkout.shippingcity = "";
-$scope.checkout.shippingcontact  = 0;
-$scope.checkout.shippingcountry = "";
-      }
-    }
-    // GOOGLE AND FACEBOOK LOGIN
+    $scope.sameShipping = function(flag, frombilling) {
+            console.log(flag);
+            if (flag == "closemodalship") {
+                $scope.checkout.shippingaddress = $scope.checkout.billingaddress;
+                $scope.checkout.shippingpincode = $scope.checkout.billingpincode;
+                $scope.checkout.shippingstate = $scope.checkout.billingstate;
+                $scope.checkout.shippingcity = $scope.checkout.billingcity;
+                $scope.checkout.shippingcontact = $scope.checkout.billingcontact;
+                $scope.checkout.shippingcountry = $scope.checkout.billingcountry;
+            } else if (frombilling == true) {} else {
+                $scope.checkout.shippingaddress = "";
+                $scope.checkout.shippingpincode = 0;
+                $scope.checkout.shippingstate = "";
+                $scope.checkout.shippingcity = "";
+                $scope.checkout.shippingcontact = 0;
+                $scope.checkout.shippingcountry = "";
+            }
+        }
+        // GOOGLE AND FACEBOOK LOGIN
     var checktwitter = function(data, status) {
         if (data != "false") {
             $interval.cancel(stopinterval);
@@ -2102,12 +2101,12 @@ $scope.checkout.shippingcountry = "";
         }
 
         if (check) {
-          var codpincodes = [ 400037,400037,400037,400014,400012,400031,400014,400012,400031,400031,400037,400022,400070,400070,400019,400024,400070,400022,400072,400022,400022,400072,400002,400005,400001,400020,400020,400005,400005,400001,400032,400005,400001,400032,400021,400021,400032,400001,400001,400001,400005,421501,400004,400004,400004,400004,400004,400020,400004,400002,400002,400002,400053,400071,400091,400022,400070,400070,400019,400024,400070,400022,400072,400022,400022,400072,400094,400085,400084,400075,400082,400042,400078,400078,400074,400089,400043,400074,400086,400074,400075,400075,400077,400086,400086,400071,400089,400065,400104,400066,400092,400067,400066,400063,400104,400104,400095,400060,400102,400101,400067,400067,400095,400064,400066,400097,400064,400064,400103,400104,400065,400064,400102,400066,400097,400065,400066,400063,400029,400099,400069,400058,400051,400053,400051,400050,400051,400093,400091,400016,400008,400011,400007,400011,400011,400026,400026,400026,400008,400026,400007,400011,400034,400008,400011,400008,400008,400006,400007,400035,400007,400007,400034,400028,400028,400030,400013,400017,400017,400028,400016,400016,400016,400016,400025,400025,400028,400028,400028,400030,400018,400030,400018,400030,400086,400065,400104,400066,400092,400067,400066,400063,400104,400104,400095,400060,400102,400101,400067,400067,400095,400064,400066,400097,400064,400064,400103,400104,400065,400064,400102,400066,400097,400065,400066,400063,400050,400054,400056,400052,400051,400058,400057,400099,400056,400059,400049,400052,400052,400051,400061,400059,400059,400069,400099,400099,400054,400029,400055,400054,400096,400052,400055,400061,400098,400057,400057,400056,400009,400014,400071,400016,400037,400037,400037,400014,400012,400031,400014,400012,400031,400031,400037,400022,400070,400070,400019,400024,400070,400022,400072,400022,400022,400003,400012,400012,400033,400010,400033,400033,400012,400003,400003,400010,400010,400010,400009,400003,400012,400012,400009,400033,400015,400033,400027,400010,400074,400089,400074,400086,400074,400086,400086,400071,400089,400066,400063,400060,400101,400097,400069,400051,400055,400057];
-          if(_.indexOf(codpincodes, parseInt($scope.checkout.shippingpincode)) !== -1){
-            $scope.hasCOD = true;
-          }else{
-            $scope.hasCOD = false;
-          }
+            var codpincodes = [400037, 400037, 400037, 400014, 400012, 400031, 400014, 400012, 400031, 400031, 400037, 400022, 400070, 400070, 400019, 400024, 400070, 400022, 400072, 400022, 400022, 400072, 400002, 400005, 400001, 400020, 400020, 400005, 400005, 400001, 400032, 400005, 400001, 400032, 400021, 400021, 400032, 400001, 400001, 400001, 400005, 421501, 400004, 400004, 400004, 400004, 400004, 400020, 400004, 400002, 400002, 400002, 400053, 400071, 400091, 400022, 400070, 400070, 400019, 400024, 400070, 400022, 400072, 400022, 400022, 400072, 400094, 400085, 400084, 400075, 400082, 400042, 400078, 400078, 400074, 400089, 400043, 400074, 400086, 400074, 400075, 400075, 400077, 400086, 400086, 400071, 400089, 400065, 400104, 400066, 400092, 400067, 400066, 400063, 400104, 400104, 400095, 400060, 400102, 400101, 400067, 400067, 400095, 400064, 400066, 400097, 400064, 400064, 400103, 400104, 400065, 400064, 400102, 400066, 400097, 400065, 400066, 400063, 400029, 400099, 400069, 400058, 400051, 400053, 400051, 400050, 400051, 400093, 400091, 400016, 400008, 400011, 400007, 400011, 400011, 400026, 400026, 400026, 400008, 400026, 400007, 400011, 400034, 400008, 400011, 400008, 400008, 400006, 400007, 400035, 400007, 400007, 400034, 400028, 400028, 400030, 400013, 400017, 400017, 400028, 400016, 400016, 400016, 400016, 400025, 400025, 400028, 400028, 400028, 400030, 400018, 400030, 400018, 400030, 400086, 400065, 400104, 400066, 400092, 400067, 400066, 400063, 400104, 400104, 400095, 400060, 400102, 400101, 400067, 400067, 400095, 400064, 400066, 400097, 400064, 400064, 400103, 400104, 400065, 400064, 400102, 400066, 400097, 400065, 400066, 400063, 400050, 400054, 400056, 400052, 400051, 400058, 400057, 400099, 400056, 400059, 400049, 400052, 400052, 400051, 400061, 400059, 400059, 400069, 400099, 400099, 400054, 400029, 400055, 400054, 400096, 400052, 400055, 400061, 400098, 400057, 400057, 400056, 400009, 400014, 400071, 400016, 400037, 400037, 400037, 400014, 400012, 400031, 400014, 400012, 400031, 400031, 400037, 400022, 400070, 400070, 400019, 400024, 400070, 400022, 400072, 400022, 400022, 400003, 400012, 400012, 400033, 400010, 400033, 400033, 400012, 400003, 400003, 400010, 400010, 400010, 400009, 400003, 400012, 400012, 400009, 400033, 400015, 400033, 400027, 400010, 400074, 400089, 400074, 400086, 400074, 400086, 400086, 400071, 400089, 400066, 400063, 400060, 400101, 400097, 400069, 400051, 400055, 400057];
+            if (_.indexOf(codpincodes, parseInt($scope.checkout.shippingpincode)) !== -1) {
+                $scope.hasCOD = true;
+            } else {
+                $scope.hasCOD = false;
+            }
             if ($scope.allamount == 0) {
                 $scope.noamount = true;
             } else {
@@ -2137,7 +2136,7 @@ $scope.checkout.shippingcountry = "";
                         $scope.showPaymentMethod = true;
                     else
                         $scope.showPaymentMethod = false
-                    $scope.showcontinue=false;
+                    $scope.showcontinue = false;
                 });
 
             });
@@ -2155,23 +2154,25 @@ $scope.checkout.shippingcountry = "";
 
     //      placeorder
 
-    $scope.payByCOD = function(){
-      $scope.showPaymentMethod=false;
-      ngDialog.closeAll();
-      NavigationService.COD({
-        id:$scope.orderid
-      },function(data){
-        if(data.value !== false){
-          $state.go('thankyou',{order:data.OrderId});
-        }
-      });
+    $scope.payByCOD = function() {
+        $scope.showPaymentMethod = false;
+        ngDialog.closeAll();
+        NavigationService.COD({
+            id: $scope.orderid
+        }, function(data) {
+            if (data.value !== false) {
+                $state.go('thankyou', {
+                    order: data.OrderId
+                });
+            }
+        });
     };
-    $scope.askCOD = function(){
-      ngDialog.open({
-          template: '<div class="pop-up"><h5 class="popup-wishlist">Are you sure? </h5><button class= "btn btn-all" style="float:right;" ng-click="closeThisDialog()">No</button><button class="btn btn-all" style="float:right;" ng-click="payByCOD()">Yes</button><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
-          plain: true,
-          scope:$scope
-      });
+    $scope.askCOD = function() {
+        ngDialog.open({
+            template: '<div class="pop-up"><h5 class="popup-wishlist">Are you sure? </h5><button class= "btn btn-all" style="float:right;" ng-click="closeThisDialog()">No</button><button class="btn btn-all" style="float:right;" ng-click="payByCOD()">Yes</button><span class="closepop" ng-click="closeThisDialog(value);">X</span></div>',
+            plain: true,
+            scope: $scope
+        });
     }
     $scope.placeorder = function() {
         console.log();
@@ -2858,6 +2859,12 @@ $scope.checkout.shippingcountry = "";
     $scope.price = {};
     $scope.price.minPrice = 0;
     $scope.price.maxPrice = 100;
+
+    if ($stateParams.brand && $stateParams.brand.indexOf('-')) {
+        console.log("here");
+        var split = $stateParams.brand.split('-');
+        $stateParams.brand = split[split.length - 1];
+    }
 
     $scope.products = [];
     $scope.showfilter = [];

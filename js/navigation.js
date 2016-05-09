@@ -1,5 +1,5 @@
-// var admin_url = "http://accessworld.in/admin/index.php/";
-var admin_url = "http://wohlig.co.in/accessback/index.php/";
+var admin_url = "http://accessworld.in/admin/index.php/";
+// var admin_url = "http://wohlig.co.in/accessback/index.php/";
 // var admin_url = "http://192.168.1.133/accessback/index.php/";
 // var admin_url = "http://192.168.0.126/accessback/index.php/";
 var adminhauth = admin_url + "hauth/";
