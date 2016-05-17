@@ -8,7 +8,7 @@
 					<div class="product-list">
 							<div class="col-md-3 col-sm-6" ng-repeat="pro in products">
 									<div class="pro-box">
-											<a href="#/productdetail/{{pro.id}}">
+											<a href="" ng-click="getproductdetails(pro);">
 													<div class="img-box">
 															<span ng-if="!pro.image2 && pro.image1">
 															<div class="pro-img1 img1" style="opacity:1;" ng-if="pro.image1" >

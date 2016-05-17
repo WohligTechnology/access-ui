@@ -155,8 +155,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     });
 
-    $scope.goToProductDetail = function(id) {
-        $location.url("/productdetail/" + id);
+    $scope.goToProductDetail = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
 
     //    $scope.slides = [
@@ -363,8 +363,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.category = $stateParams.category;
 
     //GO TO PRODUCT DETAIL
-    $scope.getproductdetails = function(productid) {
-        $location.url("/productdetail/" + productid);
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
     $scope.notOver = false;
     $scope.giveUsMoment = false;
@@ -1112,6 +1112,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Productdetail");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    if ($stateParams.id && $stateParams.id.indexOf('-')) {
+        var split = $stateParams.id.split('-');
+        $stateParams.id = split[split.length - 1];
+    }
+
     $scope.productid = $stateParams.id;
     $scope.playvideo = false;
     $scope.showSalePrice = false;
@@ -1296,7 +1302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.makeactive = function(product) {
         $scope.productdetail = [];
         $scope.product = {};
-        $location.url("/productdetail/" + product.id);
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
         // NavigationService.getproductdetails(product.id).success(getproductdetailscallback);
     }
 
@@ -1696,9 +1702,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
 
-    $scope.getproductdetails = function(productid) {
-        console.log(productid);
-        $location.url("/productdetail/" + productid);
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
 
     }
 
@@ -2442,13 +2447,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.products = data.queryresult;
         console.log($scope.products);
     }
-    NavigationService.getexclusiveandnewarrival(1, getexclusiveandnewarrivalcallback);
+    NavigationService.getexclusiveandnewarrival(1, 1, getexclusiveandnewarrivalcallback);
 
 
-    $scope.getproductdetails = function(productid) {
-        console.log(productid);
-        $location.url("/productdetail/" + productid);
-
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
 
     var addtowishlistcallback = function(data, status) {
@@ -2575,10 +2578,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $.jStorage.set("filters", null);
     // WISHLIST PRODUCTS
 
-    $scope.getproductdetails = function(productid) {
-        console.log(productid);
-        $location.url("/productdetail/" + productid);
-
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
 
     var getwishlistproductcallback = function(data, status) {
@@ -2639,10 +2640,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $.jStorage.set("filters", null);
     $scope.searchfor = $stateParams.search;
 
-    $scope.getproductdetails = function(productid) {
-        console.log(productid);
-        $location.url("/productdetail/" + productid);
-
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
 
     var addtowishlistcallback = function(data, status) {
@@ -3036,8 +3035,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
     //GO TO PRODUCT DETAIL
-    $scope.getproductdetails = function(productid) {
-        $location.url("/productdetail/" + productid);
+    $scope.getproductdetails = function(product) {
+        $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
     $scope.notOver = false;
     $scope.giveUsMoment = false;
