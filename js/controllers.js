@@ -159,6 +159,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $location.url("/productdetail/" + product.name.split(' ').join('_') + "-" + product.id);
     }
 
+    $scope.goToProductDetail2 = function(product) {
+        $location.url("/productdetail/" + product);
+    }
+
     //    $scope.slides = [
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
     //        'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
