@@ -1,10 +1,10 @@
-var admin_url = "http://accessworld.in/admin/index.php/";
+var admin_url = "http://admin.accessworld.in/index.php/";
 // var admin_url = "http://wohlig.co.in/accessback/index.php/";
 // var admin_url = "http://192.168.1.133/accessback/index.php/";
 // var admin_url = "http://192.168.0.126/accessback/index.php/";
 var adminhauth = admin_url + "hauth/";
-var adminbase = "http://accessworld.in/admin/";
-var adminimage = adminbase + "uploads/";
+var adminbase = "http://admin.accessworld.in/";
+var adminimage = "https://storage.googleapis.com/imagesaccess/";
 var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function($http) {
@@ -128,14 +128,14 @@ var navigationservice = angular.module('navigationservice', [])
                 method: "POST"
             }).success(callback);
         },
-        COD:function(request,callback){
-          $http({
-              url: admin_url + 'json/COD',
-              method: 'POST',
-              data: {
-                  "id": request.id
-              }
-          }).success(callback);
+        COD: function(request, callback) {
+            $http({
+                url: admin_url + 'json/COD',
+                method: 'POST',
+                data: {
+                    "id": request.id
+                }
+            }).success(callback);
         },
         getbrand: function(pageno, callback) {
             return $http.get(admin_url + 'json/getbrand?maxrow=16&pageno=' + pageno, {}, {

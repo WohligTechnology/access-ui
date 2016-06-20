@@ -986,7 +986,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         if (data != "false") {
             $.jStorage.set("user", data);
             user = data;
-            $location.url("/app/home");
+            $location.url("/home");
+            window.location.reload();
         }
     };
 

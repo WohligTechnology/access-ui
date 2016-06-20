@@ -7,3 +7,7 @@ less/style.css
 production/
 *.zip
 *.tar
+appengine/fonts
+appengine/img
+appengine/favicon.ico
+appengine/index.php

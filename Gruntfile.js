@@ -220,6 +220,46 @@ module.exports = function(grunt) {
 
                 ],
             },
+            appengine: {
+                files: [
+
+                    // includes files within path and its sub-directories
+                    {
+                        expand: true,
+                        src: ['img/**'],
+                        dest: 'appengine/'
+                    }, {
+                        expand: true,
+                        src: ['fonts/**'],
+                        dest: 'appengine/'
+                    },
+
+                ],
+            },
+            jsappengine: {
+                files: [
+
+                    // includes files within path and its sub-directories
+                    {
+                        expand: false,
+                        src: ['./w/w.min.js'],
+                        dest: './appengine/'
+                    }
+
+                ],
+            },
+            cssappengine: {
+                files: [
+
+                    // includes files within path and its sub-directories
+                    {
+                        expand: false,
+                        src: ['./w/w.min.css'],
+                        dest: './appengine/'
+                    }
+
+                ],
+            },
         },
         htmlmin: { // Task
             dist: { // Target
@@ -229,6 +269,15 @@ module.exports = function(grunt) {
                 },
                 files: { // Dictionary of files
                     './w/index.html': './indexproduction.html',
+                }
+            },
+            appengine: { // Target
+                options: { // Target options
+                    removeComments: true,
+                    collapseWhitepace: true
+                },
+                files: { // Dictionary of files
+                    './appengine/index.php': './indexappengine.html',
                 }
             },
         },
@@ -262,4 +311,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('production', ['copy', 'htmlmin', 'less:production', 'cssmin', 'ngtemplates', 'concat', 'uglify', 'compress:css', 'compress:js', 'compress:indexhtml', 'compress:zip']);
+    grunt.registerTask('appengine', ['copy:appengine', 'htmlmin:appengine', 'less:development', 'ngtemplates', 'concat', 'uglify', 'copy:jsappengine', 'copy:cssappengine']);
 };
