@@ -229,7 +229,7 @@
          </form>
 
          <div class="placeorder" ng-show="paymentinfo">
-            <form action="http://accessinfoworld.com/admin/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
+            <form action="http://admin.accessworld.in/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
                <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
                <!--               CHECKOUT POST FORM START                    -->
                <input type="text" hidden name="tid" id="tid" />
@@ -239,7 +239,7 @@
                <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
                <input type="text" hidden name="currency" value="INR">
                <input type="text" hidden name="merchant_param1" ng-model="couponhave">
-               <input type="text" hidden name="redirect_url" value="http://accessinfoworld.com/admin/index.php/json/payumoneysuccess">
+               <input type="text" hidden name="redirect_url" value="http://admin.accessworld.in/index.php/json/payumoneysuccess">
                <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
                <input type="text" hidden name="language" value="EN" />
                <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
