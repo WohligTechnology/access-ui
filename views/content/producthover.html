@@ -8,7 +8,7 @@
 							<div class="row">
 								<div class="col-md-2" ng-repeat="cat in categories">
 									<div class="iphone-access">
-										<h5 class="text-capitalize">{{cat.name}}</h5>
+										<h5 class="text-capitalize" ui-sref="searchresult({search:cat.name})">{{cat.name}}</h5>
 										<ul>
 											<li ng-repeat="subcat in cat.subcategory"><a href="#/product/{{subcat.id}}/0/0">{{subcat.name}}</a></li>
 										</ul>
