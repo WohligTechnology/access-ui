@@ -1294,7 +1294,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     $scope.onimgclick = function(img) {
-        // console.log(img);
+        console.log('prod',img);
         if (img.check == 0) {
             $scope.playvideo = true;
             $scope.product.product.img = img.url;

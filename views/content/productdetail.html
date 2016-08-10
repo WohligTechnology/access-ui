@@ -65,6 +65,11 @@
                               <li ng-click="onimgclick(prd)" class="slide">
                                  <div class="mh-hold">
                                     <img ng-src="{{prd.image}}" alt="Product-detail" class="img-responsive prd-slide ">
+                                    <div class="play-btn" ng-if="prd.check == 0">
+                                        <img src="img/play-small-btn.png" alt="" width="20">
+                                        <!-- <i class="fa fa-play"></i> -->
+
+                                    </div>
                                  </div>
                                  <!-- <div class="image-holds" ng-style="{'background-image':'url({{prd.image}})'}">
                                             </div> -->

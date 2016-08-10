@@ -27,6 +27,19 @@
 @font-family-head: 'lato';
 @font-big: 16px;
 @font-droid: 'Droid Serif', serif;
+// classes
+.dh-absulate {
+    position: absolute;
+}
+.middle {
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%,-50%));
+}
+.pointer {
+  cursor: pointer;
+}
+// classes end
 .pad-mar {
   padding: 0;
   margin: 0;
@@ -805,6 +818,7 @@ img.doneLoading {
       color: transparent;
       background: url(../img/left_slider_arrow.png) no-repeat center;
     }
+    .play-btn img { width: 30px; }
   }
   .flex-direction-nav a {
     width: 65px;
