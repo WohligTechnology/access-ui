@@ -1025,9 +1025,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $.jStorage.set("filters", null);
 })
 
-.controller('headerctrl', function($scope, TemplateService, NavigationService, $location, $window) {
+.controller('headerctrl', function($rootScope,$scope, TemplateService, NavigationService, $location, $window) {
 
     // WISHLIST
+
+
+    $rootScope.$on('$stateChangeStart',
+function(event, toState, toParams, fromState, fromParams){
+  (new Image()).src = '//googleads.g.doubleclick.net/pagead/viewthroughconversion/877002392/?value=0&guid=ON&script=0';
+})
 
     window.scrollTo(0, 0);
 
