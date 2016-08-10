@@ -61,6 +61,8 @@ module.exports = function(grunt) {
                     './bower_components/valdr/valdr.min.js',
                     './bower_components/valdr/valdr-message.min.js',
                     './bower_components/lodash/lodash.js',
+                    './bower_components/angulartics/dist/angulartics.min.js',
+                    './bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js',
                     './js/app.js',
                     './js/controllers.js',
                     './js/templateservice.js',
