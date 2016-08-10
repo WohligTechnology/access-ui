@@ -4,7 +4,10 @@ var firstapp = angular.module('firstapp', [
     'phonecatControllers',
     'templateservicemod',
     'ui-rangeSlider',
-    'navigationservice'
+    'navigationservice',
+    'angulartics',
+    'angulartics.google.analytics'
+
 ]);
 
 firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
