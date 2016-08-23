@@ -24,20 +24,22 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     })
 
     .state('productdetail', {
-            url: "/productdetail/:id",
-            templateUrl: "views/template.html",
-            controller: 'ProductdetailCtrl'
-        })
-        .state('wishlist', {
-            url: "/wishlist",
-            templateUrl: "views/template.html",
-            controller: 'WishlistCtrl'
-        })
-        .state('newarrivals', {
-            url: "/newarrivals",
-            templateUrl: "views/template.html",
-            controller: 'NewarrivalsCtrl'
-        })
+        url: "/productdetail/:id",
+        templateUrl: "views/template.html",
+        controller: 'ProductdetailCtrl'
+    })
+
+    .state('wishlist', {
+        url: "/wishlist",
+        templateUrl: "views/template.html",
+        controller: 'WishlistCtrl'
+    })
+
+    .state('newarrivals', {
+        url: "/newarrivals",
+        templateUrl: "views/template.html",
+        controller: 'NewarrivalsCtrl'
+    })
 
     .state('product', {
         url: "/product/:parent/:category/:brand",
@@ -198,14 +200,19 @@ firstapp.filter('serverimage', function() {
         else
             return "img/noimage.png";
     };
-})
+});
+firstapp.filter("productName", function() {
+    return function(product) {
+        return product.name.split(' ').join('_') + "-" + product.id;
+    };
+});
 
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
     for (var i = 0; i < allvalidation.length; i++) {
         console.log("checking");
         console.log(allvalidation[i].field);
-        if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
+        if (allvalidation[i].field === "" || !allvalidation[i].field || allvalidation[i].field === "Please select" || allvalidation[i].field === "Please Select") {
             allvalidation[i].validation = "ng-invalid";
             isvalid2 = false;
         }
