@@ -33,7 +33,7 @@
 
 #container input:checked + label {
 	background: #7ee1ea;  /* Fondo de las pestañas al presionar */
-	color: #fff; /* Color de las pestañas al presionar */ 
+	color: #fff; /* Color de las pestañas al presionar */
 	position: relative;
 	z-index: 6;
 	/*
@@ -64,7 +64,7 @@
 	transition: all linear 0.1s;
 	*/
 }
- 
+
 #content p {
 	clear: both;
 	margin-bottom: 1em;
