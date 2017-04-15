@@ -1,83 +1,96 @@
 <div class="checkout">
-   <div class="container">
-      <div ng-hide="showLoading">
-         <form action="">
-            <div class="check-info" ng-show="showlogin">
-               <h3 class="head">Checkout</h3>
-               <div class="check-panel">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="check-reg">
-                           <h4 class="text-uppercase">checkout as a guest or register</h4>
-                           <p class="reg">Register with us for future convenience:{{openblock.radiovalue}}</p>
-                           <label class="form-divider" ng-click="registerifnot()">
+      <div class="container">
+            <div ng-hide="showLoading">
+                  <form action="">
+                        <div class="check-info" ng-show="showlogin">
+                              <h3 class="head">Checkout</h3>
+                              <div class="check-panel">
+                                    <div class="row">
+                                          <div class="col-md-4">
+                                                <div class="check-reg">
+                                                      <h4 class="text-uppercase">checkout as a guest or register</h4>
+                                                      <p class="reg">Register with us for future convenience:{{openblock.radiovalue}}</p>
+                                                      <label class="form-divider" ng-click="registerifnot()">
                               <input type="radio" name="1" value="checkoutasguest" ng-model="openblock.radiovalue"> Checkout as guest</label>
-                           <label class="form-divider" ng-click="registerifnot()">
+                                                      <label class="form-divider" ng-click="registerifnot()">
                               <input type="radio" name="1" value="register" ng-model="openblock.radiovalue"> Register</label>
-                        </div>
-                        <div class="cont" ng-click="continuebilling()">
-                           <a href="" class="btn-all">Continue</a>
-                        </div>
-                     </div>
-                     <div class="col-md-4" ng-show="register">
-                        <div class="login">
-                           <h4 class="text-uppercase">Login</h4>
-                           <h5><span style="color: tomato;">{{msg}}</span></h5>
-                           <input type="text" class="form-control form-divider" placeholder="Username or email" ng-class="allvalidation[0].validation" ng-model="login.email">
-                           <input type="password" class="form-control form-divider" placeholder="Password" ng-class="allvalidation[1].validation" ng-model="login.password">
-                           <div class="clearfix">
-                              <a href="#" class="pull-left forgot">Forgot Password?</a>
-                              <a class="pull-right btn-log" ng-click="userlogin(login);">Login</a>
-                           </div>
-                           <div class="clearfix" style="margin-top:20px">
+                                                </div>
+                                                <div class="cont" ng-click="continuebilling()">
+                                                      <a href="" class="btn-all">Continue</a>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-4" ng-show="register">
+                                                <div class="login">
+                                                      <h4 class="text-uppercase">Login</h4>
+                                                      <h5><span style="color: tomato;">{{msg}}</span></h5>
+                                                      <input type="text" class="form-control form-divider" placeholder="Username or email" ng-class="allvalidation[0].validation"
+                                                            ng-model="login.email">
+                                                      <input type="password" class="form-control form-divider" placeholder="Password" ng-class="allvalidation[1].validation" ng-model="login.password">
+                                                      <div class="clearfix">
+                                                            <a href="#" class="pull-left forgot">Forgot Password?</a>
+                                                            <a class="pull-right btn-log" ng-click="userlogin(login);">Login</a>
+                                                      </div>
+                                                      <!--<div class="clearfix" style="margin-top:20px">
                               <a class="btn btn-primary pull-left g-login g-logins" ng-click="googlelogin()">
                                  <i class="fa fa-google-plus"></i>Google+</a>
                               <a class="btn btn-primary pull-left f-login g-logins" ng-click="facebooklogin()">
                                  <i class="fa fa-facebook"></i>Facebook</a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4" ng-show="register">
+                           </div>-->
+                                                </div>
+                                          </div>
+                                          <div class="col-md-4" ng-show="register">
 
-                        <div class="login">
-                           <h4>create an account</h4>
-                           <h5><span style="color: tomato;">{{msgregister}}</span></h5>
-                           <form>
-                              <input type="text" placeholder="First name *" class="form-control" ng-class="allvalidation[0].validation" ng-model="account.firstname">
-                              <input type="text" placeholder="Last name *" class="form-control form-divider" ng-class="allvalidation[1].validation" ng-model="account.lastname">
-                              <input type="email" placeholder="Email *" class="form-control form-divider" ng-class="allvalidation[2].validation" ng-model="account.email">
-                              <input type="password" placeholder="Password *" class="form-control form-divider" ng-class="allvalidation[3].validation" ng-model="account.password">
-                              <input type="password" placeholder="Confirm password *" class="form-control form-divider" ng-class="allvalidation[4].validation" ng-model="account.confirmpassword">
-                           </form>
-                           <a class="btns" ng-click="registeruser();">Submit</a>
-                        </div>
-                        <div class="login clearfix" style="margin-top:20px;">
-                           <a class="btn btn-primary pull-left g-login g-logins" ng-click="googlelogin()">
-                              <i class="fa fa-google-plus"></i>Google+</a>
-                           <a class="btn btn-primary pull-left f-login g-logins" ng-click="facebooklogin()">
-                              <i class="fa fa-facebook"></i>Facebook</a>
-                        </div>
-                     </div>
+                                                <div class="login">
+                                                      <h4>create an account</h4>
+                                                      <h5><span style="color: tomato;">{{msgregister}}</span></h5>
+                                                      <form>
+                                                            <input type="text" placeholder="First name *" class="form-control" ng-class="allvalidation[0].validation" ng-model="account.firstname">
+                                                            <input type="text" placeholder="Last name *" class="form-control form-divider" ng-class="allvalidation[1].validation" ng-model="account.lastname">
+                                                            <input type="email" placeholder="Email *" class="form-control form-divider" ng-class="allvalidation[2].validation" ng-model="account.email">
+                                                            <input type="password" placeholder="Password *" class="form-control form-divider" ng-class="allvalidation[3].validation"
+                                                                  ng-model="account.password">
+                                                            <input type="password" placeholder="Confirm password *" class="form-control form-divider" ng-class="allvalidation[4].validation"
+                                                                  ng-model="account.confirmpassword">
+                                                      </form>
+                                                      <a class="btns" ng-click="registeruser();">Submit</a>
+                                                </div>
+                                                <!--<div class="login clearfix" style="margin-top:20px;">
+                                                      <a class="btn btn-primary pull-left g-login g-logins" ng-click="googlelogin()">
+                                                            <i class="fa fa-google-plus"></i>Google+</a>
+                                                      <a class="btn btn-primary pull-left f-login g-logins" ng-click="facebooklogin()">
+                                                            <i class="fa fa-facebook"></i>Facebook</a>
+                                                </div>-->
+                                          </div>
 
-                  </div>
-               </div>
-            </div>
-            <div>
-               <div class="billing-info" ng-show="openblockvalue">
-                  <h3 class="head">Billing information</h3>
-                  <h5>{{checkoutmsg}}</h5>
-                  <div class="billing-panel">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="billing-reg">
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.firstname" placeholder="First Name *" ng-class="allvalidation[0].validation" required>
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.lastname" placeholder="Last Name *" ng-class="allvalidation[1].validation" required>
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.company" placeholder="Company">
-                              <input ng-change="sameShipping(openship.open,true)"type="email" class="form-control form-divider" ng-model="checkout.email" placeholder="Email *" ng-class="allvalidation[2].validation" required>
-                              <textarea ng-change="sameShipping(openship.open,true)"name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.billingaddress" placeholder="Address *" ng-class="allvalidation[3].validation" required></textarea>
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingcity" placeholder="City *" ng-class="allvalidation[4].validation" required>
-                              <!-- <input type="text" class="form-control form-divider" ng-model="checkout.billingstate" placeholder="State/Province *" ng-class="allvalidation[5].validation" required> -->
-                              <select ng-change="sameShipping(openship.open,true)"class="form-control" ng-model="checkout.billingstate">
+                                    </div>
+                              </div>
+                        </div>
+                        <div>
+                              <div class="billing-info" ng-show="openblockvalue">
+                                    <h3 class="head">Billing information</h3>
+                                    <h5>{{checkoutmsg}}</h5>
+                                    <div class="billing-panel">
+                                          <div class="row">
+                                                <div class="col-md-6">
+                                                      <div class="billing-reg">
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.firstname"
+                                                                  placeholder="First Name *" ng-class="allvalidation[0].validation"
+                                                                  required>
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.lastname"
+                                                                  placeholder="Last Name *" ng-class="allvalidation[1].validation"
+                                                                  required>
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.company"
+                                                                  placeholder="Company">
+                                                            <input ng-change="sameShipping(openship.open,true)" type="email" class="form-control form-divider" ng-model="checkout.email"
+                                                                  placeholder="Email *" ng-class="allvalidation[2].validation"
+                                                                  required>
+                                                            <textarea ng-change="sameShipping(openship.open,true)" name="" id="" cols="30" rows="50" class="form-control form-divider"
+                                                                  ng-model="checkout.billingaddress" placeholder="Address *" ng-class="allvalidation[3].validation"
+                                                                  required></textarea>
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.billingcity"
+                                                                  placeholder="City *" ng-class="allvalidation[4].validation" required>
+                                                            <!-- <input type="text" class="form-control form-divider" ng-model="checkout.billingstate" placeholder="State/Province *" ng-class="allvalidation[5].validation" required> -->
+                                                            <select ng-change="sameShipping(openship.open,true)" class="form-control" ng-model="checkout.billingstate">
                                  <option value="">Select State</option>
                                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                  <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -115,35 +128,42 @@
                                  <option value="Uttar Pradesh">Uttar Pradesh</option>
                                  <option value="West Bengal">West Bengal</option>
                               </select>
-                              <!-- <select class="form-control form-divider" ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required> -->
-                              <!-- </select> -->
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[6].validation" maxlength="6" required ng-trim="false">
-                              <select class="form-control form-divider" ng-model="checkout.billingcountry" ng-class="allvalidation[7].validation" required>
+                                                            <!-- <select class="form-control form-divider" ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required> -->
+                                                            <!-- </select> -->
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.billingpincode"
+                                                                  placeholder="Zip/Postal *" ng-class="allvalidation[6].validation"
+                                                                  maxlength="6" required ng-trim="false">
+                                                            <select class="form-control form-divider" ng-model="checkout.billingcountry" ng-class="allvalidation[7].validation" required>
                                  <option value="">Select Country *</option>
                                  <option value="India" selected>India</option>
                               </select>
-                              <input ng-change="sameShipping(openship.open,true)"type="text" class="form-control form-divider" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" placeholder="Telephone *" ng-trim="false">
-                              <label class="form-divider">
+                                                            <input ng-change="sameShipping(openship.open,true)" type="text" class="form-control form-divider" ng-model="checkout.billingcontact"
+                                                                  ng-class="allvalidation[8].validation" placeholder="Telephone *"
+                                                                  ng-trim="false">
+                                                            <label class="form-divider">
                                  <input type="radio" name="check" value="closemodalship" ng-model="openship.open" ng-change="sameShipping(openship.open)" ng-click="showshipping=false"> Ship to this address</label>
-                              <label class="form-divider">
+                                                            <label class="form-divider">
                                  <input type="radio" name="check" value="openmodalship" ng-model="openship.open" ng-change= "sameShipping(openship.open)" ng-click="showshipping=true"> Ship to different address</label>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="ship-info" ng-show="showshipping">
-                  <h3 class="head">shipping information</h3>
-                  <div class="shipping-panel">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="shipping-reg">
-                              <input type="text" class="form-control form-divider" ng-model="checkout.shippingname" placeholder="Shipping Name *" ng-class="allvalidation[9].validation" required>
-                              <textarea name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.shippingaddress" placeholder="Address *" ng-class="allvalidation[10].validation" required></textarea>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.shippingcity" placeholder="City *" ng-class="allvalidation[11].validation" required>
-                              <!-- <input type="text" class="form-control form-divider" ng-model="checkout.shippingstate" ng-class="allvalidation[12].validation" placeholder="State/Province *"> -->
-                              <!-- <input type="text" class="form-control form-divider" ng-model="checkout.shippingstate" placeholder="State/Province *" ng-class="allvalidation[12].validation" required> -->
-                              <select class="form-control" ng-model="checkout.shippingstate">
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="ship-info" ng-show="showshipping">
+                                    <h3 class="head">shipping information</h3>
+                                    <div class="shipping-panel">
+                                          <div class="row">
+                                                <div class="col-md-6">
+                                                      <div class="shipping-reg">
+                                                            <input type="text" class="form-control form-divider" ng-model="checkout.shippingname" placeholder="Shipping Name *" ng-class="allvalidation[9].validation"
+                                                                  required>
+                                                            <textarea name="" id="" cols="30" rows="50" class="form-control form-divider" ng-model="checkout.shippingaddress" placeholder="Address *"
+                                                                  ng-class="allvalidation[10].validation" required></textarea>
+                                                            <input type="text" class="form-control form-divider" ng-model="checkout.shippingcity" placeholder="City *" ng-class="allvalidation[11].validation"
+                                                                  required>
+                                                            <!-- <input type="text" class="form-control form-divider" ng-model="checkout.shippingstate" ng-class="allvalidation[12].validation" placeholder="State/Province *"> -->
+                                                            <!-- <input type="text" class="form-control form-divider" ng-model="checkout.shippingstate" placeholder="State/Province *" ng-class="allvalidation[12].validation" required> -->
+                                                            <select class="form-control" ng-model="checkout.shippingstate">
                                  <option value="">Select State</option>
                                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                  <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -181,95 +201,96 @@
                                  <option value="Uttar Pradesh">Uttar Pradesh</option>
                                  <option value="West Bengal">West Bengal</option>
                               </select>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.shippingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[13].validation" required ng-trim="false" maxlength="10">
-                              <select class="form-control form-divider" ng-model="checkout.shippingcountry" ng-class="allvalidation[14].validation">
+                                                            <input type="text" class="form-control form-divider" ng-model="checkout.shippingpincode" placeholder="Zip/Postal *" ng-class="allvalidation[13].validation"
+                                                                  required ng-trim="false" maxlength="10">
+                                                            <select class="form-control form-divider" ng-model="checkout.shippingcountry" ng-class="allvalidation[14].validation">
                                  <option value="">Select Country *</option>
                                  <option value="India" selected>India</option>
                               </select>
-                              <input type="text" class="form-control form-divider" ng-model="checkout.shippingcontact" placeholder="Telephone *" ng-trim="false">
-                              <textarea name="" class="form-control form-divider" ng-model="checkout.customernote" placeholder="Customer Notes *" ng-class="allvalidation[15].validation"></textarea>
-                           </div>
+                                                            <input type="text" class="form-control form-divider" ng-model="checkout.shippingcontact" placeholder="Telephone *" ng-trim="false">
+                                                            <textarea name="" class="form-control form-divider" ng-model="checkout.customernote" placeholder="Customer Notes *" ng-class="allvalidation[15].validation"></textarea>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
+                                    <a href="" class="contn pull-right">Continue</a>
+                              </div>
+                              <div class="order-info">
+                                    <h3 class="head">Order review</h3>
+                                    <div class="row">
+                                          <div class="col-md-6">
+                                                <div class="order-panel">
+                                                      <table class="table">
+                                                            <thead class="text-uppercase">
+                                                                  <th>subtotal</th>
+                                                                  <th>discount</th>
+                                                                  <th>total amount</th>
+                                                            </thead>
+                                                            <tbody>
+                                                                  <tr>
+                                                                        <td>
+                                                                              <i class="fa fa-inr"></i>{{totalcart}}
+                                                                        </td>
+                                                                        <td>
+                                                                              <i class="fa fa-inr"></i>{{discount}}
+                                                                        </td>
+                                                                        <td>
+                                                                              <i class="fa fa-inr"></i>{{allamount}}
+                                                                        </td>
+                                                                  </tr>
+                                                            </tbody>
+                                                      </table>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="continue-btn" ng-click="shippingbilling()" ng-show="showcontinue">
-                  <a href="" class="contn pull-right">Continue</a>
-               </div>
-               <div class="order-info">
-                  <h3 class="head">Order review</h3>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <div class="order-panel">
-                           <table class="table">
-                              <thead class="text-uppercase">
-                                 <th>subtotal</th>
-                                 <th>discount</th>
-                                 <th>total amount</th>
-                              </thead>
-                              <tbody>
-                                 <tr>
-                                    <td>
-                                       <i class="fa fa-inr"></i>{{totalcart}}
-                                    </td>
-                                    <td>
-                                       <i class="fa fa-inr"></i>{{discount}}
-                                    </td>
-                                    <td>
-                                       <i class="fa fa-inr"></i>{{allamount}}
-                                    </td>
-                                 </tr>
-                              </tbody>
-                           </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </form>
+                  </form>
 
-         <div class="placeorder" ng-show="paymentinfo">
-            <form action="http://admin.accessworld.in/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
-               <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
-               <!--               CHECKOUT POST FORM START                    -->
-               <input type="text" hidden name="tid" id="tid" />
-               <input type="text" hidden name="order_id" ng-model="orderid">
-               <input type="text" hidden name="merchant_id" value="76752">
-               <input type="text" hidden name="amount" ng-model="allamount">
-               <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
-               <input type="text" hidden name="currency" value="INR">
-               <input type="text" hidden name="merchant_param1" ng-model="couponhave">
-               <input type="text" hidden name="redirect_url" value="http://admin.accessworld.in/index.php/json/payumoneysuccess">
-               <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
-               <input type="text" hidden name="language" value="EN" />
-               <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
-               <input type="text" hidden name="billing_address" ng-model="checkout.billingaddress">
-               <input type="text" hidden name="billing_country" ng-model="checkout.billingcountry">
-               <input type="text" hidden name="billing_state" ng-model="checkout.billingstate">
-               <input type="text" hidden name="billing_city" ng-model="checkout.billingcity">
-               <input type="text" hidden name="billing_zip" ng-model="checkout.billingpincode">
-               <input type="text" hidden name="billing_tel" ng-model="checkout.billingcontact">
-               <input type="text" hidden name="billing_email" ng-model="checkout.email">
-               <input type="text" hidden name="delivery_name" ng-model="checkout.shippingname">
-               <input type="text" hidden name="delivery_address" ng-model="checkout.shippingaddress">
-               <input type="text" hidden name="delivery_country" ng-model="checkout.shippingcountry">
-               <input type="text" hidden name="delivery_city" ng-model="checkout.shippingcity">
-               <input type="text" hidden name="delivery_state" ng-model="checkout.shippingstate">
-               <input type="text" hidden name="delivery_zip" ng-model="checkout.shippingpincode">
-               <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingtel">
-               <input type="text" hidden name="integration_type" value="iframe_normal" />
-                          <a class="btn-all pull-right" ng-if="hasCOD" ng-click="askCOD()">Pay by COD</a>
-               <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Pay online">
-               <!--               CHECKOUT POST FORM START                    -->
-            </form>
-            <!--            <a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->
-         </div>
-         <div class="placeorder" ng-show="noamount">
-            <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
-         </div>
+                  <div class="placeorder" ng-show="paymentinfo">
+                        <form action="http://admin.accessworld.in/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
+                              <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
+                              <!--               CHECKOUT POST FORM START                    -->
+                              <input type="text" hidden name="tid" id="tid" />
+                              <input type="text" hidden name="order_id" ng-model="orderid">
+                              <input type="text" hidden name="merchant_id" value="76752">
+                              <input type="text" hidden name="amount" ng-model="allamount">
+                              <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
+                              <input type="text" hidden name="currency" value="INR">
+                              <input type="text" hidden name="merchant_param1" ng-model="couponhave">
+                              <input type="text" hidden name="redirect_url" value="http://admin.accessworld.in/index.php/json/payumoneysuccess">
+                              <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
+                              <input type="text" hidden name="language" value="EN" />
+                              <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
+                              <input type="text" hidden name="billing_address" ng-model="checkout.billingaddress">
+                              <input type="text" hidden name="billing_country" ng-model="checkout.billingcountry">
+                              <input type="text" hidden name="billing_state" ng-model="checkout.billingstate">
+                              <input type="text" hidden name="billing_city" ng-model="checkout.billingcity">
+                              <input type="text" hidden name="billing_zip" ng-model="checkout.billingpincode">
+                              <input type="text" hidden name="billing_tel" ng-model="checkout.billingcontact">
+                              <input type="text" hidden name="billing_email" ng-model="checkout.email">
+                              <input type="text" hidden name="delivery_name" ng-model="checkout.shippingname">
+                              <input type="text" hidden name="delivery_address" ng-model="checkout.shippingaddress">
+                              <input type="text" hidden name="delivery_country" ng-model="checkout.shippingcountry">
+                              <input type="text" hidden name="delivery_city" ng-model="checkout.shippingcity">
+                              <input type="text" hidden name="delivery_state" ng-model="checkout.shippingstate">
+                              <input type="text" hidden name="delivery_zip" ng-model="checkout.shippingpincode">
+                              <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingtel">
+                              <input type="text" hidden name="integration_type" value="iframe_normal" />
+                              <a class="btn-all pull-right" ng-if="hasCOD" ng-click="askCOD()">Pay by COD</a>
+                              <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Pay online">
+                              <!--               CHECKOUT POST FORM START                    -->
+                        </form>
+                        <!--            <a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->
+                  </div>
+                  <div class="placeorder" ng-show="noamount">
+                        <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
+                  </div>
+            </div>
+            <div class="centerno" ng-show="showLoading">
+                  Please Wait...
+            </div>
       </div>
-      <div class="centerno" ng-show="showLoading">
-         Please Wait...
-      </div>
-   </div>
 </div>

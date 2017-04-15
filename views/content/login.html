@@ -1,40 +1,42 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 marg">
-             <div class="sign pads">
-                <h3 class="text-center" >login / registration</h3>
-                <hr class="text-center" >
-<!--                <p>Items reserved for limited time only</p>-->
-           <div class="col-md-5">
-               <div class="login borderright">
-                   <h4>Login</h4>
-                    <h5><span style="color: tomato;">{{msg}}</span></h5>
-                   <form>
-                   <input type="email" placeholder="Email  *" required class="form-control" ng-class="allvalidation[0].validation" ng-model="login.email">
-                   <input type="password" placeholder="Password *" required class="form-control" ng-class="allvalidation[1].validation" ng-model="login.password">
-                   </form>
-                   <p><a class="btns" ng-click="userlogin(login);">login</a>
-                     <a class="btn btn-primary pull-right g-login g-logins" ng-click="googlelogin()">
+            <div class="sign pads">
+                <h3 class="text-center">login / registration</h3>
+                <hr class="text-center">
+                <!--                <p>Items reserved for limited time only</p>-->
+                <div class="col-md-5">
+                    <div class="login borderright">
+                        <h4>Login</h4>
+                        <h5><span style="color: tomato;">{{msg}}</span></h5>
+                        <form>
+                            <input type="email" placeholder="Email  *" required class="form-control" ng-class="allvalidation[0].validation" ng-model="login.email">
+                            <input type="password" placeholder="Password *" required class="form-control" ng-class="allvalidation[1].validation" ng-model="login.password">
+                        </form>
+                        <p><a class="btns" ng-click="userlogin(login);">login</a>
+                            <!--<a class="btn btn-primary pull-right g-login g-logins" ng-click="googlelogin()">
                        <i class="fa fa-google-plus"></i>Google+</a>
                        <a class="btn btn-primary pull-right f-login g-logins" ng-click="facebooklogin()">
-                         <i class="fa fa-facebook"></i>Facebook</a></p>
-                   <span> <a href="#/forgotpassword">Forgot your password?</a> </span>
-               </div>
-           </div>
-           <div class="col-md-offset-2 col-md-5">
-                  <div class="login">
-                   <h4>create an account</h4>
-                      <h5><span style="color: tomato;">{{msgregister}}</span></h5>
-                   <form>
-                   <input type="text" placeholder="First name *" required class="form-control" ng-class="allvalidation[0].validation" ng-model="account.firstname">
-                   <input type="text" placeholder="Last name *" required class="form-control" ng-class="allvalidation[1].validation" ng-model="account.lastname">
-                   <input type="email" placeholder="Email *" required class="form-control" ng-class="allvalidation[2].validation" ng-model="account.email">
-                   <input type="password" placeholder="Password *" required class="form-control" ng-class="allvalidation[3].validation" ng-model="account.password">
-                   <input type="password" placeholder="Confirm password *" required class="form-control" ng-class="allvalidation[4].validation" ng-model="account.confirmpassword">
-                   </form>
-                   <a class="btns" ng-click="registeruser();">Submit</a>
-               </div>
-           </div>
+                         <i class="fa fa-facebook"></i>Facebook</a>-->
+                        </p>
+                        <span> <a href="#/forgotpassword">Forgot your password?</a> </span>
+                    </div>
+                </div>
+                <div class="col-md-offset-2 col-md-5">
+                    <div class="login">
+                        <h4>create an account</h4>
+                        <h5><span style="color: tomato;">{{msgregister}}</span></h5>
+                        <form>
+                            <input type="text" placeholder="First name *" required class="form-control" ng-class="allvalidation[0].validation" ng-model="account.firstname">
+                            <input type="text" placeholder="Last name *" required class="form-control" ng-class="allvalidation[1].validation" ng-model="account.lastname">
+                            <input type="email" placeholder="Email *" required class="form-control" ng-class="allvalidation[2].validation" ng-model="account.email">
+                            <input type="password" placeholder="Password *" required class="form-control" ng-class="allvalidation[3].validation" ng-model="account.password">
+                            <input type="password" placeholder="Confirm password *" required class="form-control" ng-class="allvalidation[4].validation"
+                                ng-model="account.confirmpassword">
+                        </form>
+                        <a class="btns" ng-click="registeruser();">Submit</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
