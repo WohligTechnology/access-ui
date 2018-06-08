@@ -11,3 +11,5 @@ appengine/fonts
 appengine/img
 appengine/favicon.ico
 appengine/index.php
+
+.DS_STORE
