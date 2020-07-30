@@ -6,24 +6,15 @@ firstapp.run(['$templateCache', function($templateCache) {  'use strict';
 
 
   $templateCache.put('views/footer.html',
-    "<div class=footer><div class=container><div class=footer-set><div class=row><div class=col-md-3><div class=get-height><h4>collection</h4><ul><li><a href=#/brand>brands</a></li><li><a href=#/category>product</a></li><li><a href=#/newarrivals>New Arrivals</a></li><li><a href=#/distribution>distribution</a></li><li><a href=#/about>about us</a></li></ul><div class=pay><h4>payment method</h4><ul><li><img src=img/payment/1.png></li><li><img src=img/payment/2.png></li><li><img src=img/payment/3.png></li><li><img src=img/payment/4.png></li></ul></div></div></div><div class=col-md-3><div class=get-height><h4>site</h4><ul><li><a href=#/termscondition>terms and service</a></li><li><a href=#/privacy>privacy policy</a></li><li><a href=#/faq>faq</a></li></ul></div></div><div class=col-md-3><div class=get-height><h4>shop</h4><ul><li><a href=#/about>about us</a></li><li><a href=\"\">shipping method</a></li><li><a href=\"\">career</a></li><li><a href=#/contact>contact Us</a></li></ul></div></div><div class=col-md-3><div class=\"get-height nobd\"><div class=plugin-fb><div class=fb-page data-href=\"https://www.facebook.com/accessretail/\" data-tabs=timeline data-small-header=true data-adapt-container-width=true data-hide-cover=false data-show-facepile=true><div class=fb-xfbml-parse-ignore><h4 cite=\"https://www.facebook.com/accessretail/\"><a href=\"https://www.facebook.com/accessretail/\">Access</a></h4></div></div><div id=fb-root></div><script>FB = null;\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t(function (d, s, id) {\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\tvar js, fjs = d.getElementsByTagName(s)[0];\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\t//if (d.getElementById(id)) return;\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\tjs = d.createElement(s);\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\tjs.id = id;\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\tjs.src = \"//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5\";\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t\tfjs.parentNode.insertBefore(js, fjs);\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\t}(document, 'script', 'facebook-jssdk'));</script><script>(new Image()).src =\r" +
-    "\n" +
+    "<div class=footer><div class=container><div class=footer-set><div class=row><div class=col-md-3><div class=get-height><h4>collection</h4><ul><li><a href=#/brand>brands</a></li><li><a href=#/category>product</a></li><li><a href=#/newarrivals>New Arrivals</a></li><li><a href=#/distribution>distribution</a></li><li><a href=#/about>about us</a></li></ul><div class=pay><h4>payment method</h4><ul><li><img src=img/payment/1.png></li><li><img src=img/payment/2.png></li><li><img src=img/payment/3.png></li><li><img src=img/payment/4.png></li></ul></div></div></div><div class=col-md-3><div class=get-height><h4>site</h4><ul><li><a href=#/termscondition>terms and service</a></li><li><a href=#/privacy>privacy policy</a></li><li><a href=#/faq>faq</a></li></ul></div></div><div class=col-md-3><div class=get-height><h4>shop</h4><ul><li><a href=#/about>about us</a></li><li><a href=\"\">shipping method</a></li><li><a href=\"\">career</a></li><li><a href=#/contact>contact Us</a></li></ul></div></div><div class=col-md-3><div class=\"get-height nobd\"><div class=plugin-fb><div class=fb-page data-href=\"https://www.facebook.com/accessretail/\" data-tabs=timeline data-small-header=true data-adapt-container-width=true data-hide-cover=false data-show-facepile=true><div class=fb-xfbml-parse-ignore><h4 cite=\"https://www.facebook.com/accessretail/\"><a href=\"https://www.facebook.com/accessretail/\">Access</a></h4></div></div><div id=fb-root></div><script>FB = null;\n" +
+    "\t\t\t\t\t\t\t\t(function (d, s, id) {\n" +
+    "\t\t\t\t\t\t\t\t\tvar js, fjs = d.getElementsByTagName(s)[0];\n" +
+    "\t\t\t\t\t\t\t\t\t//if (d.getElementById(id)) return;\n" +
+    "\t\t\t\t\t\t\t\t\tjs = d.createElement(s);\n" +
+    "\t\t\t\t\t\t\t\t\tjs.id = id;\n" +
+    "\t\t\t\t\t\t\t\t\tjs.src = \"//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5\";\n" +
+    "\t\t\t\t\t\t\t\t\tfjs.parentNode.insertBefore(js, fjs);\n" +
+    "\t\t\t\t\t\t\t\t}(document, 'script', 'facebook-jssdk'));</script><script>(new Image()).src =\n" +
     "\t\t\t\t\t\t\t\t\t'//googleads.g.doubleclick.net/pagead/viewthroughconversion/877002392/?value=0&guid=ON&script=0';</script></div></div></div></div><div class=row><div class=col-md-12><div style=\"padding-right: 130px\">Powered by <a href=https://shopmyway.co.in target=_blank><span class=color-pink>ShopMy<span class=color-blue>Way</span></span></a></div></div></div></div></div></div>"
   );
 
