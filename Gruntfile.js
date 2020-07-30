@@ -106,6 +106,7 @@ module.exports = function (grunt) {
         cwd: "./w",
         src: ["w.min2.css"],
         dest: "./production/p",
+        ext: ".gz.css",
       },
       js: {
         options: {
@@ -115,14 +116,17 @@ module.exports = function (grunt) {
         cwd: "./w",
         src: ["w.min.js"],
         dest: "./production/p",
-        ext: ".js",
+        ext: ".gz.js",
       },
       indexhtml: {
+        options: {
+          mode: "gzip",
+        },
         expand: true,
         cwd: "./w",
         src: ["index.html"],
         dest: "./production/",
-        ext: ".html",
+        ext: ".gz.html",
       },
     },
     imagemin: {
@@ -292,7 +296,7 @@ module.exports = function (grunt) {
         },
         files: {
           // Dictionary of files
-          "./appengine/index.php": "./index.html",
+          "./appengine/index.php": "./indexappengine.html",
         },
       },
     },
